@@ -126,7 +126,10 @@ export default {
       }
     },
     // 社交信息栏
-    socialLinks: [{ icon: "gitee", link: "https://gitee.com/SaltedFish-Cai/saltedfish-website" }],
+    socialLinks: [
+      { icon: "gitee", link: "https://gitee.com/SaltedFish-Cai/Saltedfish-Website" },
+      { icon: "github", link: "https://github.com/SaltedFish-Cai/Saltedfish-Website" }
+    ],
     // 底部信息栏
     footer: {
       message: "Released under the MIT License.",
