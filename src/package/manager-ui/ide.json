@@ -1,0 +1,173 @@
+{
+  "workbench.colorTheme": "Light",
+  "editor.wordSegmenterLocales": null,
+  "eslint.autoFixOnSave": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "git.ignoreMissingGitWarning": true,
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.enableSmartCommit": true,
+  "explorer.confirmDelete": false,
+  "editor.tabSize": 2,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "cSpell.userWords": [],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": false,
+  "playwright.reuseBrowser": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.unicodeHighlight.allowedLocales": {
+    "zh-hant": true
+  },
+  "playwright.showTrace": false,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "editor.minimap.maxColumn": 320,
+  "editor.minimap.scale": 3,
+  "playwright.env": {},
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.wordWrapColumn": 100,
+  "diffEditor.wordWrap": "off",
+  "prettier.printWidth": 800,
+  "files.associations": {
+    "*.cjson": "jsonc",
+    "*.wxss": "css",
+    "*.wxs": "javascript"
+  },
+  "emmet.includeLanguages": {
+    "wxml": "html"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.wordSeparators": "`~!#$%^&*()=/+[{]}\\|;:'\",.<>?",
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.language.colorizedBracketPairs": [],
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "editor.fastScrollSensitivity": 2,
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+  "update.enableWindowsBackgroundUpdates": false,
+  "update.showReleaseNotes": false,
+  "editor.stickyScroll.enabled": false,
+  "editor.stickyScroll.scrollWithEditor": false,
+  "workbench.tree.enableStickyScroll": false,
+  "prettier.bracketSameLine": true,
+  "editor.cursorStyle": "line-thin",
+  "workbench.tree.expandMode": "doubleClick",
+  "better-comments.tags": [
+    {
+      "tag": ">------------->",
+      "color": "#ffffff",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "#145116",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": " ",
+      "color": "#ffffff",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "#145116",
+      "bold": false,
+      "italic": false
+    }
+  ],
+  "material-icon-theme.showUpdateMessage": false,
+  "window.commandCenter": true,
+  "autoHeader": {
+    "header": {
+      "Author": "Cai",
+      "Create Time": {
+        "type": "createTime",
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Modified by": {
+        "type": "modifier",
+        "value": "Cai"
+      },
+      "Modified time": {
+        "type": "modifyTime",
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Description": "page name: "
+    }
+  },
+  "minapp-vscode.disableAutoConfig": true,
+  "bitoAI.codeCompletion.setAutoCompletionTriggerLogic": 250,
+  "bitoAI.codeCompletion.enableAutoCompletion": true,
+  "bitoAI.codeCompletion.enableCommentToCode": true,
+  "materialTheme.accent": "Yellow",
+  "vsicons.dontShowNewVersionMessage": true,
+  "bitoAI.appearance.fontSize (Match with IDE Font)": false,
+  "tabnine.experimentalAutoImports": true,
+  "gitlens.views.scm.grouped.views": {
+    "commits": true,
+    "branches": true,
+    "remotes": true,
+    "stashes": true,
+    "tags": true,
+    "worktrees": true,
+    "contributors": true,
+    "repositories": true,
+    "searchAndCompare": false,
+    "launchpad": false
+  },
+  "gitlens.views.branches.branches.layout": "list",
+  "workbench.settings.applyToAllProfiles": ["files.defaultLanguage", "editor.fontSize"],
+  "better-comments.highlightPlainText": true,
+  "settingsSync.ignoredExtensions": ["eamodio.gitlens", "marscode.marscode-extension"],
+  "cSpell.words": [
+    "Cascader",
+    "dropdownMenuVisible",
+    "elapseds",
+    "newapi",
+    "nprogress",
+    "pageable",
+    "Pdfh",
+    "pdfurl",
+    "pinia",
+    "tapstart",
+    "Unchoose",
+    "Vant",
+    "vitepress",
+    "vnode",
+    "wangeditor"
+  ],
+  "editor.fontSize": 11,
+  "debug.console.fontSize": 14,
+  "editor.scrollbar.horizontalScrollbarSize": 16,
+  "editor.scrollbar.verticalScrollbarSize": 16,
+  "editor.minimap.sectionHeaderFontSize": 12,
+  "workbench.sash.size": 8,
+  "gitlens.graph.minimap.enabled": false,
+  "workbench.iconTheme": "vscode-icons"
+}

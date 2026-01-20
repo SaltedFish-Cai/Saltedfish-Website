@@ -1,0 +1,45 @@
+.m-display-v2 {
+  width: 100%;
+  font-size: var(--m-size-v2-font);
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 1px calc(var(--m-size-v2-padding) * 1);
+  box-sizing: border-box;
+  transition: var(--m-animation-time, 0.2s);
+  padding: calc(var(--m-size-v2-padding) / 3) calc(var(--m-size-v2-padding) / 1.2);
+  line-height: calc(var(--m-size-v2-height) - var(--m-size-v2-height) / 4);
+  border-radius: var(--m-size-v2-radius);
+  border: 1px solid var(--m-color-v2-border);
+  background-color: var(--m-color-v2-send-bg);
+}
+
+.m-contrast-v2 {
+  margin-top: 2px;
+  position: relative;
+  color: var(--m-color-v2-danger);
+  font-size: calc(var(--m-size-v2-font) - 2px) !important;
+  line-height: 1.3em;
+  padding-right: 25px;
+  width: initial !important;
+  * {
+    padding-top: 0 !important;
+    display: inline-block;
+    // height: initial !important;
+    // min-height: initial !important;
+  }
+  .m-form-content-value {
+    background: none !important;
+    display: inline;
+  }
+  &:has(> .m-media-view-download-file) {
+    margin-top: 0px;
+  }
+  &::before {
+    position: absolute;
+    right: -5px;
+    font-size: 12px;
+    transform: scale(0.9);
+    display: inline-block;
+    content: "（原）";
+  }
+}

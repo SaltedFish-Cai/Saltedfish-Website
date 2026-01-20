@@ -1,0 +1,101 @@
+.m-hand {
+  cursor: pointer;
+}
+.m-loading,
+.m-loading-v2 {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  height: 300px;
+
+  .loading_font {
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 21px);
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 42px;
+    color: var(--el-color-primary);
+    animation: loadings 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+}
+@keyframes loadings {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.no-more-v2 {
+  padding: var(--m-size-v2-padding, 10px);
+  font-size: calc(var(--m-size-v2-font, 16px));
+  color: var(--m-color-v2-info);
+  text-align: center;
+}
+
+.m-card {
+  box-sizing: border-box;
+  padding: var(--m-component-padding-size, 10px);
+  overflow-x: hidden;
+  background-color: var(--el-bg-color);
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  font-size: var(--m-component-font-size, 13px);
+}
+
+.m-display-v2 {
+  width: 100%;
+  font-size: var(--m-component-font-size, 13px);
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 1px calc(var(--m-component-padding-size, 10px) * 1);
+  box-sizing: border-box;
+  transition: var(--m-animation-time, 0.2s);
+  padding: calc(var(--m-component-padding-size, 10px) / 3) calc(var(--m-component-padding-size, 10px) / 1.2);
+  line-height: calc(var(--m-component-height-size, 24px) - var(--m-component-height-size, 24px) / 4);
+  border-radius: 3px;
+  border: 1px solid var(--m-border-color);
+  background-color: var(--m-send-bg-color-lighter);
+}
+
+.m-contrast-v2 {
+  margin-top: 2px;
+  position: relative;
+  color: var(--m-color-danger);
+  font-size: var(--m-component-font-size, 13px) !important;
+  line-height: 1.3em;
+  padding-right: 25px;
+  width: initial !important;
+  * {
+    padding-top: 0 !important;
+    display: inline-block;
+    // height: initial !important;
+    // min-height: initial !important;
+  }
+  .m-form-content-value {
+    background: none !important;
+    display: inline;
+  }
+  &:has(> .m-media-view-download-file) {
+    margin-top: 0px;
+  }
+  &::before {
+    position: absolute;
+    right: -5px;
+    font-size: calc(var(--m-size-v2-font) - 2px);
+    transform: scale(0.9);
+    display: inline-block;
+    content: "（原）";
+  }
+}

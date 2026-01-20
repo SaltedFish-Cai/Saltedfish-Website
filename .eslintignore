@@ -1,0 +1,17 @@
+*.sh
+*.js
+node_modules
+*.md
+*.woff
+*.ttf
+.vscode
+.idea
+dist
+/public
+/docs
+.local
+/bin
+/src/mock/*
+stats.html
+/src/package/manager-ui/m-icon/*
+/ManagerUI
