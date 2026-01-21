@@ -21,6 +21,7 @@ export const useSeniorFilterHooks = () => {
   async function GetDictionaries() {
     const Data = await GetConditionals(ManagerGlobalConfig.value, "link");
     state.seniorFilterOptions.LineConditional = Data.ConditionalType;
+
     const List = await GetConditionals(ManagerGlobalConfig.value, "group", { keys: "FilterLinkNextType" });
     state.seniorFilterOptions.linkOptions = List.FilterLinkNextType;
   }

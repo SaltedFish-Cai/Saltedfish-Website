@@ -8,13 +8,13 @@ export const managerUIV2Sidebar = [
     items: [
       { text: "Icon 图标", link: "/document/ManagerUI_V2/m-icon/readme" },
       { text: "Button 按钮", link: "/document/ManagerUI_V2/m-button/readme" },
-      { text: "Color 颜色选择器", link: "/document/ManagerUI_V2/m-color-v2/readme" }
+      { text: "Color 颜色选择器", link: "/document/ManagerUI_V2/m-color-v2/readme" },
+      { text: "Scrollbar 滚动条", link: "/document/ManagerUI_V2/m-scrollbar/readme" }
     ]
   },
   {
     text: "Cell单元(原生)",
     items: [
-      //
       { text: "Input 输入框", link: "/document/ManagerUI_V2/m-input/readme" },
       { text: "Number 数字框", link: "/document/ManagerUI_V2/m-number/readme" },
       { text: "Select 选择器", link: "/document/ManagerUI_V2/m-select/readme" },

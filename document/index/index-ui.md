@@ -24,7 +24,7 @@ hero:
       link: /document/ManagerUI/m-button/readme
     - theme: img
       text: 🚀 微信群聊二维码
-      link: http://manager.frontend-m.online/test-file/wx.png
+      link: http://manager.frontend-m.online/file/wx.png
 
 features:
   - icon: 👍

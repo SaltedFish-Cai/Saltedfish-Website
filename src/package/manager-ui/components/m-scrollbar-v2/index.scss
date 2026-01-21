@@ -35,36 +35,39 @@
     }
 
     .scrollbar-body-content {
-      min-width: 100%;
+      position: relative;
+      width: max-content;
+      height: max-content;
+      box-sizing: border-box;
     }
     .scrollbar-body-content.padding-top {
       padding-top: var(--m-size-v2-padding-base, 10px);
-      height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
-      min-height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // min-height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
     }
     .scrollbar-body-content.padding-left {
       padding-left: var(--m-size-v2-padding-base, 10px);
-      width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
-      min-width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // min-width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
     }
     .scrollbar-body-content.padding-bottom {
       padding-bottom: var(--m-size-v2-padding-base, 10px);
-      height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
-      min-height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // min-height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
     }
     .scrollbar-body-content.padding-right {
       padding-right: var(--m-size-v2-padding-base, 10px);
-      width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
-      min-width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
+      // min-width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)));
     }
-    .scrollbar-body-content.padding-top.padding-bottom {
-      height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
-      min-height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
-    }
-    .scrollbar-body-content.padding-left.padding-right {
-      width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
-      min-width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
-    }
+    // .scrollbar-body-content.padding-top.padding-bottom {
+    //   height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
+    //   min-height: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
+    // }
+    // .scrollbar-body-content.padding-left.padding-right {
+    //   width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
+    //   min-width: calc(100% - calc(var(--m-size-v2-padding-base, 10px)) * 2);
+    // }
   }
   .scrollbar-body-y {
     overflow-y: scroll;
@@ -238,6 +241,20 @@
 
     padding-right: 14px;
     width: calc(100% - var(--m-size-v2-padding-base, 10px));
+    .scrollbar__bar.is-horizontal {
+      width: calc(100% - 14px);
+    }
+  }
+
+  &:has(> .scrollbar__bar.is-horizontal) {
+    // padding-right: calc(var(--m-size-v2-padding-base, 10px) - 0px);
+
+    padding-bottom: 14px;
+    height: calc(100% - var(--m-size-v2-padding-base, 10px));
+    width: calc(100% - 14px);
+    .scrollbar__bar.is-vertical {
+      height: calc(100% - 14px);
+    }
   }
 
   .scrollbar__bar.is-vertical {
@@ -247,6 +264,17 @@
     transform: translate(-3px, -3px) scale(1, 0.65);
     .scrollbar__thumb {
       width: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  .scrollbar__bar.is-horizontal {
+    height: 8px;
+    border-radius: 12px;
+    box-shadow: 0 0 4px 3px #d2e7e4;
+    transform: translate(-3px, -3px) scale(0.65, 1);
+    .scrollbar__thumb {
+      height: 100%;
       border-radius: 10px;
     }
   }

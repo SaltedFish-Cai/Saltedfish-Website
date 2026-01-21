@@ -6,7 +6,7 @@ import { useSidebar } from "../composables/sidebar";
 import VPDocAside from "./VPDocAside.vue";
 import VPDocFooter from "./VPDocFooter.vue";
 import { MManagerV2Type } from "M_Types";
-import { advancedQueryApi, groupAdvancedQueryApi } from "./mock-api";
+import { advancedQueryApi, groupAdvancedQueryApi } from "../../../../../../public/file/mock-api";
 const { theme } = useData();
 
 const route = useRoute();
@@ -22,10 +22,7 @@ const ManagerUIConfig = ref({
   size: "default",
   isDark: false,
   baseHost: "",
-  requestHeader: {
-    Authorization: "",
-    Version: 20260101
-  },
+  requestHeader: { Authorization: "", Version: 20260101 },
   table_config: {
     groupAdvancedQueryApi: groupAdvancedQueryApi,
     advancedQueryApi: advancedQueryApi,
@@ -174,63 +171,65 @@ const ManagerUIConfig = ref({
 </style>
 <style lang="scss">
 .vp-doc {
-  // div::not(.m-editor) {
-  h1 {
-    margin-top: 30px;
-    letter-spacing: -0.02em;
-    line-height: 40px;
-    font-size: 28px;
-    letter-spacing: 2px;
-    // &::after {
-    //   display: inline;
-    //   width: 120px;
-    //   height: 1em;
-    //   margin-right: 8px;
-    //   content: "🥳🥳🥳";
-    // }
-  }
-  h2 {
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-weight: bold;
-    color: var(--vp-c-text-1);
-    margin: 48px 0 16px;
-    border-top: 1px solid var(--vp-c-divider);
-    padding-top: 24px;
-    letter-spacing: -0.02em;
-    line-height: 32px;
-    font-size: 24px;
-    &::before {
-      display: block;
-      width: 7px;
-      height: 1em;
-      margin-right: 8px;
-      content: "";
-      background-color: var(--el-color-primary);
+  > div {
+    // div::not(.m-editor) {
+    h1 {
+      position: relative;
+      margin-top: 30px;
+      letter-spacing: -0.02em;
+      line-height: 40px;
+      font-size: 28px;
+      letter-spacing: 2px;
+      // &::after {
+      //   display: inline;
+      //   width: 120px;
+      //   height: 1em;
+      //   margin-right: 8px;
+      //   content: "🥳🥳🥳";
+      // }
     }
-  }
-  h3 {
-    display: inline-block;
-    margin-top: 20px;
-    border-bottom: 3px solid var(--el-color-primary);
-    margin: 0 0 0 15px;
-    letter-spacing: -0.01em;
-    line-height: 28px;
-    font-size: 20px;
-  }
-  h2,
-  h3,
-  h4,
-  h5 {
-    code {
-      color: var(--el-color-primary);
+    h2 {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-weight: bold;
+      color: var(--vp-c-text-1);
+      margin: 48px 0 16px;
+      letter-spacing: -0.02em;
+      line-height: 32px;
+      font-size: 24px;
+      &::before {
+        display: block;
+        width: 7px;
+        height: 1em;
+        margin-right: 8px;
+        content: "";
+        background-color: var(--el-color-primary);
+      }
     }
-  }
-  p,
-  summary {
-    margin: 16px 0;
+    h3 {
+      display: inline-block;
+      margin-top: 20px;
+      border-bottom: 3px solid var(--el-color-primary);
+      margin: 0 0 0 15px;
+      letter-spacing: -0.01em;
+      line-height: 28px;
+      font-size: 20px;
+    }
+    h2,
+    h3,
+    h4,
+    h5 {
+      position: relative;
+      code {
+        color: var(--el-color-primary);
+      }
+    }
+    p,
+    summary {
+      margin: 16px 0;
+    }
   }
 
   // }

@@ -1,4 +1,3 @@
-import http from "../api/index";
 import lodashPkg from "lodash";
 import { useBaseStore as globalState } from "../store/index";
 
@@ -25,17 +24,15 @@ export async function GetSystemAddressMap() {
       return exData;
     }
   } else {
-    const url = useGlobalState.getFormConfig?.addressApi?.url;
-    const type = useGlobalState.getFormConfig?.addressApi?.type;
+    const API = useGlobalState.getFormConfig?.addressApi;
 
-    if (url) {
-      const { Data, Code } = await http[type || "get"](url);
-      if (Code == 200) {
-        useGlobalState.setDictionary(KEY, Data);
-        return Data;
-      } else {
-        return [];
-      }
+    if (typeof API == "object") {
+      useGlobalState.setDictionary(KEY, API as any);
+      return API;
+    } else if (typeof API == "function") {
+      const data: any = await API();
+      useGlobalState.setDictionary(KEY, data);
+      return data;
     } else {
       return [];
     }

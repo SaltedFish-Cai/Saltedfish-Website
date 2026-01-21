@@ -2,6 +2,7 @@ import { h, watch } from "vue";
 import DefaultTheme from "vitepress/theme"; //引入默认主题
 import { useData, EnhanceAppContext } from "vitepress";
 import { createMediumZoomProvider } from "../../../src/components/box-nav/composable/useMediumZoom";
+import { advancedQueryApi, groupAdvancedQueryApi, addressApi } from "../../../public/file/mock-api";
 
 // >-------------> 组件 <------------<
 import demo from "../../../src/demo-block/demo.vue";
@@ -76,21 +77,12 @@ export default {
         Version: 2026010101
       },
       tableConfig: {
-        advancedQueryApi: {
-          url: "/SystemDictionary/GetConditionals",
-          type: "get"
-        },
-        groupAdvancedQueryApi: {
-          url: "/SystemDictionary/GetDictionariesByKeys",
-          type: "get"
-        },
+        groupAdvancedQueryApi: groupAdvancedQueryApi,
+        advancedQueryApi: advancedQueryApi,
         useSeniorFilter: true
       },
       formConfig: {
-        addressApi: {
-          url: "/Common/GetAllProvinceCityInfo",
-          type: "get"
-        },
+        addressApi: addressApi,
         fileApi: {
           url: "/UploadFile/UploadFiles",
           type: "post",

@@ -27,12 +27,30 @@
             'padding-bottom': padding?.includes('bottom') || padding?.includes('all'),
             'padding-right': padding?.includes('right') || padding?.includes('all')
           }"
+          :style="{
+            '--border-padding-top':
+              padding?.includes('top') || padding?.includes('all') ? `var(--m-size-v2-padding-base, 10px)` : '',
+            '--border-padding-left':
+              padding?.includes('left') || padding?.includes('all') ? `var(--m-size-v2-padding-base, 10px)` : '',
+            '--border-padding-bottom':
+              padding?.includes('bottom') || padding?.includes('all') ? `var(--m-size-v2-padding-base, 10px)` : '',
+            '--border-padding-right':
+              padding?.includes('right') || padding?.includes('all') ? `var(--m-size-v2-padding-base, 10px)` : ''
+          }"
           ref="scrollbarBodyContentRef"
         >
           <div v-if="border?.includes('top') || border?.includes('all')" class="m-border-v2_top"></div>
           <div v-if="border?.includes('left') || border?.includes('all')" class="m-border-v2_left"></div>
           <div v-if="border?.includes('bottom') || border?.includes('all')" class="m-border-v2_bottom"></div>
           <div v-if="border?.includes('right') || border?.includes('all')" class="m-border-v2_right"></div>
+
+          <div v-if="paddingBorder?.includes('top') || paddingBorder?.includes('all')" class="m-border-v2_padding_top"></div>
+          <div v-if="paddingBorder?.includes('left') || paddingBorder?.includes('all')" class="m-border-v2_padding_left"></div>
+          <div
+            v-if="paddingBorder?.includes('bottom') || paddingBorder?.includes('all')"
+            class="m-border-v2_padding_bottom"
+          ></div>
+          <div v-if="paddingBorder?.includes('right') || paddingBorder?.includes('all')" class="m-border-v2_padding_right"></div>
           <slot></slot>
         </div>
       </div>
@@ -62,7 +80,7 @@
 // # import
 import { ref, Ref, onMounted, onBeforeUnmount, nextTick, watch, provide, computed } from "vue";
 import { randChar } from "../tools/rand-char";
-import { ScrollbarPropsType } from "./type";
+import { ScrollbarV2Type } from "./type";
 import { startDrag, listenElementScroll, observeElementResize } from "./scrollListener";
 import { useIntersectionObserver } from "../m-scrollbar-list/useIntersectionObserver";
 import { getElementPosition } from "../utils/getElementPosition";
@@ -88,14 +106,16 @@ const emits = defineEmits([
 ]);
 const scrollbarBodyRef = ref();
 const scrollbarBodyContentRef = ref();
-const prop = withDefaults(defineProps<ScrollbarPropsType>(), {
+const prop = withDefaults(defineProps<ScrollbarV2Type>(), {
   useScrollY: true,
   useScrollX: true,
   showThumb: true,
   useClosePopover: true,
   styleMode: "default",
   defaultScrollHorizontalThumb: 0,
-  defaultScrollVerticalThumb: 0
+  defaultScrollVerticalThumb: 0,
+  useBackTop: undefined,
+  useShadow: undefined
 });
 const id = ref(randChar());
 const verticalThumbRef = ref();
@@ -203,6 +223,7 @@ onMounted(() => {
 
         scrollVerticalValue.value = scrollTop;
         scrollHorizontalValue.value = scrollLeft;
+
         scrollVerticalThumb.value = prop.defaultScrollVerticalThumb + scrollTop * _verticalThumbScale;
         scrollHorizontalThumb.value = prop.defaultScrollHorizontalThumb + scrollLeft * _horizontalThumbScale;
         if (scrollData.isAtBottom) {
@@ -299,7 +320,7 @@ onMounted(() => {
 
 // # Function 开始监听
 function createObserver(intersectClassName: string) {
-  const Els = document.querySelectorAll(`${intersectClassName}`);
+  const Els = document.querySelectorAll(`#${id.value} ${intersectClassName}`);
   if (Els.length) {
     for (let i = 0; i < Els.length; i++) {
       const el: Element = Els[i];
@@ -403,6 +424,8 @@ function setUpdate() {
     useHorizontal.value = useHorizontalValue;
     useVertical.value = useVerticalValue;
     scrollBodyHeight.value = scrollbarBodyRef.value?.clientHeight;
+    scrollbarBodyContentRef.value.style.width = `max-content`;
+    scrollbarBodyContentRef.value.style.height = `max-content`;
 
     nextTick(() => {
       // 启动垂直滑块拖拽
@@ -432,6 +455,8 @@ function setUpdate() {
       }
 
       emits("scrollChildChange", { bodyWidth: _scrollbarBodyRef.clientWidth, bodyHeight: _scrollbarBodyRef.clientHeight });
+      scrollbarBodyContentRef.value.style.width = `${_scrollbarBodyRef.scrollWidth}px`;
+      scrollbarBodyContentRef.value.style.height = `${_scrollbarBodyRef.scrollHeight}px`;
     });
   }
 }

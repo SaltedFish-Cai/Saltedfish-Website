@@ -158,12 +158,7 @@ export const useBaseStore = defineStore({
      * @type `GlobalState.apiBaseUrl` 为 `string` api基础路径
      * @type `GlobalState.size` 为 `default` | `large` | `small` 组件大小
      * @type `GlobalState.tableConfig` 为 `tableConfigType` 表格配置
-     *   - `tableConfigType.useSeniorFilter` 为 `boolean` 是否使用高级搜索
-     *   - `tableConfigType.advancedQueryApi` 为 `apiType` 高级搜索api
-     *   - `tableConfigType.groupAdvancedQueryApi` 为 `apiType` 高级搜索api
      * @type `GlobalState.formConfig` 为 `formConfigType` 表单配置
-     *   - `formConfigType.addressApi` 为 `apiType` 地址api
-     *   - `formConfigType.fileApi` 为 `apiType & { fileApi: string; downloadApi: string }` 文件api
      * @returns 无返回值
      * @example
      * ```ts
@@ -175,6 +170,7 @@ export const useBaseStore = defineStore({
      * */
     setGlobalConfig(config: GlobalState) {
       const _config = { ...this, ...config };
+      this.themeColor = _config.themeColor;
       this.themeColor = _config.themeColor;
       this.isDark = _config.isDark;
       this.requestHeader = _config.requestHeader;

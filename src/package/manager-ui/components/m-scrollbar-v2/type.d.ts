@@ -1,27 +1,27 @@
-import { ScrollbarProps } from "element-plus";
-
-export interface ScrollbarPropsType extends Partial<Omit<ScrollbarProps, "data">> {
+export interface ScrollbarV2Type {
   /**
    * @description 是否使用阴影
-   * @default false
+   * @default true
+   * @description styleMode='color'时：默认为 false
    */
   useShadow?: boolean;
 
   /**
    * @description 是否显示回到顶部按钮
-   * @default false
+   * @default true
+   * @description styleMode='color'时：默认为 false
    */
   useBackTop?: boolean;
 
   /**
    * @description 是否开启垂直滚动条
-   * @default false
+   * @default true
    */
   useScrollY?: boolean;
 
   /**
    * @description 是否开启水平滚动条
-   * @default false
+   * @default true
    */
   useScrollX?: boolean;
 
@@ -95,14 +95,20 @@ export interface ScrollbarPropsType extends Partial<Omit<ScrollbarProps, "data">
   border?: Array<"all" | "bottom" | "left" | "right" | "top">;
 
   /**
+   * @description 是否使用内边距边框
+   * @default false
+   */
+  paddingBorder?: Array<"all" | "bottom" | "left" | "right" | "top">;
+
+  /**
    * @description 默认垂直滚动条位置
-   * @default 2
+   * @default 0
    */
   defaultScrollVerticalThumb?: number;
 
   /**
    * @description 默认水平滚动条位置
-   * @default 2
+   * @default 0
    */
   defaultScrollHorizontalThumb?: number;
 

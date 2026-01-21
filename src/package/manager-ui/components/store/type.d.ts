@@ -68,13 +68,13 @@ export interface GlobalState {
    * @type tableConfigType
    * @description 表格配置
    * @property `boolean` `tableConfigType.useSeniorFilter` 是否使用高级搜索
-   * @property `apiType` `tableConfigType.advancedQueryApi` 高级搜索api
-   * @property `apiType` `tableConfigType.groupAdvancedQueryApi` 高级搜索api
+   * @property `objectType | ((params?: objectType) => objectType)` `tableConfigType.groupAdvancedQueryApi` 高级搜索api
+   * @property `objectType | ((params?: objectType) => objectType)` `tableConfigType.advancedQueryApi` 高级搜索api
    * */
   tableConfig?: {
     useSeniorFilter?: boolean;
-    advancedQueryApi?: apiType;
-    groupAdvancedQueryApi?: apiType;
+    groupAdvancedQueryApi?: objectType | ((params?: objectType) => objectType);
+    advancedQueryApi?: objectType | ((params?: objectType) => objectType);
   };
 
   /**
@@ -85,7 +85,7 @@ export interface GlobalState {
    * @property `apiType` `formConfigType.fileApi` 文件api
    * */
   formConfig?: {
-    addressApi?: apiType;
+    addressApi?: objectType | ((params?: objectType) => objectType);
     fileApi?: apiType & { fileApi: string; downloadApi: string };
   };
 
