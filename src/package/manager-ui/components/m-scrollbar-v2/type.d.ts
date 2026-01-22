@@ -1,4 +1,4 @@
-export interface ScrollbarV2Type {
+export interface MScrollbarV2Type {
   /**
    * @description 是否使用阴影
    * @default true

@@ -179,7 +179,7 @@ withDefaults(defineProps<Props>(), {
 }
 
 .org.link:hover {
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
 }
 
 .desc {
@@ -188,7 +188,7 @@ withDefaults(defineProps<Props>(), {
 
 .desc :deep(a) {
   font-weight: 500;
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
   text-decoration-style: dotted;
   transition: color 0.25s;
 }
@@ -221,8 +221,6 @@ withDefaults(defineProps<Props>(), {
 
 .sp-icon {
   margin-right: 8px;
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
+  font-size: 16px;
 }
 </style>

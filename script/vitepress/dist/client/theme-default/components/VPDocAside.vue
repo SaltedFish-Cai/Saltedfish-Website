@@ -29,7 +29,6 @@ const { theme } = useData();
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  border-left: 1px solid var(--vp-c-divider);
 }
 
 .spacer {

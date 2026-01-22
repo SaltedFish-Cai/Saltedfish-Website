@@ -6,7 +6,7 @@ import VPIconMoreHorizontal from "./icons/VPIconMoreHorizontal.vue";
 import VPMenu from "./VPMenu.vue";
 
 defineProps<{
-  icon?: any;
+  icon?: string;
   button?: string;
   label?: string;
   items?: any[];
@@ -52,7 +52,8 @@ function onBlur() {
 }
 
 .VPFlyout:hover {
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
+  transition: color 0.25s;
 }
 
 .VPFlyout:hover .text {
@@ -63,17 +64,12 @@ function onBlur() {
   fill: var(--vp-c-text-2);
 }
 
-.VPFlyout.active {
-  font-weight: bold;
-  transform: scale(1.1);
-  .text {
-    color: var(--el-color-primary);
-    font-weight: bold;
-  }
+.VPFlyout.active .text {
+  color: var(--vp-c-brand-1);
 }
 
-.VPFlyout:hover .text {
-  color: var(--el-color-primary);
+.VPFlyout.active:hover .text {
+  color: var(--vp-c-brand-2);
 }
 
 .VPFlyout:hover .menu,
@@ -110,22 +106,16 @@ function onBlur() {
 
 .option-icon {
   margin-right: 0px;
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
+  font-size: 16px;
 }
 
 .text-icon {
   margin-left: 4px;
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
+  font-size: 14px;
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+  font-size: 20px;
   transition: fill 0.25s;
 }
 

@@ -1,26 +1,22 @@
 <script setup lang="ts">
-import { useScrollLock } from '@vueuse/core'
-import { inBrowser } from 'vitepress'
-import { ref } from 'vue'
-import VPNavScreenAppearance from './VPNavScreenAppearance.vue'
-import VPNavScreenMenu from './VPNavScreenMenu.vue'
-import VPNavScreenSocialLinks from './VPNavScreenSocialLinks.vue'
-import VPNavScreenTranslations from './VPNavScreenTranslations.vue'
+import { useScrollLock } from "@vueuse/core";
+import { inBrowser } from "vitepress";
+import { ref } from "vue";
+import VPNavScreenAppearance from "./VPNavScreenAppearance.vue";
+import VPNavScreenMenu from "./VPNavScreenMenu.vue";
+import VPNavScreenSocialLinks from "./VPNavScreenSocialLinks.vue";
+import VPNavScreenTranslations from "./VPNavScreenTranslations.vue";
 
 defineProps<{
-  open: boolean
-}>()
+  open: boolean;
+}>();
 
-const screen = ref<HTMLElement | null>(null)
-const isLocked = useScrollLock(inBrowser ? document.body : null)
+const screen = ref<HTMLElement | null>(null);
+const isLocked = useScrollLock(inBrowser ? document.body : null);
 </script>
 
 <template>
-  <transition
-    name="fade"
-    @enter="isLocked = true"
-    @after-leave="isLocked = false"
-  >
+  <transition name="fade" @enter="isLocked = true" @after-leave="isLocked = false">
     <div v-if="open" class="VPNavScreen" ref="screen" id="VPNavScreen">
       <div class="container">
         <slot name="nav-screen-content-before" />
@@ -37,7 +33,7 @@ const isLocked = useScrollLock(inBrowser ? document.body : null)
 <style scoped>
 .VPNavScreen {
   position: fixed;
-  top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 1px);
+  top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px));
   /*rtl:ignore*/
   right: 0;
   bottom: 0;
@@ -47,8 +43,9 @@ const isLocked = useScrollLock(inBrowser ? document.body : null)
   width: 100%;
   background-color: var(--vp-nav-screen-bg-color);
   overflow-y: auto;
-  transition: background-color 0.5s;
+  transition: background-color 0.25s;
   pointer-events: auto;
+  z-index: 1002;
 }
 
 .VPNavScreen.fade-enter-active,

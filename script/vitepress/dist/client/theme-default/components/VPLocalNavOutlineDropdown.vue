@@ -1,72 +1,85 @@
 <script setup lang="ts">
-import { onClickOutside, onKeyStroke } from "@vueuse/core";
-import { onContentUpdated } from "vitepress";
-import { nextTick, ref } from "vue";
-import { useData } from "../composables/data";
-import { resolveTitle, type MenuItem } from "../composables/outline";
-import VPDocOutlineItem from "./VPDocOutlineItem.vue";
-import VPIconChevronRight from "./icons/VPIconChevronRight.vue";
+import { onKeyStroke } from '@vueuse/core'
+import { onContentUpdated } from 'vitepress'
+import { nextTick, ref, watch } from 'vue'
+import { useData } from '../composables/data'
+import { resolveTitle, type MenuItem } from '../composables/outline'
+import VPDocOutlineItem from './VPDocOutlineItem.vue'
 
 const props = defineProps<{
-  headers: MenuItem[];
-  navHeight: number;
-}>();
+  headers: MenuItem[]
+  navHeight: number
+}>()
 
-const { theme } = useData();
-const open = ref(false);
-const vh = ref(0);
-const main = ref<HTMLDivElement>();
-const items = ref<HTMLDivElement>();
+const { theme } = useData()
+const open = ref(false)
+const vh = ref(0)
+const main = ref<HTMLDivElement>()
+const items = ref<HTMLDivElement>()
 
-onClickOutside(main, () => {
-  open.value = false;
-});
+function closeOnClickOutside(e: Event) {
+  if (!main.value?.contains(e.target as Node)) {
+    open.value = false
+  }
+}
 
-onKeyStroke("Escape", () => {
-  open.value = false;
-});
+watch(open, (value) => {
+  if (value) {
+    document.addEventListener('click', closeOnClickOutside)
+    return
+  }
+  document.removeEventListener('click', closeOnClickOutside)
+})
+
+onKeyStroke('Escape', () => {
+  open.value = false
+})
 
 onContentUpdated(() => {
-  open.value = false;
-});
+  open.value = false
+})
 
 function toggle() {
-  open.value = !open.value;
-  vh.value = window.innerHeight + Math.min(window.scrollY - props.navHeight, 0);
+  open.value = !open.value
+  vh.value = window.innerHeight + Math.min(window.scrollY - props.navHeight, 0)
 }
 
 function onItemClick(e: Event) {
-  if ((e.target as HTMLElement).classList.contains("outline-link")) {
+  if ((e.target as HTMLElement).classList.contains('outline-link')) {
     // disable animation on hash navigation when page jumps
     if (items.value) {
-      items.value.style.transition = "none";
+      items.value.style.transition = 'none'
     }
     nextTick(() => {
-      open.value = false;
-    });
+      open.value = false
+    })
   }
 }
 
 function scrollToTop() {
-  open.value = false;
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  open.value = false
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 }
 </script>
 
 <template>
-  <div class="VPLocalNavOutlineDropdown" :style="{ '--vp-vh': vh + 'px' }" ref="main">
+  <div
+    class="VPLocalNavOutlineDropdown"
+    :style="{ '--vp-vh': vh + 'px' }"
+    ref="main"
+  >
     <button @click="toggle" :class="{ open }" v-if="headers.length > 0">
-      {{ resolveTitle(theme) }}
-      <VPIconChevronRight class="icon" />
+      <span class="menu-text">{{ resolveTitle(theme) }}</span>
+      <span class="vpi-chevron-right icon" />
     </button>
     <button @click="scrollToTop" v-else>
-      {{ theme.returnToTopLabel || "回到顶部" }}
+      {{ theme.returnToTopLabel || 'Return to top' }}
     </button>
     <Transition name="flyout">
       <div v-if="open" ref="items" class="items" @click="onItemClick">
         <div class="header">
           <a class="top-link" href="#" @click="scrollToTop">
-            {{ theme.returnToTopLabel || "回到顶部" }}
+            {{ theme.returnToTopLabel || 'Return to top' }}
           </a>
         </div>
         <div class="outline">
@@ -107,19 +120,23 @@ function scrollToTop() {
   color: var(--vp-c-text-1);
 }
 
-@media (min-width: 960px) {
-  .VPLocalNavOutlineDropdown button {
-    font-size: 14px;
-  }
-}
-
 .icon {
   display: inline-block;
   vertical-align: middle;
   margin-left: 2px;
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
+  font-size: 14px;
+  transform: rotate(0deg);
+  transition: transform 0.25s;
+}
+
+@media (min-width: 960px) {
+  .VPLocalNavOutlineDropdown button {
+    font-size: 14px;
+  }
+
+  .icon {
+    font-size: 16px;
+  }
 }
 
 .open > .icon {
@@ -159,7 +176,7 @@ function scrollToTop() {
   line-height: 48px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
 }
 
 .outline {

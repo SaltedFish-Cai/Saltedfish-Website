@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { DefaultTheme } from "vitepress/theme";
-import { withBase } from "vitepress";
+import type { DefaultTheme } from 'vitepress/theme'
+import { withBase } from 'vitepress'
 
 defineProps<{
-  image: DefaultTheme.ThemeableImage;
-  alt?: string;
-}>();
+  image: DefaultTheme.ThemeableImage
+  alt?: string
+}>()
 
-defineOptions({ inheritAttrs: false });
+defineOptions({ inheritAttrs: false })
 </script>
 
 <template>
@@ -20,13 +20,23 @@ defineOptions({ inheritAttrs: false });
       :alt="alt ?? (typeof image === 'string' ? '' : image.alt || '')"
     />
     <template v-else>
-      <VPImage class="dark" :image="image.dark" :alt="image.alt" v-bind="$attrs" />
-      <VPImage class="light" :image="image.light" :alt="image.alt" v-bind="$attrs" />
+      <VPImage
+        class="dark"
+        :image="image.dark"
+        :alt="image.alt"
+        v-bind="$attrs"
+      />
+      <VPImage
+        class="light"
+        :image="image.light"
+        :alt="image.alt"
+        v-bind="$attrs"
+      />
     </template>
   </template>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 html:not(.dark) .VPImage.dark {
   display: none;
 }

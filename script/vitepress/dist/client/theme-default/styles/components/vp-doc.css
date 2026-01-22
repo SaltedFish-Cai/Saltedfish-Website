@@ -2,6 +2,46 @@
  * Headings
  * -------------------------------------------------------------------------- */
 
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  position: relative;
+  font-weight: 600;
+  outline: none;
+}
+
+.vp-doc h1 {
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-size: 28px;
+}
+
+.vp-doc h2 {
+  margin: 48px 0 16px;
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 24px;
+  letter-spacing: -0.02em;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+.vp-doc h3 {
+  margin: 32px 0 0;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  font-size: 20px;
+}
+
+.vp-doc h4 {
+  margin: 24px 0 0;
+  letter-spacing: -0.01em;
+  line-height: 24px;
+  font-size: 18px;
+}
+
 .vp-doc .header-anchor {
   position: absolute;
   top: 0;
@@ -11,60 +51,77 @@
   user-select: none;
   opacity: 0;
   text-decoration: none;
-  transition: color 0.25s, opacity 0.25s;
+  transition:
+    color 0.25s,
+    opacity 0.25s;
 }
 
 .vp-doc .header-anchor:before {
   content: var(--vp-header-anchor-symbol);
 }
 
-.vp-doc > div > h1:hover .header-anchor,
-.vp-doc > div > h1 .header-anchor:focus,
-.vp-doc > div > h2:hover .header-anchor,
-.vp-doc > div > h2 .header-anchor:focus,
-.vp-doc > div > h3:hover .header-anchor,
-.vp-doc > div > h3 .header-anchor:focus,
-.vp-doc > div > h4:hover .header-anchor,
-.vp-doc > div > h4 .header-anchor:focus,
-.vp-doc > div > h5:hover .header-anchor,
-.vp-doc > div > h5 .header-anchor:focus,
-.vp-doc > div > h6:hover .header-anchor,
-.vp-doc > div > h6 .header-anchor:focus {
+.vp-doc h1:hover .header-anchor,
+.vp-doc h1 .header-anchor:focus,
+.vp-doc h2:hover .header-anchor,
+.vp-doc h2 .header-anchor:focus,
+.vp-doc h3:hover .header-anchor,
+.vp-doc h3 .header-anchor:focus,
+.vp-doc h4:hover .header-anchor,
+.vp-doc h4 .header-anchor:focus,
+.vp-doc h5:hover .header-anchor,
+.vp-doc h5 .header-anchor:focus,
+.vp-doc h6:hover .header-anchor,
+.vp-doc h6 .header-anchor:focus {
   opacity: 1;
 }
 
 @media (min-width: 768px) {
-  .vp-doc > div > h1 {
+  .vp-doc h1 {
     letter-spacing: -0.02em;
     line-height: 40px;
     font-size: 32px;
   }
 }
 
+.vp-doc h2 .header-anchor {
+  top: 24px;
+}
+
 /**
  * Paragraph and inline elements
  * -------------------------------------------------------------------------- */
+
+.vp-doc p,
+.vp-doc summary {
+  margin: 16px 0;
+}
+
+.vp-doc p {
+  line-height: 28px;
+}
 
 .vp-doc blockquote {
   margin: 16px 0;
   border-left: 2px solid var(--vp-c-divider);
   padding-left: 16px;
   transition: border-color 0.5s;
+  color: var(--vp-c-text-2);
 }
 
 .vp-doc blockquote > p {
   margin: 0;
   font-size: 16px;
-  color: var(--vp-c-text-2);
   transition: color 0.5s;
 }
 
 .vp-doc a {
   font-weight: 500;
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
   text-decoration: underline;
   text-underline-offset: 2px;
-  transition: color 0.25s, opacity 0.25s;
+  transition:
+    color 0.25s,
+    opacity 0.25s;
 }
 
 .vp-doc a:hover {
@@ -80,7 +137,7 @@
  * -------------------------------------------------------------------------- */
 
 .vp-doc ul,
-.vp-doc ol ::not(.m-editor) {
+.vp-doc ol {
   padding-left: 1.25rem;
   margin: 16px 0;
 }
@@ -93,7 +150,7 @@
   list-style: decimal;
 }
 
-.vp-doc li + li ::not(.m-editor) {
+.vp-doc li + li {
   margin-top: 8px;
 }
 
@@ -105,30 +162,31 @@
 /**
  * Table
  * -------------------------------------------------------------------------- */
-.vp-doc > div > table {
+
+.vp-doc table {
   display: block;
   border-collapse: collapse;
   margin: 20px 0;
   overflow-x: auto;
 }
 
-.vp-doc > div > table tr {
+.vp-doc tr {
   background-color: var(--vp-c-bg);
   border-top: 1px solid var(--vp-c-divider);
   transition: background-color 0.5s;
 }
 
-.vp-doc > div > table tr:nth-child(2n) {
+.vp-doc tr:nth-child(2n) {
   background-color: var(--vp-c-bg-soft);
 }
 
-.vp-doc > div > table th,
-.vp-doc > div > table td {
+.vp-doc th,
+.vp-doc td {
   border: 1px solid var(--vp-c-divider);
   padding: 8px 16px;
 }
 
-.vp-doc > div > table th {
+.vp-doc th {
   text-align: left;
   font-size: 14px;
   font-weight: 600;
@@ -136,7 +194,7 @@
   background-color: var(--vp-c-bg-soft);
 }
 
-.vp-doc > div > table td {
+.vp-doc td {
   font-size: 14px;
 }
 
@@ -144,7 +202,7 @@
  * Decorational elements
  * -------------------------------------------------------------------------- */
 
-.vp-doc > div > hr {
+.vp-doc hr {
   margin: 16px 0;
   border: none;
   border-top: 1px solid var(--vp-c-divider);
@@ -167,12 +225,12 @@
   margin: 0;
 }
 
-.vp-doc .custom-block div[class*="language-"] {
+.vp-doc .custom-block div[class*='language-'] {
   margin: 8px 0;
   border-radius: 8px;
 }
 
-.vp-doc .custom-block div[class*="language-"] code {
+.vp-doc .custom-block div[class*='language-'] code {
   font-weight: 400;
   background-color: transparent;
 }
@@ -189,14 +247,16 @@
 /* inline code */
 .vp-doc :not(pre, h1, h2, h3, h4, h5, h6) > code {
   font-size: var(--vp-code-font-size);
-  color: var(--el-color-primary);
+  color: var(--vp-code-color);
 }
 
 .vp-doc :not(pre) > code {
   border-radius: 4px;
   padding: 3px 6px;
   background-color: var(--vp-code-bg);
-  transition: color 0.25s, background-color 0.5s;
+  transition:
+    color 0.25s,
+    background-color 0.5s;
 }
 
 .vp-doc a > code {
@@ -209,11 +269,12 @@
 
 .vp-doc h1 > code,
 .vp-doc h2 > code,
-.vp-doc h3 > code {
+.vp-doc h3 > code,
+.vp-doc h4 > code {
   font-size: 0.9em;
 }
 
-.vp-doc div[class*="language-"],
+.vp-doc div[class*='language-'],
 .vp-block {
   position: relative;
   margin: 16px -24px;
@@ -223,7 +284,7 @@
 }
 
 @media (min-width: 640px) {
-  .vp-doc div[class*="language-"],
+  .vp-doc div[class*='language-'],
   .vp-block {
     border-radius: 8px;
     margin: 16px 0;
@@ -231,19 +292,19 @@
 }
 
 @media (max-width: 639px) {
-  .vp-doc li div[class*="language-"] {
+  .vp-doc li div[class*='language-'] {
     border-radius: 8px 0 0 8px;
   }
 }
 
-.vp-doc div[class*="language-"] + div[class*="language-"],
-.vp-doc div[class$="-api"] + div[class*="language-"],
-.vp-doc div[class*="language-"] + div[class$="-api"] > div[class*="language-"] {
+.vp-doc div[class*='language-'] + div[class*='language-'],
+.vp-doc div[class$='-api'] + div[class*='language-'],
+.vp-doc div[class*='language-'] + div[class$='-api'] > div[class*='language-'] {
   margin-top: -8px;
 }
 
-.vp-doc [class*="language-"] pre,
-.vp-doc [class*="language-"] code {
+.vp-doc [class*='language-'] pre,
+.vp-doc [class*='language-'] code {
   /*rtl:ignore*/
   direction: ltr;
   /*rtl:ignore*/
@@ -261,7 +322,7 @@
   hyphens: none;
 }
 
-.vp-doc [class*="language-"] pre {
+.vp-doc [class*='language-'] pre {
   position: relative;
   z-index: 1;
   margin: 0;
@@ -270,7 +331,7 @@
   overflow-x: auto;
 }
 
-.vp-doc [class*="language-"] code {
+.vp-doc [class*='language-'] code {
   display: block;
   padding: 0 24px;
   width: fit-content;
@@ -281,7 +342,7 @@
   transition: color 0.5s;
 }
 
-.vp-doc [class*="language-"] code .highlighted {
+.vp-doc [class*='language-'] code .highlighted {
   background-color: var(--vp-code-line-highlight-color);
   transition: background-color 0.5s;
   margin: 0 -24px;
@@ -290,15 +351,15 @@
   display: inline-block;
 }
 
-.vp-doc [class*="language-"] code .highlighted.error {
+.vp-doc [class*='language-'] code .highlighted.error {
   background-color: var(--vp-code-line-error-color);
 }
 
-.vp-doc [class*="language-"] code .highlighted.warning {
+.vp-doc [class*='language-'] code .highlighted.warning {
   background-color: var(--vp-code-line-warning-color);
 }
 
-.vp-doc [class*="language-"] code .diff {
+.vp-doc [class*='language-'] code .diff {
   transition: background-color 0.5s;
   margin: 0 -24px;
   padding: 0 24px;
@@ -306,47 +367,51 @@
   display: inline-block;
 }
 
-.vp-doc [class*="language-"] code .diff::before {
+.vp-doc [class*='language-'] code .diff::before {
   position: absolute;
   left: 10px;
 }
 
-.vp-doc [class*="language-"] .has-focused-lines .line:not(.has-focus) {
+.vp-doc [class*='language-'] .has-focused-lines .line:not(.has-focus) {
   filter: blur(0.095rem);
   opacity: 0.4;
-  transition: filter 0.35s, opacity 0.35s;
+  transition:
+    filter 0.35s,
+    opacity 0.35s;
 }
 
-.vp-doc [class*="language-"] .has-focused-lines .line:not(.has-focus) {
+.vp-doc [class*='language-'] .has-focused-lines .line:not(.has-focus) {
   opacity: 0.7;
-  transition: filter 0.35s, opacity 0.35s;
+  transition:
+    filter 0.35s,
+    opacity 0.35s;
 }
 
-.vp-doc [class*="language-"]:hover .has-focused-lines .line:not(.has-focus) {
+.vp-doc [class*='language-']:hover .has-focused-lines .line:not(.has-focus) {
   filter: blur(0);
   opacity: 1;
 }
 
-.vp-doc [class*="language-"] code .diff.remove {
+.vp-doc [class*='language-'] code .diff.remove {
   background-color: var(--vp-code-line-diff-remove-color);
   opacity: 0.7;
 }
 
-.vp-doc [class*="language-"] code .diff.remove::before {
-  content: "-";
+.vp-doc [class*='language-'] code .diff.remove::before {
+  content: '-';
   color: var(--vp-code-line-diff-remove-symbol-color);
 }
 
-.vp-doc [class*="language-"] code .diff.add {
+.vp-doc [class*='language-'] code .diff.add {
   background-color: var(--vp-code-line-diff-add-color);
 }
 
-.vp-doc [class*="language-"] code .diff.add::before {
-  content: "+";
+.vp-doc [class*='language-'] code .diff.add::before {
+  content: '+';
   color: var(--vp-code-line-diff-add-symbol-color);
 }
 
-.vp-doc div[class*="language-"].line-numbers-mode {
+.vp-doc div[class*='language-'].line-numbers-mode {
   /*rtl:ignore*/
   padding-left: 32px;
 }
@@ -367,10 +432,12 @@
   line-height: var(--vp-code-line-height);
   font-size: var(--vp-code-font-size);
   color: var(--vp-code-line-number-color);
-  transition: border-color 0.5s, color 0.5s;
+  transition:
+    border-color 0.5s,
+    color 0.5s;
 }
 
-.vp-doc [class*="language-"] > button.copy {
+.vp-doc [class*='language-'] > button.copy {
   /*rtl:ignore*/
   direction: ltr;
   position: absolute;
@@ -389,30 +456,33 @@
   background-position: 50%;
   background-size: 20px;
   background-repeat: no-repeat;
-  transition: border-color 0.25s, background-color 0.25s, opacity 0.25s;
+  transition:
+    border-color 0.25s,
+    background-color 0.25s,
+    opacity 0.25s;
 }
 
-.vp-doc [class*="language-"]:hover > button.copy,
-.vp-doc [class*="language-"] > button.copy:focus {
+.vp-doc [class*='language-']:hover > button.copy,
+.vp-doc [class*='language-'] > button.copy:focus {
   opacity: 1;
 }
 
-.vp-doc [class*="language-"] > button.copy:hover,
-.vp-doc [class*="language-"] > button.copy.copied {
+.vp-doc [class*='language-'] > button.copy:hover,
+.vp-doc [class*='language-'] > button.copy.copied {
   border-color: var(--vp-code-copy-code-hover-border-color);
   background-color: var(--vp-code-copy-code-hover-bg);
 }
 
-.vp-doc [class*="language-"] > button.copy.copied,
-.vp-doc [class*="language-"] > button.copy:hover.copied {
+.vp-doc [class*='language-'] > button.copy.copied,
+.vp-doc [class*='language-'] > button.copy:hover.copied {
   /*rtl:ignore*/
   border-radius: 0 4px 4px 0;
   background-color: var(--vp-code-copy-code-hover-bg);
   background-image: var(--vp-icon-copied);
 }
 
-.vp-doc [class*="language-"] > button.copy.copied::before,
-.vp-doc [class*="language-"] > button.copy:hover.copied::before {
+.vp-doc [class*='language-'] > button.copy.copied::before,
+.vp-doc [class*='language-'] > button.copy:hover.copied::before {
   position: relative;
   top: -1px;
   /*rtl:ignore*/
@@ -436,7 +506,7 @@
   content: var(--vp-code-copy-copied-text-content);
 }
 
-.vp-doc [class*="language-"] > span.lang {
+.vp-doc [class*='language-'] > span.lang {
   position: absolute;
   top: 2px;
   /*rtl:ignore*/
@@ -445,11 +515,13 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--vp-code-lang-color);
-  transition: color 0.4s, opacity 0.4s;
+  transition:
+    color 0.4s,
+    opacity 0.4s;
 }
 
-.vp-doc [class*="language-"]:hover > button.copy + span.lang,
-.vp-doc [class*="language-"] > button.copy:focus + span.lang {
+.vp-doc [class*='language-']:hover > button.copy + span.lang,
+.vp-doc [class*='language-'] > button.copy:focus + span.lang {
   opacity: 0;
 }
 
@@ -476,6 +548,10 @@
   max-width: calc((100% - 24px) / 2) !important;
 }
 
+/**
+ * External links
+ * -------------------------------------------------------------------------- */
+
 /* prettier-ignore */
 :is(.vp-external-link-icon, .vp-doc a[href*='://'], .vp-doc a[target='_blank']):not(.no-icon)::after {
   display: inline-block;
@@ -492,7 +568,7 @@
 }
 
 .vp-external-link-icon::after {
-  content: "";
+  content: '';
 }
 
 /* prettier-ignore */

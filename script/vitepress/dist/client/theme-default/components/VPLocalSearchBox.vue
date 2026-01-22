@@ -585,6 +585,7 @@ function formMarkRegex(terms: Set<string>) {
   z-index: 100;
   inset: 0;
   display: flex;
+  z-index: 1020;
 }
 
 .backdrop {

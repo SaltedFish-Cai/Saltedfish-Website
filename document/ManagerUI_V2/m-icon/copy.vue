@@ -8,19 +8,17 @@
     <!-- <m-tabs v-model="activeName" class="no_flx_tabs">
       <m-tab-item v-for="its in Config" :key="its.name" :label="`${its.title}(${its.icons.length})`" :name="its.name"> -->
     <div class="h300">
-      <m-scrollbar-v2 always>
-        <div class="select_icon_popover">
-          <template v-for="icon in Config[0].icons" :key="icon.value">
-            <m-icon-v2
-              class="pop_icon"
-              :style="{ color: icon.value == selectItem ? 'var(--el-color-primary)' : '' }"
-              :name="icon.value"
-              @click="selectedIcon(icon.value)"
-              @mouseover="hoverIcon(icon)"
-            />
-          </template>
-        </div>
-      </m-scrollbar-v2>
+      <div class="select_icon_popover">
+        <template v-for="icon in Config[0].icons" :key="icon.value">
+          <m-icon-v2
+            class="pop_icon"
+            :style="{ color: icon.value == selectItem ? 'var(--el-color-primary)' : '' }"
+            :name="icon.value"
+            @click="selectedIcon(icon.value)"
+            @mouseover="hoverIcon(icon)"
+          />
+        </template>
+      </div>
     </div>
     <!-- </m-tab-item>
     </m-tabs> -->

@@ -3,8 +3,6 @@ import { computed } from "vue";
 import VPFlyout from "./VPFlyout.vue";
 import VPMenuLink from "./VPMenuLink.vue";
 import VPSwitchAppearance from "./VPSwitchAppearance.vue";
-import VPSelectColor from "./VPSelectColor.vue";
-import VPSelectSize from "./VPSelectSize.vue";
 import VPSocialLinks from "./VPSocialLinks.vue";
 import { useData } from "../composables/data";
 import { useLangs } from "../composables/langs";
@@ -27,29 +25,13 @@ const hasExtraContent = computed(
       </template>
     </div>
 
-    <div v-if="site.appearance && site.appearance !== 'force-dark'" class="group">
+    <div v-if="site.appearance && site.appearance !== 'force-dark' && site.appearance !== 'force-auto'" class="group">
       <div class="item appearance">
         <p class="label">
-          {{ theme.darkModeSwitchLabel || "外观" }}
+          {{ theme.darkModeSwitchLabel || "Appearance" }}
         </p>
         <div class="appearance-action">
           <VPSwitchAppearance />
-        </div>
-      </div>
-      <div class="item appearance mt10">
-        <p class="label">
-          {{ theme.colorModeSelectLabel || "主色" }}
-        </p>
-        <div class="appearance-action">
-          <VPSelectColor />
-        </div>
-      </div>
-      <div class="item appearance mt10">
-        <p class="label">
-          {{ theme.colorModeSizeLabel || "尺寸" }}
-        </p>
-        <div class="appearance-action">
-          <VPSelectSize />
         </div>
       </div>
     </div>

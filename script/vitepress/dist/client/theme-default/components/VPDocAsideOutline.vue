@@ -20,18 +20,22 @@ useActiveAnchor(container, marker);
 </script>
 
 <template>
-  <div class="VPDocAsideOutline" :class="{ 'has-outline': headers.length > 0 }" ref="container" role="navigation">
+  <nav
+    aria-labelledby="doc-outline-aria-label"
+    class="VPDocAsideOutline"
+    :class="{ 'has-outline': headers.length > 0 }"
+    ref="container"
+  >
     <div class="content">
       <div class="outline-marker" ref="marker" />
 
-      <div class="outline-title" role="heading" aria-level="2">{{ resolveTitle(theme) }}</div>
+      <div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading">
+        {{ resolveTitle(theme) }}
+      </div>
 
-      <nav aria-labelledby="doc-outline-aria-label">
-        <span class="visually-hidden" id="doc-outline-aria-label"> Table of Contents for current page </span>
-        <VPDocOutlineItem :headers="headers" :root="true" />
-      </nav>
+      <VPDocOutlineItem :headers="headers" :root="true" />
     </div>
-  </div>
+  </nav>
 </template>
 
 <style scoped>
@@ -45,6 +49,7 @@ useActiveAnchor(container, marker);
 
 .content {
   position: relative;
+  border-left: 1px solid var(--vp-c-divider);
   padding-left: 16px;
   font-size: 13px;
   font-weight: 500;
@@ -59,7 +64,7 @@ useActiveAnchor(container, marker);
   width: 2px;
   border-radius: 2px;
   height: 18px;
-  background-color: var(--el-color-primary);
+  background-color: var(--vp-c-brand-1);
   transition: top 0.25s cubic-bezier(0, 1, 0.5, 1), background-color 0.5s, opacity 0.25s;
 }
 
@@ -67,9 +72,5 @@ useActiveAnchor(container, marker);
   line-height: 32px;
   font-size: 14px;
   font-weight: 600;
-  font-size: 18px;
-  font-style: italic;
-  letter-spacing: 2px;
-  color: var(--el-color-primary);
 }
 </style>

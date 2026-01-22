@@ -73,12 +73,9 @@ const { hasSidebar } = useSidebar();
 
 .VPContent.has-sidebar {
   margin: 0;
-  padding-top: var(--vp-nav-height);
-
-  padding-left: var(--vp-sidebar-width);
 }
 
-/* @media (min-width: 960px) {
+@media (min-width: 960px) {
   .VPContent {
     padding-top: var(--vp-nav-height);
   }
@@ -89,7 +86,7 @@ const { hasSidebar } = useSidebar();
   }
 }
 
-@media (min-width: 1440px) {
+/* @media (min-width: 1440px) {
   .VPContent.has-sidebar {
     padding-right: calc((100vw - var(--vp-layout-max-width)) / 2);
     padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));

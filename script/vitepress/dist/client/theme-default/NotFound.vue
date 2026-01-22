@@ -1,23 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { useData } from './composables/data'
 import { useLangs } from './composables/langs'
 
-const { site, theme } = useData()
-const { localeLinks } = useLangs({ removeCurrent: false })
-
-const root = ref('/')
-onMounted(() => {
-  const path = window.location.pathname
-    .replace(site.value.base, '')
-    .replace(/(^.*?\/).*$/, '/$1')
-  if (localeLinks.value.length) {
-    root.value =
-      localeLinks.value.find(({ link }) => link.startsWith(path))?.link ||
-      localeLinks.value[0].link
-  }
-})
+const { theme } = useData()
+const { currentLang } = useLangs()
 </script>
 
 <template>
@@ -35,7 +22,7 @@ onMounted(() => {
     <div class="action">
       <a
         class="link"
-        :href="withBase(root)"
+        :href="withBase(currentLang.link)"
         :aria-label="theme.notFound?.linkLabel ?? 'go to home'"
       >
         {{ theme.notFound?.linkText ?? 'Take me home' }}
@@ -91,12 +78,12 @@ onMounted(() => {
 
 .link {
   display: inline-block;
-  border: 1px solid var(--el-color-primary);
+  border: 1px solid var(--vp-c-brand-1);
   border-radius: 16px;
   padding: 3px 16px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
   transition:
     border-color 0.25s,
     color 0.25s;

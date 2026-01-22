@@ -126,7 +126,6 @@ const heroImageSlotExists = inject("hero-image-slot-exists") as Ref<boolean>;
 }
 
 .VPHero.has-image .container {
-  padding-top: 120px;
   text-align: center;
 }
 

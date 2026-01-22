@@ -1,34 +1,31 @@
 <script setup lang="ts">
-import { useData } from "../composables/data";
-import { useSidebar } from "../composables/sidebar";
+import { useData } from '../composables/data'
+import { useSidebar } from '../composables/sidebar'
 
-const { theme, frontmatter } = useData();
-const { hasSidebar } = useSidebar();
+const { theme, frontmatter } = useData()
+const { hasSidebar } = useSidebar()
 </script>
 
 <template>
   <footer v-if="theme.footer && frontmatter.footer !== false" class="VPFooter" :class="{ 'has-sidebar': hasSidebar }">
     <div class="container">
-      <!-- <p v-if="theme.footer.message" class="message" v-html="theme.footer.message"></p> -->
+      <p v-if="theme.footer.message" class="message" v-html="theme.footer.message"></p>
       <p v-if="theme.footer.copyright" class="copyright" v-html="theme.footer.copyright"></p>
     </div>
   </footer>
 </template>
 
-<style lang="scss">
+<style scoped>
 .VPFooter {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  width: 100%;
+  position: relative;
+  z-index: var(--vp-z-index-footer);
   border-top: 1px solid var(--vp-c-gutter);
-  padding: 5px 24px;
+  padding: 32px 24px;
   background-color: var(--vp-c-bg);
 }
 
 .VPFooter.has-sidebar {
-  /* display: none; */
+  display: none;
 }
 
 .VPFooter :deep(a) {
@@ -41,21 +38,23 @@ const { hasSidebar } = useSidebar();
   color: var(--vp-c-text-1);
 }
 
-.VPFooter .container {
+@media (min-width: 768px) {
+  .VPFooter {
+    padding: 32px;
+  }
+}
+
+.container {
   margin: 0 auto;
   max-width: var(--vp-layout-max-width);
   text-align: center;
 }
 
-.VPFooter .message,
-.VPFooter .copyright {
+.message,
+.copyright {
   line-height: 24px;
   font-size: 14px;
   font-weight: 500;
   color: var(--vp-c-text-2);
-  a {
-    margin-left: 5px;
-    font-size: 12px;
-  }
 }
 </style>

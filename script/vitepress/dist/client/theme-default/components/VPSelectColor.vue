@@ -7,11 +7,22 @@ const { themeColor, isDark } = useData();
 const toggleThemeColor = async value => {
   if (value) {
     themeColor.value = value;
+    const style = window.document?.documentElement.style || null;
+
+    style?.setProperty(`--vp-c-brand-1`, value);
+    style?.setProperty(`--vp-c-brand-2`, value);
+    style?.setProperty(`--vp-c-brand-3`, value);
+
     window.setManagerTheme(value, isDark.value);
   }
 };
 if (inBrowser) {
   window.setManagerTheme(themeColor.value, isDark.value);
+  const style = window.document?.documentElement.style || null;
+
+  style?.setProperty(`--vp-c-brand-1`, themeColor.value);
+  style?.setProperty(`--vp-c-brand-2`, themeColor.value);
+  style?.setProperty(`--vp-c-brand-3`, themeColor.value);
 }
 </script>
 

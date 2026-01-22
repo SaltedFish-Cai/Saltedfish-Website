@@ -69,7 +69,7 @@ const $t = createSearchTranslate(defaultTranslations);
   height: 55px;
   background: transparent;
   transition: border-color 0.25s;
-  border: 1px solid var(--vp-c-divider);
+  /* border: 1px solid var(--vp-c-divider); */
 }
 
 .DocSearch-Button:hover {
@@ -96,7 +96,7 @@ const $t = createSearchTranslate(defaultTranslations);
   }
 
   .DocSearch-Button:hover {
-    border-color: var(--el-color-primary);
+    border-color: var(--vp-c-brand-1);
     background: var(--vp-c-bg-alt);
   }
 }

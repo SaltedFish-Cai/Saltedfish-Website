@@ -35,17 +35,12 @@ import VPStar from "./VPStar.vue";
 
 <style scoped>
 .VPHome {
-  padding-bottom: 96px;
-}
-
-.VPHome :deep(.VPHomeSponsors) {
-  margin-top: 112px;
-  margin-bottom: -128px;
+  margin-bottom: 96px;
 }
 
 @media (min-width: 768px) {
   .VPHome {
-    padding-bottom: 128px;
+    margin-bottom: 128px;
   }
 }
 </style>

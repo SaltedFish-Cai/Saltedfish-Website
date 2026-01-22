@@ -167,9 +167,10 @@ const toggleAppearance = inject("toggle-appearance", async ({ clientX: x, client
   document.documentElement.animate(
     { clipPath: isDark.value ? clipPath.reverse() : clipPath },
     {
-      duration: 300,
+      duration: 550,
       easing: "ease-in",
-      pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`
+      pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`,
+      fill: "forwards" // 保持最后一帧
     }
   );
 });

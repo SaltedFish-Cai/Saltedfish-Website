@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import type { DefaultTheme } from "vitepress/theme";
+import { computed } from "vue";
 import { useSidebarControl } from "../composables/sidebar";
-import VPIconChevronRight from "./icons/VPIconChevronRight.vue";
 import VPLink from "./VPLink.vue";
 
 const props = defineProps<{
@@ -62,7 +61,7 @@ function onCaretClick() {
       <component v-else :is="textTag" class="text" v-html="item.text" />
 
       <div
-        v-if="item.collapsed != null"
+        v-if="item.collapsed != null && item.items && item.items.length"
         class="caret"
         role="button"
         aria-label="toggle section"
@@ -70,7 +69,7 @@ function onCaretClick() {
         @keydown.enter="onCaretClick"
         tabindex="0"
       >
-        <VPIconChevronRight class="caret-icon" />
+        <span class="vpi-chevron-right caret-icon" />
       </div>
     </div>
 
@@ -115,7 +114,7 @@ function onCaretClick() {
 .VPSidebarItem.level-3.is-active > .item > .indicator,
 .VPSidebarItem.level-4.is-active > .item > .indicator,
 .VPSidebarItem.level-5.is-active > .item > .indicator {
-  background-color: var(--el-color-primary);
+  background-color: var(--vp-c-brand-1);
 }
 
 .link {
@@ -137,6 +136,10 @@ function onCaretClick() {
   color: var(--vp-c-text-1);
 }
 
+.VPSidebarItem.level-0 > .item > .text {
+  margin: 20px 0 10px 0;
+}
+
 .VPSidebarItem.level-1 .text,
 .VPSidebarItem.level-2 .text,
 .VPSidebarItem.level-3 .text,
@@ -152,7 +155,7 @@ function onCaretClick() {
 .VPSidebarItem.level-3.is-link > .item > .link:hover .text,
 .VPSidebarItem.level-4.is-link > .item > .link:hover .text,
 .VPSidebarItem.level-5.is-link > .item > .link:hover .text {
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
 }
 
 .VPSidebarItem.level-0.has-active > .item > .text,
@@ -176,7 +179,7 @@ function onCaretClick() {
 .VPSidebarItem.level-3.is-active > .item .link > .text,
 .VPSidebarItem.level-4.is-active > .item .link > .text,
 .VPSidebarItem.level-5.is-active > .item .link > .text {
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
 }
 
 .caret {
@@ -201,9 +204,7 @@ function onCaretClick() {
 }
 
 .caret-icon {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
+  font-size: 18px;
   transform: rotate(90deg);
   transition: transform 0.25s;
 }

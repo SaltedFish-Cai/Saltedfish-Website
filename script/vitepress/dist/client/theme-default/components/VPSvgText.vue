@@ -122,14 +122,22 @@ function animate() {
 
   .VPSvgTextText1,
   .VPSvgTextText2 {
+    left: 0;
     position: absolute;
+    text-align: left;
     width: 100%;
     height: 100%;
     display: inline-block;
     font-weight: 700;
     font-size: 30pt;
-    text-align: left;
     user-select: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .VPSvgTextText1,
+  .VPSvgTextText2 {
+    text-align: center !important;
   }
 }
 .VPSvgDefs {

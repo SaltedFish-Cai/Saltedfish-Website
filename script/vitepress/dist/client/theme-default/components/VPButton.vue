@@ -68,19 +68,19 @@ const component = computed(() => {
 .VPButton.brand {
   border-color: var(--vp-button-brand-border);
   color: var(--vp-button-brand-text);
-  background-color: var(--m-color-v2-primary);
+  background-color: var(--vp-button-brand-bg);
 }
 
 .VPButton.brand:hover {
   border-color: var(--vp-button-brand-hover-border);
   color: var(--vp-button-brand-hover-text);
-  background-color: var(--m-color-v2-primary-light-6);
+  background-color: var(--vp-button-brand-hover-bg);
 }
 
 .VPButton.brand:active {
   border-color: var(--vp-button-brand-active-border);
   color: var(--vp-button-brand-active-text);
-  background-color: var(--m-color-v2-primary-light-6);
+  background-color: var(--vp-button-brand-active-bg);
 }
 
 .VPButton.alt {

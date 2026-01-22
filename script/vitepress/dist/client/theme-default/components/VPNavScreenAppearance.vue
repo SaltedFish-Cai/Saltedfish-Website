@@ -6,9 +6,16 @@ const { site, theme } = useData()
 </script>
 
 <template>
-  <div v-if="site.appearance && site.appearance !== 'force-dark'" class="VPNavScreenAppearance">
+  <div
+    v-if="
+      site.appearance &&
+      site.appearance !== 'force-dark' &&
+      site.appearance !== 'force-auto'
+    "
+    class="VPNavScreenAppearance"
+  >
     <p class="text">
-      {{ theme.darkModeSwitchLabel || '外观' }}
+      {{ theme.darkModeSwitchLabel || 'Appearance' }}
     </p>
     <VPSwitchAppearance />
   </div>

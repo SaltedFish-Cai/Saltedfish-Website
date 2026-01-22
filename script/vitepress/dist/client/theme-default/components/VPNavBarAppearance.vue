@@ -1,19 +1,19 @@
 <script lang="ts" setup>
 import { useData } from "../composables/data";
-import VPSwitchAppearance from "./VPSwitchAppearance.vue";
+// import VPSwitchAppearance from "./VPSwitchAppearance.vue";
 import VPSwitchAppearanceLine from "./VPSwitchAppearanceLine.vue";
 import VPSelectColor from "./VPSelectColor.vue";
-import VPSelectSize from "./VPSelectSize.vue";
+// import VPSelectSize from "./VPSelectSize.vue";
 
-const { site, env } = useData();
+const { site } = useData();
 </script>
 
 <template>
-  <div v-if="site.appearance && site.appearance !== 'force-dark'" class="VPNavBarAppearance">
-    <VPSwitchAppearance v-if="env == 'document'" />
-    <VPSwitchAppearanceLine v-else />
+  <div v-if="site.appearance && site.appearance !== 'force-dark' && site.appearance !== 'force-auto'" class="VPNavBarAppearance">
+    <!-- <VPSwitchAppearance /> -->
+    <VPSwitchAppearanceLine />
     <VPSelectColor class="ml10" />
-    <VPSelectSize class="ml10" />
+    <!-- <VPSelectSize class="ml10" /> -->
   </div>
 </template>
 

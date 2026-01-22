@@ -15,7 +15,7 @@
 
 .custom-block.info a,
 .custom-block.info code {
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
 }
 
 .custom-block.info a:hover,
@@ -35,7 +35,7 @@
 
 .custom-block.note a,
 .custom-block.note code {
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
 }
 
 .custom-block.note a:hover,
@@ -55,7 +55,7 @@
 
 .custom-block.tip a,
 .custom-block.tip code {
-  color: var(--el-color-primary);
+  color: var(--vp-c-tip-1);
 }
 
 .custom-block.tip a:hover,
@@ -154,7 +154,7 @@
 }
 
 .custom-block.details a {
-  color: var(--el-color-primary);
+  color: var(--vp-c-brand-1);
 }
 
 .custom-block.details a:hover,

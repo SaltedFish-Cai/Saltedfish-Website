@@ -46,7 +46,7 @@ watchEffect(() => {
   z-index: var(--vp-z-index-nav);
   width: 100%;
   pointer-events: none;
-  transition: background-color 0.5s;
+  transition: background-color 0.5s;z-index: 1002;
 }
 
 @media (min-width: 960px) {
