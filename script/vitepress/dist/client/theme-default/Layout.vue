@@ -14,9 +14,10 @@ import VPGhost from "./components/VPGhost.vue";
 import { useData } from "./composables/data";
 import { useCloseSidebarOnEscape, useSidebar } from "./composables/sidebar";
 
-const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar } = useSidebar();
+const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar, hasSidebar } = useSidebar();
 
 const route = useRoute();
+
 watch(() => route.path, closeSidebar);
 
 useCloseSidebarOnEscape(isSidebarOpen, closeSidebar);
@@ -29,7 +30,11 @@ provide("hero-image-slot-exists", heroImageSlotExists);
 </script>
 
 <template>
-  <div v-if="frontmatter.layout !== false" class="Layout" :class="frontmatter.pageClass">
+  <div
+    v-if="frontmatter.layout !== false"
+    class="Layout"
+    :class="(!hasSidebar ? 'has-sidebar ' : ' ') + (frontmatter.pageClass ? frontmatter.pageClass : '')"
+  >
     <slot name="layout-top" />
     <VPSkipLink />
     <VPBackdrop class="backdrop" :show="isSidebarOpen" @click="closeSidebar" />
@@ -92,4 +97,11 @@ provide("hero-image-slot-exists", heroImageSlotExists);
   flex-direction: column;
   min-height: 100vh;
 }
+.Layout.has-sidebar {
+  min-height: calc(100vh - 113px);
+}
+</style>
+
+<style lang="scss">
+@import "./styles/icons.css";
 </style>

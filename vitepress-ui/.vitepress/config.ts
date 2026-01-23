@@ -53,6 +53,7 @@ export default {
         ],
         activeMatch: "/Manager"
       },
+      { text: "🤯 AI学习", link: "/document/study/ai/install" },
       { text: "🔨 工具站", link: "/document/tools/tools" },
       {
         text: "相关链接",
@@ -132,7 +133,7 @@ export default {
     ],
     // 底部信息栏
     footer: {
-      message: "Released under the MIT License.",
+      message: "Released under the BSD License.",
       copyright: "Copyright © 2024-present <a href='http://beian.miit.gov.cn' target='_blank'>沪ICP备2022024976号</a>"
     },
     lastUpdated: {
