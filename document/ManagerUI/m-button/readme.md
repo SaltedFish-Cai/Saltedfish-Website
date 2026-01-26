@@ -16,7 +16,7 @@
 
 ## 链接按钮
 
-:::warning
+:::warning 注意
 `type="text"` 已被 废弃，请考虑切换至新的 API `link` 。
 :::
 

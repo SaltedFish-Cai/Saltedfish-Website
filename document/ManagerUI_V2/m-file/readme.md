@@ -1,6 +1,6 @@
 # File 文件
 
-:::warning
+:::warning 注意
 `m-file` 可独立使用，在 `m-form/m-table` 中可使用时，需配置 `prop` 字段。
 :::
 

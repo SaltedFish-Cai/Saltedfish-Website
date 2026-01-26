@@ -66,6 +66,9 @@ function onBlur() {
 
 .VPFlyout.active .text {
   color: var(--vp-c-brand-1);
+  font-weight: bold;
+  transform: scale(1.2);
+  transition: transform 0.25s;
 }
 
 .VPFlyout.active:hover .text {

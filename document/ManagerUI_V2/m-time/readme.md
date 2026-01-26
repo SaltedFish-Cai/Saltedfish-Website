@@ -1,6 +1,6 @@
 # Time 时间
 
-:::warning
+:::warning 注意
 `m-time-v2` 可独立使用，在 `m-form-v2/m-table-v2` 中可使用时，需配置 `prop` 字段。
 :::
 
