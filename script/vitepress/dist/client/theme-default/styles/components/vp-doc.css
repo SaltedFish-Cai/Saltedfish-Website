@@ -160,30 +160,30 @@
  * Table
  * -------------------------------------------------------------------------- */
 
-.vp-doc table {
+.vp-doc > div > table {
   display: block;
   border-collapse: collapse;
   margin: 20px 0;
   overflow-x: auto;
 }
 
-.vp-doc tr {
+.vp-doc > div > table tr {
   background-color: var(--vp-c-bg);
   border-top: 1px solid var(--vp-c-divider);
   transition: background-color 0.5s;
 }
 
-.vp-doc tr:nth-child(2n) {
+.vp-doc > div > table tr:nth-child(2n) {
   background-color: var(--vp-c-bg-soft);
 }
 
-.vp-doc th,
-.vp-doc td {
+.vp-doc > div > table th,
+.vp-doc > div > table td {
   border: 1px solid var(--vp-c-divider);
   padding: 8px 16px;
 }
 
-.vp-doc th {
+.vp-doc > div > table th {
   text-align: left;
   font-size: 14px;
   font-weight: 600;
@@ -191,7 +191,7 @@
   background-color: var(--vp-c-bg-soft);
 }
 
-.vp-doc td {
+.vp-doc > div > table td {
   font-size: 14px;
 }
 
@@ -199,7 +199,7 @@
  * Decorational elements
  * -------------------------------------------------------------------------- */
 
-.vp-doc hr {
+.vp-doc > div > hr {
   margin: 16px 0;
   border: none;
   border-top: 1px solid var(--vp-c-divider);
