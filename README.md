@@ -2,7 +2,7 @@
 
 站点基于 Vue3 + Vitepress 搭建，提供 Manager-UI-Element 和 Manager-UI 两个 UI 框架源码与相关文档，同时也提供了一些工具站，帮助开发者快速搭建项目，提高开发效率，减少开发成本，提升开发体验，欢迎加入我们的微信群。
 
-添加微信群方式： [点击加入](http://manager.1 srontend-m.online/file/wx.png)
+添加微信群方式： [点击加入](http://manager.1 srontend-m.online/file/wx.jpg)
 
 ## UI 框架 Manager-UI-Element（该项目已进入稳定版本，后续将只维护 bug 修复）
 
