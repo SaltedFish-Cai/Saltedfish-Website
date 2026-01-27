@@ -381,8 +381,8 @@ function eq(prop, data, contrastData) {
   }
 
   return !isEqual(
-    data?.[prop]?.map(item => item.FileId),
-    _contrastData.map(item => item.FileId)
+    data?.[prop]?.map?.(item => item.FileId)?.sort((a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, "")),
+    _contrastData?.map?.(item => item.FileId)?.sort((a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, ""))
   );
 }
 

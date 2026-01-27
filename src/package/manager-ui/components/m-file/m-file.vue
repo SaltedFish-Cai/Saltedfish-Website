@@ -360,8 +360,8 @@ function eq(data, contrastData) {
   }
 
   return !isEqual(
-    data?.map?.(item => item.FileId),
-    _contrastData.map(item => item.FileId)
+    data?.map?.(item => item.FileId)?.sort((a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, "")),
+    _contrastData?.map?.(item => item.FileId)?.sort((a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, ""))
   );
 }
 

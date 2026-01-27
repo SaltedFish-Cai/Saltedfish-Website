@@ -390,8 +390,8 @@ function eq(data, contrastData) {
   const compareKey = ManagerGlobalConfig.value?.file_config?.compareKey || "FileId";
 
   return !isEqual(
-    data?.map(item => item[compareKey]),
-    _contrastData.map(item => item[compareKey])
+    data?.map?.(item => item[compareKey])?.sort((a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, "")),
+    _contrastData?.map?.(item => item[compareKey])?.sort((a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, ""))
   );
 }
 
