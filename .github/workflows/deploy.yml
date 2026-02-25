@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build with VitePress
-        run: npm run docs:build # 确保你的 package.json 里有这个命令
+        run: npm run build:doc # 确保你的 package.json 里有这个命令
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
