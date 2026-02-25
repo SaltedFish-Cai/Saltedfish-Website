@@ -10,7 +10,7 @@ hero:
   name: SaltedFish
   tagline: [Manager-UI-Element, Manager-UI]
   image:
-    src: /Saltedfish-Website/logo-ui.svg
+    src: /logo-ui.svg
     alt: logo
   actions:
     - theme: brand

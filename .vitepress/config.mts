@@ -181,7 +181,7 @@ export default {
   },
   head: [
     ["meta", { name: "theme-color", content: "#3eaf7c" }],
-    ["link", { rel: "icon", href: `/logo-ui.svg` }]
+    ["link", { rel: "icon", href: `/Saltedfish-Website/logo-ui.svg` }]
     // ["script", { src: `https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js` }]
   ]
 };
