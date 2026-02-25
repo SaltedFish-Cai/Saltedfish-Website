@@ -32,3 +32,4 @@ egg/app/public/*
 
 index.md
 components.d.ts
+dist

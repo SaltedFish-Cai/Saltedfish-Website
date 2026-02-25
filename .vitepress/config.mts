@@ -19,7 +19,7 @@ import { VantResolver } from "@vant/auto-import-resolver";
 
 export default {
   srcDir: "./",
-  outDir: "./docs",
+  outDir: ".vitepress/dist",
   base: "/Saltedfish-Website/",
   cleanUrls: true,
   lang: "zh-CN",
