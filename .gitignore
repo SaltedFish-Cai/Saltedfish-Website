@@ -30,6 +30,5 @@ yarn-error.log
 stats.html
 egg/app/public/*
 
-index.md
 components.d.ts
 dist
