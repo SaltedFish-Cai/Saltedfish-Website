@@ -14,7 +14,7 @@ import "./styles/animation.scss";
 
 function installPackage() {
   const ScriptList = [
-    "/Saltedfish-Website/library/wangEditor.js",
+    "/Saltedfish-Website/library/wangeditor.js",
 
     "/Saltedfish-Website/library/xlsx.full.min.js",
 

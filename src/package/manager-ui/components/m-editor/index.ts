@@ -5,7 +5,7 @@ import inBrowser from "../tools/inBrowser";
 // # Var
 if (inBrowser) {
   const script = window.document?.createElement("script") || {};
-  script.src = "/Saltedfish-Website/library/wangEditor.js";
+  script.src = "/Saltedfish-Website/library/wangeditor.js";
   window.document?.head?.appendChild(script);
 }
 

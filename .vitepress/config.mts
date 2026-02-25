@@ -38,7 +38,7 @@ export default {
   },
 
   themeConfig: {
-    logo: "/logo-ui.svg",
+    logo: "/Saltedfish-Website/logo-ui.svg",
     outline: {
       level: [2, 6],
       label: "目录大纲"
