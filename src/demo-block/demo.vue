@@ -86,7 +86,7 @@ const onCopy = async e => {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .demo {
   margin: 10px 0;
 
@@ -160,15 +160,22 @@ const onCopy = async e => {
   background-size: 20px;
   border-radius: 4px;
   transition: opacity 0.25s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .m-icon-v2 {
+    font-size: 25px;
+  }
 }
 .demo-show-copied {
   background-color: var(--vp-code-copy-code-hover-bg);
   background-image: var(--vp-icon-copied);
-  border-radius: 0 4px 4px 0;
+  border-radius: 4px;
+  width: 105px;
 }
 .demo-show-copied::before {
   position: relative;
-  left: -65px;
   display: block;
   width: 64px;
   height: 40px;
