@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { ref, onUnmounted } from "vue";
-import inBrowser from "../../../../../../src/package/manager-ui/components/tools/inBrowser";
+import inBrowser from "../../../../src/package/manager-ui/components/tools/inBrowser";
 
 let move;
 const topX = ref(-110);

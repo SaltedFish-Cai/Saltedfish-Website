@@ -169,10 +169,10 @@ export default {
     },
     resolve: {
       alias: {
-        "@": resolve(__dirname, "../../src"),
-        "@m": resolve(__dirname, "../../src/package/manager-ui"),
-        "@mo": resolve(__dirname, "../../src/package/manager-mobile"),
-        MTools: resolve(__dirname, "../../src/package/manager-ui/tools/"),
+        "@": resolve(__dirname, "../src"),
+        "@m": resolve(__dirname, "../src/package/manager-ui"),
+        "@mo": resolve(__dirname, "../src/package/manager-mobile"),
+        MTools: resolve(__dirname, "../src/package/manager-ui/tools/"),
         "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
       }
     }

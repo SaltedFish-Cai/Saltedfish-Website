@@ -78,7 +78,7 @@
 
 <script lang="ts" setup>
 import { onUnmounted } from "vue";
-import inBrowser from "../../../../../../src/package/manager-ui/components/tools/inBrowser";
+import inBrowser from "../../../../src/package/manager-ui/components/tools/inBrowser";
 
 let time;
 if (inBrowser) {
@@ -104,7 +104,7 @@ if (inBrowser) {
     }
 
     function changeTime() {
-      let time = new Date();
+      const time = new Date();
       const [h_1, h_2] = handleNumber(time.getHours());
       const [m_1, m_2] = handleNumber(time.getMinutes());
       const [s_1, s_2] = handleNumber(time.getSeconds());

@@ -6,7 +6,7 @@ import { useSidebar } from "../composables/sidebar";
 import VPDocAside from "./VPDocAside.vue";
 import VPDocFooter from "./VPDocFooter.vue";
 import { MManagerV2Type } from "M_Types";
-import { advancedQueryApi, groupAdvancedQueryApi } from "../../../../../../public/file/mock-api";
+import { advancedQueryApi, groupAdvancedQueryApi } from "../../../../public/file/mock-api";
 const { theme } = useData();
 
 const route = useRoute();
