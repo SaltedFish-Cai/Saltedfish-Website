@@ -180,3 +180,14 @@
     background-color: var(--el-color-primary);
   }
 }
+
+.medium-zoom-overlay {
+  z-index: 9995 !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.medium-zoom-image--opened {
+  z-index: 9998 !important;
+}

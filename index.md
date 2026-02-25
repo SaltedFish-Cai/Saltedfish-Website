@@ -21,7 +21,7 @@ hero:
       link: /document/ManagerUI/m-button/readme
     - theme: img
       text: 🚀 微信群聊二维码
-      link: /file/wx.jpg
+      link: /Saltedfish-Website/file/wx.jpg
 
 features:
   - icon: 👍

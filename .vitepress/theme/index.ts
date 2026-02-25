@@ -60,6 +60,7 @@ export default {
     });
   },
   enhanceApp({ app, router }: EnhanceAppContext) {
+    console.log('++++++++++> 11111111:', 11111111);
     createMediumZoomProvider(app, router);
     app.mixin({
       async beforeMount() {
