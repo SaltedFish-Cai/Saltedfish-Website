@@ -21,6 +21,7 @@ export default {
   srcDir: "./",
   outDir: "./docs",
   base: "/Saltedfish-Website/",
+  cleanUrls: true,
   lang: "zh-CN",
   // lang: 'en-US',
   title: "Salted-Fish", // 标题
@@ -169,7 +170,7 @@ export default {
     },
     resolve: {
       alias: {
-        "public": resolve(__dirname, "../public"),
+        public: resolve(__dirname, "../public"),
         "@": resolve(__dirname, "../src"),
         "@m": resolve(__dirname, "../src/package/manager-ui"),
         "@mo": resolve(__dirname, "../src/package/manager-mobile"),
