@@ -1,4 +1,4 @@
-import demoBlock from "../../src/demo-block";
+import demoBlock from "../src/demo-block";
 
 import { sidebar } from "./sidebar";
 import { managerUISidebar } from "./manager-ui-sidebar";
@@ -18,8 +18,8 @@ import NutUIResolver from "@nutui/auto-import-resolver";
 import { VantResolver } from "@vant/auto-import-resolver";
 
 export default {
-  srcDir: "../",
-  outDir: "../docs",
+  srcDir: "./",
+  outDir: "./docs",
   base: "/",
   lang: "zh-CN",
   // lang: 'en-US',

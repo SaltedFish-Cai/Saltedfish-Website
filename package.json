@@ -20,7 +20,7 @@
   },
   "scripts": {
     "create:index": "node ./script/create-index --mode index-ui",
-    "dev": "rimraf -G ./script/demo.vue && npm run create:index && node ./script/vitepress/bin/vitepress.js dev vitepress-ui",
+    "dev": "rimraf -G ./script/demo.vue && npm run create:index && node ./script/vitepress/bin/vitepress.js dev",
     "update-version": "node ./script/update-version.js",
     "tsc": "vue-tsc",
     "build-tsc": "rimraf -G ./ManagerUI && vue-tsc && vite --config ./src/package/manager-ui/vite.config.ts build",

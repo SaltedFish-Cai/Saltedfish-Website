@@ -1,20 +1,20 @@
 import { h, watch } from "vue";
 import DefaultTheme from "vitepress/theme"; //引入默认主题
 import { useData, EnhanceAppContext } from "vitepress";
-import { createMediumZoomProvider } from "../../../src/components/box-nav/composable/useMediumZoom";
-import { advancedQueryApi, groupAdvancedQueryApi, addressApi } from "../../../public/file/mock-api";
+import { createMediumZoomProvider } from "../../src/components/box-nav/composable/useMediumZoom";
+import { advancedQueryApi, groupAdvancedQueryApi, addressApi } from "../../public/file/mock-api";
 
 // >-------------> 组件 <------------<
-import demo from "../../../src/demo-block/demo.vue";
+import demo from "../../src/demo-block/demo.vue";
 
-import CodeView from "../../../src/components/box-code-view/index.vue";
+import CodeView from "../../src/components/box-code-view/index.vue";
 
-import MNavVisitor from "../../../src/components/box-nav/MNavVisitor.vue";
-import MDocFooter from "../../../src/components/box-nav/MDocFooter.vue";
+import MNavVisitor from "../../src/components/box-nav/MNavVisitor.vue";
+import MDocFooter from "../../src/components/box-nav/MDocFooter.vue";
 // import MAsideSponsors from "../../src/components/box-nav/MAsideSponsors.vue";
-import NavLinks from "../../../src/components/box-nav/NavLinks.vue";
+import NavLinks from "../../src/components/box-nav/NavLinks.vue";
 
-import directives from "../../../src/directives/index";
+import directives from "../../src/directives/index";
 
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -23,16 +23,16 @@ import "@nutui/nutui/dist/style.css";
 import "vant/lib/index.css";
 
 // import { mIcon, mButton, mTable, mForm } from "../../src/package/index";
-import ManagerUI from "../../../src/package/manager-ui/index";
+import ManagerUI from "../../src/package/manager-ui/index";
 
 // import ManagerUi from "../../ManagerUI/es/index";
 // import "../../ManagerUI/es/style.css";
 
 // scss
-import "../../../src/styles/custom.scss";
-import "../../../src/styles/theme.scss";
-import "../../../src/styles/flex.scss";
-import "../../../src/styles/mp.scss";
+import "../../src/styles/custom.scss";
+import "../../src/styles/theme.scss";
+import "../../src/styles/flex.scss";
+import "../../src/styles/mp.scss";
 
 // 导出vitepress配置
 export default {
