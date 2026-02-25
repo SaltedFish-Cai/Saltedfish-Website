@@ -20,7 +20,7 @@ import { VantResolver } from "@vant/auto-import-resolver";
 export default {
   srcDir: "./",
   outDir: "./docs",
-  base: "/salted-fish-website/",
+  base: "/Saltedfish-Website/",
   lang: "zh-CN",
   // lang: 'en-US',
   title: "Salted-Fish", // 标题
