@@ -1,4 +1,4 @@
-export interface MScrollbarV2Type {
+export interface ScrollbarV2Type {
   /**
    * @description 是否使用阴影
    * @default true
@@ -71,7 +71,7 @@ export interface MScrollbarV2Type {
    * @description 滚动条宽度
    * @default 10
    */
-  paddingWidth?: number;
+  paddingWidth?: number | string;
 
   /**
    * **监听元素类名**

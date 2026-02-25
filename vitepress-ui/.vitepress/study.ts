@@ -13,7 +13,7 @@ export const study = [
     text: "NumPy 笔记",
     items: [
       { text: "NumPy 基础", link: "/document/study/python/numPy" },
-      { text: "数据处理、矩阵运算", link: "/document/study/python/numPy-matrix" }
+      { text: "数据处理、矩阵运算", link: "/document/study/python/numPy_matrix" }
     ]
   },
   {
@@ -22,6 +22,13 @@ export const study = [
   },
   {
     text: "AI 笔记",
-    items: [{ text: "本地AI环境安装", link: "/document/study/ai/install" }]
+    items: [
+      { text: "AI 模型的选择", link: "/document/study/ai/selection" },
+      { text: "本地AI环境安装", link: "/document/study/ai/install" },
+      { text: "关于 Ollama 微调", link: "/document/study/ai/ollama-training" },
+      { text: "关于 微调和知识库对比", link: "/document/study/ai/FineTuneVsRAG" },
+      { text: "关于 LLaMA-Factory 微调", link: "/document/study/ai/llama-factory" },
+      { text: "关于 MLX-LM 微调", link: "/document/study/ai/mlx-lm-finetune" }
+    ]
   }
 ];

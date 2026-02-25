@@ -53,7 +53,7 @@ export default {
         ],
         activeMatch: "/Manager"
       },
-      { text: "🤯 AI学习", link: "/document/study/ai/install", activeMatch: "/study/" },
+      { text: "🤯 AI学习", link: "/document/study/ai/selection", activeMatch: "/study/" },
       { text: "🔨 工具站", link: "/document/tools/tools" },
       {
         text: "相关链接",

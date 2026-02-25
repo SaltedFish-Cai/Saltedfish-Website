@@ -21,7 +21,7 @@ ManagerMobile
 !document/ManagerUI
 !document/ManagerMobile
 
-!script/vitepress/*
+script/vitepress/*
 script/vitepress/node_modules/*
 !script/cz-customizable/*
 *.back-locl

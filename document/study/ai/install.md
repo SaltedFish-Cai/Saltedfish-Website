@@ -1,19 +1,20 @@
-# 本地 AI 环境安装
+# 本地 AI 环境安装(Apple Silicon)
 
 :::warning 注意
 本次案例使用 `MAC mini M4 (24G)` 作为演示环境，你可以根据自己的硬件配置进行调整。
+Windows安装方式点[这里](/document/study/ai/install-windows.md)
 :::
 
-## 一、整体方案思路
+## 1. 整体方案思路
 
 1. 利用 macOS 的优势，优先选择适配 Apple Silicon 的开源框架（Ollama + Open WebUI），无需复杂的环境配置；
 2. 选择轻量且性能足够的本地模型（如 Llama 3 8B、Qwen 7B），适配 24G 内存；
 3. 通过插件实现本地模型的网络搜索能力；
 4. Open WebUI 提供开箱即用的可视化对话界面，支持多模型切换、对话历史管理。
 
-## 二、分步搭建教程
+## 2. 分步搭建教程
 
-### 步骤 1：准备基础环境
+### 2.1 准备基础环境
 
 Mac mini M4 的 macOS 已预装 Python，只需确认 Homebrew（包管理器）是否安装，没有则执行：
 
@@ -25,7 +26,7 @@ Mac mini M4 的 macOS 已预装 Python，只需确认 Homebrew（包管理器）
 brew --version
 ```
 
-### 步骤 2：安装 Ollama（本地模型运行核心）
+### 2.2 安装 Ollama（本地模型运行核心）
 
 Ollama 是专为 macOS（尤其是 Apple Silicon）优化的本地 LLM 运行工具，一键部署模型，无需手动配置 CUDA/Metal。
 
@@ -40,7 +41,7 @@ ollama serve &
 ollama --version
 ```
 
-### 步骤 3：拉取并运行适配的本地 AI 模型
+### 2.3 拉取并运行适配的本地 AI 模型
 
 24G 内存推荐选择 7B/8B 量级的模型，兼顾性能和体验：
 
@@ -56,7 +57,7 @@ ollama run llama3:8b
 # 输入问题如“介绍一下Mac mini M4”，测试回复后按Ctrl+D退出
 ```
 
-### 步骤 4：安装 Open WebUI（可视化对话界面）
+### 2.4 安装 Open WebUI（可视化对话界面）
 
 Open WebUI 是开源的 AI 对话界面，适配 Ollama，支持网络搜索、多模型切换、自定义提示词等，且原生支持 Apple Silicon。
 
@@ -74,7 +75,7 @@ docker run -d -p 3000:8080 --env ENABLE_WEB_SEARCH=true --add-host=host.docker.i
 docker ps | grep open-webui
 ```
 
-### 步骤 5：配置网络搜索功能
+### 2.5 配置网络搜索功能
 
 Open WebUI 内置网络搜索插件，只需简单配置即可让本地模型调用网络资源：
 
@@ -84,7 +85,7 @@ Open WebUI 内置网络搜索插件，只需简单配置即可让本地模型调
 4. 找到「Web Search」插件，启用并保存；
 5. 回到对话界面，输入问题时勾选输入框下方的「Web Search」选项，模型会自动联网搜索并整合结果。
 
-### 步骤 6：优化 M4 芯片性能（可选）
+### 2.6 优化 M4 芯片性能（可选）
 
 为充分利用 M4 的 Metal 加速，调整 Ollama 配置：
 
@@ -99,7 +100,7 @@ BLAS_NUM_THREADS=8' > ~/.ollama/config
 pkill ollama && ollama serve &
 ```
 
-## 三、使用说明
+## 3. 使用说明
 
 1. **启动服务**：每次开机后，只需执行以下命令即可启动全套服务：
    ```bash
@@ -115,7 +116,7 @@ pkill ollama && ollama serve &
    docker stop open-webui
    ```
 
-## 总结
+## 4. 总结
 
 1. 核心架构：**Ollama（本地模型运行） + Open WebUI（可视化界面+网络搜索）**，完美适配 Mac mini M4 的 24G 内存和 Apple Silicon 架构；
 2. 关键优势：无需复杂的环境配置，一键部署，模型轻量（7B/8B），兼顾本地对话和网络搜索；

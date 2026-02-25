@@ -1,9 +1,12 @@
-import type MarkdownIt from "markdown-it";
-import type { Options as MiniSearchOptions } from "minisearch";
-import type { ComputedRef, Ref, ShallowRef } from "vue";
-import type { DocSearchProps } from "./docsearch.js";
-import type { LocalSearchTranslations, PageSplitSection } from "./local-search.js";
-import type { Awaitable, MarkdownEnv, PageData } from "./shared.js";
+import type MarkdownIt from 'markdown-it'
+import type { Options as MiniSearchOptions } from 'minisearch'
+import type { ComputedRef, Ref, ShallowRef } from 'vue'
+import type { DocSearchProps } from './docsearch.js'
+import type {
+  LocalSearchTranslations,
+  PageSplitSection
+} from './local-search.js'
+import type { Awaitable, MarkdownEnv, PageData } from './shared.js'
 
 export namespace DefaultTheme {
   export interface Config {
@@ -12,42 +15,42 @@ export namespace DefaultTheme {
      *
      * @example '/logo.svg'
      */
-    logo?: ThemeableImage;
+    logo?: ThemeableImage
 
     /**
      * Overrides the link of the site logo.
      */
-    logoLink?: string | { link?: string; rel?: string; target?: string };
+    logoLink?: string | { link?: string; rel?: string; target?: string }
 
     /**
      * Custom site title in navbar. If the value is undefined,
      * `config.title` will be used.
      */
-    siteTitle?: string | false;
+    siteTitle?: string | false
 
     /**
      * Custom header levels of outline in the aside component.
      *
      * @default 2
      */
-    outline?: Outline | Outline["level"] | false;
+    outline?: Outline | Outline['level'] | false
 
     /**
      * @deprecated Use `outline.label` instead.
      *
      * @default 'On this page'
      */
-    outlineTitle?: string;
+    outlineTitle?: string
 
     /**
      * The nav items.
      */
-    nav?: NavItem[];
+    nav?: NavItem[]
 
     /**
      * The sidebar items.
      */
-    sidebar?: Sidebar;
+    sidebar?: Sidebar
 
     /**
      * Set to `false` to prevent rendering of aside container.
@@ -56,13 +59,13 @@ export namespace DefaultTheme {
      *
      * @default true
      */
-    aside?: boolean | "left";
+    aside?: boolean | 'left'
 
     /**
      * Info for the edit link. If it's undefined, the edit link feature will
      * be disabled.
      */
-    editLink?: EditLink;
+    editLink?: EditLink
 
     /**
      * @deprecated Use `lastUpdated.text` instead.
@@ -71,178 +74,180 @@ export namespace DefaultTheme {
      *
      * @default 'Last updated'
      */
-    lastUpdatedText?: string;
+    lastUpdatedText?: string
 
-    lastUpdated?: LastUpdatedOptions;
+    lastUpdated?: LastUpdatedOptions
 
     /**
      * Set custom prev/next labels.
      */
-    docFooter?: DocFooter;
+    docFooter?: DocFooter
 
     /**
      * The social links to be displayed at the end of the nav bar. Perfect for
      * placing links to social services such as GitHub, Twitter, Facebook, etc.
      */
-    socialLinks?: SocialLink[];
+    socialLinks?: SocialLink[]
 
     /**
      * The footer configuration.
      */
-    footer?: Footer;
+    footer?: Footer
 
     /**
      * @default 'Appearance'
      */
-    darkModeSwitchLabel?: string;
+    darkModeSwitchLabel?: string
 
     /**
      * @default 'Switch to light theme'
      */
-    lightModeSwitchTitle?: string;
+    lightModeSwitchTitle?: string
 
     /**
      * @default 'Switch to dark theme'
      */
-    darkModeSwitchTitle?: string;
+    darkModeSwitchTitle?: string
 
     /**
      * @default 'Menu'
      */
-    sidebarMenuLabel?: string;
+    sidebarMenuLabel?: string
 
     /**
      * @default 'Return to top'
      */
-    returnToTopLabel?: string;
+    returnToTopLabel?: string
 
     /**
      * Set custom `aria-label` for language menu button.
      *
      * @default 'Change language'
      */
-    langMenuLabel?: string;
+    langMenuLabel?: string
 
-    search?: { provider: "algolia"; options: AlgoliaSearchOptions } | { provider: "local"; options?: LocalSearchOptions };
+    search?:
+      | { provider: 'local'; options?: LocalSearchOptions }
+      | { provider: 'algolia'; options: AlgoliaSearchOptions }
 
     /**
      * @deprecated Use `search` instead.
      */
-    algolia?: AlgoliaSearchOptions;
+    algolia?: AlgoliaSearchOptions
 
     /**
      * The carbon ads options. Leave it undefined to disable the ads feature.
      */
-    carbonAds?: CarbonAdsOptions;
+    carbonAds?: CarbonAdsOptions
 
     /**
      * Changing locale when current url is `/foo` will redirect to `/locale/foo`.
      *
      * @default true
      */
-    i18nRouting?: boolean;
+    i18nRouting?: boolean
 
     /**
      * Show external link icon in Markdown links.
      *
      * @default false
      */
-    externalLinkIcon?: boolean;
+    externalLinkIcon?: boolean
 
     /**
      * Customize text of 404 page.
      */
-    notFound?: NotFoundOptions;
+    notFound?: NotFoundOptions
   }
 
   // nav -----------------------------------------------------------------------
 
-  export type NavItem = NavItemComponent | NavItemWithChildren | NavItemWithLink;
+  export type NavItem = NavItemComponent | NavItemWithLink | NavItemWithChildren
 
   export interface NavItemComponent {
-    component: string;
-    props?: Record<string, any>;
+    component: string
+    props?: Record<string, any>
   }
 
   export interface NavItemWithLink {
-    text: string;
-    link: string;
-    items?: never;
+    text: string
+    link: string
+    items?: never
 
     /**
      * `activeMatch` is expected to be a regex string. We can't use actual
      * RegExp object here because it isn't serializable
      */
-    activeMatch?: string;
-    rel?: string;
-    target?: string;
-    noIcon?: boolean;
+    activeMatch?: string
+    rel?: string
+    target?: string
+    noIcon?: boolean
   }
 
   export interface NavItemChildren {
-    text?: string;
-    items: NavItemWithLink[];
+    text?: string
+    items: NavItemWithLink[]
   }
 
   export interface NavItemWithChildren {
-    text?: string;
-    items: (NavItemChildren | NavItemComponent | NavItemWithLink)[];
+    text?: string
+    items: (NavItemComponent | NavItemChildren | NavItemWithLink)[]
 
     /**
      * `activeMatch` is expected to be a regex string. We can't use actual
      * RegExp object here because it isn't serializable
      */
-    activeMatch?: string;
+    activeMatch?: string
   }
 
   // image ---------------------------------------------------------------------
 
   export type ThemeableImage =
     | string
+    | { src: string; alt?: string; [prop: string]: any }
     | { light: string; dark: string; alt?: string; [prop: string]: any }
-    | { src: string; alt?: string; [prop: string]: any };
 
   export type FeatureIcon =
     | string
     | {
-        light: string;
-        dark: string;
-        alt?: string;
-        width?: string;
-        height?: string;
-        wrap?: boolean;
+        src: string
+        alt?: string
+        width?: string
+        height?: string
+        wrap?: boolean
       }
     | {
-        src: string;
-        alt?: string;
-        width?: string;
-        height?: string;
-        wrap?: boolean;
-      };
+        light: string
+        dark: string
+        alt?: string
+        width?: string
+        height?: string
+        wrap?: boolean
+      }
 
   // sidebar -------------------------------------------------------------------
 
-  export type Sidebar = SidebarItem[] | SidebarMulti;
+  export type Sidebar = SidebarItem[] | SidebarMulti
 
   export interface SidebarMulti {
-    [path: string]: SidebarItem[] | { items: SidebarItem[]; base: string };
+    [path: string]: SidebarItem[] | { items: SidebarItem[]; base: string }
   }
 
   export type SidebarItem = {
     /**
      * The text label of the item.
      */
-    text?: string;
+    text?: string
 
     /**
      * The link of the item.
      */
-    link?: string;
+    link?: string
 
     /**
      * The children of the item.
      */
-    items?: SidebarItem[];
+    items?: SidebarItem[]
 
     /**
      * If not specified, group is not collapsible.
@@ -251,36 +256,36 @@ export namespace DefaultTheme {
      *
      * If `false`, group is collapsible but expanded by default
      */
-    collapsed?: boolean;
+    collapsed?: boolean
 
     /**
      * Base path for the children items.
      */
-    base?: string;
+    base?: string
 
     /**
      * Customize text that appears on the footer of previous/next page.
      */
-    docFooterText?: string;
+    docFooterText?: string
 
-    rel?: string;
-    target?: string;
-  };
+    rel?: string
+    target?: string
+  }
 
   /**
    * ReturnType of `useSidebar`
    */
   export interface DocSidebar {
-    isOpen: Ref<boolean>;
-    sidebar: ComputedRef<SidebarItem[]>;
-    sidebarGroups: ComputedRef<SidebarItem[]>;
-    hasSidebar: ComputedRef<boolean>;
-    hasAside: ComputedRef<boolean>;
-    leftAside: ComputedRef<boolean>;
-    isSidebarEnabled: ComputedRef<boolean>;
-    open: () => void;
-    close: () => void;
-    toggle: () => void;
+    isOpen: Ref<boolean>
+    sidebar: ComputedRef<SidebarItem[]>
+    sidebarGroups: ComputedRef<SidebarItem[]>
+    hasSidebar: ComputedRef<boolean>
+    hasAside: ComputedRef<boolean>
+    leftAside: ComputedRef<boolean>
+    isSidebarEnabled: ComputedRef<boolean>
+    open: () => void
+    close: () => void
+    toggle: () => void
   }
 
   // edit link -----------------------------------------------------------------
@@ -292,14 +297,14 @@ export namespace DefaultTheme {
      * @example 'https://github.com/vuejs/vitepress/edit/main/docs/:path'
      * @example ({ filePath }) => { ... }
      */
-    pattern: string | ((payload: PageData) => string);
+    pattern: string | ((payload: PageData) => string)
 
     /**
      * Custom text for edit link.
      *
      * @default 'Edit this page'
      */
-    text?: string;
+    text?: string
   }
 
   // prev-next -----------------------------------------------------------------
@@ -310,43 +315,43 @@ export namespace DefaultTheme {
      *
      * @default 'Previous page'
      */
-    prev?: boolean | string;
+    prev?: string | boolean
 
     /**
      * Custom label for next page button. Can be set to `false` to disable.
      *
      * @default 'Next page'
      */
-    next?: boolean | string;
+    next?: string | boolean
   }
 
   // social link ---------------------------------------------------------------
 
   export interface SocialLink {
-    icon: string;
-    link: string;
-    ariaLabel?: string;
+    icon: string
+    link: string
+    ariaLabel?: string
   }
 
   // footer --------------------------------------------------------------------
 
   export interface Footer {
-    message?: string;
-    copyright?: string;
+    message?: string
+    copyright?: string
   }
 
   // team ----------------------------------------------------------------------
 
   export interface TeamMember {
-    avatar: string;
-    name: string;
-    title?: string;
-    org?: string;
-    orgLink?: string;
-    desc?: string;
-    links?: SocialLink[];
-    sponsor?: string;
-    actionText?: string;
+    avatar: string
+    name: string
+    title?: string
+    org?: string
+    orgLink?: string
+    desc?: string
+    links?: SocialLink[]
+    sponsor?: string
+    actionText?: string
   }
 
   // local nav -----------------------------------------------------------------
@@ -358,21 +363,21 @@ export namespace DefaultTheme {
     /**
      * The outline headers of the current page.
      */
-    headers: ShallowRef<any>;
+    headers: ShallowRef<any>
 
     /**
      * Whether the current page has a local nav. Local nav is shown when the
      * "outline" is present in the page. However, note that the actual
      * local nav visibility depends on the screen width as well.
      */
-    hasLocalNav: ComputedRef<boolean>;
+    hasLocalNav: ComputedRef<boolean>
   }
 
   // outline -------------------------------------------------------------------
 
   export interface Outline {
-    level?: number | "deep" | [number, number];
-    label?: string;
+    level?: number | [number, number] | 'deep'
+    label?: string
   }
 
   // local search --------------------------------------------------------------
@@ -382,7 +387,7 @@ export namespace DefaultTheme {
      * @default false
      * @deprecated Use `detailedView: false` instead.
      */
-    disableDetailedView?: boolean;
+    disableDetailedView?: boolean
 
     /**
      * If `true`, the detailed view will be enabled by default.
@@ -391,25 +396,28 @@ export namespace DefaultTheme {
      *
      * @default 'auto'
      */
-    detailedView?: boolean | "auto";
+    detailedView?: boolean | 'auto'
 
     /**
      * @default false
      */
-    disableQueryPersistence?: boolean;
+    disableQueryPersistence?: boolean
 
-    translations?: LocalSearchTranslations;
-    locales?: Record<string, Partial<Omit<LocalSearchOptions, "locales">>>;
+    translations?: LocalSearchTranslations
+    locales?: Record<string, Partial<Omit<LocalSearchOptions, 'locales'>>>
 
     miniSearch?: {
       /**
        * @see https://lucaong.github.io/minisearch/types/MiniSearch.Options.html
        */
-      options?: Pick<MiniSearchOptions, "extractField" | "processTerm" | "tokenize">;
+      options?: Pick<
+        MiniSearchOptions,
+        'extractField' | 'tokenize' | 'processTerm'
+      >
       /**
        * @see https://lucaong.github.io/minisearch/types/MiniSearch.SearchOptions.html
        */
-      searchOptions?: MiniSearchOptions["searchOptions"];
+      searchOptions?: MiniSearchOptions['searchOptions']
 
       /**
        * Overrides the default regex based page splitter.
@@ -424,13 +432,20 @@ export namespace DefaultTheme {
       _splitIntoSections?: (
         path: string,
         html: string
-      ) => AsyncGenerator<PageSplitSection> | Awaitable<PageSplitSection[]> | Generator<PageSplitSection>;
-    };
+      ) =>
+        | AsyncGenerator<PageSplitSection>
+        | Generator<PageSplitSection>
+        | Awaitable<PageSplitSection[]>
+    }
     /**
      * Allows transformation of content before indexing (node only)
      * Return empty string to skip indexing
      */
-    _render?: (src: string, env: MarkdownEnv, md: MarkdownIt) => Awaitable<string>;
+    _render?: (
+      src: string,
+      env: MarkdownEnv,
+      md: MarkdownIt
+    ) => Awaitable<string>
   }
 
   // algolia -------------------------------------------------------------------
@@ -440,14 +455,14 @@ export namespace DefaultTheme {
    * `@docsearch/react/dist/esm/DocSearch.d.ts`
    */
   export interface AlgoliaSearchOptions extends DocSearchProps {
-    locales?: Record<string, Partial<DocSearchProps>>;
+    locales?: Record<string, Partial<DocSearchProps>>
   }
 
   // carbon ads ----------------------------------------------------------------
 
   export interface CarbonAdsOptions {
-    code: string;
-    placement: string;
+    code: string
+    placement: string
   }
 
   // last updated --------------------------------------------------------------
@@ -458,7 +473,7 @@ export namespace DefaultTheme {
      *
      * @default 'Last updated'
      */
-    text?: string;
+    text?: string
 
     /**
      * Set options for last updated time formatting.
@@ -467,7 +482,7 @@ export namespace DefaultTheme {
      * @default
      * { dateStyle: 'short', timeStyle: 'short' }
      */
-    formatOptions?: Intl.DateTimeFormatOptions & { forceLocale?: boolean };
+    formatOptions?: Intl.DateTimeFormatOptions & { forceLocale?: boolean }
   }
 
   // not found -----------------------------------------------------------------
@@ -478,32 +493,32 @@ export namespace DefaultTheme {
      *
      * @default 'PAGE NOT FOUND'
      */
-    title?: string;
+    title?: string
 
     /**
      * Set custom not found description.
      *
      * @default "But if you don't change your direction, and if you keep looking, you may end up where you are heading."
      */
-    quote?: string;
+    quote?: string
 
     /**
      * Set aria label for home link.
      *
      * @default 'go to home'
      */
-    linkLabel?: string;
+    linkLabel?: string
 
     /**
      * Set custom home link text.
      *
      * @default 'Take me home'
      */
-    linkText?: string;
+    linkText?: string
 
     /**
      * @default '404'
      */
-    code?: string;
+    code?: string
   }
 }

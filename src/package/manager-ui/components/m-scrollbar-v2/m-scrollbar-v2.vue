@@ -7,7 +7,11 @@
       ...style,
       '--scroll-vertical-thumb': scrollVerticalThumb + 'px',
       '--scroll-horizontal-thumb': scrollHorizontalThumb + 'px',
-      '--m-size-v2-padding-base': prop.paddingWidth ? prop.paddingWidth + 'px' : ''
+      '--m-size-v2-padding-base': prop.paddingWidth
+        ? typeof prop.paddingWidth === 'number'
+          ? prop.paddingWidth + 'px'
+          : prop.paddingWidth
+        : ''
     }"
   >
     <div class="m-scrollbar-v2-content">
@@ -80,7 +84,7 @@
 // # import
 import { ref, Ref, onMounted, onBeforeUnmount, nextTick, watch, provide, computed } from "vue";
 import { randChar } from "../tools/rand-char";
-import { MScrollbarV2Type } from "./type";
+import { ScrollbarV2Type } from "./type";
 import { startDrag, listenElementScroll, observeElementResize } from "./scrollListener";
 import { useIntersectionObserver } from "../m-scrollbar-list/useIntersectionObserver";
 import { getElementPosition } from "../utils/getElementPosition";
@@ -106,7 +110,7 @@ const emits = defineEmits([
 ]);
 const scrollbarBodyRef = ref();
 const scrollbarBodyContentRef = ref();
-const prop = withDefaults(defineProps<MScrollbarV2Type>(), {
+const prop = withDefaults(defineProps<ScrollbarV2Type>(), {
   useScrollY: true,
   useScrollX: true,
   showThumb: true,
@@ -115,7 +119,8 @@ const prop = withDefaults(defineProps<MScrollbarV2Type>(), {
   defaultScrollHorizontalThumb: 0,
   defaultScrollVerticalThumb: 0,
   useBackTop: undefined,
-  useShadow: undefined
+  useShadow: undefined,
+  paddingWidth: "var(--m-component-padding-size, 10px)"
 });
 const id = ref(randChar());
 const verticalThumbRef = ref();
@@ -223,7 +228,6 @@ onMounted(() => {
 
         scrollVerticalValue.value = scrollTop;
         scrollHorizontalValue.value = scrollLeft;
-
         scrollVerticalThumb.value = prop.defaultScrollVerticalThumb + scrollTop * _verticalThumbScale;
         scrollHorizontalThumb.value = prop.defaultScrollHorizontalThumb + scrollLeft * _horizontalThumbScale;
         if (scrollData.isAtBottom) {
@@ -320,7 +324,7 @@ onMounted(() => {
 
 // # Function 开始监听
 function createObserver(intersectClassName: string) {
-  const Els = document.querySelectorAll(`#${id.value} ${intersectClassName}`);
+  const Els = document.querySelectorAll(`${intersectClassName}`);
   if (Els.length) {
     for (let i = 0; i < Els.length; i++) {
       const el: Element = Els[i];
@@ -424,8 +428,6 @@ function setUpdate() {
     useHorizontal.value = useHorizontalValue;
     useVertical.value = useVerticalValue;
     scrollBodyHeight.value = scrollbarBodyRef.value?.clientHeight;
-    scrollbarBodyContentRef.value.style.width = `max-content`;
-    scrollbarBodyContentRef.value.style.height = `max-content`;
 
     nextTick(() => {
       // 启动垂直滑块拖拽
@@ -455,8 +457,6 @@ function setUpdate() {
       }
 
       emits("scrollChildChange", { bodyWidth: _scrollbarBodyRef.clientWidth, bodyHeight: _scrollbarBodyRef.clientHeight });
-      scrollbarBodyContentRef.value.style.width = `${_scrollbarBodyRef.scrollWidth}px`;
-      scrollbarBodyContentRef.value.style.height = `${_scrollbarBodyRef.scrollHeight}px`;
     });
   }
 }

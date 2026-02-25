@@ -28,7 +28,7 @@ import numpy as np  # 常和Pandas配合使用，处理数值计算
 
 ## 2. 创建核心数据结构
 
-### （1）创建 Series
+### 2.1 创建 Series
 
 ```python
 # 基础创建：值 + 自定义索引
@@ -48,7 +48,7 @@ print("Series值：", s.values)    # 获取值（数组形式）
 print("Series数据类型：", s.dtype)  # 获取数据类型
 ```
 
-### （2）创建 DataFrame
+### 2.2 创建 DataFrame
 
 ```python
 # 方式1：从字典创建（最常用）
@@ -161,7 +161,7 @@ print(df)
 # print(df.groupby('城市')['年龄'].mean())  # 按城市分组，计算年龄均值
 ```
 
-## 总结
+## 7. 总结
 
 1. Pandas 核心是 **Series（一维）** 和 **DataFrame（二维）**，DataFrame 是日常使用的核心。
 2. 新手先掌握 **数据读取/查看/筛选/清洗** 这 4 类操作，能覆盖 80%的基础场景。

@@ -36,9 +36,7 @@
 
     .scrollbar-body-content {
       position: relative;
-      width: max-content;
-      height: max-content;
-      box-sizing: border-box;
+      // min-width: 100%;
     }
     .scrollbar-body-content.padding-top {
       padding-top: var(--m-size-v2-padding-base, 10px);
@@ -76,7 +74,7 @@
     overflow-x: scroll;
     > .scrollbar-body-content {
       width: fit-content;
-      min-width: 100%;
+      // min-width: 100%;
     }
   }
 
