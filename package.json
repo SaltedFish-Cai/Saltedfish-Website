@@ -20,7 +20,7 @@
   },
   "scripts": {
     "copy-vitepress": "node ./script/copy-vitepress",
-    "dev": "rimraf -G ./script/demo.vue && npm run copy-vitepress && node ./script/vitepress/bin/vitepress.js dev",
+    "dev": "rimraf -G ./script/demo.vue && npm run copy-vitepress && vitepress dev",
     "update-version": "node ./script/update-version.js",
     "tsc": "vue-tsc",
     "build-tsc": "rimraf -G ./ManagerUI && vue-tsc && vite --config ./src/package/manager-ui/vite.config.ts build",
@@ -29,7 +29,7 @@
     "build:pkg": "npm run update-version && vite --config ./src/package/manager-ui/vite.config.ts build",
     "build:dome": "npm run build:es && npm run build:dome",
     "build:es": "rimraf -G ./script/src && tsc -b -f",
-    "build:doc": "rimraf -G ./docs && npm run copy-vitepress && node ./script/vitepress/bin/vitepress.js build",
+    "build:doc": "rimraf -G ./docs && npm run copy-vitepress && vitepress build",
     "build:local-doc": "rimraf -G ./docs && node ./script/vitepress/bin/vitepress.js build --base /public/docs/ --outDir ./egg/app/public/docs/",
     "update-git": "git rm -r --cached . && git add .",
     "serve": "node ./script/vitepress/bin/vitepress.js serve",

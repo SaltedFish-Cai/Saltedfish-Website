@@ -94,13 +94,9 @@ function deleteDirectory(targetDir) {
 
 const synchronousArray = [
   {
-    sourceDir: "./node_modules/vitepress",
-    targetDir: ["./script/vitepress"]
-  },
-  {
     sourceDir: "./script/client",
-    targetDir: ["./script/vitepress/dist/client"]
-  },
+    targetDir: ["./node_modules/vitepress/dist/client"]
+  }
 ];
 
 for (const item of synchronousArray) {
