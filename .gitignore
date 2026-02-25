@@ -26,7 +26,6 @@ script/vitepress/node_modules/*
 !script/cz-customizable/*
 *.back-locl
 
-package-lock.json
 pnpm-lock.yaml
 yarn-error.log
 yarn.lock
