@@ -28,6 +28,8 @@
     "paths": {
       "MTypes": ["src/package/manager-ui/components/global"],
       "M_Types": ["src/package/manager-ui/components/manager-type"],
+      "public": ["public"],
+      "public/*": ["public/*"],
       "@": ["src"],
       "@/*": ["src/*"],
       "@m/": ["src/package/manager-ui/components"],

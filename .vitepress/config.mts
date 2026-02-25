@@ -169,6 +169,7 @@ export default {
     },
     resolve: {
       alias: {
+        "public": resolve(__dirname, "../public"),
         "@": resolve(__dirname, "../src"),
         "@m": resolve(__dirname, "../src/package/manager-ui"),
         "@mo": resolve(__dirname, "../src/package/manager-mobile"),
