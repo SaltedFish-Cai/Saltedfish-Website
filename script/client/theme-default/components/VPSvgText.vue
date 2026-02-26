@@ -17,7 +17,8 @@ let coolDown = coolDownTime;
 
 // 判断是否是移动端
 const isMobile = computed(() => {
-  const _navigator = navigator || {};
+  const _window: any = typeof window == "undefined" ? global : window;
+  const _navigator = _window?.navigator || {};
   const agent = _navigator?.userAgent || "";
   return /mobile/i.test(agent);
 });
