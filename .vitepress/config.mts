@@ -85,33 +85,8 @@ export default {
       "/document/study": study
     },
     search: {
-      provider: "algolia",
+      provider: "local",
       options: {
-        appId: "TTGOEBBDXS",
-        apiKey: "03aad24b4d704f275f0d80faece15e95",
-        indexName: "saltedfish-website",
-
-        // 核心修复代码
-        transformItems(items) {
-          return items.map(item => {
-            console.log(item);
-            return {
-              ...item,
-              url: item.url || "", // 确保 url 不为 undefined
-              hierarchy: {
-                ...item.hierarchy,
-                // 如果 lvl0 是固定的 "Documentation"，我们尝试用 lvl1 替换它来确保文字显示
-                lvl0: item.hierarchy.lvl1 || item.hierarchy.lvl0
-              }
-            };
-          });
-        },
-        // 确保请求了所有必要的层级
-        searchParameters: {
-          attributesToRetrieve: ["hierarchy", "content", "url", "url_without_anchor", "type"]
-        },
-
-        placeholder: "搜索文档",
         translations: {
           button: {
             buttonText: "搜索文档",
@@ -152,6 +127,18 @@ export default {
         }
       }
     },
+    // search: {
+    //   provider: "algolia",
+    //   options: {
+    //     appId: "TTGOEBBDXS",
+    //     apiKey: "03aad24b4d704f275f0d80faece15e95",
+    //     indexName: "saltedfish-website",
+    //     initialQuery: "",
+    //     algoliaOptions: {
+    //       hitsPerPage: 10
+    //     }
+    //   }
+    // },
     // 社交信息栏
     socialLinks: [
       { icon: "gitee", link: "https://gitee.com/SaltedFish-Cai/Saltedfish-Website" },
