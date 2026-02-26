@@ -192,6 +192,9 @@
   z-index: 9998 !important;
 }
 
-.DocSearch-Container{
+.DocSearch-Container {
   z-index: 1200 !important;
+  background: none !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
