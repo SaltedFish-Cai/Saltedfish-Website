@@ -30,7 +30,8 @@ provide("hero-image-slot-exists", heroImageSlotExists);
 
 // 判断是否是移动端
 const isMobile = computed(() => {
-  const agent = navigator?.userAgent || "";
+  const _navigator = navigator || {};
+  const agent = _navigator?.userAgent || "";
   return /mobile/i.test(agent);
 });
 </script>
