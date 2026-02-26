@@ -85,8 +85,12 @@ export default {
       "/document/study": study
     },
     search: {
-      provider: "local",
+      provider: "algolia",
       options: {
+        appId: "TTGOEBBDXS",
+        apiKey: "03aad24b4d704f275f0d80faece15e95",
+        indexName: "saltedfish-website",
+        placeholder: "搜索文档",
         translations: {
           button: {
             buttonText: "搜索文档",
