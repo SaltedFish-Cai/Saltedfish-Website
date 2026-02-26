@@ -133,9 +133,44 @@ export default {
         appId: "TTGOEBBDXS",
         apiKey: "03aad24b4d704f275f0d80faece15e95",
         indexName: "saltedfish-website",
+
+        // 1. 必须开启 Insights 才能启用 AI 功能
+        insights: true,
+
         initialQuery: "",
         algoliaOptions: {
-          hitsPerPage: 10
+          hitsPerPage: 10,
+          // 2. 将你的 Assistant ID 注入
+          assistantId: "RO6Rb34soEl3"
+        },
+
+        // 可选：添加中文翻译，让 AI 按钮也显示中文
+        placeholder: "搜索文档或询问 AI...",
+        translations: {
+          button: {
+            buttonText: "搜索文档",
+            buttonAriaLabel: "搜索文档"
+          },
+          modal: {
+            searchBox: {
+              resetButtonTitle: "清除查询条件",
+              resetButtonAriaLabel: "清除查询条件",
+              cancelButtonText: "取消",
+              cancelButtonAriaLabel: "取消"
+            },
+            footer: {
+              selectText: "选择",
+              navigateText: "切换",
+              closeText: "关闭",
+              searchByText: "搜索提供者"
+            },
+            noResultsScreen: {
+              noResultsText: "无法找到相关结果",
+              suggestedQueryText: "你可以尝试查询",
+              reportMissingResultsText: "你认为该查询应该有结果？",
+              reportMissingResultsLinkText: "点击反馈"
+            }
+          }
         }
       }
     },
@@ -194,8 +229,9 @@ export default {
   head: [
     ["meta", { name: "theme-color", content: "#3eaf7c" }],
     ["link", { rel: "icon", href: `/Saltedfish-Website/logo-ui.svg` }],
-    ["meta", { name: "algolia-site-verification", content: "48817BDBFC0292EE" }]
-
+    ["meta", { name: "algolia-site-verification", content: "48817BDBFC0292EE" }],
+    ["link", { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@docsearch/css@3" }],
+    ["link", { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@docsearch/css@3.8.2/dist/style.min.css" }]
     // ["script", { src: `https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js` }]
   ]
 };

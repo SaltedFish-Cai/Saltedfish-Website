@@ -94,6 +94,8 @@
     "vue-tsc": "1.2.0"
   },
   "dependencies": {
+    "@docsearch/css": "^4.6.0",
+    "@docsearch/js": "^4.6.0",
     "@nutui/nutui": "^4.3.13",
     "@nutui/touch-emulator": "^1.0.0",
     "@vue-office/docx": "^1.6.3",

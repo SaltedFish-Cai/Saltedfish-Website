@@ -42,6 +42,9 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
   const options = Object.assign<{}, DefaultTheme.AlgoliaSearchOptions, Partial<DocSearchProps>>({}, userOptions, {
     container: "#docsearch",
 
+    // --- 关键修改：开启 AI 必须项 ---
+    insights: true,
+
     navigator: {
       navigate({ itemUrl }) {
         const { pathname: hitPathname } = new URL(window.location.origin + itemUrl);
