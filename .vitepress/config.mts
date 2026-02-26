@@ -88,7 +88,7 @@ export default {
       provider: "algolia",
       options: {
         appId: "TTGOEBBDXS",
-        apiKey: "31aa1961ea75932f134c39b8e949f078",
+        apiKey: "03aad24b4d704f275f0d80faece15e95",
         indexName: "saltedfish-website",
         searchParameters: {
           // 强制过滤语言或特定路径，防止跨域名干扰
