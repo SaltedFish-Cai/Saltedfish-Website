@@ -24,7 +24,7 @@ export default {
   cleanUrls: true,
   lang: "zh-CN",
   // lang: 'en-US',
-  title: "Salted-Fish", // 标题
+  title: "SaltedFish", // 标题
   description: "老咸鱼的站点", // 描述
   env: "manager",
   lastUpdated: true, // 上次更新时间

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Obj } from "@/package/manager-ui/global";
-import { Ref, ref, onMounted } from "vue";
+import { computed, ref, onMounted } from "vue";
 
 const props = defineProps<{
-  text?: string | string[];
+  text?: string[] | string;
 }>();
 
 const els: Obj = ref({});
@@ -15,8 +15,16 @@ let time = new Date();
 let morph = 0;
 let coolDown = coolDownTime;
 
+// 判断是否是移动端
+const isMobile = computed(() => {
+  return /mobile/i.test(navigator.userAgent);
+});
+
 onMounted(() => {
   setTimeout(() => {
+    if (isMobile.value) {
+      return;
+    }
     els.value = {
       VPSvgTextText1: document.getElementById("VPSvgTextText1"),
       VPSvgTextText2: document.getElementById("VPSvgTextText2")
@@ -67,10 +75,10 @@ function doCoolDown() {
 function animate() {
   requestAnimationFrame(animate);
 
-  let newTime = new Date();
+  const newTime = new Date();
 
-  let shouldIncrementIndex = coolDown > 0;
-  let dt = 10 / 1000;
+  const shouldIncrementIndex = coolDown > 0;
+  const dt = 10 / 1000;
   time = newTime;
 
   coolDown -= dt;
@@ -87,24 +95,27 @@ function animate() {
 </script>
 
 <template>
-  <div id="VPSvgText" class="VPSvgText">
-    <span id="VPSvgTextText1" class="VPSvgTextText1"></span>
-    <span id="VPSvgTextText2" class="VPSvgTextText2"></span>
-  </div>
-  <svg id="filters" class="VPSvgDefs">
-    <defs>
-      <filter id="threshold">
-        <feColorMatrix
-          in="SourceGraphic"
-          type="matrix"
-          values="1 0 0 0 0
+  <div v-if="isMobile"></div>
+  <template v-else>
+    <div id="VPSvgText" class="VPSvgText">
+      <span id="VPSvgTextText1" class="VPSvgTextText1"></span>
+      <span id="VPSvgTextText2" class="VPSvgTextText2"></span>
+    </div>
+    <svg id="filters" class="VPSvgDefs">
+      <defs>
+        <filter id="threshold">
+          <feColorMatrix
+            in="SourceGraphic"
+            type="matrix"
+            values="1 0 0 0 0
          0 1 0 0 0
          0 0 1 0 0
          0 0 0 250 -140"
-        />
-      </filter>
-    </defs>
-  </svg>
+          />
+        </filter>
+      </defs>
+    </svg>
+  </template>
 </template>
 
 <style scoped>

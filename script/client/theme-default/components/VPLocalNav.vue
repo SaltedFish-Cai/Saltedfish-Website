@@ -68,14 +68,14 @@ const classes = computed(() => {
 .VPLocalNav {
   position: sticky;
   top: 0;
-  /*rtl:ignore*/
   left: 0;
   z-index: var(--vp-z-index-local-nav);
   border-bottom: 1px solid var(--vp-c-gutter);
   padding-top: var(--vp-layout-top-height, 0px);
   width: 100%;
-  background-color: var(--vp-local-nav-bg-color);
   z-index: 1000;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .VPLocalNav.fixed {
@@ -89,6 +89,7 @@ const classes = computed(() => {
 
   .VPLocalNav.has-sidebar {
     margin-left: var(--vp-sidebar-width);
+    width: calc(100% - var(--vp-sidebar-width));
   }
 
   .VPLocalNav.empty {

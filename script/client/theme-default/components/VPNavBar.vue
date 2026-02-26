@@ -195,7 +195,6 @@ watchPostEffect(() => {
 @media (min-width: 960px) {
   .VPNavBar:not(.home.top) .content-body {
     position: relative;
-    background-color: var(--vp-nav-bg-color);
   }
 
   .VPNavBar:not(.has-sidebar):not(.home.top) .content-body {

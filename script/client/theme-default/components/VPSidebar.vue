@@ -113,7 +113,9 @@ watch(
     margin-right: -32px;
     margin-left: -32px;
     height: var(--vp-nav-height);
-    background-color: var(--vp-sidebar-bg-color);
+    /* backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--vp-c-gutter); */
   }
 }
 

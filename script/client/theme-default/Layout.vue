@@ -22,11 +22,16 @@ watch(() => route.path, closeSidebar);
 
 useCloseSidebarOnEscape(isSidebarOpen, closeSidebar);
 
-const { frontmatter, env } = useData();
+const { frontmatter } = useData();
 const slots = useSlots();
 const heroImageSlotExists = computed(() => !!slots["home-hero-image"]);
 
 provide("hero-image-slot-exists", heroImageSlotExists);
+
+// 判断是否是移动端
+const isMobile = computed(() => {
+  return /mobile/i.test(navigator.userAgent);
+});
 </script>
 
 <template>
@@ -88,7 +93,7 @@ provide("hero-image-slot-exists", heroImageSlotExists);
   <VPFooter />
 
   <!-- <LittleBear></LittleBear> -->
-  <VPGhost></VPGhost>
+  <VPGhost v-if="!isMobile"></VPGhost>
 </template>
 
 <style scoped>
