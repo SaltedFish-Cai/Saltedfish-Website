@@ -39,11 +39,12 @@ jobs:
           access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
           access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
 
-      - name: Upload to Aliyun OSS
+      - name: Clean and Upload to Aliyun OSS
         run: |
-          # 使用 sync 命令实现增量同步
-          # --delete 表示删除源端（本地）不存在但目的端（OSS）存在的文件
-          ossutil sync .vitepress/dist/ oss://${{ secrets.ALIYUN_OSS_BUCKET }}/ --delete -f
+          # 先删除 Bucket 下的所有内容（谨慎使用，确保 Bucket 仅用于此项目）
+          ossutil rm oss://${{ secrets.ALIYUN_OSS_BUCKET }}/ -r -f
+          # 再上传新内容
+          ossutil cp -r .vitepress/dist/ oss://${{ secrets.ALIYUN_OSS_BUCKET }}/ -f
 
       # (可选) 如果你开启了阿里云 CDN，可以在这里增加一步刷新缓存
       # 需要在 RAM 权限中添加 AliyunCDNFullAccess
