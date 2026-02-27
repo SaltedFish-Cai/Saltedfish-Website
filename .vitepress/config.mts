@@ -84,96 +84,98 @@ export default {
       "/document/solution": managerUISidebar,
       "/document/study": study
     },
-    // search: {
-    //   provider: "local",
-    //   options: {
-    //     translations: {
-    //       button: {
-    //         buttonText: "搜索文档",
-    //         buttonAriaLabel: "搜索文档"
-    //       },
-    //       modal: {
-    //         searchBox: {
-    //           resetButtonTitle: "清除查询条件",
-    //           resetButtonAriaLabel: "清除查询条件",
-    //           cancelButtonText: "取消",
-    //           cancelButtonAriaLabel: "取消"
-    //         },
-    //         startScreen: {
-    //           recentSearchesTitle: "搜索历史",
-    //           noRecentSearchesText: "没有搜索历史",
-    //           saveRecentSearchButtonTitle: "保存至搜索历史",
-    //           removeRecentSearchButtonTitle: "从搜索历史中移除",
-    //           favoriteSearchesTitle: "收藏",
-    //           removeFavoriteSearchButtonTitle: "从收藏中移除"
-    //         },
-    //         errorScreen: {
-    //           titleText: "无法获取结果",
-    //           helpText: "你可能需要检查你的网络连接"
-    //         },
-    //         footer: {
-    //           selectText: "选择",
-    //           navigateText: "切换",
-    //           closeText: "关闭",
-    //           searchByText: "搜索提供者"
-    //         },
-    //         noResultsScreen: {
-    //           noResultsText: "无法找到相关结果",
-    //           suggestedQueryText: "你可以尝试查询",
-    //           reportMissingResultsText: "你认为该查询应该有结果？",
-    //           reportMissingResultsLinkText: "点击反馈"
-    //         }
-    //       }
-    //     }
-    //   }
-    // },
-    search: {
-      provider: "algolia",
-      options: {
-        appId: "TTGOEBBDXS",
-        apiKey: "03aad24b4d704f275f0d80faece15e95",
-        indexName: "saltedfish-website",
-        askAi: {
-          assistantId: "RO6Rb34soEl3",
-          searchParameters: {
-            facetFilters: ["language:en", "version:1.0.0"]
-          }
-        },
-        // 1. 必须开启 Insights 才能启用 AI 功能
-        insights: true,
-
-        initialQuery: "",
-
-        // 可选：添加中文翻译，让 AI 按钮也显示中文
-        placeholder: "搜索文档或询问 AI...",
-        translations: {
-          button: {
-            buttonText: "搜索文档",
-            buttonAriaLabel: "搜索文档"
-          },
-          modal: {
-            searchBox: {
-              resetButtonTitle: "清除查询条件",
-              resetButtonAriaLabel: "清除查询条件",
-              cancelButtonText: "取消",
-              cancelButtonAriaLabel: "取消"
-            },
-            footer: {
-              selectText: "选择",
-              navigateText: "切换",
-              closeText: "关闭",
-              searchByText: "搜索提供者"
-            },
-            noResultsScreen: {
-              noResultsText: "无法找到相关结果",
-              suggestedQueryText: "你可以尝试查询",
-              reportMissingResultsText: "你认为该查询应该有结果？",
-              reportMissingResultsLinkText: "点击反馈"
+    search:
+      process.env.DEPLOY_TARGET === "gh-pages"
+        ? {
+            provider: "local",
+            options: {
+              translations: {
+                button: {
+                  buttonText: "搜索文档",
+                  buttonAriaLabel: "搜索文档"
+                },
+                modal: {
+                  searchBox: {
+                    resetButtonTitle: "清除查询条件",
+                    resetButtonAriaLabel: "清除查询条件",
+                    cancelButtonText: "取消",
+                    cancelButtonAriaLabel: "取消"
+                  },
+                  startScreen: {
+                    recentSearchesTitle: "搜索历史",
+                    noRecentSearchesText: "没有搜索历史",
+                    saveRecentSearchButtonTitle: "保存至搜索历史",
+                    removeRecentSearchButtonTitle: "从搜索历史中移除",
+                    favoriteSearchesTitle: "收藏",
+                    removeFavoriteSearchButtonTitle: "从收藏中移除"
+                  },
+                  errorScreen: {
+                    titleText: "无法获取结果",
+                    helpText: "你可能需要检查你的网络连接"
+                  },
+                  footer: {
+                    selectText: "选择",
+                    navigateText: "切换",
+                    closeText: "关闭",
+                    searchByText: "搜索提供者"
+                  },
+                  noResultsScreen: {
+                    noResultsText: "无法找到相关结果",
+                    suggestedQueryText: "你可以尝试查询",
+                    reportMissingResultsText: "你认为该查询应该有结果？",
+                    reportMissingResultsLinkText: "点击反馈"
+                  }
+                }
+              }
             }
           }
-        }
-      }
-    },
+        : {
+            provider: "algolia",
+            options: {
+              appId: "IAB2LW1YC9",
+              apiKey: "7137ff10d7023a7fd954b56a313c2076",
+              indexName: "saltedfish.frontend-m.online",
+              askAi: {
+                assistantId: "RO6Rb34soEl3",
+                searchParameters: {
+                  facetFilters: ["language:en", "version:1.0.0"]
+                }
+              },
+              // 1. 必须开启 Insights 才能启用 AI 功能
+              insights: true,
+
+              initialQuery: "",
+
+              // 可选：添加中文翻译，让 AI 按钮也显示中文
+              placeholder: "搜索文档或询问 AI...",
+              translations: {
+                button: {
+                  buttonText: "搜索文档",
+                  buttonAriaLabel: "搜索文档"
+                },
+                modal: {
+                  searchBox: {
+                    resetButtonTitle: "清除查询条件",
+                    resetButtonAriaLabel: "清除查询条件",
+                    cancelButtonText: "取消",
+                    cancelButtonAriaLabel: "取消"
+                  },
+                  footer: {
+                    selectText: "选择",
+                    navigateText: "切换",
+                    closeText: "关闭",
+                    searchByText: "搜索提供者"
+                  },
+                  noResultsScreen: {
+                    noResultsText: "无法找到相关结果",
+                    suggestedQueryText: "你可以尝试查询",
+                    reportMissingResultsText: "你认为该查询应该有结果？",
+                    reportMissingResultsLinkText: "点击反馈"
+                  }
+                }
+              }
+            }
+          },
     // 社交信息栏
     socialLinks: [
       { icon: "gitee", link: "https://gitee.com/SaltedFish-Cai/Saltedfish-Website" },
@@ -229,7 +231,7 @@ export default {
   head: [
     ["meta", { name: "theme-color", content: "#3eaf7c" }],
     ["link", { rel: "icon", href: `//saltedfish.frontend-m.online/logo-ui.svg` }],
-    ["meta", { name: "algolia-site-verification", content: "48817BDBFC0292EE" }],
+    ["meta", { name: "algolia-site-verification", content: "601BD5B794ABD061" }],
     ["script", { src: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.js" }],
     ["link", { rel: "stylesheet", href: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.css" }]
     // ["script", { src: `https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js` }]

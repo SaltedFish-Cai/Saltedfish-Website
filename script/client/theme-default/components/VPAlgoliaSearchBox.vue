@@ -70,11 +70,12 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
     }
   }) as DocSearchProps;
   console.log("++++++++++> options:", options);
+  // docsearch({ options });
   docsearch({
     container: "#docsearch",
-    appId: "TTGOEBBDXS",
-    apiKey: "03aad24b4d704f275f0d80faece15e95",
-    indexName: "saltedfish-website",
+    appId: "IAB2LW1YC9",
+    apiKey: "7137ff10d7023a7fd954b56a313c2076",
+    indexName: "saltedfish.frontend-m.online",
     insights: true, // 必须开启，AI 依赖事件追踪
     askAi: "RO6Rb34soEl3"
   });
