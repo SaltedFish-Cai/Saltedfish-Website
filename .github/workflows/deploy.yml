@@ -1,4 +1,4 @@
-name: Deploy VitePress to Aliyun OSS
+name: Deploy VitePress to Aliyun OSS & GitHub Pages
 
 on:
   push:
@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: read
+  pages: write # GitHub Pages 权限
+  id-token: write # GitHub Pages 权限
 
 jobs:
   build-and-deploy:
@@ -23,32 +25,43 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          # 补充你提到的平台依赖
           npm install @rollup/rollup-linux-x64-gnu
 
-      - name: Build with VitePress
+      # --- 步骤 1: 为阿里云 OSS 构建 (使用根路径 /) ---
+      - name: Build for Aliyun OSS
+        # 显式清除 DEPLOY_TARGET 确保 base 是 "/"
         run: npm run build:doc
-
-      # --- 关键修改：同步到阿里云 OSS ---
 
       - name: Setup ossutil
         uses: manyuanrong/setup-ossutil@v2.0
         with:
-          # 示例：oss-cn-shanghai.aliyuncs.com
           endpoint: ${{ secrets.ALIYUN_OSS_ENDPOINT }}
           access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
           access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
 
       - name: Clean and Upload to Aliyun OSS
         run: |
-          # 先删除 Bucket 下的所有内容（谨慎使用，确保 Bucket 仅用于此项目）
           ossutil rm oss://${{ secrets.ALIYUN_OSS_BUCKET }}/ -r -f
-          # 再上传新内容
           ossutil cp -r .vitepress/dist/ oss://${{ secrets.ALIYUN_OSS_BUCKET }}/ -f
+
+      # --- 步骤 2: 为 GitHub Pages 构建 (使用子路径) ---
+      - name: Build for GitHub Pages
+        # 设置环境变量，触发 config.mts 中的逻辑
+        run: DEPLOY_TARGET=gh-pages npm run build:doc
+
+      - name: Upload Artifact to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .vitepress/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
 
       # (可选) 如果你开启了阿里云 CDN，可以在这里增加一步刷新缓存
       # 需要在 RAM 权限中添加 AliyunCDNFullAccess
-      - name: Refresh CDN Cache
-        run: |
-          # 假设你要刷新整个首页路径
-          ossutil api purge-cdn-cache --domain-names your-domain.com --objects /
+      # - name: Refresh CDN Cache
+      #   run: |
+      #     # 假设你要刷新整个首页路径
+      #     ossutil api purge-cdn-cache --domain-names your-domain.com --objects /

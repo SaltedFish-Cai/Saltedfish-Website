@@ -20,7 +20,7 @@ import { VantResolver } from "@vant/auto-import-resolver";
 export default {
   srcDir: "./",
   outDir: ".vitepress/dist",
-  base: "/",
+  base: process.env.DEPLOY_TARGET === "gh-pages" ? "/Saltedfish-Website/" : "/",
   cleanUrls: true,
   lang: "zh-CN",
   // lang: 'en-US',
