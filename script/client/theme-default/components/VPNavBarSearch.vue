@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import "@docsearch/css";
 import { onKeyStroke } from "@vueuse/core";
 import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import type { DefaultTheme } from "../../shared";

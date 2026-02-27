@@ -1,5 +1,7 @@
 <script setup lang="ts">
-// import docsearch from "@docsearch/js";
+import docsearch from "@docsearch/js";
+import "@docsearch/css";
+
 import { useRoute, useRouter } from "vitepress";
 import type { DefaultTheme } from "vitepress/theme";
 import { nextTick, onMounted, watch } from "vue";
@@ -68,28 +70,13 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
     }
   }) as DocSearchProps;
   console.log("++++++++++> options:", options);
-  SiteSearch.init({
+  docsearch({
     container: "#docsearch",
-    applicationId: "TTGOEBBDXS",
+    appId: "TTGOEBBDXS",
     apiKey: "03aad24b4d704f275f0d80faece15e95",
     indexName: "saltedfish-website",
-    insights: true,
-    attributes: {
-      primaryText: "title",
-      secondaryText: "description",
-      tertiaryText: "itunesAuthor",
-      url: "url",
-      image: "imageUrl"
-    },
-    askAi: {
-      assistantId: "RO6Rb34soEl3",
-      indexName: "saltedfish-website",
-      apiKey: "03aad24b4d704f275f0d80faece15e95",
-      appId: "TTGOEBBDXS",
-      searchParameters: {
-        facetFilters: ["language:en"]
-      }
-    }
+    insights: true, // 必须开启，AI 依赖事件追踪
+    askAi: "RO6Rb34soEl3"
   });
 }
 
