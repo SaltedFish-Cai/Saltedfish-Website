@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocSearch AI 功能测试</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Algolia DocSearch AI 测试</h1>
+    <p>点击下方搜索框或使用 <kbd>Ctrl+K</kbd> 唤起 AI 问答</p>
+    <div id="docsearch"></div>
+  </div>
+  asd
+  <script>
+    !function (e, a, t, n, s, i, c) {
+      e.AlgoliaAnalyticsObject = s, e[s] = e[s] || function () {
+        (e[s].queue = e[s].queue || []).push(arguments)
+      }, i = a.createElement(t), c = a.getElementsByTagName(t)[0],
+        i.async = 1, i.src = n, c.parentNode.insertBefore(i, c)
+    }(window, document, "script", "https://cdn.jsdelivr.net/npm/search-insights@2.11.0", "aa");
+
+    window.aa('init', {
+      appId: 'IAB2LW1YC9',
+      apiKey: '7137ff10d7023a7fd954b56a313c2076',
+      useCookie: true
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@4" />s
+
+  <script type="text/javascript">
+    // docsearch({
+    //   container: '#docsearch',
+    //   appId: 'IAB2LW1YC9',
+    //   apiKey: '7137ff10d7023a7fd954b56a313c2076',
+    //   indexName: 'saltedfish.frontend-m.online',
+    //   insights: true, // 必须为 true
+    //   askAi: 'M7l8pndQS3kV', // 您的 AI ID
+    //   placeholder: "搜索文档或询问 AI...",
+
+    //   // 添加自定义提示词和文本
+    //   translations: {
+    //     button: {
+    //       buttonText: '搜索文档或询问 AI...', // 搜索框默认显示的文字
+    //       buttonAriaLabel: '搜索文档',
+    //     },
+    //     modal: {
+    //       searchBox: {
+    //         placeholder: '有什么我可以帮您的？', // 唤起弹窗后的搜索框提示
+    //       },
+    //       // 以下是 Ask AI 专属的文案翻译/自定义
+    //       askAi: {
+    //         title: 'Ask AI',
+    //         inputPlaceholder: '请描述您的问题，例如：如何部署项目？', // AI 模式下的输入框提示
+    //         introduction: '我是 AI 助手，可以根据文档内容回答您的问题。', // AI 欢迎语
+    //         error: '抱歉，生成回答时出现了点问题，请稍后再试。',
+    //         noResults: '未能在文档中找到相关答案。',
+    //       }
+    //     }
+    //   },
+
+    //   searchParameters: {
+    //     attributesToSnippet: ['content:10'],
+    //     snippetEllipsisText: '...',
+    //     clickAnalytics: true // 确保开启点击分析
+    //   }
+    // });
+
+    docsearch({
+      container: '#docsearch',
+      appId: 'IAB2LW1YC9',
+      apiKey: '7137ff10d7023a7fd954b56a313c2076',
+      indexName: 'saltedfish.frontend-m.online',
+      insights: true,
+      askAi: {
+        assistantId: 'M7l8pndQS3kV',
+        searchParameters: {
+          // Filtering parameters
+          facetFilters: ['language:en', 'version:latest'],
+          filters: 'type:content AND language:en',
+
+          // Content control parameters
+          attributesToRetrieve: ['title', 'content', 'url'],
+          restrictSearchableAttributes: ['title', 'content'],
+
+          // Deduplication
+          distinct: true,
+        },
+        translations: {
+          button: {
+            buttonText: '搜索文档或提问 AI', // 页面上未激活时的按钮文字
+            buttonAriaLabel: '搜索文档',
+          },
+          modal: {
+            searchBox: {
+              placeholder: '输入问题，AI 为您解答...', // 您截图中输入框内的文字
+              cancelButtonText: '取消',
+              resetButtonTitle: '清除查询',
+            },
+            footer: {
+              selectText: '选择',
+              selectKeyAriaLabel: '回车键',
+              navigateText: '切换',
+              navigateUpKeyAriaLabel: '向上箭头',
+              navigateDownKeyAriaLabel: '向下箭头',
+              closeText: '关闭',
+              closeKeyAriaLabel: 'Esc 键',
+              searchByText: '搜索服务提供商',
+            },
+            errorScreen: {
+              titleText: '无法获取结果',
+              helpText: '您可能需要检查网络连接',
+            },
+            startScreen: {
+              recentSearchesTitle: '最近搜索',
+              noRecentSearchesText: '无最近搜索',
+              saveRecentSearchButtonTitle: '保存此搜索',
+              removeRecentSearchButtonTitle: '从历史中移除',
+              favoriteSearchesTitle: '收藏',
+              removeFavoriteSearchButtonTitle: '从收藏中移除',
+            },
+            noResultsScreen: {
+              noResultsText: '没有找到相关结果',
+              suggestedQueryText: '您可以尝试搜索',
+              reportMissingResultsText: '确信该内容存在？',
+              reportMissingResultsLinkText: '点此反馈',
+            },
+            // Ask AI 专属文案
+            askAi: {
+              title: 'Ask AI',
+              inputPlaceholder: '请描述您的问题...',
+              introduction: '我是 AI 助手，会根据文档内容为您提供解答。',
+            }
+          }
+        },
+        // --- 语言与提示词修改结束 ---
+      },
+
+      // --- 语言与提示词修改开始 ---
+      translations: {
+        button: {
+          buttonText: '搜索文档或提问 AI', // 页面上未激活时的按钮文字
+          buttonAriaLabel: '搜索文档',
+        },
+        modal: {
+          searchBox: {
+            placeholder: '输入问题，AI 为您解答...', // 您截图中输入框内的文字
+            cancelButtonText: '取消',
+            resetButtonTitle: '清除查询',
+          },
+          footer: {
+            selectText: '选择',
+            selectKeyAriaLabel: '回车键',
+            navigateText: '切换',
+            navigateUpKeyAriaLabel: '向上箭头',
+            navigateDownKeyAriaLabel: '向下箭头',
+            closeText: '关闭',
+            closeKeyAriaLabel: 'Esc 键',
+            searchByText: '搜索服务提供商',
+          },
+          errorScreen: {
+            titleText: '无法获取结果',
+            helpText: '您可能需要检查网络连接',
+          },
+          startScreen: {
+            recentSearchesTitle: '最近搜索',
+            noRecentSearchesText: '无最近搜索',
+            saveRecentSearchButtonTitle: '保存此搜索',
+            removeRecentSearchButtonTitle: '从历史中移除',
+            favoriteSearchesTitle: '收藏',
+            removeFavoriteSearchButtonTitle: '从收藏中移除',
+          },
+          noResultsScreen: {
+            noResultsText: '没有找到相关结果',
+            suggestedQueryText: '您可以尝试搜索',
+            reportMissingResultsText: '确信该内容存在？',
+            reportMissingResultsLinkText: '点此反馈',
+          },
+          // Ask AI 专属文案
+          askAi: {
+            title: 'Ask AI',
+            inputPlaceholder: '请描述您的问题...',
+            introduction: '我是 AI 助手，会根据文档内容为您提供解答。',
+          }
+        }
+      },
+      // --- 语言与提示词修改结束 ---
+
+      searchParameters: {
+        clickAnalytics: true,
+        facetFilters: ['language:en', 'version:latest'],
+      }
+    });
+  </script>
+</body>
+
+</html>

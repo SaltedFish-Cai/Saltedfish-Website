@@ -135,44 +135,61 @@ export default {
               appId: "IAB2LW1YC9",
               apiKey: "7137ff10d7023a7fd954b56a313c2076",
               indexName: "saltedfish.frontend-m.online",
-              askAi: {
-                assistantId: "M7l8pndQS3kV",
-                searchParameters: {
-                  facetFilters: ["language:en", "version:1.0.0"]
-                }
-              },
-              // 1. 必须开启 Insights 才能启用 AI 功能
               insights: true,
+              askAi: "M7l8pndQS3kV",
 
-              initialQuery: "",
-
-              // 可选：添加中文翻译，让 AI 按钮也显示中文
-              placeholder: "搜索文档或询问 AI...",
+              // --- 语言与提示词修改开始 ---
               translations: {
                 button: {
-                  buttonText: "搜索文档",
+                  buttonText: "搜索文档或提问 AI",
                   buttonAriaLabel: "搜索文档"
                 },
                 modal: {
                   searchBox: {
-                    resetButtonTitle: "清除查询条件",
-                    resetButtonAriaLabel: "清除查询条件",
+                    placeholder: "输入问题，AI 为您解答...",
                     cancelButtonText: "取消",
-                    cancelButtonAriaLabel: "取消"
+                    resetButtonTitle: "清除查询"
                   },
                   footer: {
                     selectText: "选择",
+                    selectKeyAriaLabel: "回车键",
                     navigateText: "切换",
+                    navigateUpKeyAriaLabel: "向上箭头",
+                    navigateDownKeyAriaLabel: "向下箭头",
                     closeText: "关闭",
-                    searchByText: "搜索提供者"
+                    closeKeyAriaLabel: "Esc 键",
+                    searchByText: "搜索服务提供商"
+                  },
+                  errorScreen: {
+                    titleText: "无法获取结果",
+                    helpText: "您可能需要检查网络连接"
+                  },
+                  startScreen: {
+                    recentSearchesTitle: "最近搜索",
+                    noRecentSearchesText: "无最近搜索",
+                    saveRecentSearchButtonTitle: "保存此搜索",
+                    removeRecentSearchButtonTitle: "从历史中移除",
+                    favoriteSearchesTitle: "收藏",
+                    removeFavoriteSearchButtonTitle: "从收藏中移除"
                   },
                   noResultsScreen: {
-                    noResultsText: "无法找到相关结果",
-                    suggestedQueryText: "你可以尝试查询",
-                    reportMissingResultsText: "你认为该查询应该有结果？",
-                    reportMissingResultsLinkText: "点击反馈"
+                    noResultsText: "没有找到相关结果",
+                    suggestedQueryText: "您可以尝试搜索",
+                    reportMissingResultsText: "确信该内容存在？",
+                    reportMissingResultsLinkText: "点此反馈"
+                  },
+                  // Ask AI 专属文案
+                  askAi: {
+                    title: "Ask AI",
+                    inputPlaceholder: "请描述您的问题...",
+                    introduction: "我是 AI 助手，会根据文档内容为您提供解答。"
                   }
                 }
+              },
+              // --- 语言与提示词修改结束 ---
+
+              searchParameters: {
+                clickAnalytics: true
               }
             }
           },
@@ -233,7 +250,10 @@ export default {
     ["link", { rel: "icon", href: `//saltedfish.frontend-m.online/logo-ui.svg` }],
     ["meta", { name: "algolia-site-verification", content: "601BD5B794ABD061" }],
     ["script", { src: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.js" }],
-    ["link", { rel: "stylesheet", href: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.css" }]
+    ["link", { rel: "stylesheet", href: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.css" }],
+
+    ["script", { src: "https://cdn.jsdelivr.net/npm/@docsearch/js@4" }],
+    ["link", { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@docsearch/css@4" }]
     // ["script", { src: `https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js` }]
   ]
 };

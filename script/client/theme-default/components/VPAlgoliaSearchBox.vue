@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import docsearch from "@docsearch/js";
-import "@docsearch/css";
+// import docsearch from "@docsearch/js";
+// import "@docsearch/css";
 
 import { useRoute, useRouter } from "vitepress";
 import type { DefaultTheme } from "vitepress/theme";
@@ -69,15 +69,41 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
       });
     }
   }) as DocSearchProps;
-  console.log("++++++++++> options:", options);
+
   // docsearch({ options });
-  docsearch({
+
+  !(function (e, a, t, n, s, i, c) {
+    (e.AlgoliaAnalyticsObject = s),
+      (e[s] =
+        e[s] ||
+        function () {
+          (e[s].queue = e[s].queue || []).push(arguments);
+        }),
+      (i = a.createElement(t)),
+      (c = a.getElementsByTagName(t)[0]),
+      (i.async = 1),
+      (i.src = n),
+      c.parentNode.insertBefore(i, c);
+  })(window, document, "script", "https://cdn.jsdelivr.net/npm/search-insights@2.11.0", "insights");
+
+  window.insights("init", {
+    appId: options.appId,
+    apiKey: options.apiKey,
+    useCookie: true
+  });
+
+  // docsearch({
+  //   container: "#docsearch",
+  //   appId: "IAB2LW1YC9",
+  //   apiKey: "7137ff10d7023a7fd954b56a313c2076",
+  //   indexName: "saltedfish.frontend-m.online",
+  //   insights: true, // 必须开启，AI 依赖事件追踪
+  //   askAi: "M7l8pndQS3kV"
+  // });
+
+  window.docsearch({
     container: "#docsearch",
-    appId: "IAB2LW1YC9",
-    apiKey: "7137ff10d7023a7fd954b56a313c2076",
-    indexName: "saltedfish.frontend-m.online",
-    insights: true, // 必须开启，AI 依赖事件追踪
-    askAi: "M7l8pndQS3kV"
+    ...options
   });
 }
 
