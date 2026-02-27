@@ -20,7 +20,7 @@ import { VantResolver } from "@vant/auto-import-resolver";
 export default {
   srcDir: "./",
   outDir: ".vitepress/dist",
-  base: "/Saltedfish-Website/",
+  base: "/",
   cleanUrls: true,
   lang: "zh-CN",
   // lang: 'en-US',
@@ -228,7 +228,7 @@ export default {
   },
   head: [
     ["meta", { name: "theme-color", content: "#3eaf7c" }],
-    ["link", { rel: "icon", href: `/Saltedfish-Website/logo-ui.svg` }],
+    ["link", { rel: "icon", href: `/logo-ui.svg` }],
     ["meta", { name: "algolia-site-verification", content: "48817BDBFC0292EE" }],
     ["script", { src: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.js" }],
     ["link", { rel: "stylesheet", href: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.css" }]

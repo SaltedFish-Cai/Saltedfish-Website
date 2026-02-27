@@ -14,17 +14,17 @@ import "./styles/animation.scss";
 
 function installPackage() {
   const ScriptList = [
-    "/Saltedfish-Website/library/wangeditor.js",
+    "/library/wangeditor.js",
 
-    "/Saltedfish-Website/library/xlsx.full.min.js",
+    "/library/xlsx.full.min.js",
 
-    "/Saltedfish-Website/library/pdf.js",
-    "/Saltedfish-Website/library/pdf.worker.js",
-    "/Saltedfish-Website/library/jquery-3.6.0.min.js",
-    "/Saltedfish-Website/library/docx@1.6.4.js",
-    "/Saltedfish-Website/library/excel@1.7.14.js",
+    "/library/pdf.js",
+    "/library/pdf.worker.js",
+    "/library/jquery-3.6.0.min.js",
+    "/library/docx@1.6.4.js",
+    "/library/excel@1.7.14.js",
 
-    "/Saltedfish-Website/library/sortable.js"
+    "/library/sortable.js"
   ];
   for (let index = 0; index < ScriptList.length; index++) {
     const src = ScriptList[index];
@@ -32,7 +32,7 @@ function installPackage() {
     script.src = src;
     if (src.includes("pdf.js")) {
       script.onload = () => {
-        const ScriptList = ["/Saltedfish-Website/library/pdfh5.js"];
+        const ScriptList = ["/library/pdfh5.js"];
         for (let index = 0; index < ScriptList.length; index++) {
           const src = ScriptList[index];
           const script = window.document?.createElement("script") || {};
@@ -45,7 +45,7 @@ function installPackage() {
   }
 
   // setTimeout(() => {
-  //   const ScriptList = ["/Saltedfish-Website/library/pdfh5.js"];
+  //   const ScriptList = ["/library/pdfh5.js"];
   //   for (let index = 0; index < ScriptList.length; index++) {
   //     const src = ScriptList[index];
   //     const script = window.document?.createElement("script") || {};
@@ -55,9 +55,9 @@ function installPackage() {
   // }, 300);
 
   const LinkList = [
-    "/Saltedfish-Website/library/pdfh5.min.css",
-    "/Saltedfish-Website/library/docx@1.6.4.css",
-    "/Saltedfish-Website/library/excel@1.7.14.css"
+    "/library/pdfh5.min.css",
+    "/library/docx@1.6.4.css",
+    "/library/excel@1.7.14.css"
   ];
 
   for (let index = 0; index < LinkList.length; index++) {

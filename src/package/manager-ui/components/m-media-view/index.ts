@@ -4,25 +4,25 @@ import inBrowser from "../tools/inBrowser";
 
 if (inBrowser) {
   const script1 = window.document?.createElement("script") || {};
-  script1.src = "/Saltedfish-Website/library/pdf.js";
+  script1.src = "/library/pdf.js";
   script1.onload = () => {
     const script = window.document?.createElement("script") || {};
-    script.src = "/Saltedfish-Website/library/pdfh5.js";
+    script.src = "/library/pdfh5.js";
     window.document?.head?.appendChild(script);
   };
   window.document?.head?.appendChild(script1);
 
   const script2 = window.document?.createElement("script") || {};
-  script2.src = "/Saltedfish-Website/library/pdf.worker.js";
+  script2.src = "/library/pdf.worker.js";
   window.document?.head?.appendChild(script2);
 
   const script3 = window.document?.createElement("script") || {};
-  script3.src = "/Saltedfish-Website/library/jquery-3.6.0.min.js";
+  script3.src = "/library/jquery-3.6.0.min.js";
   window.document?.head?.appendChild(script3);
 
   const link = window.document?.createElement("link") || {};
   link.rel = "stylesheet";
-  link.href = "/Saltedfish-Website/library/pdfh5.min.css";
+  link.href = "/library/pdfh5.min.css";
   window.document?.head?.appendChild(link);
 
   // const mammoth = window.document?.createElement("script") || {};
@@ -30,31 +30,31 @@ if (inBrowser) {
   // window.document?.head?.appendChild(mammoth);
 
   // const zip = window.document?.createElement("script") || {};
-  // zip.src = "/Saltedfish-Website/library/jszip.min.js";
+  // zip.src = "/library/jszip.min.js";
   // window.document?.head?.appendChild(zip);
 
   // const docx = window.document?.createElement("script") || {};
-  // docx.src = "/Saltedfish-Website/library/docx-preview.js";
+  // docx.src = "/library/docx-preview.js";
   // window.document?.head?.appendChild(docx);
 
   // word
   const docxScript = window.document?.createElement("script") || {};
-  docxScript.src = "/Saltedfish-Website/library/docx@1.6.4.js";
+  docxScript.src = "/library/docx@1.6.4.js";
   window.document?.head?.appendChild(docxScript);
 
   const docxCss = window.document?.createElement("link") || {};
   docxCss.rel = "stylesheet";
-  docxCss.href = "/Saltedfish-Website/library/docx@1.6.4.css";
+  docxCss.href = "/library/docx@1.6.4.css";
   window.document?.head?.appendChild(docxCss);
 
   // excel
   const excelScript = window.document?.createElement("script") || {};
-  excelScript.src = "/Saltedfish-Website/library/excel@1.7.14.js";
+  excelScript.src = "/library/excel@1.7.14.js";
   window.document?.head?.appendChild(excelScript);
 
   const excelCss = window.document?.createElement("link") || {};
   excelCss.rel = "stylesheet";
-  excelCss.href = "/Saltedfish-Website/library/excel@1.7.14.css";
+  excelCss.href = "/library/excel@1.7.14.css";
   window.document?.head?.appendChild(excelCss);
 }
 
