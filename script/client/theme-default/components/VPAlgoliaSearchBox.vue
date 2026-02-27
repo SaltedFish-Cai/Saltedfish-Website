@@ -77,7 +77,7 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
     apiKey: "7137ff10d7023a7fd954b56a313c2076",
     indexName: "saltedfish.frontend-m.online",
     insights: true, // 必须开启，AI 依赖事件追踪
-    askAi: "RO6Rb34soEl3"
+    askAi: "M7l8pndQS3kV"
   });
 }
 

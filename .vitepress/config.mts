@@ -136,7 +136,7 @@ export default {
               apiKey: "7137ff10d7023a7fd954b56a313c2076",
               indexName: "saltedfish.frontend-m.online",
               askAi: {
-                assistantId: "RO6Rb34soEl3",
+                assistantId: "M7l8pndQS3kV",
                 searchParameters: {
                   facetFilters: ["language:en", "version:1.0.0"]
                 }
