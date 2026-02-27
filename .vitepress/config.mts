@@ -230,8 +230,8 @@ export default {
     ["meta", { name: "theme-color", content: "#3eaf7c" }],
     ["link", { rel: "icon", href: `/Saltedfish-Website/logo-ui.svg` }],
     ["meta", { name: "algolia-site-verification", content: "48817BDBFC0292EE" }],
-    ["link", { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@docsearch/css@3" }],
-    ["link", { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@docsearch/css@3.8.2/dist/style.min.css" }]
+    ["script", { src: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.js" }],
+    ["link", { rel: "stylesheet", href: "https://unpkg.com/@algolia/sitesearch@latest/dist/search.min.css" }]
     // ["script", { src: `https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js` }]
   ]
 };
