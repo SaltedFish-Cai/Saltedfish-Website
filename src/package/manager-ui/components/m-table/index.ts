@@ -5,7 +5,8 @@ import inBrowser from "../tools/inBrowser";
 // # Var
 if (inBrowser) {
   const script = window.document?.createElement("script") || {};
-  script.src = "/library/sortable.js";
+  const useDomain = window.location.href.includes("Saltedfish-Website") ? "/Saltedfish-Website" : "";
+  script.src = useDomain + "/library/sortable.js";
   window.document?.head?.appendChild(script);
 }
 
