@@ -1,13 +1,13 @@
 ---
 layout: home
 
-title: SaltedFish
-titleTemplate: SaltedFish
+title: Salted-Fish
+titleTemplate: Salted-Fish
 editLink: true
 lastUpdated: true
 
 hero:
-  name: SaltedFish
+  name: Salted-Fish
   tagline: [Manager-UI-Element, Manager-UI]
   image:
     src: /logo-ui.svg

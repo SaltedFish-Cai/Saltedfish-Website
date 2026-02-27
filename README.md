@@ -1,4 +1,4 @@
-# SaltedFish 站点介绍
+# Salted-Fish 站点介绍
 
 站点基于 Vue3 + Vitepress 搭建，提供 Manager-UI-Element 和 Manager-UI 两个 UI 框架源码与相关文档，同时也提供了一些工具站，帮助开发者快速搭建项目，提高开发效率，减少开发成本，提升开发体验，欢迎加入我们的微信群。
 
