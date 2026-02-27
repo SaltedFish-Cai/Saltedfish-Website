@@ -39,30 +39,18 @@ async function update() {
 }
 
 function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
-  // 1. 提取基础配置
-  const { appId, apiKey, indexName, algoliaOptions } = userOptions;
-
-  const options = {
-    appId,
-    apiKey,
-    indexName,
+  const options = Object.assign<{}, DefaultTheme.AlgoliaSearchOptions, Partial<DocSearchProps>>({}, userOptions, {
     container: "#docsearch",
 
-    // 2. 核心：显式开启 Insights 模式
+    // --- 关键修改：开启 AI 必须项 ---
     insights: true,
 
-    // 3. 核心：手动注入 Assistant ID
-    searchParameters: {
-      ...userOptions.searchParameters,
-      // 这里的 ID 必须匹配你截图中的 RO6Rb34soEl3
-      assistantId: "RO6Rb34soEl3",
-      attributesToSnippet: ["*:20"]
-    },
-
-    // 4. 处理路由跳转逻辑（保持你原有的不变）
     navigator: {
       navigate({ itemUrl }) {
         const { pathname: hitPathname } = new URL(window.location.origin + itemUrl);
+
+        // router doesn't handle same-page navigation so we use the native
+        // browser location API for anchor navigation
         if (route.path === hitPathname) {
           window.location.assign(window.location.origin + itemUrl);
         } else {
@@ -72,17 +60,26 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
     },
 
     transformItems(items) {
-      return items.map(item => ({
-        ...item,
-        url: getRelativePath(item.url)
-      }));
+      return items.map(item => {
+        return Object.assign({}, item, {
+          url: getRelativePath(item.url)
+        });
+      });
     }
-  } as DocSearchProps;
-
-  // 打印到控制台，确认 assistantId 是否真的存在
-  console.log("Final AI Config:", options);
-
-  docsearch(options);
+  }) as DocSearchProps;
+  console.log("++++++++++> options:", options);
+  docsearch({
+    container: "#docsearch",
+    appId: "TTGOEBBDXS",
+    apiKey: "03aad24b4d704f275f0d80faece15e95",
+    indexName: "saltedfish-website",
+    askAi: {
+      assistantId: "RO6Rb34soEl3",
+      searchParameters: {
+        facetFilters: ["language:en", "version:1.0.0"]
+      }
+    }
+  });
 }
 
 function getRelativePath(url: string) {

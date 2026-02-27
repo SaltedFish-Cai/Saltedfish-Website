@@ -133,16 +133,16 @@ export default {
         appId: "TTGOEBBDXS",
         apiKey: "03aad24b4d704f275f0d80faece15e95",
         indexName: "saltedfish-website",
-
+        askAi: {
+          assistantId: "RO6Rb34soEl3",
+          searchParameters: {
+            facetFilters: ["language:en", "version:1.0.0"]
+          }
+        },
         // 1. 必须开启 Insights 才能启用 AI 功能
         insights: true,
 
         initialQuery: "",
-        algoliaOptions: {
-          hitsPerPage: 10,
-          // 2. 将你的 Assistant ID 注入
-          assistantId: "RO6Rb34soEl3"
-        },
 
         // 可选：添加中文翻译，让 AI 按钮也显示中文
         placeholder: "搜索文档或询问 AI...",
