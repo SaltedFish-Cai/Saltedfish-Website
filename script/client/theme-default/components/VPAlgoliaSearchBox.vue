@@ -83,7 +83,7 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
     },
     askAi: {
       assistantId: "RO6Rb34soEl3",
-      indexName: "saltedfish-website-markdown",
+      indexName: "saltedfish-website",
       apiKey: "03aad24b4d704f275f0d80faece15e95",
       appId: "TTGOEBBDXS",
       searchParameters: {
