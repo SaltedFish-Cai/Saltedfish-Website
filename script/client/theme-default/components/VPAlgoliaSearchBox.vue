@@ -73,8 +73,12 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
     appId: "TTGOEBBDXS",
     apiKey: "03aad24b4d704f275f0d80faece15e95",
     indexName: "saltedfish-website",
+    insights: true,
     askAi: {
       assistantId: "RO6Rb34soEl3",
+      indexName: "saltedfish-website",
+      apiKey: "03aad24b4d704f275f0d80faece15e95",
+      appId: "TTGOEBBDXS",
       searchParameters: {
         facetFilters: ["language:en", "version:1.0.0"]
       }
