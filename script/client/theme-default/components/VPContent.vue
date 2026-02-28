@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
+import { useRoute } from "vitepress";
 
 import NotFound from "../NotFound.vue";
 import { useData } from "../composables/data";
@@ -8,10 +9,15 @@ import VPHome from "./VPHome.vue";
 import VPPage from "./VPPage.vue";
 
 const { page, frontmatter } = useData();
+const route = useRoute();
 const hasSidebar = ref(false);
-onMounted(() => {
+
+function updateSidebar() {
   hasSidebar.value = document.querySelector(".VPSidebar") !== null;
-});
+}
+
+onMounted(updateSidebar);
+watch(() => route.path, updateSidebar);
 </script>
 
 <template>
