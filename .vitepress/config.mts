@@ -138,27 +138,45 @@ export default {
               insights: true,
               askAi: "M7l8pndQS3kV",
 
-              // --- 语言与提示词修改开始 ---
               translations: {
                 button: {
-                  buttonText: "搜索文档或提问 AI",
+                  buttonText: "搜索文档或提问 AI", // 页面上未激活时的按钮文字
                   buttonAriaLabel: "搜索文档"
                 },
                 modal: {
                   searchBox: {
-                    placeholder: "输入问题，AI 为您解答...",
-                    cancelButtonText: "取消",
-                    resetButtonTitle: "清除查询"
+                    clearButtonTitle: "清除查询",
+                    clearButtonAriaLabel: "清除查询",
+                    closeButtonText: "关闭",
+                    closeButtonAriaLabel: "关闭弹窗",
+                    placeholderText: "搜索文档或提问 AI...",
+                    placeholderTextAskAi: "有什么我可以帮您的？",
+                    placeholderTextAskAiStreaming: "AI 正在生成回答...",
+                    enterKeyHint: "发送",
+                    enterKeyHintAskAi: "发送",
+                    searchInputLabel: "搜索文档或提问 AI...",
+                    backToKeywordSearchButtonText: "返回关键词搜索",
+                    backToKeywordSearchButtonAriaLabel: "返回关键词搜索",
+                    newConversationPlaceholder: "新的对话",
+                    conversationHistoryTitle: "对话历史",
+                    startNewConversationText: "开始新的对话",
+                    viewConversationHistoryText: "查看对话历史",
+                    threadDepthErrorPlaceholder: "对话深度超过最大限制，无法继续"
+                  },
+                  newConversation: {
+                    newConversationTitle: "新的对话",
+                    newConversationDescription: "开始新的对话，AI 助手将忘记之前的内容。"
                   },
                   footer: {
                     selectText: "选择",
+                    submitQuestionText: "提交问题",
                     selectKeyAriaLabel: "回车键",
                     navigateText: "切换",
                     navigateUpKeyAriaLabel: "向上箭头",
                     navigateDownKeyAriaLabel: "向下箭头",
                     closeText: "关闭",
-                    closeKeyAriaLabel: "Esc 键",
-                    searchByText: "搜索服务提供商"
+                    backToSearchText: "返回搜索",
+                    closeKeyAriaLabel: "Esc 键"
                   },
                   errorScreen: {
                     titleText: "无法获取结果",
@@ -170,7 +188,9 @@ export default {
                     saveRecentSearchButtonTitle: "保存此搜索",
                     removeRecentSearchButtonTitle: "从历史中移除",
                     favoriteSearchesTitle: "收藏",
-                    removeFavoriteSearchButtonTitle: "从收藏中移除"
+                    removeFavoriteSearchButtonTitle: "从收藏中移除",
+                    recentConversationsTitle: "最近对话",
+                    removeRecentConversationButtonTitle: "从历史中移除"
                   },
                   noResultsScreen: {
                     noResultsText: "没有找到相关结果",
@@ -178,15 +198,27 @@ export default {
                     reportMissingResultsText: "确信该内容存在？",
                     reportMissingResultsLinkText: "点此反馈"
                   },
+                  resultsScreen: {
+                    askAiPlaceholder: "输入问题，AI 为您解答...",
+                    noResultsAskAiPlaceholder: "没有找到相关结果，您可以尝试搜索..."
+                  },
                   // Ask AI 专属文案
-                  askAi: {
-                    title: "Ask AI",
-                    inputPlaceholder: "请描述您的问题...",
-                    introduction: "我是 AI 助手，会根据文档内容为您提供解答。"
+                  askAiScreen: {
+                    disclaimerText: "请确认您的问题与文档内容相关，AI 助手不提供专业咨询服务。",
+                    relatedSourcesText: "相关文档",
+                    thinkingText: "思考中...",
+                    copyButtonText: "复制",
+                    copyButtonCopiedText: "已复制",
+                    copyButtonTitle: "复制回答",
+                    likeButtonTitle: "喜欢",
+                    dislikeButtonTitle: "不喜欢",
+                    thanksForFeedbackText: "感谢您的反馈！",
+                    preToolCallText: "正在调用工具...",
+                    duringToolCallText: "工具调用中...",
+                    afterToolCallText: "工具调用完成"
                   }
                 }
               },
-              // --- 语言与提示词修改结束 ---
 
               searchParameters: {
                 clickAnalytics: true

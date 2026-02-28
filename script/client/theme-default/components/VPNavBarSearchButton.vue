@@ -67,9 +67,9 @@ const $t = createSearchTranslate(defaultTranslations);
   padding: 0;
   width: 48px;
   height: 55px;
-  background: transparent;
+  background: transparent !important;
   transition: border-color 0.25s;
-  /* border: 1px solid var(--vp-c-divider); */
+  border: 1px solid var(--vp-c-divider) !important;
 }
 
 .DocSearch-Button:hover {
@@ -180,6 +180,7 @@ const $t = createSearchTranslate(defaultTranslations);
   font-size: 12px;
   font-weight: 500;
   transition: color 0.5s, border-color 0.5s;
+  background-color: transparent !important;
 }
 
 .DocSearch-Button .DocSearch-Button-Key + .DocSearch-Button-Key {

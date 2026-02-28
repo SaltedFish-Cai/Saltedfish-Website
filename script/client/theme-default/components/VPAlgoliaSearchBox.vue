@@ -72,25 +72,25 @@ function initialize(userOptions: DefaultTheme.AlgoliaSearchOptions) {
 
   // docsearch({ options });
 
-  !(function (e, a, t, n, s, i, c) {
-    (e.AlgoliaAnalyticsObject = s),
-      (e[s] =
-        e[s] ||
-        function () {
-          (e[s].queue = e[s].queue || []).push(arguments);
-        }),
-      (i = a.createElement(t)),
-      (c = a.getElementsByTagName(t)[0]),
-      (i.async = 1),
-      (i.src = n),
-      c.parentNode.insertBefore(i, c);
-  })(window, document, "script", "https://cdn.jsdelivr.net/npm/search-insights@2.11.0", "insights");
+  // !(function (e, a, t, n, s, i, c) {
+  //   (e.AlgoliaAnalyticsObject = s),
+  //     (e[s] =
+  //       e[s] ||
+  //       function () {
+  //         (e[s].queue = e[s].queue || []).push(arguments);
+  //       }),
+  //     (i = a.createElement(t)),
+  //     (c = a.getElementsByTagName(t)[0]),
+  //     (i.async = 1),
+  //     (i.src = n),
+  //     c.parentNode.insertBefore(i, c);
+  // })(window, document, "script", "https://cdn.jsdelivr.net/npm/search-insights@2.11.0", "insights");
 
-  window.insights("init", {
-    appId: options.appId,
-    apiKey: options.apiKey,
-    useCookie: true
-  });
+  // window.insights("init", {
+  //   appId: options.appId,
+  //   apiKey: options.apiKey,
+  //   useCookie: true
+  // });
 
   // docsearch({
   //   container: "#docsearch",
