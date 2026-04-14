@@ -38,14 +38,14 @@
       padding: 0 2px;
       margin-left: 5px;
       font-size: 12px;
-      background-color: var(--m-color-primary-light-9);
+      background-color: var(--sa-color-primary-light-9);
       border: 1px solid var(--sa-color-border);
       border-radius: 4px;
     }
     .query_item_box2 {
       padding: 2px 5px;
       font-size: 13px;
-      background-color: var(--m-color-primary-light-8);
+      background-color: var(--sa-color-primary-light-8);
       & > div {
         max-width: 500px;
         height: 1em;
@@ -68,7 +68,7 @@
       height: 1.6em;
       padding: 0 6px;
       margin-left: 5px;
-      background-color: var(--m-color-primary-light-8);
+      background-color: var(--sa-color-primary-light-8);
       border: 1px solid var(--sa-color-border);
       border-radius: 4px;
       &:first-child {
@@ -85,12 +85,12 @@
     }
     .query_item_text_relationship_link {
       font-size: 11px;
-      color: var(--m-color-primary);
+      color: var(--sa-color-primary);
     }
     .query_item_text_group_link {
       margin-left: 5px;
       font-size: 11px;
-      color: var(--m-color-primary-light-1);
+      color: var(--sa-color-primary-light-1);
     }
   }
 }

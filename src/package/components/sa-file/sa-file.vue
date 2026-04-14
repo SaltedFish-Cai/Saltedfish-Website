@@ -101,7 +101,7 @@
 
     <div
       class="file-item-box"
-      :class="['m-contrast-v2']"
+      :class="['sa-contrast-style']"
       v-if="(alwaysContrast && contrastData?.length) || (contrastData?.length && eq(inValue, contrastData))"
     >
       <template v-if="contrastData.length">

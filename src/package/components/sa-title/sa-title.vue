@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<SaTitleType>(), {
   font-weight: bold;
   font-size: var(--sa-size-font, 13px);
   margin-left: 0;
-  color: var(--m-color-primary);
+  color: var(--sa-color-primary);
   width: calc(100% - var(--m-scroll-padding));
 
   .sa-title_box {
@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<SaTitleType>(), {
       left: 3px;
       z-index: 1;
       width: calc(100% - 3px);
-      background-color: var(--m-color-primary-light-7);
+      background-color: var(--sa-color-primary-light-7);
     }
   }
 
@@ -68,7 +68,7 @@ const props = withDefaults(defineProps<SaTitleType>(), {
       z-index: 2;
       left: 0px;
       width: 100%;
-      background-color: var(--m-color-primary);
+      background-color: var(--sa-color-primary);
     }
   }
 
@@ -96,7 +96,7 @@ const props = withDefaults(defineProps<SaTitleType>(), {
       z-index: 2;
       left: 0px;
       width: 100%;
-      background-color: var(--m-color-primary);
+      background-color: var(--sa-color-primary);
     }
   }
 }

@@ -27,7 +27,7 @@ import { GlobalState } from "./components/store/type";
 // _Function install
 const install = function (app, options: GlobalState) {
   const {
-    themeColor = "#254679",
+    themeColor = "#5940A3",
     isDark = false,
     requestHeader,
     tableConfig = {},

@@ -54,7 +54,7 @@
   font-size: var(--sa-size-font, 13px);
 }
 
-.m-display-v2 {
+.sa-display-style {
   width: 100%;
   font-size: var(--sa-size-font, 13px);
   word-wrap: break-word;
@@ -69,7 +69,7 @@
   background-color: var(--sa-color-send-bg);
 }
 
-.m-contrast-v2 {
+.sa-contrast-style {
   margin-top: 2px;
   position: relative;
   color: var(--sa-color-danger);

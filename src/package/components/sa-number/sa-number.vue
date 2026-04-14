@@ -2,6 +2,9 @@
   <div v-if="!display" class="sa-number" :class="[props.class, { 'is-disabled': props.disabled }]" :style="{ ...props.style }">
     <!-- input -->
     <div class="sa-number-input" :class="[isFocus ? 'is-focus' : '']">
+      <div v-if="title" :style="{ width: titleWidth }" class="sa-cell-label">
+        {{ typeof title === "string" ? title : title[languageValue] }}
+      </div>
       <input
         class="sa-number-input-inner"
         v-model="inValue"
@@ -17,6 +20,7 @@
         autocomplete="off"
         :placeholder="computedPlaceholder"
       />
+      <div v-if="unit" class="sa-number-input-unit">{{ unit }}</div>
       <sa-icon v-if="!disabled && clearable && inValue" name="close_circle_line" class="clear-icon" @click="clearInput" />
       <div class="sa-number-input-controls" v-if="!disabled && controls">
         <sa-icon name="up_line" class="control-icon top" @click="handleControl('up')" />
@@ -24,14 +28,14 @@
       </div>
     </div>
   </div>
-  <div v-else class="m-display-v2">
+  <div v-else class="sa-display-style">
     <slot name="exDisplay"></slot>
     <template v-if="$slots.exDisplay"> ( {{ keepDecimalPlaces(inValue, precision) || "--" }}{{ unit }} )</template>
     <template v-else>{{ keepDecimalPlaces(inValue, precision) || "--" }}{{ unit }}</template>
   </div>
   <div
     v-if="(alwaysContrast && !isNil(contrastData)) || (!isNil(contrastData) && !isEqual(inValue, contrastData))"
-    :class="['m-contrast-v2']"
+    :class="['sa-contrast-style']"
   >
     <slot name="exContrast"></slot>
     <template v-if="$slots.exContrast"> ( {{ keepDecimalPlaces(contrastData, precision) || "--" }}{{ unit }} )</template>
@@ -56,6 +60,9 @@ let setRange = false;
 const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
 const languagePackage = computed(() => {
   return SaltedGlobalConfig.value?.language?.package?.["cell"] || {};
+});
+const languageValue = computed(() => {
+  return SaltedGlobalConfig.value?.language?.value || "zh-CN";
 });
 
 const computedPlaceholder: ComputedRef<string> = computed(() => {

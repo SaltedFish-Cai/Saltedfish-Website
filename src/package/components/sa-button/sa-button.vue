@@ -1,7 +1,7 @@
 <template>
   <button
     :id="id"
-    @click.stop="btnClick"
+    @click="btnClick"
     type="button"
     :disabled="disabled"
     :class="[
@@ -10,6 +10,7 @@
       props.useLine ? 'use-line' : '',
       { disabled },
       `sa-button--${state.buttonConfig.type}`,
+      `sa-button--${state.buttonConfig.size}`,
       props.usePlain ? 'use-plain' : ''
     ]"
     :style="{ ...props.style }"
@@ -18,22 +19,28 @@
       <sa-icon
         v-if="iconPosition == 'left' && !loading && !state.isLoading && (useFont || state.buttonConfig.iconName)"
         :name="state.buttonConfig.iconName"
-        :class="state.slotsLength ? 'mr-btn btn-icon' : ''"
+        :class="state.slotsLength || text ? 'mr-btn btn-icon' : ''"
       />
     </slot>
-    <template v-if="state.slotsLength"> <slot></slot> </template>
+    <div class="btn-text">
+      <template v-if="state.slotsLength || text">
+        <slot>
+          <template v-if="text"> {{ typeof text == "string" ? text : text[languageValue] }} </template>
+        </slot>
+      </template>
+    </div>
     <sa-icon v-if="iconPosition == 'right' && useFont" :name="state.buttonConfig.iconName" class="ml-btn btn-icon"></sa-icon>
   </button>
 </template>
 
 <script lang="ts" setup>
 // # Import
-import { reactive, onBeforeMount, useSlots, nextTick, watch } from "vue";
+import { reactive, onBeforeMount, useSlots, nextTick, watch, inject, ComputedRef, computed } from "vue";
 import lodashPkg from "lodash";
 import { SaButtonType } from "./type";
 import inBrowser from "../tools/inBrowser";
 import { M_MessageBox } from "../feedback";
-import SaIcon from "../sa-icon/sa-icon.vue";
+import { SaltedGlobalConfigType } from "../sa-content/type";
 
 // # Var
 const { debounce } = lodashPkg;
@@ -42,15 +49,21 @@ const props = withDefaults(defineProps<SaButtonType>(), {
   debouncedTime: 300,
   disabled: false,
   iconPosition: "left",
+  size: undefined,
   loading: false,
   useLine: false,
   loadingBy: "#nprogress",
   useFont: true,
-  usePlain: true
+  usePlain: true,
+  useStop: true
 });
 
 const emit = defineEmits(["click", "confirmClick", "deleteClick", "submitClick"]);
 
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+const languageValue = computed(() => {
+  return SaltedGlobalConfig.value?.language?.value || "zh-CN";
+});
 const state = reactive({
   id: new Date().getTime() + Math.random(),
   maskVisible: false,
@@ -65,11 +78,13 @@ onBeforeMount(() => {
   state.slotsLength = slots.default ? 1 : 0;
   if (props.iconName) state.buttonConfig.iconName = props.iconName;
   if (props.type) state.buttonConfig.type = props.type;
+  if (props.size) state.buttonConfig.size = props.size;
 });
 
 // #Function 点击按钮
 const _debounce = debounce(realClick, props.debouncedTime, { trailing: true });
-function btnClick() {
+function btnClick(event: MouseEvent) {
+  if (props.useStop) event.stopPropagation();
   if (props.onConfirmClick || props.onDeleteClick || props.onSubmitClick) {
     let confirmConfig = {
       title: { "en-US": "Tips", "zh-CN": "温馨提示" },
@@ -165,7 +180,8 @@ watch(
       type: "primary",
       plain: true,
       iconName: "finger_press_line",
-      color: ""
+      color: "",
+      size: ""
     };
     if (text) {
       switch (text) {
@@ -251,10 +267,17 @@ watch(
           // config.color = "#026ccf";
           // config.plain = false;
           break;
+        case "delete":
+          config.iconName = "close_circle_line";
+          config.type = "danger";
+          break;
         default:
           break;
       }
     }
+
+    if (props.size) config.size = props.size;
+
     state.buttonConfig = config;
   },
   { immediate: true }

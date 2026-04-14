@@ -1,7 +1,9 @@
-import _ from "lodash";
-const { isNil } = _;
+import { isNil } from "lodash";
+import { MOptionV2Type } from "M_Types";
 
-export function findData(data, options) {
+export function findData(data, options: MOptionV2Type.SelectList) {
+  const language = window.SaltedGlobalConfig.language || "zh-CN";
+
   let text = "";
   if (!options?.length) return "--";
   if (Array.isArray(data)) {
@@ -10,7 +12,9 @@ export function findData(data, options) {
       for (let index = 0; index < options.length; index++) {
         const option = options[index];
         if (option.value == row) {
-          text += option.label + `${I_index < data.length - 1 ? "，" : ""}`;
+          text +=
+            (typeof option.label == "string" ? option.label : option.label[language]) +
+            `${I_index < data.length - 1 ? "，" : ""}`;
         }
       }
     }
@@ -18,9 +22,9 @@ export function findData(data, options) {
     for (let index = 0; index < options.length; index++) {
       const option = options[index];
       if (option.value == data) {
-        text += option.label;
+        text += typeof option.label == "string" ? option.label : option.label[language];
       }
     }
   }
-  return text || "--";
+  return text;
 }

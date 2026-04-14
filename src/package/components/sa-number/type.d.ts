@@ -46,6 +46,21 @@ export type SaNumberType = {
   placeholder?: Record<languageKey, string> | string;
 
   /**
+   * **表单项标签**
+   * @type `string`
+   * @description 当设置该值为 `string` 时，会使用该值作为表单项标签
+   * */
+  title?: Record<languageKey, string> | string;
+
+  /**
+   * **表单项标签宽度**
+   * @type `string`
+   * @default `100px`
+   * @description 当设置该值为 `string` 时，会使用该值作为表单项标签宽度
+   * */
+  titleWidth?: string;
+
+  /**
    * **是否禁用**
    * @type `boolean`
    * @default `false`

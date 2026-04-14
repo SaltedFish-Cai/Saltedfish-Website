@@ -84,7 +84,7 @@
     > .scrollbar__thumb {
       border-radius: 4px;
       opacity: 0.5;
-      background-color: var(--sa-color-hover);
+      background-color: var(--sa-color-send-font);
       &:hover {
         transition: var(--sa-animation-time, 0.2s);
         opacity: 0.8;
@@ -233,7 +233,7 @@
 
 .color-scrollbar {
   --sa-color-border: #fff;
-  --sa-color-hover: #d2e7e4;
+  --sa-color-send-font: var(--sa-color-primary-light-2);
   &:has(> .scrollbar__bar.is-vertical) {
     // padding-right: calc(var(--sa-size-padding-base, 10px) - 0px);
 
@@ -258,7 +258,7 @@
   .scrollbar__bar.is-vertical {
     width: 8px;
     border-radius: 12px;
-    box-shadow: 0 0 4px 3px #d2e7e4;
+    box-shadow: 0 0 4px 3px var(--sa-color-primary-light-6);
     transform: translate(-3px, -3px) scale(1, 0.65);
     .scrollbar__thumb {
       width: 100%;
@@ -269,7 +269,7 @@
   .scrollbar__bar.is-horizontal {
     height: 8px;
     border-radius: 12px;
-    box-shadow: 0 0 4px 3px #d2e7e4;
+    box-shadow: 0 0 4px 3px var(--sa-color-primary-light-6);
     transform: translate(-3px, -3px) scale(0.65, 1);
     .scrollbar__thumb {
       height: 100%;

@@ -11,7 +11,7 @@
     display: flex;
     padding: 1px calc(var(--sa-size-padding, 10px) / 2);
     margin: 2px;
-    border-radius: 3px;
+    border-radius: calc(var(--sa-size-radius) / 1.4);
     line-height: normal;
     justify-content: center;
     align-items: center;

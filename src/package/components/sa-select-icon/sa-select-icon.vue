@@ -38,14 +38,14 @@
     </sa-popover>
   </div>
 
-  <div v-else class="m-display-v2">
+  <div v-else class="sa-display-style">
     <slot name="exDisplay"></slot>
     <template v-if="$slots.exDisplay"> ( <sa-icon :name="selectItem" class="sa-select-icon_select-icon" /> )</template>
     <template v-else><sa-icon :name="selectItem" class="sa-select-icon_select-icon" /></template>
   </div>
   <div
     v-if="(alwaysContrast && !isNil(contrastData)) || (!isNil(contrastData) && !isEqual(selectItem, contrastData))"
-    :class="['m-contrast-v2']"
+    :class="['sa-contrast-style']"
   >
     <slot name="exContrast"></slot>
     <template v-if="$slots.exContrast"> ( <sa-icon :name="contrastData" class="sa-select-icon_select-icon" /> )</template>
@@ -156,7 +156,7 @@ watch(
     align-items: center;
     font-size: calc(var(--sa-size-font, 13px) * 1.2);
     color: #fff;
-    background-color: var(--m-color-primary);
+    background-color: var(--sa-color-primary);
     font-weight: 500;
     border-radius: 50%;
   }
@@ -185,7 +185,7 @@ watch(
     }
 
     &.selected {
-      background-color: var(--m-color-primary);
+      background-color: var(--sa-color-primary);
       color: #fff;
       font-weight: 500;
     }
@@ -205,15 +205,15 @@ watch(
       > .sa-button {
         transition: var(--sa-animation-time, 0.2s);
 
-        border-color: var(--m-color-primary);
-        box-shadow: 0 0 0 2px var(--m-color-primary-light-8);
+        border-color: var(--sa-color-primary);
+        box-shadow: 0 0 0 2px var(--sa-color-primary-light-8);
       }
     }
     > .sa-button {
       width: 100%;
       &.hover {
-        border-color: var(--m-color-primary);
-        box-shadow: 0 0 0 2px var(--m-color-primary-light-8);
+        border-color: var(--sa-color-primary);
+        box-shadow: 0 0 0 2px var(--sa-color-primary-light-8);
       }
     }
   }

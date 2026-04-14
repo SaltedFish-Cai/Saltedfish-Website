@@ -383,16 +383,16 @@ defineExpose({
   width: max-content;
   &:hover {
     font-weight: bold;
-    color: var(--m-color-primary);
+    color: var(--sa-color-primary);
     cursor: pointer;
   }
 }
 .icon_highlight {
   font-weight: bold;
-  color: var(--m-color-primary);
+  color: var(--sa-color-primary);
 }
 .icon_highlight--show {
-  color: var(--m-color-primary);
+  color: var(--sa-color-primary);
 }
 .icon_highlight--hide {
   color: var(--sa-color-warning);

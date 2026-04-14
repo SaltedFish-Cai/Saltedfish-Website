@@ -8,7 +8,7 @@ import languageMap from "../language.json";
 export const useBaseStore = defineStore({
   id: "salted-ui-global-configs",
   state: (): GlobalState & toolsState => ({
-    themeColor: "#254679",
+    themeColor: "#5940A3",
     isDark: false,
     requestHeader: {},
     tableConfig: {},

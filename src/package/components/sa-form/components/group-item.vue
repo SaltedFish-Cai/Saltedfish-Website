@@ -38,7 +38,7 @@
                   (!isNil(injectConfigContext.contrastData) &&
                     !isEqual(injectConfigContext.data[item.prop], injectConfigContext.contrastData))
                 "
-                :class="['m-contrast-v2']"
+                :class="['sa-contrast-style']"
               >
                 {{ injectConfigContext.contrastData || "--" }}
               </div>

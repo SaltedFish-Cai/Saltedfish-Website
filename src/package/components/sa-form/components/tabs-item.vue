@@ -207,7 +207,7 @@
         </sa-tabs-item>
       </sa-tabs>
 
-      <div v-else class="m-display-v2">
+      <div v-else class="sa-display-style">
         {{ injectConfigContext.languagePackage["empyt"] }}
       </div>
     </sa-form-item>

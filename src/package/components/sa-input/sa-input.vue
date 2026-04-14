@@ -1,13 +1,12 @@
 <template>
   <template v-if="!display">
-    <div class="sa-input">
+    <div class="sa-input" :style="{ ...props.style }" :class="[props.class]">
       <!-- <div class="mock-box" v-if="isFocus"></div> -->
-      <div
-        class="sa-input_body"
-        :class="[props.class, { 'is-disabled': disabled }, { 'is-focus': isFocus }]"
-        :style="{ ...props.style }"
-      >
+      <div class="sa-input_body" :class="[{ 'is-disabled': disabled }, { 'is-focus': isFocus }]" @click="textareaRef.focus()">
         <!-- textarea -->
+        <div v-if="title" :style="{ width: titleWidth }" class="sa-cell-label">
+          {{ typeof title === "string" ? title : title[languageValue] }}
+        </div>
         <div class="sa-input-textarea" :class="[isFocus ? 'is-focus' : '']">
           <div
             v-if="!isFocus"
@@ -19,28 +18,30 @@
           <textarea
             ref="textareaRef"
             class="sa-input-textarea-inner textarea"
+            style="overflow: hidden"
             :class="[isFocus ? 'is-focus' : 'not-focus']"
-            v-model="inValue"
+            v-model="inValue as string"
             :name="id"
             :rows="isFocus ? 1 : 1"
             @focus="handleFocus"
             @blur="handleBlur"
             @input="handleInput"
             @change="handleChange"
+            @keydown="handleEnter"
             :disabled="disabled"
             autocomplete="off"
             :placeholder="computedPlaceholder"
             :maxlength="maxLength"
           />
 
-          <div v-if="isFocus" class="flex-end clean-box">
-            <div v-if="maxLength" class="m-input-word-limit">
+          <div v-if="isFocus && maxLength" class="flex-end clean-box">
+            <div v-if="maxLength" class="sa-input-word-limit">
               {{ inValue?.length || 0 }}{{ maxLength ? " / " + maxLength : "" }}
             </div>
-            <sa-icon name="close_circle_line" class="clear-icon" @click="clearInput" />
+            <!-- <sa-icon name="close_circle_line" class="clear-icon" @click="clearInput" /> -->
           </div>
           <sa-icon
-            v-else-if="!disabled && clearable && inValue"
+            v-else-if="!disabled && clearable && inValue && !isFocus"
             name="close_circle_line"
             class="clear-icon"
             @click="clearInput"
@@ -62,13 +63,13 @@
             :placeholder="computedPlaceholder"
             :maxlength="maxLength"
           />
-          <div v-if="maxLength" class="m-input-word-limit">{{ inValue?.length || 0 }}{{ maxLength ? "/" + maxLength : "" }}</div>
+          <div v-if="maxLength" class="sa-input-word-limit">{{ inValue?.length || 0 }}{{ maxLength ? "/" + maxLength : "" }}</div>
           <sa-icon v-if="!disabled && clearable && inValue" name="close_circle_line" class="clear-icon" @click="clearInput" />
         </div> -->
       </div>
     </div>
   </template>
-  <div v-else class="m-display-v2">
+  <div v-else class="sa-display-style">
     <slot name="exDisplay"></slot>
     <template v-if="$slots.exDisplay"> ( {{ inValue || "--" }} )</template>
     <template v-else>{{ inValue || "--" }}</template>
@@ -76,7 +77,7 @@
 
   <div
     v-if="(alwaysContrast && !isNil(contrastData)) || (!isNil(contrastData) && !isEqual(inValue, contrastData))"
-    :class="['m-contrast-v2']"
+    :class="['sa-contrast-style']"
   >
     <slot name="exContrast"></slot>
     <template v-if="$slots.exContrast"> ( {{ contrastData || "--" }} )</template>
@@ -101,6 +102,9 @@ const isFocus = ref(false);
 const languagePackage = computed(() => {
   return SaltedGlobalConfig.value?.language?.package?.["cell"] || {};
 });
+const languageValue = computed(() => {
+  return SaltedGlobalConfig.value?.language?.value || "zh-CN";
+});
 
 const computedPlaceholder: ComputedRef<string> = computed(() => {
   const language = SaltedGlobalConfig.value?.language?.value || "zh-CN";
@@ -112,13 +116,18 @@ const computedPlaceholder: ComputedRef<string> = computed(() => {
 const props = withDefaults(defineProps<SaInputType>(), {
   id: randChar(),
   modelValue: "",
-  type: "text",
+  type: "textarea",
   clearable: true,
   autofocus: false
 });
+const inValue = ref(String(props.modelValue));
+const emits = defineEmits(["update:modelValue", "change", "blur", "focus", "enter"]);
 
-const inValue = ref(props.modelValue);
-const emits = defineEmits(["update:modelValue", "change", "blur", "focus"]);
+function handleEnter(e: KeyboardEvent) {
+  if (e.key === "Enter") {
+    emits("enter");
+  }
+}
 
 function handleInput() {
   limitLength(inValue.value);
@@ -134,6 +143,9 @@ function handleChange() {
 
 function handleFocus() {
   isFocus.value = true;
+  if (props.type === "textarea") {
+    adjustTextareaHeight();
+  }
   emits("focus");
 }
 function handleBlur() {
@@ -173,16 +185,17 @@ const adjustTextareaHeight = () => {
   textareaRef.value.style.height = "auto";
 
   // 计算内容高度，加上一些缓冲以避免滚动条闪烁
-  const contentHeight = textareaRef.value.scrollHeight + 2;
+  const contentHeight = textareaRef.value.scrollHeight;
   const minHeight = parseInt(getComputedStyle(textareaRef.value).minHeight) || 0;
+  const _val = Math.max(contentHeight, minHeight) + "px";
   // 设置新的高度，确保不低于最小高度
-  textareaRef.value.style.height = Math.max(contentHeight, minHeight) + "px";
+  textareaRef.value.style.height = _val;
 
   // 恢复滚动位置
   textareaRef.value.scrollTop = scrollTop;
 };
 
-let oldValue: string | undefined = props.modelValue;
+let oldValue: string | undefined = String(props.modelValue);
 const limitLength = value => {
   if (props.maxLength && value.length > Number(props.maxLength)) {
     inValue.value = value.slice(0, Number(props.maxLength));
@@ -198,8 +211,8 @@ const limitLength = value => {
 watch(
   () => props.modelValue,
   data => {
-    inValue.value = !isNil(data) ? data : "";
-    oldValue = !isNil(data) ? data : "";
+    inValue.value = !isNil(data) ? data.toString() : "";
+    oldValue = !isNil(data) ? data.toString() : "";
     nextTick(() => {
       adjustTextareaHeight();
     });

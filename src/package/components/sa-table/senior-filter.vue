@@ -349,7 +349,7 @@ watch(
       line-height: 1.7em;
       padding-left: 12px;
       font-size: calc(var(--sa-size-font, 13px) + 1px);
-      color: var(--m-color-primary);
+      color: var(--sa-color-primary);
       &::before {
         position: absolute;
         top: 50%;
@@ -359,7 +359,7 @@ watch(
         width: 4px;
         height: 15px;
         content: "";
-        background-color: var(--m-color-primary);
+        background-color: var(--sa-color-primary);
       }
     }
   }

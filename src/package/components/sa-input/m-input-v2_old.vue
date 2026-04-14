@@ -41,7 +41,7 @@
       <sa-icon v-if="!disabled && clearable && inValue" name="close_circle_line" class="clear-icon" @click="clearInput" />
     </div>
   </div>
-  <div v-else class="m-display-v2">
+  <div v-else class="sa-display-style">
     <slot name="exDisplay"></slot>
     <template v-if="$slots.exDisplay"> ( {{ inValue || "--" }} )</template>
     <template v-else>{{ inValue || "--" }}</template>
@@ -49,7 +49,7 @@
 
   <div
     v-if="(alwaysContrast && !isNil(contrastData)) || (!isNil(contrastData) && !isEqual(inValue, contrastData))"
-    :class="['m-contrast-v2']"
+    :class="['sa-contrast-style']"
   >
     <slot name="exContrast"></slot>
     <template v-if="$slots.exContrast"> ( {{ contrastData || "--" }} )</template>

@@ -1,5 +1,32 @@
 import { MessageBoxOptions } from "@/package/components/sa-message-box/type";
 
+type languageKey = "en-US" | "zh-CN";
+
+export type ButtonTypeV2Is =
+  | "add"
+  | "cancel"
+  | "check"
+  | "delete"
+  | "download"
+  | "edit"
+  | "export"
+  | "file"
+  | "go"
+  | "import"
+  | "more"
+  | "ok"
+  | "refresh"
+  | "remove"
+  | "save"
+  | "search"
+  | "submit"
+  | "switch"
+  | "sync"
+  | "time"
+  | "trash"
+  | "upload"
+  | "view";
+
 export type SaButtonType = {
   /**
    * **组件唯一标识**
@@ -29,34 +56,37 @@ export type SaButtonType = {
   style?: Record<string, string>;
 
   /**
+   * **按钮文本**
+   * @type `Record<languageKey, string> | string`
+   * @default `undefined`
+   * @description 当设置该值时，会显示在按钮上
+   * @description 该值的类型为 `Record<languageKey, string> | string`，可以是任意类型
+   * @example
+   * ```tsx
+   * <MoButton text="创建表格" />
+   * ```
+   * @example
+   * ```tsx
+   * <MoButton text={{ "en-US": "Create Table", "zh-CN": "创建表格" }} />
+   * ```
+   * */
+  text?: Record<languageKey, string> | string;
+
+  /**
+   * **按钮大小**
+   * @type `string`
+   * @default `undefined`
+   * @description 可选值为 `small` | `large`
+   * */
+  size?: "large" | "small";
+
+  /**
    * **内置样式**
    * @type `string` | `undefined`
    * @default `undefined`
    * @description 可选值为  `add` | `cancel` | `check` | `download` | `edit` | `export` | `file` | `go` | `import` | `ok` | `refresh` | `remove` | `save` | `search` | `submit` | `switch` | `sync` | `time` | `trash` | `upload` | `view` | `more`
    * */
-  is?:
-    | "add"
-    | "cancel"
-    | "check"
-    | "download"
-    | "edit"
-    | "export"
-    | "file"
-    | "go"
-    | "import"
-    | "more"
-    | "ok"
-    | "refresh"
-    | "remove"
-    | "save"
-    | "search"
-    | "submit"
-    | "switch"
-    | "sync"
-    | "time"
-    | "trash"
-    | "upload"
-    | "view";
+  is?: ButtonTypeV2Is;
 
   /**
    * **按钮样式类型**
@@ -135,6 +165,7 @@ export type SaButtonType = {
    * @description 当设置该值时，会使用该值作为ICON
    * @description
    * - 该值的类型为 `string`，可以是任意类型
+   * - 该值的数据可以从[Icon库](https://dms.bbraun.cn/DocumentToDms/document/ManagerUI/m-icon/readme.html#icon-%E9%80%89%E6%8B%A9)中获取
    * */
   iconName?: string;
 
@@ -173,6 +204,15 @@ export type SaButtonType = {
    * @description 当设置该值为 `undefined` 时，不会开启确认弹窗功能
    * */
   confirmConfig?: MessageBoxOptions;
+
+  /**
+   * **是否阻止事件冒泡**
+   * @type `boolean`
+   * @default `true`
+   * @description 当设置该值为 `true` 时，会阻止事件冒泡
+   * @description 当设置该值为 `false` 时，不会阻止事件冒泡
+   * */
+  useStop?: boolean;
 
   onConfirmClick?: () => void;
   onSubmitClick?: () => void;

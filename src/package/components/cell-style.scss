@@ -1,4 +1,4 @@
-.m-display-v2 {
+.sa-display-style {
   width: 100%;
   font-size: var(--sa-size-font);
   word-wrap: break-word;
@@ -13,7 +13,7 @@
   background-color: var(--sa-color-send-bg);
 }
 
-.m-contrast-v2 {
+.sa-contrast-style {
   margin-top: 2px;
   position: relative;
   color: var(--sa-color-danger);
@@ -42,4 +42,18 @@
     display: inline-block;
     content: "（原）";
   }
+}
+
+.sa-cell-label {
+  padding-right: calc(var(--sa-size-padding, 10px) / 2);
+  margin-right: calc(var(--sa-size-padding, 10px) / 2);
+  font-size: calc(var(--sa-size-font, 16px) - 1px);
+  color: var(--sa-color-font);
+  border-right: 1px solid var(--sa-color-border);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }

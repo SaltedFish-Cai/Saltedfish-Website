@@ -75,7 +75,7 @@
     padding: 0;
     border-bottom: 0;
   }
-  .m-display-v2 {
+  .sa-display-style {
     padding: 0;
     background: none !important;
     border: none !important;
@@ -194,7 +194,7 @@
 
       line-height: var(--sa-size-height, 28px);
       height: calc(var(--sa-size-height, 28px) + var(--sa-size-padding, 10px));
-      color: var(--m-color-primary);
+      color: var(--sa-color-primary);
       font-weight: bold;
       font-size: var(--sa-size-font, 13px);
       white-space: nowrap;
@@ -208,7 +208,7 @@
 
       transition: opacity 0.2s;
       &.dragover {
-        border: 2px dashed var(--m-color-primary);
+        border: 2px dashed var(--sa-color-primary);
         background-color: var(--sa-color-default-light-6);
       }
 
@@ -226,13 +226,13 @@
         display: none;
         color: var(--sa-color-font);
         &:hover {
-          color: var(--m-color-primary);
+          color: var(--sa-color-primary);
           cursor: move;
         }
       }
       .dragover_width.dragover {
         display: block;
-        color: var(--m-color-primary);
+        color: var(--sa-color-primary);
       }
     }
 
@@ -416,12 +416,12 @@
     z-index: 6;
     // 高亮行样式
     &.highlight-row {
-      background-color: var(--m-color-primary-light-9) !important;
+      background-color: var(--sa-color-primary-light-9) !important;
     }
 
     // // 高亮列样式
     &.highlight-column {
-      background-color: var(--m-color-primary-light-9) !important;
+      background-color: var(--sa-color-primary-light-9) !important;
     }
 
     &:has(.sa-table-cell__error) {
@@ -430,7 +430,7 @@
 
     // 同时高亮行和列时的样式
     // &.highlight-row.highlight-column {
-    //   background-color: var(--m-color-primary-light-2);
+    //   background-color: var(--sa-color-primary-light-2);
     // }
 
     .table_body_select {
@@ -654,7 +654,7 @@
   }
   .bold-text {
     font-weight: bold;
-    color: var(--m-color-primary);
+    color: var(--sa-color-primary);
   }
 }
 

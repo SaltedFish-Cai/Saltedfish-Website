@@ -13,7 +13,7 @@
   width: 100%;
   padding: calc(var(--sa-size-padding, 10px) / 3) calc(var(--sa-size-padding, 10px) / 1.2);
   background-color: var(--sa-color-bg);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   border: 1px solid var(--sa-color-border);
   box-sizing: border-box;
   display: flex;
@@ -76,18 +76,18 @@
   }
 
   .sa-input-textarea {
+    position: relative;
     cursor: text;
     display: inline-flex;
     flex-grow: 1;
-    // min-height: calc(var(--sa-size-height, 24px) - var(--sa-size-height, 24px) / 4);
-    height: calc(var(--sa-size-height, 24px) - var(--sa-size-height, 24px) / 4);
+    min-height: calc(var(--sa-size-height, 24px) - var(--sa-size-height, 24px) / 4);
+    // height: calc(var(--sa-size-height, 24px) - var(--sa-size-height, 24px) / 4);
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: row;
-    width: 100%;
-
+    width: 1px;
     .sa-input-textarea-inner {
       width: 100%;
       border: 0;
@@ -95,6 +95,7 @@
       padding: 0 0;
       resize: vertical;
       font-size: var(--sa-size-font, 16px);
+      color: var(--sa-color-font);
       line-height: 1.5;
       resize: none;
       background: none;
@@ -143,15 +144,15 @@
   .sa-input-textarea.is-focus {
     display: inline-flex;
     flex-grow: 1;
-    min-height: calc(var(--sa-size-height, 24px) - 2px);
-    height: auto !important;
+    min-height: calc(var(--sa-size-height, 24px) - var(--sa-size-height, 24px) / 4);
+    // height: calc(var(--sa-size-height, 24px) - var(--sa-size-height, 24px) / 4);
     box-sizing: border-box;
     justify-content: flex-end;
     align-items: flex-end;
     display: flex;
     flex-direction: column;
     .sa-input-textarea-inner {
-      min-height: calc(var(--sa-size-height, 24px) - 2px);
+      min-height: calc(var(--sa-size-height, 24px) - var(--sa-size-height, 24px) / 4);
       transition: var(--sa-animation-time, 0.2s);
     }
   }
@@ -160,12 +161,12 @@
     width: auto;
     transform: translate(calc(var(--sa-size-padding, 10px) / 1.2), calc(var(--sa-size-padding, 10px) / 3));
     padding: calc(var(--sa-size-padding, 10px) / 4) calc(var(--sa-size-padding, 10px) / 2);
-    border-radius: var(--sa-size-radius) 0 var(--sa-size-radius) 0;
+    border-radius: var(--sa-size-radius, 3px) 0 var(--sa-size-radius, 3px) 0;
     transition: var(--sa-animation-time, 0.2s);
     border: 1px solid var(--sa-color-border);
     border-right: none;
     border-bottom: none;
-    > .m-input-word-limit {
+    > .sa-input-word-limit {
       height: calc(var(--sa-size-height, 24px) - 10px);
       line-height: calc(var(--sa-size-height, 24px) - 10px);
     }
@@ -176,12 +177,12 @@
     }
   }
 
-  .m-input-word-limit {
+  .sa-input-word-limit {
     font-size: calc(var(--sa-size-font, 16px) - 2px);
     color: var(--sa-color-info-light-1);
   }
 
-  .m-input-word-limit + .clear-icon {
+  .sa-input-word-limit + .clear-icon {
     margin-left: calc(var(--sa-size-padding, 10px) / 2);
   }
 }

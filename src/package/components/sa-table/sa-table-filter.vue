@@ -53,7 +53,7 @@
         <span
           class="flex-center query_item_box query_item_box2"
           :style="{
-            backgroundColor: 'var(--m-color-primary-light-8)',
+            backgroundColor: 'var(--sa-color-primary-light-8)',
             color: '#818181'
           }"
         >

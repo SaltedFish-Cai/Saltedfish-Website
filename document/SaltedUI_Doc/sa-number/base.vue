@@ -1,6 +1,12 @@
 <template>
   <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-number v-model="value1" controls :size="size" :contrastData="value2"></sa-number>
+  <sa-number
+    v-model="value1"
+    controls
+    :size="size"
+    :contrastData="value2"
+    :title="{ 'en-US': 'Basic Usage', 'zh-CN': '基础使用' }"
+  ></sa-number>
 
   <sa-title :padding="['bottom']">Display</sa-title>
   <sa-number v-model="value3" controls :size="size" display :contrastData="value2"></sa-number>

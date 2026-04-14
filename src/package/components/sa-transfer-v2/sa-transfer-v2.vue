@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div v-else class="m-display-v2">
+  <div v-else class="sa-display-style">
     <slot name="exDisplay"></slot>
 
     <template v-if="exOptionsList?.length || displayValue">
@@ -81,7 +81,7 @@
           contrastData
         ))
     "
-    :class="['m-contrast-v2']"
+    :class="['sa-contrast-style']"
   >
     <div v-if="exOptionsList?.length">
       <slot name="exContrast"></slot>

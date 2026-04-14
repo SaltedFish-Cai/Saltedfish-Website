@@ -1,9 +1,9 @@
 <template>
   <section class="sa-icon" @click="props.onClick" :class="[props.class]" :style="{ ...props.style }">
-    <span v-if="!tip" :class="['m-iconfont', 'm-iconfont_icon', `icon-${name}`]"></span>
+    <span v-if="!tip" :class="['m-iconfont', 'sa-iconfont_icon', `icon-${name}`]"></span>
     <template v-else>
       <sa-popover trigger="hover">
-        <template #reference> <span class="m-iconfont m-iconfont_icon" :class="'icon-' + name"></span> </template>
+        <template #reference> <span class="m-iconfont sa-iconfont_icon" :class="'icon-' + name"></span> </template>
         {{ tip }}
       </sa-popover>
     </template>
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<SaIconType>(), {
   display: inline-block;
   font-family: "m-iconfont-v2" !important;
   font-size: calc(var(--sa-size-font) + 1px);
-  .m-iconfont_icon {
+  .sa-iconfont_icon {
     position: relative;
     z-index: 0;
     display: inline-block;

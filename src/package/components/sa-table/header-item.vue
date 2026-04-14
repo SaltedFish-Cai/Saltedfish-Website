@@ -219,11 +219,11 @@ watch(
     color: var(--sa-color-hover);
   }
   .order-act {
-    color: var(--m-color-primary);
+    color: var(--sa-color-primary);
   }
 }
 .light-order-box-act {
-  // background-color: var(--m-color-primary-light-9);
+  // background-color: var(--sa-color-primary-light-9);
 }
 .light-table-order-box {
   @extend %light-table-order-box;
@@ -239,11 +239,11 @@ watch(
   }
 
   .filter-act {
-    color: var(--m-color-primary);
+    color: var(--sa-color-primary);
   }
 }
 .sa-table-filter-box-act {
-  // background-color: var(--m-color-primary-light-9);
+  // background-color: var(--sa-color-primary-light-9);
 }
 .sa-table-cell_header-span {
   overflow: hidden;
@@ -287,7 +287,7 @@ watch(
 }
 .body_cell_text-copy {
   &:hover {
-    color: var(--m-color-primary);
+    color: var(--sa-color-primary);
     cursor: pointer;
   }
 }

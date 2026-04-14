@@ -8,7 +8,7 @@
     font-size: var(--sa-size-font, 13px);
     margin-right: calc(var(--sa-size-padding, 10px) / 2);
     > span {
-      color: var(--m-color-primary);
+      color: var(--sa-color-primary);
       font-weight: bold;
     }
   }
@@ -24,7 +24,7 @@
     outline: none;
 
     &:focus {
-      border-color: var(--m-color-primary);
+      border-color: var(--sa-color-primary);
     }
   }
 
@@ -47,8 +47,8 @@
 
     &.is-active {
       font-weight: 500;
-      background-color: var(--m-color-primary);
-      border-color: var(--m-color-primary);
+      background-color: var(--sa-color-primary);
+      border-color: var(--sa-color-primary);
       color: #fff;
     }
   }
@@ -67,7 +67,7 @@
     color: var(--sa-color-font);
 
     &:hover {
-      color: var(--m-color-primary);
+      color: var(--sa-color-primary);
     }
   }
 

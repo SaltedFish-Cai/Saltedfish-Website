@@ -13,9 +13,13 @@
       :disabled="props.disabled"
       autoWidth
       :teleport-to="teleportInContainer ? selectRef : 'body'"
+      :closeByScroll="false"
     >
       <template #reference>
         <div class="sa-select-content">
+          <div v-if="title" :style="{ width: titleWidth }" class="sa-cell-label">
+            {{ typeof title === "string" ? title : title[languageValue] }}
+          </div>
           <div class="sa-select-input" :class="[isFocus ? 'is-focus' : '']">
             <!-- tag -->
             <template v-if="tagValue.length > 0 && isMultiple">
@@ -61,7 +65,9 @@
             @mouseleave="awaitSelecting = false"
             @click="handleOptionClick(item)"
           >
-            <slot name="optionLabel" :scope="item"> {{ item.label }} </slot>
+            <slot name="optionLabel" :scope="item">
+              {{ typeof item.label === "object" ? item.label[languageValue] || item.label["zh-CN"] : item.label }}
+            </slot>
             <sa-icon name="check_line" class="check-icon"></sa-icon>
           </div>
         </sa-scrollbar>
@@ -70,14 +76,14 @@
       <div v-else class="sa-select-no-data">{{ languagePackage["empyt"] }}</div>
     </sa-popover>
   </div>
-  <div v-else class="m-display-v2">
+  <div v-else class="sa-display-style">
     <slot name="exDisplay"></slot>
     <template v-if="$slots.exDisplay"> ( {{ findData(inValue) || "--" }} )</template>
     <template v-else>{{ findData(inValue) || "--" }}</template>
   </div>
   <div
     v-if="(alwaysContrast && !isNil(contrastData)) || (!isNil(contrastData) && !isEqual(inValue, contrastData))"
-    :class="['m-contrast-v2']"
+    :class="['sa-contrast-style']"
   >
     <slot name="exContrast"></slot>
     <template v-if="$slots.exContrast"> ( {{ findData(contrastData) || "--" }} )</template>
@@ -86,7 +92,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, nextTick, ComputedRef, inject, useTemplateRef } from "vue";
+import { ref, computed, watch, nextTick, ComputedRef, inject, useTemplateRef, onMounted } from "vue";
 import { SaSelectType } from "./type";
 import lodashPkg from "lodash";
 import { randChar } from "../tools/rand-char";
@@ -95,7 +101,6 @@ import { getElementPosition } from "../utils/getElementPosition";
 import { MOptionV2Type } from "../manager-type";
 import { findData as findDataSelect } from "./find-data";
 import { SaltedGlobalConfigType } from "../sa-content/type";
-import SaScrollBar from "../sa-scrollbar/sa-scrollbar.vue";
 
 const { isEqual, isNil, debounce } = lodashPkg;
 const popoverRef = useTemplateRef("popoverRef");
@@ -112,7 +117,9 @@ const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlo
 const languagePackage = computed(() => {
   return SaltedGlobalConfig.value?.language?.package?.["cell"] || "zh-CN";
 });
-
+const languageValue = computed(() => {
+  return SaltedGlobalConfig.value?.language?.value || "zh-CN";
+});
 const props = withDefaults(defineProps<SaSelectType>(), {
   id: randChar(),
   type: "select",
@@ -135,31 +142,37 @@ const isRequestSelect = computed(() => {
 });
 const filterOptionsList = computed(() => {
   if (isOnlineSelect.value) return exOptionsList.value;
-  return exOptionsList.value.filter(item => item.label.includes(filterValue.value));
+  return exOptionsList.value.filter(item => {
+    const label = typeof item.label === "object" ? item.label[languageValue.value] : item.label;
+    return label.includes(filterValue.value);
+  });
 });
 const inputValue = computed(() => {
   if (isFocus.value || isMultiple.value) {
     return filterValue.value || "";
   } else {
-    const data = exOptionsList.value.find(item => item.value == inValue.value)?.label || inValue.value || "";
+    const data = exOptionsList.value?.find?.(item => item.value == inValue.value)?.label || inValue.value || "";
+    if (typeof data === "object") {
+      return data[languageValue.value] || data["zh-CN"] || "";
+    }
     return data;
   }
 });
 
 const inputPlaceholder = computed(() => {
-  const language = SaltedGlobalConfig.value?.language?.value || "zh-CN";
   if (Array.isArray(inValue.value) && inValue.value?.length && isMultiple.value) {
     return "";
   } else if (isFocus.value) {
+    const _label = exOptionsList.value.find(item => item.value == inValue.value)?.label;
     return (
-      exOptionsList.value.find(item => item.value == inValue.value)?.label ||
+      (_label && typeof _label === "object" ? _label[languageValue.value] : _label) ||
       (typeof props.placeholder === "object"
-        ? props.placeholder[language] || languagePackage.value[`selectPlaceholder`]
+        ? props.placeholder[languageValue.value] || languagePackage.value[`selectPlaceholder`]
         : props.placeholder || languagePackage.value[`selectPlaceholder`])
     );
   } else {
     return typeof props.placeholder === "object"
-      ? props.placeholder[language] || languagePackage.value[`selectPlaceholder`]
+      ? props.placeholder[languageValue.value] || languagePackage.value[`selectPlaceholder`]
       : props.placeholder || languagePackage.value[`selectPlaceholder`];
   }
 });
@@ -313,6 +326,12 @@ async function remoteMethodFn(query) {
   }
 }
 
+onMounted(() => {
+  if (props.createUseChange) {
+    const item = exOptionsList.value.find(item => item.value === props.modelValue);
+    handleOptionClick(item || {});
+  }
+});
 watch(
   () => props.modelValue,
   data => {

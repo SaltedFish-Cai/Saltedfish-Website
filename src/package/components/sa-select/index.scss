@@ -2,7 +2,7 @@
   position: relative;
   margin: 0;
   background-color: var(--sa-color-bg);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   border: 1px solid var(--sa-color-border);
   min-height: var(--sa-size-height, 24px);
   box-sizing: border-box;
@@ -42,6 +42,8 @@
     align-items: center;
     display: flex;
     color: var(--sa-color-font);
+    flex: 1;
+    width: 1px;
 
     .sa-select-input-inner {
       width: 100%;
@@ -73,7 +75,7 @@
     .down-icon {
       display: block;
       font-size: calc(var(--sa-size-font, 13px) + 1px);
-      color: var(--sa-color-default-light-4);
+      color: var(--sa-color-primary);
       transition: var(--sa-animation-time, 0.2s);
     }
 
@@ -83,7 +85,7 @@
   }
   .sa-tag-collapse {
     flex-wrap: nowrap;
-    max-width: 100%;
+    max-width: 88%;
   }
 }
 .sa-select.is-disabled {
@@ -117,6 +119,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: calc(var(--sa-size-padding) / 3) calc(var(--sa-size-padding) / 1.2);
+  display: flex;
 }
 .sa-select > .sa-popover-reference {
   width: 100%;
@@ -150,6 +153,9 @@
     .check-icon {
       display: block;
     }
+  }
+  > .sa-scrollbar > .sa-scrollbar-content > .scrollbar-body > .scrollbar-body-content {
+    width: 100% !important;
   }
 }
 

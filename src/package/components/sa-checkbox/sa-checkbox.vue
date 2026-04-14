@@ -21,7 +21,7 @@
       "
     ></sa-checkbox-item>
   </div>
-  <div v-else class="m-display-v2">
+  <div v-else class="sa-display-style">
     <slot name="exDisplay"></slot>
     <template v-if="$slots.exDisplay"> ( {{ findData(inValue) || "--" }} )</template>
     <template v-else>{{ findData(inValue) || "--" }}</template>
@@ -29,7 +29,7 @@
 
   <div
     v-if="(alwaysContrast && !isNil(contrastData)) || (!isNil(contrastData) && !isEqual(inValue, contrastData))"
-    :class="['m-contrast-v2']"
+    :class="['sa-contrast-style']"
   >
     <slot name="exContrast"></slot>
     <template v-if="$slots.exContrast"> ( {{ findData(contrastData) || "--" }} )</template>

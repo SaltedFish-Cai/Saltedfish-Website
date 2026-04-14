@@ -65,6 +65,30 @@ export type SaSelectType = {
   type?: "multiple-online-select" | "multiple-request-select" | "multiple-select" | "online-select" | "request-select" | "select";
 
   /**
+   * **表单项标签**
+   * @type `string`
+   * @description 当设置该值为 `string` 时，会使用该值作为表单项标签
+   * */
+  title?: Record<languageKey, string> | string;
+
+  /**
+   * **表单项标签宽度**
+   * @type `string`
+   * @default `100px`
+   * @description 当设置该值为 `string` 时，会使用该值作为表单项标签宽度
+   * */
+  titleWidth?: string;
+
+  /**
+   * **创建时是否使用change事件**
+   * @type `boolean`
+   * @default `false`
+   * @description 当设置该值为 `true` 时，会在创建时使用change事件
+   * @description 当设置该值为 `false` 时，不会在创建时使用change事件
+   * */
+  createUseChange?: boolean;
+
+  /**
    * **外置数据**
    * @type `MOptionV2Type.SelectList`
    * @description 当设置该值时，会使用该值作为配置数据
@@ -202,14 +226,14 @@ export type SaSelectOptionsType = {
    * **数据标题**
    * @type `string`
    * */
-  label: string;
+  label: Record<languageKey, string> | string;
 
   /**
    * **数据值**
    * @type `boolean` | `number` | `string`
    * @description 数据值的类型为 `boolean` | `number` | `string`，可以是任意类型
    * */
-  value: boolean | number | string;
+  value: boolean | number | string | undefined;
 
   /**
    * **子数据**

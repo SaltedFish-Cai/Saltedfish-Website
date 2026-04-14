@@ -36,7 +36,7 @@ export type SaInputType = {
    * @description 当前属性只有作为 `独立组件` 时才会生效
    * @description 该值的类型为 `string` | `number`，可以是任意类型
    * */
-  modelValue?: string;
+  modelValue?: number | string;
 
   /**
    * **输入框类型**
@@ -59,6 +59,21 @@ export type SaInputType = {
    * ```
    * */
   type?: "input" | "text" | "textarea";
+
+  /**
+   * **表单项标签**
+   * @type `string`
+   * @description 当设置该值为 `string` 时，会使用该值作为表单项标签
+   * */
+  title?: Record<languageKey, string> | string;
+
+  /**
+   * **表单项标签宽度**
+   * @type `string`
+   * @default `100px`
+   * @description 当设置该值为 `string` 时，会使用该值作为表单项标签宽度
+   * */
+  titleWidth?: string;
 
   /**
    * **表单项占位符**
