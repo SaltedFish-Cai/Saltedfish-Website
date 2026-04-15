@@ -14,3 +14,17 @@
 .dark::view-transition-old(root) {
   z-index: 9999;
 }
+
+.sa-content {
+  .VPNav {
+    background-color: var(--sa-color-primary);
+    --vp-c-text-1: var(--sa-color-white);
+    .VPNavBarMenuLink.active {
+      --vp-c-brand-1: var(--sa-color-white);
+    }
+    .DocSearch-Button {
+      background-color: var(--sa-color-white);
+      border-radius: calc(var(--sa-size-radius, 3px) + 5px);
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-size-v2">
+  <div class="mb-size">
     <sa-color v-model="value" :preset-colors="presetColors"> </sa-color>
   </div>
 </template>

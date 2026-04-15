@@ -67,7 +67,6 @@ const $t = createSearchTranslate(defaultTranslations);
   padding: 0;
   width: 48px;
   height: 55px;
-  background: transparent !important;
   transition: border-color 0.25s;
   border: 1px solid var(--vp-c-divider) !important;
 }
