@@ -23,14 +23,6 @@ export type SaMediaViewItemType = {
   filePath: string;
 
   /**
-   * **文件完整路径**
-   * @type `string`
-   * @description 当设置该值时，会使用该值作为文件完整路径
-   * @description 该值的类型为 `string`，可以是任意类型
-   * */
-  fullPath?: string;
-
-  /**
    * **文件名称**
    * @type `string`
    * @description 当设置该值时，会使用该值作为文件名称

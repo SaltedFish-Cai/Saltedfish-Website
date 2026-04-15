@@ -1,8 +1,8 @@
-import _ from "lodash";
 import { SaTableItemType, SaTableUseItemType } from "../type";
 import { setWidthToNumber } from "./string-number";
 import { Ref, ref } from "vue";
 
+import _ from "lodash";
 const { cloneDeep } = _;
 
 const positionWidthIndex = ref(-1);
@@ -53,7 +53,8 @@ export const useDragHooks = (tableStructure: Ref<Array<SaTableItemType & SaTable
       if (!basePositionRow) return;
       const currentPositionX = e.clientX;
       const offsetX = currentPositionX - basePositionX;
-      const width = `${(setWidthToNumber(basePositionRow.width || 0) || 0) + offsetX}px`;
+      const isWidth = (setWidthToNumber(basePositionRow.width || 0) || 0) + offsetX;
+      const width = `${isWidth % 2 == 0 ? isWidth : isWidth + 1}px`;
       tableStructure.value[basePositionIndex].baseWidth = width;
       tableStructure.value[basePositionIndex].width = width;
     };

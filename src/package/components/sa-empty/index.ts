@@ -1,10 +1,10 @@
-import MEmptyV2 from "./sa-empty.vue";
+import SaEmpty from "./sa-empty.vue";
 
 // #Function install
 const install = function (app) {
-  if (!app._context.components["MEmptyV2"]) app.component("MEmptyV2", MEmptyV2);
+  if (!app._context.components["SaEmpty"]) app.component("SaEmpty", SaEmpty);
 };
 export default {
-  name: "MEmptyV2",
+  name: "SaEmpty",
   install
 };

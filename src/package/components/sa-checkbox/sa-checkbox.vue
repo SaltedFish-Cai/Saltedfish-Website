@@ -39,10 +39,10 @@
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import { SaCheckboxType } from "./type";
+import { SaCheckBoxType } from "./type";
 import lodashPkg from "lodash";
 
-const props = withDefaults(defineProps<SaCheckboxType>(), {});
+const props = withDefaults(defineProps<SaCheckBoxType>(), {});
 const { isEqual, isNil } = lodashPkg;
 const exOptionsList = ref(props?.exOptions || []);
 

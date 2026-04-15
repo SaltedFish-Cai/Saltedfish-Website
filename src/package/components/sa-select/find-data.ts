@@ -1,8 +1,8 @@
 import { isNil } from "lodash";
-import { MOptionV2Type } from "M_Types";
+import { SaOptionType } from "M_Types";
 
-export function findData(data, options: MOptionV2Type.SelectList) {
-  const language = window.SaltedGlobalConfig.language || "zh-CN";
+export function findData(data, options: SaOptionType.SelectList) {
+  const language = window.SaltedGlobalConfig?.language || "zh-CN";
 
   let text = "";
   if (!options?.length) return "--";

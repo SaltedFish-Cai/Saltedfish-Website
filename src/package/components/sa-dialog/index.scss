@@ -16,7 +16,7 @@
     margin-left: var(--sa-dialog-offset-x);
     box-shadow: 0 12px 32px 4px rgb(0 0 0 / 4%), 0 8px 20px rgb(0 0 0 / 8%);
     background-color: var(--sa-color-bg);
-    border-radius: var(--sa-size-radius);
+    border-radius: var(--sa-size-radius, 3px);
     overflow: hidden;
     transition: var(--sa-animation-time, 0.2s);
     max-height: calc(100vh - var(--sa-size-padding, 10px) * 2);
@@ -70,34 +70,35 @@
       }
     }
     .sa-dialog-content_body {
-      height: 1px;
-      flex: 1;
+      height: 100%;
+      overflow: hidden;
       .dialog__body {
         width: 100%;
         height: 100%;
+        box-sizing: border-box;
         // overflow: hidden;
       }
       .dialog__body.padding-top {
-        height: calc(100% - calc(var(--sa-size-padding, 10px)));
+        // height: calc(100% - calc(var(--sa-size-padding, 10px)));
         padding-top: calc(var(--sa-size-padding, 10px)) !important;
       }
       .dialog__body.padding-left {
-        width: calc(100% - calc(var(--sa-size-padding, 10px)));
+        // width: calc(100% - calc(var(--sa-size-padding, 10px)));
         padding-left: calc(var(--sa-size-padding, 10px)) !important;
       }
       .dialog__body.padding-bottom {
-        height: calc(100% - calc(var(--sa-size-padding, 10px)));
+        // height: calc(100% - calc(var(--sa-size-padding, 10px)));
         padding-bottom: calc(var(--sa-size-padding, 10px)) !important;
       }
       .dialog__body.padding-right {
-        width: calc(100% - calc(var(--sa-size-padding, 10px)));
+        // width: calc(100% - calc(var(--sa-size-padding, 10px)));
         padding-right: calc(var(--sa-size-padding, 10px)) !important;
       }
       .dialog__body.padding-top.padding-bottom {
-        height: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
+        // height: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
       }
       .dialog__body.padding-left.padding-right {
-        width: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
+        // width: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
       }
     }
   }
@@ -108,7 +109,7 @@
     height: calc(var(--sa-size-height) - 9px);
     color: var(--sa-color-info-light-3);
     border: 1px solid;
-    border-radius: var(--sa-size-radius);
+    border-radius: var(--sa-size-radius, 3px);
     transition: var(--sa-animation-time, 0.2s);
     &:hover {
       color: var(--sa-color-primary);
@@ -143,9 +144,6 @@
   }
 }
 
-.sa-dialog.out-of-range {
-  height: 100% !important;
-}
 .sa-dialog_full {
   height: 100% !important;
   width: 100% !important;

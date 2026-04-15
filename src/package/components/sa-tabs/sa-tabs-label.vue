@@ -4,12 +4,29 @@
 
 <script lang="tsx" setup name="TableColumn">
 // # Import
-import { inject, Ref } from "vue";
+import { computed, ComputedRef, inject, Ref } from "vue";
 import { SaTabsItemTitleType } from "./type";
+import { SaltedGlobalConfigType } from "../sa-content/type";
 const tabsContext = inject("TabsContext") as Ref<{ mode: "default" | "portrait" | "slider" | "sticky"; tabsId: string }>;
 
 // # Var
 const _props = defineProps<SaTabsItemTitleType>();
+
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+const languageValue = computed(() => {
+  return SaltedGlobalConfig.value?.language?.value || "zh-CN";
+});
+
+function setLabel(label: string) {
+  if (typeof label !== "string") return label?.[languageValue.value];
+  try {
+    const jsonStr = label.replace(/'/g, '"');
+    return JSON.parse(jsonStr)[languageValue.value];
+  } catch (err) {
+    console.error("多语言文本转对象失败:", err);
+    return label;
+  }
+}
 
 // #Function Render方法
 const RenderTableColumn = slots => {
@@ -28,14 +45,11 @@ const RenderTableColumn = slots => {
   return (
     <>
       {_slots.map(({ props, children }, index) => {
+        const name = props?.name;
         return (
-          <div class={className(props)} onClick={() => _props.changeTabs(props?.name, index)}>
-            {props?.name && children.label ? (
-              ""
-            ) : (
-              <sa-icon class="mr3" name={props?.icon ? props?.icon : "grid_adaptive_line"} />
-            )}
-            {props?.name && children.label ? children.label(props) : props?.label}
+          <div class={className(props)} onClick={() => _props.changeTabs(name, index)}>
+            {name && children.label ? "" : <sa-icon class="mr3" name={props?.icon ? props?.icon : "grid_adaptive_line"} />}
+            {name && children.label ? children.label(props) : setLabel(props?.label)}
           </div>
         );
       })}

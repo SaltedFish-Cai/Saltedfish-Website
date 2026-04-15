@@ -1,4 +1,4 @@
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 
 type languageKey = "en-US" | "zh-CN";
 
@@ -90,27 +90,27 @@ export type SaSelectType = {
 
   /**
    * **外置数据**
-   * @type `MOptionV2Type.SelectList`
+   * @type `SaOptionType.SelectList`
    * @description 当设置该值时，会使用该值作为配置数据
-   * @description 该值的类型为 `MOptionV2Type.SelectList`，可以是任意类型
+   * @description 该值的类型为 `SaOptionType.SelectList`，可以是任意类型
    * @example
    * ```tsx
    * <MoSelect exOptions={[]} />
    * ```
    * */
-  exOptions?: MOptionV2Type.SelectList;
+  exOptions?: SaOptionType.SelectList;
 
   /**
    * **远端请求选项接口**
-   * @type `({ query: string }) => Promise<MOptionV2Type.SelectList>`
+   * @type `({ query: string }) => Promise<SaOptionType.SelectList>`
    * @description 当设置该值时，会使用该接口请求选项
-   * @description 该值的类型为 `({ query: string }) => Promise<MOptionV2Type.SelectList>`，可以是任意类型
-   * @description 该接口的参数为 `{ query: string }`，返回值为 `Promise<MOptionV2Type.SelectList>`
+   * @description 该值的类型为 `({ query: string }) => Promise<SaOptionType.SelectList>`，可以是任意类型
+   * @description 该接口的参数为 `{ query: string }`，返回值为 `Promise<SaOptionType.SelectList>`
    * @example
    * ```tsx
    * <MoSelect requestApi={(query) => { return new Promise((resolve) => { resolve([]) }) }} />
    * */
-  requestApi?: ({ query: string }) => Promise<MOptionV2Type.SelectList>;
+  requestApi?: ({ query: string }) => Promise<SaOptionType.SelectList>;
 
   // /**
   //  * **选项KEy**
@@ -212,7 +212,7 @@ export type SaSelectType = {
    * @type `oldValue` 为旧值
    * @type `option` 为当前选项
    * @default `undefined`
-   * @description 当设置该值为 `({ value, oldValue, option: MOptionV2Type.Select }) => void` 时，会使用该值作为回调函数
+   * @description 当设置该值为 `({ value, oldValue, option: SaOptionType.Select }) => void` 时，会使用该值作为回调函数
    * @example
    * ```tsx
    * <MoSelect onChange={({value, oldValue, option}) => { console.log(value, oldValue, option) }} />

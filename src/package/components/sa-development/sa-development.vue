@@ -98,16 +98,16 @@ if (SaltedGlobalConfig.value.env == "development") {
       justify-content: flex-start;
       align-items: center;
       padding: 6px 12px;
-      font-size: calc(var(--el-font-base-size-default));
+      font-size: calc(var(--sa-size-font));
       border-radius: 3px;
       .m-icon {
         margin-right: 5px;
-        font-size: var(--el-font-base-size-default);
+        font-size: var(--sa-size-font);
       }
       &:hover {
         cursor: pointer;
         background-color: var(--sa-color-primary);
-        color: var(--el-color-white);
+        color: var(--sa-color-white);
       }
     }
   }

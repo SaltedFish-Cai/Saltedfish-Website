@@ -1,9 +1,9 @@
 <template>
   <div class="sa-media-view-download-file">
-    <div @click="openFile" class="sa-media-view-download-file_name flex-center-start m-hand pr-size-v2">
-      <sa-icon :name="'attachment_line'" class="ml-size-v2 mr-size-v2" />
+    <div @click="openFile" class="sa-media-view-download-file_name flex-center-start m-hand pr-size">
+      <sa-icon :name="'attachment_line'" class="ml-size mr-size" />
       <slot>
-        <div style="white-space: initial; width: 100%">{{ file?.fileName }}</div>
+        <div style="white-space: initial; width: 100%">{{ fileName || file?.OriginalName || file?.FileName }}</div>
       </slot>
     </div>
     <div class="flex-center down-file m-hand" @click="downFile">
@@ -19,10 +19,11 @@
     size="max"
     :scroll="false"
   >
-    <div class="m-media-v2-page-body">
+    <div class="sa-media-page-body">
       <imageView v-if="fileType == 'image'" :filePath="filePath" v-model="zoomIndex" ref="viewRef"></imageView>
       <pdfView v-else-if="fileType == 'pdf'" :filePath="filePath" :zoom="zoomIndex" ref="viewRef"></pdfView>
-      <office-view v-if="fileType == 'word' || fileType == 'excel'" :filePath="filePath" :zoom="zoomIndex"></office-view>
+      <excel-view v-else-if="fileType == 'excel'" :filePath="filePath" :zoom="zoomIndex"></excel-view>
+      <word-view v-if="fileType == 'word'" :filePath="filePath" :zoom="zoomIndex"></word-view>
       <textView v-else-if="fileType == 'text'" :filePath="filePath" :zoom="zoomIndex"></textView>
     </div>
     <template #footer>
@@ -35,8 +36,8 @@
     <template #footerRight>
       <div class="flex-center zoom-box" v-if="fileType == 'pdf' || fileType == 'image'">
         <div class="flex-center mr-size reset-btn" @click="reset90" v-if="fileType == 'pdf' || fileType == 'image'">
-          <sa-icon class="mr5" name="reset_line"></sa-icon
-          ><span style="font-size: 12px">{{ languagePackage["rotate"] }}</span>
+          <sa-icon class="mr5" name="reset_line"></sa-icon>
+          <span style="font-size: 12px">{{ languagePackage["rotate"] }}</span>
         </div>
         <sa-icon name="minus_circle_line" class="m-hand" @click="handleMouseWheel({ deltaY: 1 })"></sa-icon>
         <div
@@ -62,7 +63,8 @@ import { ElMessage } from "element-plus";
 import { useDownload } from "./use-download";
 import imageView from "./image-view.vue";
 import pdfView from "./pdf-view.vue";
-import officeView from "./office-view.vue";
+import excelView from "./excel-view.vue";
+import wordView from "./word-view.vue";
 import textView from "./text-view.vue";
 import { useTemplateRef } from "vue";
 import { SaltedGlobalConfigType } from "../sa-content/type";
@@ -157,7 +159,7 @@ watch(
   width: max-content;
   max-width: 100%;
   border: 1px solid var(--sa-color-border);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   margin: 3px 3px 3px 0;
   font-size: var(--sa-size-font);
   background-color: var(--sa-color-bg);
@@ -195,7 +197,7 @@ watch(
   }
 }
 
-.m-media-v2-page-body {
+.sa-media-page-body {
   width: 100%;
   height: 100%;
   background: gray;

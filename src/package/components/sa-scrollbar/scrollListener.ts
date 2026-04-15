@@ -1,5 +1,4 @@
-import _ from "lodash";
-const { debounce, throttle } = _;
+import { debounce, throttle } from "lodash";
 
 /**
  * 滚动数据接口

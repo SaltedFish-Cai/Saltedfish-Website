@@ -3,7 +3,7 @@ import SaColor from "./sa-color.vue";
 
 // #Function install
 const install = function (app) {
-  if (!app._context.components["MColor"]) {
+  if (!app._context.components["SaColor"]) {
     app.component("SaColor", SaColor);
   }
 };

@@ -130,15 +130,15 @@ export type SaSwitchType = SaSwitchOptionType & {
 export type SaSwitchOptionType = {
   /**
    * **打开值**
-   * @type `boolean` | `number` | `string`
+   * @typenumber` | `string`
    * */
-  activeValue?: boolean | number | string;
+  activeValue?: number | string;
 
   /**
    * **关闭值**
-   * @type `boolean` | `number` | `string`
+   * @type `number` | `string`
    * */
-  inActiveValue?: boolean | number | string;
+  inActiveValue?: number | string;
 
   /**
    * **打开标题**

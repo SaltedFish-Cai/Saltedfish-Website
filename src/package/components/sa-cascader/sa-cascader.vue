@@ -122,7 +122,7 @@ const OptionsHeight = ref("auto");
 
 const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
 const languagePackage = computed(() => {
-  return SaltedGlobalConfig.value?.language?.package?.["cell"] || "zh-CN";
+  return SaltedGlobalConfig.value?.language?.package?.["cell"] || {};
 });
 const languageValue = computed(() => {
   return SaltedGlobalConfig.value?.language?.value || "zh-CN";

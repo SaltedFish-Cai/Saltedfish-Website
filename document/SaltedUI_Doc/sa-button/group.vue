@@ -1,5 +1,5 @@
 <template>
-  <sa-button-group>
+  <sa-button-group type="primary">
     <sa-button iconName="star_arc_line" is="upload">Upload</sa-button>
     <sa-button iconName="star_arc_line" is="download">Download</sa-button>
     <sa-button iconName="star_arc_line" is="add">Add</sa-button>

@@ -32,10 +32,10 @@ const props = withDefaults(defineProps<SaTitleType>(), {
 .sa-title {
   position: relative;
   font-weight: bold;
-  font-size: var(--sa-size-font, 13px);
+  font-size: var(--sa-size-font, 16px);
   margin-left: 0;
   color: var(--sa-color-primary);
-  width: calc(100% - var(--m-scroll-padding));
+  width: calc(100% - var(--sa-scroll-padding));
 
   .sa-title_box {
     position: relative;
@@ -122,7 +122,7 @@ const props = withDefaults(defineProps<SaTitleType>(), {
 // .m-scrollbar:has(> .is-vertical .el-scrollbar__thumb[style*="height"]) {
 //   .el-scrollbar__view {
 //     .sa-title {
-//       --m-scroll-padding: var(--sa-size-padding, 10px);
+//       --sa-scroll-padding: var(--sa-size-padding, 10px);
 //     }
 //   }
 // }

@@ -14,7 +14,7 @@
       :id="props.id"
     >
       <div class="sa-table_body_header_box" ref="headerBoxRef">
-        <SaTableFilter
+        <mTableV2Filter
           ref="filterRef"
           :tableStructure="tableStructure"
           :tableQuery="state.tableQuery"
@@ -24,23 +24,11 @@
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
             <slot :name="slot" v-bind="scope"></slot>
           </template>
-        </SaTableFilter>
+        </mTableV2Filter>
 
         <!-- header -->
-        <div class="sa-table_body_header_scroll">
-          <sa-scrollbar
-            ref="mScrollbarHeaderListRef"
-            :useShadow="false"
-            :useScrollY="!useSticky"
-            :showThumb="false"
-            @mouseover="overScroll(true)"
-            :onDirectlyScroll="
-              ({ scrollLeft }) => !isScrollIng && mScrollbarListRef?.setScrollLeft(scrollLeft, undefined, 'instant')
-            "
-            style="height: auto"
-            @scroll-left="onScrollLeft"
-            @scroll-right="onScrollRight"
-          >
+        <div class="sa-table_body_header_scroll" ref="mScrollbarHeaderListRef">
+          <div :style="{ width: isLeft && isRight ? '100%' : 'max-content' }">
             <div class="sa-table_body_header_scroll_body">
               <template v-for="(item, index) in tableStructure" :key="item.prop">
                 <template v-if="item.isShow !== false">
@@ -51,7 +39,7 @@
                       item.fixed == 'left'
                         ? 'sticky-left border-right'
                         : item.fixed == 'right'
-                        ? 'sticky-right border-left'
+                        ? 'sticky-right border-right'
                         : 'border-right',
                       item.lastLeftFixed ? 'last-left-fixed' : '',
                       item.lastRightFixed ? 'last-right-fixed' : '',
@@ -61,10 +49,10 @@
                         : ''
                     ]"
                     :style="{
-                      '--m-table-sticky': item.fixedValue,
-                      '--m-table-sticky-index': item.fixedValueIndex,
-                      '--m-table-item-width': item.width,
-                      '--m-table-item-min-width': item.minWidth,
+                      '--sa-table-sticky': item.fixedValue,
+                      '--sa-table-sticky-index': item.fixedValueIndex,
+                      '--sa-table-item-width': item.width,
+                      '--sa-table-item-min-width': item.minWidth,
                       justifyContent: isRowIndex(item) ? 'center' : 'flex-start'
                     }"
                     :draggable="!item.fixed"
@@ -120,17 +108,24 @@
                 </template>
               </template>
             </div>
-          </sa-scrollbar>
+          </div>
         </div>
       </div>
 
       <!-- body -->
       <div class="sa-table_body" ref="bodyRef">
+        <div
+          v-if="state.tableLoadingSize != 100"
+          class="sa-table_body_loading"
+          :style="{ width: state.tableLoadingSize + '%' }"
+        ></div>
+        <div v-if="state.flatTableData.length == 0 && state.tableLoadingSize != 100" class="sa-table_body_first_loading">
+          <m-icon class="loading_font" name="loading_line"></m-icon>
+        </div>
         <sa-scrollbar
           ref="mScrollbarListRef"
           :useScrollY="!useSticky"
-          @mouseover="overScroll(false)"
-          @scroll-child-change="({ bodyHeight, bodyWidth }) => ((bodyContentHeight = bodyHeight), (bodyContentWidth = bodyWidth))"
+          @scroll-child-change="handleScrollChildChange"
           :onDirectlyScroll="directlyScroll"
         >
           <!-- content -->
@@ -138,10 +133,11 @@
             class="sa-table_body_content"
             ref="contentRef"
             :style="{
-              '--body-content-height': bodyContentHeight + 'px',
+              '--body-content-height': showTableList.length > 1 ? bodyContentHeight + 'px' : '0px',
               '--body-content-width': bodyContentWidth + 'px',
               '--scroll-body-height': scrollBodyHeight,
-              '--scroll-body-width': scrollBodyWidth
+              '--scroll-body-width': scrollBodyWidth,
+              '--body_content_col_hover_index': -1
               // minHeight: useSummary
               //   ? `calc(${scrollBodyHeight} - var(--sa-size-padding, 10px) * 2 - 4em)`
               //   : `calc(${scrollBodyHeight} - var(--sa-size-padding, 10px) - 2em)`
@@ -151,7 +147,7 @@
           cadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsc
         </div> -->
             <template v-for="(item, index) in showTableList" :key="index">
-              <div class="sa-table_body_content_rows">
+              <div class="sa-table_body_content_rows" :style="{ opacity: state.flatTableData.length > 0 ? 1 : 0 }">
                 <template v-for="row in item" :key="row[rowKey]">
                   <div
                     v-if="row.type == 'more'"
@@ -170,7 +166,7 @@
                       class="sa-table_body_content_cell_empty"
                     >
                       <!-- {{ index }} -->
-                      <loading1></loading1>
+                      <!-- <loading1></loading1> -->
                     </div>
 
                     <div
@@ -190,8 +186,6 @@
                         :useChildren="useChildren"
                         :setCellWidthIng="state.setCellWidthIng"
                         :useAverageWidth="state.useAverageWidth"
-                        @select-row-back="data => emits('selectRowBack', data)"
-                        @radio-row-back="data => emits('radioRowBack', data)"
                         @change-row-status="changeRowStatus"
                       >
                         <template v-for="slot in Object.keys($slots)" #[slot]="scope">
@@ -221,8 +215,6 @@
                                   :setCellWidthIng="state.setCellWidthIng"
                                   :useAverageWidth="state.useAverageWidth"
                                   :parentRow="row"
-                                  @select-row-back="data => emits('selectRowBack', data)"
-                                  @radio-row-back="data => emits('radioRowBack', data)"
                                 >
                                   <template v-for="slot in Object.keys($slots)" #[slot]="scope">
                                     <slot :name="slot" v-bind="scope"></slot>
@@ -244,9 +236,9 @@
             </template>
 
             <template v-if="state.tableLoadStatus">
-              <div v-for="index in Array.from({ length: 10 })" :key="String(index)" class="sa-table_body_content_cell_empty">
+              <!-- <div v-for="index in Array.from({ length: 10 })" :key="String(index)" class="sa-table_body_content_cell_empty">
                 <loading1></loading1>
-              </div>
+              </div> -->
             </template>
           </div>
           <div
@@ -254,6 +246,7 @@
             class="empty empty-table"
             style="text-align: center"
           >
+            <sa-icon name="empty" style="font-size: 40px"></sa-icon>
             {{ languagePackage["empyt"] }}
           </div>
           <!-- footer -->
@@ -276,10 +269,10 @@
                     : ''
                 ]"
                 :style="{
-                  '--m-table-sticky': tableStructure[index]?.fixedValue,
-                  '--m-table-sticky-index': tableStructure[index]?.fixedValueIndex,
-                  '--m-table-item-width': tableStructure[index]?.width,
-                  '--m-table-item-min-width': tableStructure[index]?.minWidth
+                  '--sa-table-sticky': tableStructure[index]?.fixedValue,
+                  '--sa-table-sticky-index': tableStructure[index]?.fixedValueIndex,
+                  '--sa-table-item-width': tableStructure[index]?.width,
+                  '--sa-table-item-min-width': tableStructure[index]?.minWidth
                 }"
               >
                 <div
@@ -318,7 +311,7 @@
               >
                 {{ state.showSelectList ? languagePackage["switchSelect"] : languagePackage["switchInvert"] }}
               </sa-button>
-              <div class="ml-size-v2">
+              <div class="ml-size">
                 {{ languagePackage["selected"] }}
                 <span class="bold-text ml3 mr3">{{ isTableSelectAll ? state.pageable.total : selectedRowsLength }}</span>
                 {{ languagePackage["piece"] }}
@@ -341,7 +334,7 @@
               :pageable="state.pageable"
               :pageNum="state.PageNum"
               :exPagination="exPagination"
-              :handle-size-change="handleSizeChange"
+              :handle-size-change="(handleSizeChange as (val: number) => void)"
               :handle-current-change="handleCurrentChange"
               :handleChangeMaxPage="value => (state.maxPage = value)"
             />
@@ -371,7 +364,7 @@ import {
 import lodashPkg from "lodash";
 
 import mLightTableCell from "./sa-table-cell.vue";
-import loading1 from "./loading-1.vue";
+// import loading1 from "./loading-1.vue";
 import headerItem from "./header-item.vue";
 // import Taro from "@tarojs/taro";
 
@@ -379,7 +372,7 @@ import { SaTableItemType, SaTableType, SaTableUseItemType, SaTableUseType } from
 import { isRowIndex } from "./hooks/isType";
 
 import Pagination from "./pagination.vue";
-import SaTableFilter from "./sa-table-filter.vue";
+import mTableV2Filter from "./sa-table-filter.vue";
 
 import { useSortHooks } from "./hooks/use-sort-hooks";
 import { useStateHooks } from "./hooks/use-state-hooks";
@@ -469,6 +462,7 @@ const parentScrollbarRef = inject("parentScrollbarRef");
 const languagePackage = computed(() => SaltedGlobalConfig.value?.language?.package?.["table"] || {});
 const language = computed(() => SaltedGlobalConfig.value?.language?.value || "zh-CN");
 const infiniteScroll = computed(() => SaltedGlobalConfig.value?.table_config?.infiniteScroll || false);
+const isScrollHeaderIng = ref(false);
 
 // # Hooks
 const {
@@ -486,6 +480,7 @@ const {
   listenCellChildChange,
   clearListen
 } = useStateHooks(props, emits, {
+  isScrollHeaderIng,
   language,
   bodyRef,
   contentRef,
@@ -496,39 +491,38 @@ const {
   languagePackage
 });
 
-const {
-  isLeft,
-  isRight,
-  isScrollIng,
-  scrollDirectionY,
-  onScrollRight,
-  onScrollLeft,
-  handleSizeChange,
-  handleCurrentChange,
-  refreshTable,
-  directlyScroll,
-  overScroll
-} = useScrollHooks(props, state, {
-  headerBoxRef,
-  mScrollbarListRef,
-  mScrollbarHeaderListRef,
-  listenCellInView,
-  parentScrollbarRef,
-  infiniteScroll,
-  getTableList
-});
+const { isLeft, isRight, scrollDirectionY, handleSizeChange, handleCurrentChange, refreshTable, directlyScroll } = useScrollHooks(
+  props,
+  state,
+  {
+    isScrollHeaderIng,
+    headerBoxRef,
+    mScrollbarListRef,
+    mScrollbarHeaderListRef,
+    listenCellInView,
+    parentScrollbarRef,
+    infiniteScroll,
+    getTableList
+  }
+);
 
-const { isShiftPressed, selectedRowsLength, isTableSelectAll, handleSelectChange, handleSelectAllStatus, cleanup } =
-  useSelectHooks(props, state, emits);
+const {
+  isShiftPressed,
+  selectedRowsLength,
+  isTableSelectAll,
+  handleSelectChange,
+  handleSelectAllStatus,
+  setSelectedData,
+  getSelectedData,
+  cleanup
+} = useSelectHooks(props, state, emits, getTableList);
 
 const { handleDragStart, handleDragOver, handleDrop, handleDragEnd, dragIng, handleDragWidthStart, positionWidthIndex } =
   useDragHooks(tableStructure);
 
-const injectSetScrollToIntersect = inject("setScrollToIntersect") as (
-  el: Element,
-  callback?: () => void,
-  options?: { offsetY?: number; offsetX?: number }
-) => void;
+const injectSetScrollToIntersect = inject("setScrollToIntersect", () => {
+  console.warn("未找到滚动方法");
+}) as (el: Element, callback?: () => void, options?: { offsetY?: number; offsetX?: number }) => void;
 
 const { getSubmitTableList, validateField } = useValidateHooks(
   props,
@@ -547,14 +541,7 @@ provide("handleSelectChange", handleSelectChange);
 provide("isTableSelectAll", isTableSelectAll);
 provide("handleCellMouseEnter", handleCellMouseEnter);
 provide("handleCellMouseLeave", handleCellMouseLeave);
-provide(
-  "hoveredRowIndex",
-  computed(() => state.hoveredRowIndex)
-);
-provide(
-  "hoveredColumnIndex",
-  computed(() => state.hoveredColumnIndex)
-);
+
 provide("tableCellChange", (data: SaTableUseType.dataType) => emits("tableCellChange", data));
 provide("validateField", validateField);
 
@@ -619,6 +606,18 @@ onMounted(() => {
     getTableList();
   });
 });
+
+function handleScrollChildChange({ bodyHeight, bodyWidth, useScrollX }) {
+  bodyContentHeight.value = bodyHeight;
+  bodyContentWidth.value = bodyWidth;
+  if (useScrollX) {
+    isLeft.value = useScrollX;
+    isRight.value = !useScrollX;
+  } else {
+    isLeft.value = true;
+    isRight.value = true;
+  }
+}
 
 onUnmounted(() => {
   cleanup();
@@ -857,6 +856,11 @@ watch(
 
 defineExpose({
   /**
+   * @description: 获取表格查询参数
+   * @return {*}
+   */
+  getTableQuery: () => state.tableQuery,
+  /**
    * @description: 请求表格用数据
    * @return {*}
    */
@@ -876,6 +880,19 @@ defineExpose({
    * @return {*}
    */
   getTableData,
+
+  /**
+   * @description: 获取表格内选中数据
+   * @return {*}
+   */
+  getSelectedData,
+
+  /**
+   * @description: 设置表格内选中数据
+   * @param {Array<any>} data
+   * @return {*}
+   */
+  setSelectedData,
   /**
    * @description: 设置表格所有结构
    * @param {Array<SaTableItemType & SaTableUseItemType>} structure

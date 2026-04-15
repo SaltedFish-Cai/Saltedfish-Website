@@ -2,7 +2,7 @@
   position: relative;
   margin: 0;
   background-color: var(--sa-color-bg);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   border: 1px solid var(--sa-color-border);
   min-height: var(--sa-size-height);
   box-sizing: border-box;
@@ -74,7 +74,7 @@
     .down-icon {
       display: block;
       font-size: calc(var(--sa-size-font) + 1px);
-      color: var(--sa-color-default-light-4);
+      color: var(--sa-color-primary);
       transition: var(--sa-animation-time, 0.2s);
     }
 

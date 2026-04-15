@@ -1,10 +1,9 @@
 // # Import
 import { computed, ref } from "vue";
 import { SaTableType, SaTableUseType } from "../type";
+
 import _ from "lodash";
-
 const { cloneDeep } = _;
-
 // type allType = Array<boolean | number | string> | boolean | number | string | null | undefined;
 
 type selectChangeStateType = {
@@ -13,7 +12,12 @@ type selectChangeStateType = {
   parentRow?: SaTableUseType.SaTableInDataType;
 };
 
-export const useSelectHooks = (props: SaTableType, state: SaTableUseType.TableStateType, emits) => {
+export const useSelectHooks = (
+  props: SaTableType,
+  state: SaTableUseType.TableStateType,
+  emits: any,
+  getTableList: () => void
+) => {
   // #State
   const isTableSelectAll = ref<boolean>(false);
   const lastSelectedIndex = ref<number>(-1);
@@ -229,6 +233,15 @@ export const useSelectHooks = (props: SaTableType, state: SaTableUseType.TableSt
     emits("selectRowAllBack", { isSelected: isTableSelectAll.value });
   }
 
+  function setSelectedData(dataKeys: Record<string, any>[]) {
+    state.awaitSelectData = dataKeys;
+    getTableList();
+  }
+
+  function getSelectedData() {
+    return [...state.awaitSelectData, ...state.selectTableData];
+  }
+
   // 清理函数
   const cleanup = () => {
     window.developLog.log(`关闭监听——键盘事件`, props.id, "danger");
@@ -244,6 +257,8 @@ export const useSelectHooks = (props: SaTableType, state: SaTableUseType.TableSt
     isTableSelectAll,
     handleSelectChange,
     handleSelectAllStatus,
+    setSelectedData,
+    getSelectedData,
     cleanup
   };
 };

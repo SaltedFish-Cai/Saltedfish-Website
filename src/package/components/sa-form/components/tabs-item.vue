@@ -80,7 +80,7 @@
                 </div>
                 <sa-icon
                   v-if="!injectConfigContext.display && !item.disabled"
-                  class="remove-hand ml-size-v2"
+                  class="remove-hand ml-size"
                   name="close_circle_line"
                   @click.stop="removeTab(tab)"
                 />
@@ -220,7 +220,7 @@ import { ref, Ref, watch, nextTick, computed, inject } from "vue";
 import { random } from "../hooks/random";
 // import formLabel from "../form-label.vue";
 import formItem from "../form-basics-element.vue";
-import SaFormControl from "../sa-form-control.vue";
+import mFormV2Control from "../sa-form-control.vue";
 
 import { ConfigContextType, ExMultipleConfigType, FormItemRule } from "../type";
 

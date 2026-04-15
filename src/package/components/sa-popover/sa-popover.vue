@@ -2,6 +2,7 @@
   <div
     class="sa-popover-reference"
     :class="[props.class, { 'is-disabled': props.disabled, 'is-click': props.trigger == 'click' }]"
+    :style="referenceStyle"
     ref="popoverReferenceRef"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
@@ -9,7 +10,6 @@
   >
     <slot name="reference"></slot>
   </div>
-
   <template v-if="inRenderEnd && visible">
     <teleport :to="teleportTo || 'body'">
       <!-- <transition :name="!inTop ? 'mo-animation-fadeUp' : 'mo-animation-fadeDown'"> -->
@@ -37,8 +37,7 @@
 import { nextTick, onMounted, onUnmounted, useSlots, ref, Ref, inject, watch } from "vue";
 import { SaPopoverType } from "./type";
 import { getElementPosition } from "../utils/getElementPosition";
-import _ from "lodash";
-const { cloneDeep, throttle } = _;
+import { cloneDeep, throttle } from "lodash";
 
 const props = withDefaults(defineProps<SaPopoverType>(), {
   trigger: "click",
@@ -46,15 +45,16 @@ const props = withDefaults(defineProps<SaPopoverType>(), {
   autoWidth: false,
   placement: "bottom",
   targetClose: true,
-  sticky: undefined
+  sticky: undefined,
+  closeByScroll: true
 });
 const emits = defineEmits(["change"]);
 
-const id = ref(`popover-v2-${Date.now()}`);
+const id = ref(`popover-${Date.now()}`);
 const inRenderEnd = ref(false);
 
-const getManagerV2GlobalZIndex = inject("getManagerV2GlobalZIndex") as () => number;
-const zIndex = ref(getManagerV2GlobalZIndex());
+const getSaAnagerGlobalZIndex = inject("getSaAnagerGlobalZIndex") as () => number;
+const zIndex = ref(getSaAnagerGlobalZIndex());
 
 const animationFrameId = ref<number | null>(null);
 // const observer = ref<MutationObserver | null>(null);
@@ -75,7 +75,7 @@ const popoverContentStyle = ref({});
 const popoverArrowStyle = ref({});
 
 const visible = ref(false);
-const hoverTimer = ref<NodeJS.Timeout | null>(null);
+const hoverTimer = ref<any>(null);
 const slots = useSlots();
 
 // # 点击处理
@@ -178,7 +178,7 @@ function recalculatePosition() {
     }
     // @ 如果使用自动宽度适应设置内容宽度
     else if (props.autoWidth) {
-      const width = ReferencePosition.width < 300 ? 300 : ReferencePosition.width;
+      const width = ReferencePosition.width < 200 ? 200 : ReferencePosition.width;
       popoverContentStyleValue = { ...popoverContentStyleValue, width: width + "px" };
     }
     popoverContentStyle.value = popoverContentStyleValue;
@@ -390,9 +390,10 @@ function showPopover() {
       nextTick(() => {
         // 开始观察目标元素位置变化
         startObserving();
-
-        window.SaltedGlobalConfig.PopoverList = window.SaltedGlobalConfig.PopoverList || {};
-        window.SaltedGlobalConfig.PopoverList[id.value] = hidePopover;
+        if (props.closeByScroll) {
+          window.SaltedGlobalConfig.PopoverList = window.SaltedGlobalConfig.PopoverList || {};
+          window.SaltedGlobalConfig.PopoverList[id.value] = hidePopover;
+        }
       });
     });
   }
@@ -460,10 +461,7 @@ onUnmounted(() => {
 });
 
 // # 暴露获取元素坐标和检查视口的方法给父组件
-defineExpose({
-  showPopover,
-  hidePopover
-});
+defineExpose({ showPopover, hidePopover });
 
 watch(
   () => props.autoWidth,

@@ -47,8 +47,8 @@ import { SaltedGlobalConfigType } from "../sa-content/type";
 const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
 
 const props = withDefaults(defineProps<SaSwitchType>(), {
-  activeValue: true,
-  inActiveValue: false,
+  activeValue: 1,
+  inActiveValue: 0,
   contrastData: undefined
 });
 const { isEqual, isNil } = lodashPkg;

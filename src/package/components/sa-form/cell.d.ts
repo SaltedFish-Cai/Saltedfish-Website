@@ -12,7 +12,7 @@ import { MFileType } from "../m-file/type";
 import { MNumberType } from "../m-number/type";
 import { MInputType } from "../m-input/type";
 import { SaFormChildType } from "./type";
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 
 type languageKey = "en-US" | "zh-CN";
 
@@ -25,13 +25,13 @@ export type CellItemType =
       prop?: string;
       type: "cascader-check" | "cascader" | "multiple-cascader-check" | "multiple-cascader";
       displayProp?: string;
-      options?: MOptionV2Type.SelectList;
+      options?: SaOptionType.SelectList;
     })
-  | (MCheckboxType & { prop?: string; type: "checkbox"; options?: MOptionV2Type.SelectList })
+  | (MCheckboxType & { prop?: string; type: "checkbox"; options?: SaOptionType.SelectList })
   | (MFileType & { prop?: string; type: "file"; fileAttached?: Record<string, string> })
   | (MInputType & { prop?: string; type: "input" | "textarea" })
   | (MNumberType & { prop?: string; type: "number"; clearOnValue?: number })
-  | (MRadioType & { prop?: string; type: "radio"; options?: MOptionV2Type.SelectList })
+  | (MRadioType & { prop?: string; type: "radio"; options?: SaOptionType.SelectList })
   | (MSelectType & {
       prop?: string;
       type:
@@ -43,16 +43,16 @@ export type CellItemType =
         | "select";
       displayProp?: string;
       requestBy?: string;
-      options?: MOptionV2Type.SelectList;
+      options?: SaOptionType.SelectList;
     })
-  | (MSwitchType & { prop?: string; type: "switch"; options?: MOptionV2Type.SelectList });
+  | (MSwitchType & { prop?: string; type: "switch"; options?: SaOptionType.SelectList });
 
 type UnionKeys<T> = T extends T ? keyof T : never;
 type StrictUnionHelper<T, TAll> = T extends any ? Partial<Record<Exclude<UnionKeys<TAll>, keyof T>, never>> & T : never;
 type StrictUnion<T> = StrictUnionHelper<T, T>;
 
 export type OtherType = {
-  type?: "address" | "null" | "slot" | "tag";
+  type?: "address" | "clickTag" | "null" | "slot" | "tag";
   disabled?: boolean; // 禁用状态
   display?: boolean;
 };

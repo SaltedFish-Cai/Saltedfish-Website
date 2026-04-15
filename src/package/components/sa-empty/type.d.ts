@@ -1,4 +1,4 @@
-export type SaEmptyType = {
+export type SaIconType = {
   /**
    * **组件唯一标识**
    * @type `string` | `undefined`

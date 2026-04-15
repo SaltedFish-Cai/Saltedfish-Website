@@ -1,6 +1,8 @@
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 
-export type SaCheckboxItemType = {
+type languageKey = "en-US" | "zh-CN";
+
+export type SaCheckBoxItemType = {
   /**
    * **组件唯一标识**
    * @type `string` | `undefined`
@@ -45,7 +47,7 @@ export type SaCheckboxItemType = {
    * @description 当设置该值时，会作为组件的标签
    * @description 该值的类型为 `string`，可以是任意类型
    * */
-  label?: string;
+  label?: Record<languageKey, string> | string;
 
   /**
    * **值**
@@ -111,7 +113,7 @@ export type SaCheckboxItemType = {
   onChange?: ({ value, oldValue }) => void;
 };
 
-export type SaCheckboxType = {
+export type SaCheckBoxType = {
   /**
    * **组件唯一标识**
    * @type `string` | `undefined`
@@ -147,7 +149,7 @@ export type SaCheckboxType = {
    * @description 当前属性只有作为 `独立组件` 时才会生效
    * @description 该值的类型为 `Array<number | string | boolean>`，可以是任意类型
    * */
-  modelValue?: Array<boolean | number | string>;
+  modelValue?: Array<boolean | number | string | undefined>;
 
   /**
    * **是否禁用**
@@ -164,11 +166,11 @@ export type SaCheckboxType = {
 
   /**
    * **外置数据**
-   * @type `Array<MOptionV2Type.Select>`
+   * @type `Array<SaOptionType.Select>`
    * @description 当设置该值时，会使用该值作为配置数据
-   * @description 该值的类型为 `Array<MOptionV2Type.Select>`，可以是任意类型
+   * @description 该值的类型为 `Array<SaOptionType.Select>`，可以是任意类型
    * */
-  exOptions?: MOptionV2Type.SelectList;
+  exOptions?: SaOptionType.SelectList;
 
   /**
    * **纯展示模式**
@@ -216,7 +218,7 @@ export type SaCheckboxType = {
    * @type `option` 为当前选项
    * @default `undefined`
    * @description 当设置该值时，会使用该值作为回调函数
-   * @description 该值的类型为 `({ value, oldValue, option: MOptionV2Type.Select }) => void` | `undefined`，可以是任意类型
+   * @description 该值的类型为 `({ value, oldValue, option: SaOptionType.Select }) => void` | `undefined`，可以是任意类型
    * @example
    * ```tsx
    * <MSwitch onChange={({value, oldValue, option}) => { console.log(value, oldValue, option) }} />

@@ -3,7 +3,8 @@
     <transition name="mo-animation-fade">
       <div
         class="sa-dialog"
-        :class="[state.fullscreen ? 'sa-dialog_full' : '', outOfRange ? 'out-of-range' : '']"
+        :class="[state.fullscreen ? 'sa-dialog_full' : '']"
+        ref="DialogRef"
         v-if="state.visible"
         :style="{
           height: `${setHeight}`,
@@ -47,6 +48,7 @@
           <div class="sa-dialog-content_body" ref="ScrollbarRef">
             <sa-scrollbar
               v-if="scroll"
+              sa-dialog-content_body
               :useScrollX="useScrollX"
               @scroll-child-change="scrollChildChange"
               :parentBoxRef="ScrollbarRef"
@@ -98,7 +100,7 @@
 
 <script lang="ts" setup>
 // # Import
-import { ref, reactive, watch, computed, onMounted, onUnmounted } from "vue";
+import { ref, reactive, watch, computed, onMounted, onUnmounted, nextTick } from "vue";
 import { SaDialogType } from "./type";
 
 // # Var
@@ -117,11 +119,10 @@ const props = withDefaults(defineProps<SaDialogType>(), {
   useScrollX: false,
   height: "auto"
 });
-
+let openId = "";
 const emits = defineEmits(["update:modelValue", "closed"]);
 const ScrollbarRef = ref();
 const ScrollbarBodyRef = ref();
-const outOfRange = ref(false);
 const state = reactive({
   visible: false,
   fullscreen: false
@@ -148,6 +149,7 @@ const setSize = computed(() => {
     default:
       break;
   }
+
   return props.width || size;
 });
 
@@ -204,19 +206,24 @@ const setHeight = computed(() => {
   if (props.size == "max") {
     data = "95%";
   } else if (props.size == "l") {
-    data = "80%";
+    data = "85%";
   } else if (props.size == "m") {
-    data = "80%";
+    data = "70%";
   } else if (props.size == "s") {
-    data = "80%";
+    data = "50%";
   }
-  if (props.height && props.height != "default") {
+
+  if (props.height && props.height != "auto") {
     data = isNumber(props.height) ? props.height + "px" : props.scroll === false ? "" : props.height;
+  }
+  if (props.height == "auto" && props.scroll) {
+    data = "max-content";
   }
 
   if (state.fullscreen) {
     data = "100%";
   }
+
   return data;
 });
 
@@ -227,14 +234,17 @@ function isNumber(value) {
 
 // #Function 关闭弹窗回调
 function closeMenu() {
+  window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+  window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap.filter(item => item != openId);
   emits("update:modelValue", false);
   emits("closed", false);
 }
 
 // #添加ESC键监听
 function handleKeyDown(e) {
-  if (e.key === "Escape" && state.visible) {
-    if (state.fullscreen) {
+  const escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+  if (e.key === "Escape" && state.visible && escapeMap[escapeMap.length - 1] === openId) {
+    if (state.fullscreen && props.size != "full") {
       state.fullscreen = false;
       return;
     }
@@ -243,6 +253,9 @@ function handleKeyDown(e) {
 }
 
 onMounted(() => {
+  nextTick(() => {
+    scrollChildChange();
+  });
   props.closeOnPressEscape && document.addEventListener("keydown", handleKeyDown);
 });
 
@@ -251,13 +264,10 @@ onUnmounted(() => {
 });
 
 function scrollChildChange() {
-  if (ScrollbarBodyRef.value && ScrollbarRef.value) {
-    if (ScrollbarBodyRef.value.clientHeight > ScrollbarRef.value.clientHeight) {
-      outOfRange.value = true;
-    } else {
-      outOfRange.value = false;
-    }
-  }
+  if (!ScrollbarRef.value) return;
+  console.dir(ScrollbarBodyRef.value);
+  if (ScrollbarBodyRef.value.clientHeight < Number(String(setHeight.value)?.replace("px", ""))) return;
+  ScrollbarRef.value.style.height = ScrollbarBodyRef.value.clientHeight + "px";
 }
 
 defineExpose({ ScrollbarRef: ScrollbarRef });
@@ -267,6 +277,19 @@ watch(
   () => props.modelValue,
   data => {
     state.visible = data;
+    if (data) {
+      scrollChildChange();
+    }
+    if (data && props.closeOnPressEscape) {
+      window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+      openId = new Date().getTime().toString();
+      window.SaltedGlobalConfig.escapeMap.push(openId);
+    }
+    if (props.size == "full") {
+      state.fullscreen = true;
+    } else {
+      state.fullscreen = false;
+    }
   },
   { immediate: true }
 );

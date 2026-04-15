@@ -1,4 +1,4 @@
-export interface SaScrollBarListType {
+export interface SaScrollbarListType {
   /**
    * **自定义类名**
    * @type `string`

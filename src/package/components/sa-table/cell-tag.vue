@@ -2,7 +2,7 @@
   <template v-if="Array.isArray(value) && value.length > 0">
     <template v-for="item in value" :key="item">
       <div
-        class="m-table-tag-v2"
+        class="sa-table-tag"
         :class="[!!clickTag && !disabled ? 'm-hand' : '']"
         :style="{ color: findTextColor(item), backgroundColor: findBgColor(item) }"
         @click="!disabled && clickTag?.({ row })"
@@ -14,7 +14,7 @@
   </template>
   <div
     v-else-if="!Array.isArray(value)"
-    class="m-table-tag-v2"
+    class="sa-table-tag"
     :class="[!!clickTag && !disabled ? 'm-hand' : '']"
     :style="{ color: findTextColor(value), backgroundColor: findBgColor(value) }"
     @click="!disabled && clickTag?.({ row })"
@@ -25,7 +25,7 @@
   <div v-else>--</div>
 </template>
 <script lang="ts" setup>
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 import isDarkColor from "../tools/isDarkColor";
 import { SaTableUseType } from "./type";
 
@@ -34,7 +34,7 @@ type Props = {
   row: SaTableUseType.SaTableInDataType;
   clickTag?: (params: { row: SaTableUseType.SaTableInDataType }) => void;
   disabled?: boolean;
-  exOptions?: MOptionV2Type.SelectList;
+  exOptions?: SaOptionType.SelectList;
 };
 const props = withDefaults(defineProps<Props>(), {
   clickTag: undefined,
@@ -79,7 +79,7 @@ function findTextColor(row) {
 }
 </script>
 <style lang="scss">
-.m-table-tag-v2 {
+.sa-table-tag {
   margin: calc(var(--sa-size-padding, 10px) / 4);
   display: inline-flex;
   justify-content: center;
@@ -87,7 +87,7 @@ function findTextColor(row) {
   width: max-content;
   height: 2em;
   border-radius: 3px;
-  font-size: calc(var(--sa-size-font, 13px) - 2px);
+  font-size: calc(var(--sa-size-font, 16px) - 2px);
   padding: calc(var(--sa-size-padding, 10px) / 4) calc(var(--sa-size-padding, 10px) - 2px);
 }
 </style>

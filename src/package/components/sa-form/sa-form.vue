@@ -52,7 +52,7 @@
         </sa-form-control>
       </div>
     </template>
-    <div v-else-if="initialization == -1" class="m-loading-v2">
+    <div v-else-if="initialization == -1" class="sa-loading">
       <sa-icon class="loading_font" name="loading_line"></sa-icon>
     </div>
 
@@ -76,8 +76,8 @@ import {
   ComputedRef,
   inject
 } from "vue";
-import _ from "lodash";
-import SaFormControl from "./sa-form-control.vue";
+import lodashPkg, { debounce } from "lodash";
+import mFormV2Control from "./sa-form-control.vue";
 
 import inBrowser from "../tools/inBrowser";
 
@@ -90,7 +90,7 @@ import { DatePickerShortcut } from "../sa-time/type";
 import { SaltedGlobalConfigType } from "../sa-content/type";
 
 // # Var
-const { cloneDeep, isEqual, debounce } = _;
+const { cloneDeep, isEqual } = lodashPkg;
 
 const props = withDefaults(defineProps<SaFormProps>(), {
   contrastData: () => ({}),
@@ -173,8 +173,9 @@ function setRuleTabsFormRef(el: { submitTabsForm: () => Promise<boolean | undefi
   }
 }
 
+const baseInMultipleConfigKeys: string[] = [];
 const inMultipleConfigKeys: string[] = [];
-const inMultipleConfig = reactive([] as MultipleConfigType[]);
+let inMultipleConfig = reactive([] as MultipleConfigType[]);
 
 const exCellConfig = ref({});
 
@@ -314,10 +315,7 @@ provide("setRule", setRule);
 
 // # Function  解析·多form情况
 function setMultipleConfig(configItem: ExMultipleConfigType, baseIndex: number) {
-  const _groupName =
-    typeof configItem.unitName == "object"
-      ? configItem.unitName?.[SaltedGlobalConfig.value?.language?.value || "zh-CN"]
-      : configItem.unitName || "default";
+  const _groupName = configItem.unitName as string;
   const _index = inMultipleConfigKeys.indexOf(_groupName);
 
   // >-------------> 处理 表格 的 group 组 <------------<
@@ -406,8 +404,9 @@ function setMultipleConfig(configItem: ExMultipleConfigType, baseIndex: number) 
       inMultipleConfig[_index].configs.splice(baseIndex, 0, configItem);
     }
   } else {
-    inMultipleConfigKeys.push(_groupName);
-    inMultipleConfig.push({
+    const _index = baseInMultipleConfigKeys.indexOf(_groupName);
+    inMultipleConfigKeys.splice(_index, 1, _groupName);
+    inMultipleConfig.splice(_index, 1, {
       unitName: _groupName,
       unitTip: String(
         typeof configItem.unitTip == "object"
@@ -423,15 +422,35 @@ function setMultipleConfig(configItem: ExMultipleConfigType, baseIndex: number) 
 function initConfig() {
   nextTick(() => {
     inRules.value = {};
+    baseInMultipleConfigKeys.length = 0;
     createSpanStyle();
     // const { exClassName } = getFormBoxInfo();
-    const propsArr = inConfig.value.map(item => item.prop);
-    for (let index = 0; index < inMultipleConfig.length; index++) {
-      const element = inMultipleConfig[index];
-      element.configs = element.configs.filter(item => {
-        return propsArr.includes(item.prop);
-      });
+    const propsArr = inConfig.value.map(item => {
+      const _groupName =
+        typeof item.unitName == "object"
+          ? item.unitName?.[SaltedGlobalConfig.value?.language?.value || "zh-CN"]
+          : item.unitName || "default";
+      if (!baseInMultipleConfigKeys.includes(_groupName)) {
+        baseInMultipleConfigKeys.push(_groupName);
+      }
+      item.unitName = _groupName;
+      return item.prop;
+    });
+
+    inMultipleConfig = inMultipleConfig.filter(item => baseInMultipleConfigKeys.includes(item.unitName as string));
+
+    for (let index = 0; index < baseInMultipleConfigKeys.length; index++) {
+      const elIndex = inMultipleConfig.findIndex(item => item.unitName == baseInMultipleConfigKeys[index]);
+      if (elIndex >= 0) {
+        inMultipleConfig[elIndex].configs = inMultipleConfig[elIndex].configs.filter(item => {
+          return propsArr.includes(item.prop);
+        });
+        inMultipleConfig.splice(index, 0, inMultipleConfig[elIndex]);
+      } else {
+        inMultipleConfig.splice(index, 0, { unitName: baseInMultipleConfigKeys[index], configs: [] });
+      }
     }
+    inMultipleConfig = inMultipleConfig.splice(0, baseInMultipleConfigKeys.length);
 
     nextTick(() => {
       inConfig.value.map((value: SaFormItemType, index: number) => {

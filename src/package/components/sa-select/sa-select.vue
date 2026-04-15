@@ -98,9 +98,10 @@ import lodashPkg from "lodash";
 import { randChar } from "../tools/rand-char";
 import { equalData } from "../utils/equalData";
 import { getElementPosition } from "../utils/getElementPosition";
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 import { findData as findDataSelect } from "./find-data";
 import { SaltedGlobalConfigType } from "../sa-content/type";
+import SaScrollbar from "../sa-scrollbar/sa-scrollbar.vue";
 
 const { isEqual, isNil, debounce } = lodashPkg;
 const popoverRef = useTemplateRef("popoverRef");
@@ -319,7 +320,7 @@ async function remoteMethodFn(query) {
     return [];
   }
   if (props.requestApi) {
-    const opt: MOptionV2Type.SelectList = await props.requestApi({ query: query || "" });
+    const opt: SaOptionType.SelectList = await props.requestApi({ query: query || "" });
     exOptionsList.value = opt || [];
   } else {
     exOptionsList.value = [];

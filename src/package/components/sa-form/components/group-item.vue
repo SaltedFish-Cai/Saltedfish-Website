@@ -57,7 +57,7 @@ import formItem from "../form-basics-element.vue";
 import { GroupItemPropsType } from "../item";
 import lodashPkg from "lodash";
 import { ConfigContextType, SaFormChildType, SaFormItemType } from "../type";
-import { MOptionV2Type } from "../../manager-type";
+import { SaOptionType } from "../../manager-type";
 import { findData } from "../../sa-select/find-data";
 
 const { isNil, isEqual } = lodashPkg;
@@ -106,7 +106,7 @@ const injectSetRule = inject<
 const radioOptions = computed(() => {
   const val = injectConfigContext.value.data[String(props.item.prop)];
   let opts = (injectConfigContext.value.exOptions[String(props.item.prop)] ||
-    props.item.groupFormConfig) as MOptionV2Type.SelectList;
+    props.item.groupFormConfig) as SaOptionType.SelectList;
   const types = typeof val;
   if (types == "number") {
     opts = opts.map(item => {

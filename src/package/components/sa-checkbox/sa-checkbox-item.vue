@@ -17,19 +17,23 @@
         <sa-icon v-else-if="isIndeterminate" name="minus"></sa-icon>
       </div>
       <div v-if="props.label || $slots.default" class="sa-checkbox-item-label">
-        <slot>{{ props.label }}</slot>
+        <slot>{{ typeof props.label === "object" ? props.label[language] : props.label }}</slot>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
-import { SaCheckboxItemType } from "./type";
+import { computed, ComputedRef, inject, ref, watch } from "vue";
+import { SaCheckBoxItemType } from "./type";
 import _ from "lodash";
+import { SaltedGlobalConfigType } from "../sa-content/type";
 const { isNil } = _;
 
-const props = withDefaults(defineProps<SaCheckboxItemType>(), {});
+const props = withDefaults(defineProps<SaCheckBoxItemType>(), {});
+
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+const language = SaltedGlobalConfig.value?.language?.value || "zh-CN";
 
 const inValue = ref(props.modelValue);
 const emits = defineEmits(["update:modelValue", "change"]);

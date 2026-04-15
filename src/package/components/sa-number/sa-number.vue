@@ -340,10 +340,10 @@ const handleWheel = (event: WheelEvent) => {
     let newValue;
     if (event.deltaY < 0) {
       // 向上滚动，增加值
-      newValue = currentValue + props.step;
+      newValue = currentValue - props.step;
     } else {
       // 向下滚动，减少值
-      newValue = currentValue - props.step;
+      newValue = currentValue + props.step;
     }
 
     // 处理小数精度，避免浮点数精度问题

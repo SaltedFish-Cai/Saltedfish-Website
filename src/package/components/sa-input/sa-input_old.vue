@@ -17,7 +17,7 @@
         :maxlength="maxLength"
       />
       <div class="flex-end clean-box">
-        <div v-if="maxLength" class="m-input-word-limit">{{ inValue?.length || 0 }}{{ maxLength ? " / " + maxLength : "" }}</div>
+        <div v-if="maxLength" class="sa-input-word-limit">{{ inValue?.length || 0 }}{{ maxLength ? " / " + maxLength : "" }}</div>
         <sa-icon v-if="!disabled && clearable && inValue" name="close_circle_line" class="clear-icon" @click="clearInput" />
       </div>
     </div>
@@ -37,7 +37,7 @@
         :placeholder="computedPlaceholder"
         :maxlength="maxLength"
       />
-      <div v-if="maxLength" class="m-input-word-limit">{{ inValue?.length || 0 }}{{ maxLength ? "/" + maxLength : "" }}</div>
+      <div v-if="maxLength" class="sa-input-word-limit">{{ inValue?.length || 0 }}{{ maxLength ? "/" + maxLength : "" }}</div>
       <sa-icon v-if="!disabled && clearable && inValue" name="close_circle_line" class="clear-icon" @click="clearInput" />
     </div>
   </div>

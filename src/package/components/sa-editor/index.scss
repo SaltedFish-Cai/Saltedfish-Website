@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--sa-color-border);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   overflow: hidden;
   background-color: var(--sa-color-white);
   width: 100%;
@@ -27,7 +27,7 @@
       padding: 6px 10px;
       border: 1px solid var(--sa-color-border);
       background-color: var(--sa-color-bg) !important;
-      border-radius: var(--sa-size-radius);
+      border-radius: var(--sa-size-radius, 3px);
       cursor: pointer;
       font-size: var(--sa-size-font);
       transition: all 0.3s;
@@ -299,7 +299,7 @@
   button {
     padding: 6px 10px;
     border: 1px solid var(--sa-color-border);
-    border-radius: var(--sa-size-radius);
+    border-radius: var(--sa-size-radius, 3px);
     cursor: pointer;
     font-size: var(--sa-size-font);
     transition: all 0.3s;
@@ -323,7 +323,7 @@
   }
 
   .sa-editor-toolbar_input {
-    border-radius: var(--sa-size-radius);
+    border-radius: var(--sa-size-radius, 3px);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -336,8 +336,8 @@
       width: 300px;
       border: 1px solid var(--sa-color-border);
       border-right: none;
-      border-top-left-radius: var(--sa-size-radius);
-      border-bottom-left-radius: var(--sa-size-radius);
+      border-top-left-radius: var(--sa-size-radius, 3px);
+      border-bottom-left-radius: var(--sa-size-radius, 3px);
     }
     div {
       border: 1px solid var(--sa-color-border);
@@ -347,8 +347,8 @@
       font-style: italic;
       transition: all 0.3s;
       min-width: var(--sa-size-height);
-      border-top-right-radius: var(--sa-size-radius);
-      border-bottom-right-radius: var(--sa-size-radius);
+      border-top-right-radius: var(--sa-size-radius, 3px);
+      border-bottom-right-radius: var(--sa-size-radius, 3px);
       &:hover {
         color: var(--sa-color-white);
         background-color: var(--sa-color-primary);
@@ -357,7 +357,7 @@
     }
     .sa-editor-toolbar_input-del {
       margin-left: 4px;
-      border-radius: var(--sa-size-radius);
+      border-radius: var(--sa-size-radius, 3px);
       color: var(--sa-color-danger);
       &:hover {
         color: var(--sa-color-white);
@@ -374,7 +374,7 @@
   position: fixed;
   background-color: white;
   border: 1px solid var(--sa-color-border);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
   z-index: 1000;
   .menu-item {

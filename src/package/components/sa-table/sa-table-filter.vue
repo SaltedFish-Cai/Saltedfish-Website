@@ -36,8 +36,8 @@
 
   <!-- 普通搜索结果展示 -->
   <section v-if="Query.length" class="flex sa-table-query">
-    <div class="table-title-label mr-size-v2">{{ languagePackage["searchFilter"] }} :</div>
-    <div class="mr-size-v2 query_item" v-for="(item, index) in Query" :key="item.label + item.value">
+    <div class="table-title-label mr-size">{{ languagePackage["searchFilter"] }} :</div>
+    <div class="mr-size query_item" v-for="(item, index) in Query" :key="item.label + item.value">
       <span class="icon_highlight mr5">#{{ index + 1 }}</span>
       <span>{{ item.label }} :</span>
 
@@ -60,11 +60,7 @@
           <div :title="relationshipItem.value">
             {{ relationshipItem.value }}
           </div>
-          <sa-icon
-            class="ml5 hand remove-icon"
-            name="close_circle_line"
-            @click="handleRemoveQuery(relationshipItem)"
-          ></sa-icon>
+          <sa-icon class="ml5 hand remove-icon" name="close_circle_line" @click="handleRemoveQ(relationshipItem)"></sa-icon>
         </span>
       </template>
     </div>
@@ -73,9 +69,9 @@
   </section>
 
   <!-- 高级搜索结果展示 -->
-  <section v-if="AdvancedQuery.length" class="flex mb-size-v2 sa-table-query">
-    <div class="table-title-label mr-size-v2">{{ languagePackage["Advanced"] }} :</div>
-    <div class="mr-size-v2 query_item" v-for="(item, index) in AdvancedQuery" :key="item.label + item.value">
+  <section v-if="AdvancedQuery.length" class="flex mb-size sa-table-query">
+    <div class="table-title-label mr-size">{{ languagePackage["Advanced"] }} :</div>
+    <div class="mr-size query_item" v-for="(item, index) in AdvancedQuery" :key="item.label + item.value">
       <span class="icon_highlight mr5">#{{ index + 1 }}</span>
       <span>{{ item.label }} :</span>
 
@@ -99,7 +95,7 @@
           &lt;{{ setRelationshipGroupLinkType(item.relationshipGroupLinkType) }}&gt;
         </span>
       </template>
-      <sa-icon class="ml5 hand remove-icon" name="close_circle_line" @click="handleRemoveSeniorQuery(item)"></sa-icon>
+      <sa-icon class="ml5 hand remove-icon" name="close_circle_line" @click="handleRemoveSenior(item)"></sa-icon>
     </div>
 
     <sa-button is="trash" size="small" @click="handleCleanAllSeniorQuery">{{ languagePackage["clean"] }}</sa-button>
@@ -112,7 +108,6 @@
     :table-query="tableQuery"
     :senior-filter-options="seniorFilterOptions"
     :propItem="seniorFilterData.propItem"
-    :languagePackage="languagePackage"
     @save-and-filter="handleSeniorSetting"
   />
 
@@ -123,7 +118,6 @@
     :id="extraProps.id"
     :table-query="tableQuery"
     :display="extraProps.display"
-    :languagePackage="languagePackage"
   />
 </template>
 
@@ -142,6 +136,7 @@ type LightTableFilterPropsType = {
   state: SaTableUseType.TableStateType;
 };
 const props = defineProps<LightTableFilterPropsType>();
+const language = inject("language") as string;
 
 const configRef = useTemplateRef("configRef");
 const refreshTable = inject("refreshTable") as (
@@ -156,11 +151,11 @@ const {
   Query,
   AdvancedQuery,
   handleSeniorSetting,
-  handleRemoveQuery,
-  handleRemoveSeniorQuery,
+  handleRemoveQ,
+  handleRemoveSenior,
   handleCleanAllQuery,
   handleCleanAllSeniorQuery
-} = useFilterHooks(props.extraProps, props.state);
+} = useFilterHooks(props.extraProps, props.state, language);
 
 const { seniorFilterOptions, seniorFilterData, openSeniorFilter, setConditionalType, setRelationshipGroupLinkType } =
   useSeniorFilterHooks();

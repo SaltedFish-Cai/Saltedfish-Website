@@ -12,7 +12,8 @@
       justify-content: flex-start;
       overflow: hidden;
       position: relative;
-      width: calc(100% - var(--sa-size-padding, 10px) * 2);
+      // width: calc(100% - var(--sa-size-padding, 10px) * 2);
+      width: 100%;
       padding-left: var(--sa-size-padding, 10px);
       padding-right: var(--sa-size-padding, 10px);
       &:has(.left-icon) {
@@ -317,7 +318,7 @@
           > .sa-tabs-title.sa-tabs-title_action {
             position: relative;
             font-weight: bold;
-            color: var(--sa-color-bg);
+            color: var(--sa-color-white);
             background-color: var(--sa-color-primary);
             // animation: title-action3 0.36s;
             // animation-fill-mode: forwards;

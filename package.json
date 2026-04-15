@@ -38,7 +38,8 @@
     "lint:eslint": "eslint --fix --ext .ts,.vue ./src",
     "lint:lint-staged": "lint-staged",
     "prepare": "husky install",
-    "commit": "node ./script/cz-customizable/standalone.js"
+    "commit": "node ./script/cz-customizable/standalone.js",
+    "sync-components": "node ./script/sync-components.js"
   },
   "keywords": [],
   "devDependencies": {

@@ -10,7 +10,7 @@
     >
       <div class="sa-notification_header mb-size">
         <div class="flex-center-start">
-          <sa-icon class="sa-notification__icon mr-size-v2" name="warning_line"></sa-icon>
+          <sa-icon class="sa-notification__icon mr-size" name="warning_line"></sa-icon>
           <div class="sa-notification__title">{{ typeof title === "string" ? title : title[language] }}</div>
         </div>
         <sa-icon class="sa-notification__closeBtn" @click="handleClose" name="close_line"></sa-icon>

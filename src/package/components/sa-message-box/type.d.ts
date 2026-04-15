@@ -49,9 +49,23 @@ export interface MessageBoxOptions {
    */
   cancelButtonText?: Record<languageKey, string> | string;
   /**
+   * 取消按钮图标
+   */
+  cancelButtonIcon?: string;
+  /**
+   * 确认按钮图标
+   */
+  confirmButtonIcon?: string;
+  /**
    * z-index
    */
   zIndex?: number;
+  /**
+   * 是否在关闭时移除DOM元素
+   * @default true
+   * @description 是否在关闭时移除DOM元素
+   */
+  closeOnPressEscape?: boolean;
 }
 
 // 通知实例接口

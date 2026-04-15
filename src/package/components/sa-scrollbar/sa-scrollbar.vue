@@ -5,9 +5,8 @@
     :class="[prop.class, prop.styleMode === 'color' ? 'color-scrollbar' : '']"
     :style="{
       ...style,
-      '--scroll-vertical-thumb': scrollVerticalThumb + 'px',
-      '--scroll-horizontal-thumb': scrollHorizontalThumb + 'px',
-      '--sa-size-padding-base': prop.paddingWidth
+
+      '--sa-size-padding_use': prop.paddingWidth
         ? typeof prop.paddingWidth === 'number'
           ? prop.paddingWidth + 'px'
           : prop.paddingWidth
@@ -33,28 +32,28 @@
           }"
           :style="{
             '--border-padding-top':
-              padding?.includes('top') || padding?.includes('all') ? `var(--sa-size-padding-base, 10px)` : '',
+              padding?.includes('top') || padding?.includes('all') ? `var(--sa-size-padding_use, 10px)` : '',
             '--border-padding-left':
-              padding?.includes('left') || padding?.includes('all') ? `var(--sa-size-padding-base, 10px)` : '',
+              padding?.includes('left') || padding?.includes('all') ? `var(--sa-size-padding_use, 10px)` : '',
             '--border-padding-bottom':
-              padding?.includes('bottom') || padding?.includes('all') ? `var(--sa-size-padding-base, 10px)` : '',
+              padding?.includes('bottom') || padding?.includes('all') ? `var(--sa-size-padding_use, 10px)` : '',
             '--border-padding-right':
-              padding?.includes('right') || padding?.includes('all') ? `var(--sa-size-padding-base, 10px)` : ''
+              padding?.includes('right') || padding?.includes('all') ? `var(--sa-size-padding_use, 10px)` : ''
           }"
           ref="scrollbarBodyContentRef"
         >
-          <div v-if="border?.includes('top') || border?.includes('all')" class="m-border-v2_top"></div>
-          <div v-if="border?.includes('left') || border?.includes('all')" class="m-border-v2_left"></div>
-          <div v-if="border?.includes('bottom') || border?.includes('all')" class="m-border-v2_bottom"></div>
-          <div v-if="border?.includes('right') || border?.includes('all')" class="m-border-v2_right"></div>
+          <div v-if="border?.includes('top') || border?.includes('all')" class="sa-border_top"></div>
+          <div v-if="border?.includes('left') || border?.includes('all')" class="sa-border_left"></div>
+          <div v-if="border?.includes('bottom') || border?.includes('all')" class="sa-border_bottom"></div>
+          <div v-if="border?.includes('right') || border?.includes('all')" class="sa-border_right"></div>
 
-          <div v-if="paddingBorder?.includes('top') || paddingBorder?.includes('all')" class="m-border-v2_padding_top"></div>
-          <div v-if="paddingBorder?.includes('left') || paddingBorder?.includes('all')" class="m-border-v2_padding_left"></div>
+          <div v-if="paddingBorder?.includes('top') || paddingBorder?.includes('all')" class="sa-border_padding_top"></div>
+          <div v-if="paddingBorder?.includes('left') || paddingBorder?.includes('all')" class="sa-border_padding_left"></div>
           <div
             v-if="paddingBorder?.includes('bottom') || paddingBorder?.includes('all')"
-            class="m-border-v2_padding_bottom"
+            class="sa-border_padding_bottom"
           ></div>
-          <div v-if="paddingBorder?.includes('right') || paddingBorder?.includes('all')" class="m-border-v2_padding_right"></div>
+          <div v-if="paddingBorder?.includes('right') || paddingBorder?.includes('all')" class="sa-border_padding_right"></div>
           <slot></slot>
         </div>
       </div>
@@ -63,6 +62,7 @@
     <div v-if="useVertical && prop.useScrollY && prop.showThumb" class="scrollbar__bar is-vertical">
       <div class="scrollbar__thumb" ref="verticalThumbRef" :style="{ height: verticalThumb + 'px' }"></div>
     </div>
+
     <div v-if="useHorizontal && prop.useScrollX && prop.showThumb" class="scrollbar__bar is-horizontal">
       <div class="scrollbar__thumb" ref="horizontalThumbRef" :style="{ width: horizontalThumb + 'px' }"></div>
     </div>
@@ -88,8 +88,7 @@ import { ScrollbarV2Type } from "./type";
 import { startDrag, listenElementScroll, observeElementResize } from "./scrollListener";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 import { getElementPosition } from "../utils/getElementPosition";
-import _ from "lodash";
-const { debounce, isNil } = _;
+import { debounce, isNil } from "lodash";
 
 const emits = defineEmits([
   "renderEnd",
@@ -224,13 +223,23 @@ onMounted(() => {
         }
       },
       ({ scrollTop, scrollLeft, scrollData }) => {
-        const scrollDirectionY = scrollTop > scrollVerticalValue.value ? "down" : "up";
-        const scrollDirectionX = scrollLeft > scrollHorizontalValue.value ? "right" : "left";
-
         scrollVerticalValue.value = scrollTop;
         scrollHorizontalValue.value = scrollLeft;
-        scrollVerticalThumb.value = prop.defaultScrollVerticalThumb + scrollTop * _verticalThumbScale;
-        scrollHorizontalThumb.value = prop.defaultScrollHorizontalThumb + scrollLeft * _horizontalThumbScale;
+
+        const scrollVerticalThumbValue = prop.defaultScrollVerticalThumb + scrollTop * _verticalThumbScale;
+        const scrollHorizontalThumbValue = prop.defaultScrollHorizontalThumb + scrollLeft * _horizontalThumbScale;
+
+        horizontalThumbRef.value &&
+          (horizontalThumbRef.value.style.transform = `translateX(${scrollHorizontalThumbValue}px) translateZ(1px)`);
+        verticalThumbRef.value &&
+          (verticalThumbRef.value.style.transform = `translateY(${scrollVerticalThumbValue}px) translateZ(1px)`);
+
+        scrollVerticalThumb.value = scrollVerticalThumbValue;
+        scrollHorizontalThumb.value = scrollHorizontalThumbValue;
+
+        const scrollDirectionY = scrollTop > scrollVerticalThumbValue ? "down" : "up";
+        const scrollDirectionX = scrollLeft > scrollHorizontalThumbValue ? "right" : "left";
+
         if (scrollData.isAtBottom) {
           emits("directlyScrollEnd", true);
         } else {
@@ -255,7 +264,7 @@ onMounted(() => {
           emits("directlyScrollRight", false);
         }
 
-        emits("directlyScroll", { scrollTop, scrollLeft, scrollDirectionY, scrollDirectionX });
+        emits("directlyScroll", { ...scrollData, scrollTop, scrollLeft, scrollDirectionY, scrollDirectionX });
       },
       {
         debounceTime: 80,
@@ -455,9 +464,16 @@ function setUpdate() {
         (prop.parentBoxRef && prop.parentBoxRef?.clientHeight < _scrollbarBodyRef.scrollHeight)
       ) {
         isScrollEnd.value = false;
+      } else {
+        isScrollEnd.value = true;
       }
 
-      emits("scrollChildChange", { bodyWidth: _scrollbarBodyRef.clientWidth, bodyHeight: _scrollbarBodyRef.clientHeight });
+      emits("scrollChildChange", {
+        bodyWidth: _scrollbarBodyRef.clientWidth,
+        bodyHeight: _scrollbarBodyRef.clientHeight,
+        useScrollX: useHorizontal.value,
+        useScrollY: useVertical.value
+      });
     });
   }
 }

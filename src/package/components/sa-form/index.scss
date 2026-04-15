@@ -7,6 +7,30 @@
     font-size: calc(var(--sa-size-font, 13px) + 3px);
     color: var(--sa-color-warning);
   }
+
+  .click-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--sa-size-font, 16px);
+    color: var(--sa-color-font);
+    line-height: calc(var(--sa-size-height) - (var(--sa-size-height) / 4));
+    width: 100%;
+    border-radius: var(--sa-size-radius, 3px);
+    border: 1px solid var(--sa-color-border);
+    box-sizing: border-box;
+    transition: var(--sa-animation-time, 0.2s);
+    padding: calc(var(--sa-size-padding, 10px) / 3) calc(var(--sa-size-padding, 10px) / 1.2);
+    .click-tag-icon {
+      color: var(--sa-color-primary);
+    }
+    &:hover {
+      cursor: pointer;
+      color: var(--sa-color-primary);
+      border-color: var(--sa-color-primary);
+      box-shadow: 0 0 0 2px var(--sa-color-primary-light-8);
+    }
+  }
 }
 
 .config-error {
@@ -59,7 +83,7 @@
 
   > .sa-tabs-content > .sa-tabs-scroll > .sa-tabs-contents > .sa-tabs-item {
     border-radius: 3px;
-    border: 1px solid var(--sa-color-border);
+    border: 1px solid var(--sa-border-color);
     box-sizing: border-box;
     padding: calc(var(--sa-size-padding, 10px) / 2);
   }

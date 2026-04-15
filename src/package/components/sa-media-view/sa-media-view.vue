@@ -7,7 +7,7 @@
 
   <sa-dialog
     v-model="visible"
-    :title="fileList[viewIndex]?.fileName"
+    :title="fileList[viewIndex]?.OriginalName || fileList[viewIndex]?.FileName"
     size="max"
     class="sa-media-view-dialog"
     :scroll="false"
@@ -20,7 +20,7 @@
         :style="{ flex: processVisible ? '0 0 300px' : '0 0 0', width: processVisible ? '' : '0' }"
       >
         <div class="file-menu_box" :style="{ flex: processVisible ? '0 0 300px' : '0 0 0' }">
-          <sa-scrollbar class="file-menu" always>
+          <sa-scrollbar class="file-menu" always :useScrollX="false">
             <div
               v-for="(item, index) in fileList"
               :key="item.filePath"
@@ -49,8 +49,8 @@
           :zoom="zoomIndex"
           ref="pdfViewRef"
         ></pdfView>
-        <office-view v-if="fileType == 'word' || fileType == 'excel'" :filePath="filePath" :zoom="zoomIndex"></office-view>
-
+        <excel-view v-else-if="fileType == 'excel'" :filePath="fileList[viewIndex]?.filePath" :zoom="zoomIndex"></excel-view>
+        <word-view v-if="fileType == 'word'" :filePath="fileList[viewIndex]?.filePath" :zoom="zoomIndex"></word-view>
         <textView v-else-if="fileType == 'text'" :filePath="fileList[viewIndex]?.filePath" :zoom="zoomIndex"></textView>
       </div>
     </div>
@@ -95,7 +95,8 @@ import { isImageFile, isPdfFile, isTextFile, isWordFile, isExcelFile } from "./i
 import { useDownload } from "./use-download";
 import imageView from "./image-view.vue";
 import pdfView from "./pdf-view.vue";
-import officeView from "./office-view.vue";
+import excelView from "./excel-view.vue";
+import wordView from "./word-view.vue";
 import textView from "./text-view.vue";
 import { SaltedGlobalConfigType } from "../sa-content/type";
 
@@ -114,9 +115,8 @@ const props = withDefaults(defineProps<SaMediaViewType>(), {
 });
 
 const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
-console.log("++++++++++> SaltedGlobalConfig:", SaltedGlobalConfig);
 const languagePackage = computed(() => {
-  return SaltedGlobalConfig?.value?.language?.package["media"] || {};
+  return SaltedGlobalConfig.value?.language?.package["media"] || {};
 });
 
 function openFile() {
@@ -248,7 +248,7 @@ defineExpose({ openVisible, closeVisible });
     font-size: var(--sa-size-font);
     .reset-btn {
       padding: 0 7px;
-      border-radius: var(--sa-size-radius);
+      border-radius: var(--sa-size-radius, 3px);
       cursor: pointer;
       transition: var(--sa-animation-time, 0.2s);
       border: 1px solid;

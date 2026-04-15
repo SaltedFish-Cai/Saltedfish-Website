@@ -1,13 +1,13 @@
 // m-col 组件样式
-$--m-col-gutter: 24px !default;
+$--sa-col-gutter: 24px !default;
 
 .m-col {
   position: relative;
   min-height: 1px;
   box-sizing: border-box;
   float: left;
-  padding-right: calc(#{($--m-col-gutter) / 2});
-  padding-left: calc(#{($--m-col-gutter) / 2});
+  padding-right: calc(#{($--sa-col-gutter) / 2});
+  padding-left: calc(#{($--sa-col-gutter) / 2});
 }
 
 // 清除浮动
@@ -30,7 +30,7 @@ $--m-col-gutter: 24px !default;
 }
 
 // 响应式断点样式
-$--m-breakpoints: (
+$--sa-breakpoints: (
   "xs": 0,
   "sm": 384px,
   "md": 768px,
@@ -39,7 +39,7 @@ $--m-breakpoints: (
   "xxl": 1920px
 );
 
-@each $bp, $width in $--m-breakpoints {
+@each $bp, $width in $--sa-breakpoints {
   @media (min-width: $width) {
     @for $i from 1 through 24 {
       .m-col-#{$bp}-#{$i} {

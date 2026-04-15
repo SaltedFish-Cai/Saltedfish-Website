@@ -33,6 +33,7 @@ export type SaIconType = {
    * @description 当设置该值为 `undefined` 时，会使用默认值
    * @description 当设置该值为 `string` 时，会使用该值作为Icon的名称
    * @description 该值的类型为 `string`，可以是任意类型
+   * @description 该值的数据可以从[Icon库](https://dms.bbraun.cn/DocumentToDms/document/ManagerUI/m-icon/readme.html#icon-%E9%80%89%E6%8B%A9)中获取
    * @example
    * ```tsx
    * <MoIcon name="magic_line" />

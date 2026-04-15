@@ -4,7 +4,16 @@ import { nextTick, ref } from "vue";
 export const useScrollHooks = (
   props,
   state,
-  { headerBoxRef, mScrollbarListRef, mScrollbarHeaderListRef, listenCellInView, parentScrollbarRef, infiniteScroll, getTableList }
+  {
+    isScrollHeaderIng,
+    headerBoxRef,
+    mScrollbarListRef,
+    mScrollbarHeaderListRef,
+    listenCellInView,
+    parentScrollbarRef,
+    infiniteScroll,
+    getTableList
+  }
 ) => {
   // #Function 滚动条回调
   const scrollTop = ref(0);
@@ -14,20 +23,17 @@ export const useScrollHooks = (
   const isLeft = ref(true);
   const isRight = ref(true);
 
-  const isScrollIng = ref(false);
-  const isScrollHeaderIng = ref(false);
-
   const scrollDirectionY = ref("down");
   const scrollDirectionX = ref("right");
 
-  const directlyScroll = ({
-    scrollLeft: _scrollLeft,
-    scrollDirectionY: _scrollDirectionY,
-    scrollDirectionX: _scrollDirectionX
-  }) => {
-    scrollDirectionY.value = _scrollDirectionY;
-    scrollDirectionX.value = _scrollDirectionX;
-    !isScrollHeaderIng.value && mScrollbarHeaderListRef.value.setScrollLeft(_scrollLeft, undefined, "instant");
+  const directlyScroll = data => {
+    isLeft.value = data.isAtLeft;
+    isRight.value = data.isAtRight;
+    scrollDirectionY.value = data.scrollDirectionY;
+    scrollDirectionX.value = data.scrollDirectionX;
+    isScrollHeaderIng.value = true;
+
+    mScrollbarHeaderListRef.value.scrollLeft = data.scrollLeft;
   };
 
   // # Function 分页更改
@@ -51,10 +57,10 @@ export const useScrollHooks = (
   }
 
   // # Function 每页条数改变
-  function handleSizeChange(val: number) {
+  function handleSizeChange(val: number, exQuery?: Record<string, any>) {
     window.developLog.log("每页条数改变", val, "info");
     nextTick(async () => {
-      await getTableList({ Page: { PageSize: val } }, true);
+      await getTableList({ Page: { PageSize: val }, ...exQuery }, true);
       nextTick(async () => {
         const mpreEl: any = document.querySelector(`#${props.id} #${props.id}-more-0`);
         if (mpreEl) {
@@ -68,9 +74,9 @@ export const useScrollHooks = (
   }
 
   // # Function 刷新页面
-  function refreshTable() {
+  function refreshTable(exQuery?: Record<string, any>) {
     scrollDirectionY.value = "down";
-    handleSizeChange(state.pageable.PageSize);
+    handleSizeChange(state.pageable.PageSize, exQuery);
   }
 
   // # Function 设置高距离
@@ -96,43 +102,20 @@ export const useScrollHooks = (
     }
   }
 
-  // # 处理滚动结束事件
-  function onScrollLeft(val) {
-    isLeft.value = val;
-  }
-
-  function onScrollRight(val) {
-    isRight.value = val;
-  }
-
-  function overScroll(isHeader?: boolean) {
-    if (isHeader) {
-      isScrollHeaderIng.value = true;
-      isScrollIng.value = false;
-    } else {
-      isScrollHeaderIng.value = false;
-      isScrollIng.value = true;
-    }
-  }
-
   return {
     // ...toRefs(state),
+    isScrollHeaderIng,
     isLeft,
     isRight,
-    isScrollIng,
     scrollTop,
     scrollLeft,
     isDown,
     scrollDirectionX,
     scrollDirectionY,
-    onScrollLeft,
-    onScrollRight,
     setScrollTop,
     handleSizeChange,
     handleCurrentChange,
     refreshTable,
-    directlyScroll,
-
-    overScroll
+    directlyScroll
   };
 };

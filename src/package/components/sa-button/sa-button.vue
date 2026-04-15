@@ -40,6 +40,7 @@ import lodashPkg from "lodash";
 import { SaButtonType } from "./type";
 import inBrowser from "../tools/inBrowser";
 import { M_MessageBox } from "../feedback";
+
 import { SaltedGlobalConfigType } from "../sa-content/type";
 
 // # Var
@@ -61,6 +62,7 @@ const props = withDefaults(defineProps<SaButtonType>(), {
 const emit = defineEmits(["click", "confirmClick", "deleteClick", "submitClick"]);
 
 const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+
 const languageValue = computed(() => {
   return SaltedGlobalConfig.value?.language?.value || "zh-CN";
 });

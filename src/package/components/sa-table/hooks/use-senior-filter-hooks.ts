@@ -2,14 +2,14 @@
 import { ComputedRef, inject, reactive, toRefs } from "vue";
 
 import inBrowser from "../../tools/inBrowser";
-import { GetConditionals } from "../../api/table-v2";
-import { MOptionV2Type } from "../../manager-type";
+import { GetConditionals } from "../../api/table";
+import { SaOptionType } from "../../manager-type";
 import { SaltedGlobalConfigType } from "../../sa-content/type";
 
 export const useSeniorFilterHooks = () => {
   // # Var
   const state = reactive({
-    seniorFilterOptions: { LineConditional: [] as MOptionV2Type.SelectList, linkOptions: [] as MOptionV2Type.SelectList },
+    seniorFilterOptions: { LineConditional: [] as SaOptionType.SelectList, linkOptions: [] as SaOptionType.SelectList },
     seniorFilterData: { visible: false, propItem: {} as Record<string, string> }
   });
   const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
@@ -19,24 +19,23 @@ export const useSeniorFilterHooks = () => {
 
   // #Function 获取高级搜索关系字典
   async function GetDictionaries() {
-    const Data = await GetConditionals(SaltedGlobalConfig.value, "link");
+    const Data: any = await GetConditionals(SaltedGlobalConfig.value, "link");
     state.seniorFilterOptions.LineConditional = Data.ConditionalType;
-
-    const List = await GetConditionals(SaltedGlobalConfig.value, "group", { keys: "FilterLinkNextType" });
+    const List: any = await GetConditionals(SaltedGlobalConfig.value, "group", { keys: "FilterLinkNextType" });
     state.seniorFilterOptions.linkOptions = List.FilterLinkNextType;
   }
 
   // #Function 设置高级搜索字典（计算类型）
   function setConditionalType(value: string) {
     const { LineConditional } = state.seniorFilterOptions;
-    const findData = LineConditional.find(item => item.Value == value);
+    const findData = (LineConditional as any).find(item => item.value == value);
     return findData?.Description;
   }
 
   // #Function 设置高级搜索字典（上下关系）
   function setRelationshipGroupLinkType(value: string) {
     const { linkOptions } = state.seniorFilterOptions;
-    const findData = linkOptions.find(item => item.Value == value);
+    const findData = (linkOptions as any).find(item => item.Value == value);
     return findData?.Description;
   }
 

@@ -9,19 +9,19 @@ import { SaltedUIType as MManagerV2ConfigType } from "./sa-content/type";
 //   [x: string]: MOptionType;
 // };
 
-export namespace MOptionV2Type {
+export namespace SaOptionType {
   export type Select = SaSelectOptionsType;
   export type SelectList = Array<SaSelectOptionsType>;
   export type Switch = SaSwitchOptionType;
   export type Default = { [x: string]: SelectList | Switch };
 }
 
-export namespace MStructureV2Type {
+export namespace SaStructureType {
   export type FormV2 = SaFormItemType;
   export type TableV2 = SaTableItemType;
 }
 
-export namespace MRefV2Type {
+export namespace SaRefType {
   export type FormV2 = SaFormRef;
   export type TableV2 = SaTableType;
 }

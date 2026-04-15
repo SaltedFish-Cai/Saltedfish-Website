@@ -1,6 +1,6 @@
 <template>
   <!-- 表配置 -->
-  <sa-drawer :title="languagePackage?.['colSetting'] || ''" v-model="drawerVisible" @close="handleCloseDrawer" width="680px">
+  <sa-drawer :title="languagePackage?.['colSetting'] || ''" v-model="drawerVisible" @closed="handleCloseDrawer" width="680px">
     <section :id="'table-col-' + id" class="p-all-size" style="height: calc(100% - var(--sa-size-padding, 10px) * 2)">
       <sa-table
         :id="id + '-table-col-setting'"
@@ -18,7 +18,7 @@
             v-if="isSelectType(scope.row, display)"
             v-model="scope.row.searchCriteria"
             type="multiple-select"
-            :exOptions="_exOptions[scope.row.prop] as MOptionV2Type.SelectList"
+            :exOptions="_exOptions[scope.row.prop] as SaOptionType.SelectList"
             :placeholder="languagePackage?.['selectPlaceholder']"
           ></sa-select>
 
@@ -107,7 +107,7 @@ import { isSelectType, isTimeType, isTextType, isNumberType } from "./hooks/isTy
 
 import { SaTableUseItemType, SaTableUseType } from "./type";
 import { convertValue } from "../sa-time/utils";
-import { MOptionV2Type, MStructureV2Type } from "../manager-type";
+import { SaOptionType, SaStructureType } from "../manager-type";
 
 type SettingPropsType = {
   id: string;
@@ -130,7 +130,7 @@ const injectGetTableList = inject("getTableList") as (
 const injectCleanTableData = inject("cleanTableData") as () => void;
 const languagePackage = inject("languagePackage") as Record<string, string>;
 
-const exOptions = inject("exOptions") as MOptionV2Type.Default;
+const exOptions = inject("exOptions") as SaOptionType.Default;
 
 const SettingTableRef = ref();
 const drawerVisible = ref<boolean>(false);
@@ -174,7 +174,7 @@ const settingColumnsData = computed(() => {
   return arr;
 });
 
-const tableConfig: MStructureV2Type.TableV2[] = [
+const tableConfig: SaStructureType.TableV2[] = [
   { label: "列名", prop: "label", useFilter: false, useSort: false },
   { label: "筛选", prop: "searchCriteria", width: 210, useFilter: false, useSort: false },
   { label: "固定", prop: "fixed", width: 100, useFilter: false, useSort: false },
@@ -209,8 +209,8 @@ async function getTableList() {
 // ];
 
 // #Computed
-const _exOptions: ComputedRef<MOptionV2Type.Default> = computed(() => {
-  const _outData: MOptionV2Type.Default = {};
+const _exOptions: ComputedRef<SaOptionType.Default> = computed(() => {
+  const _outData: SaOptionType.Default = {};
   for (const key in exOptions.value) {
     if (Array.isArray(exOptions.value[key])) {
       _outData[key] = exOptions.value[key].map(item => {

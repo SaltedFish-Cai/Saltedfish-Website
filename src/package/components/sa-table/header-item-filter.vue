@@ -11,13 +11,13 @@
         v-model="state.searchValue"
         :placeholder="languagePackage['selectPlaceholder']"
         type="multiple-select"
-        :exOptions="_exOptions[String(item.prop)] as MOptionV2Type.SelectList"
+        :exOptions="(_exOptions[String(item.prop)] as SaOptionType.SelectList)"
         teleport-in-container
       >
-        <template #optionLabel="row">
+        <template #optionLabel="{ scope }">
           <div class="flex-center-start">
-            <div class="m-table-tag-v2-color mr-size-v2" :style="{ backgroundColor: row?.item?.tagStyle?.bgColor }"></div>
-            {{ row?.item?.label }}
+            <div class="sa-table-tag-color mr-size" :style="{ backgroundColor: scope?.tagStyle?.bgColor }"></div>
+            {{ typeof scope?.label === "object" ? scope?.label[language] : scope?.label }}
           </div>
         </template>
         <!-- <template #tag>
@@ -32,7 +32,7 @@
           <slot :name="'header-option-' + item.prop" v-bind="{ row: opt }">
             <div class="flex-center-start">
               <div
-                class="m-table-tag-v2-color mr-size"
+                class="sa-table-tag-color mr-size"
                 v-if="opt.tagStyle?.bgColor"
                 :style="{ backgroundColor: opt.tagStyle.bgColor }"
               ></div>
@@ -83,12 +83,12 @@
         v-else
         v-model="state.searchValue"
         :placeholder="languagePackage['inputPlaceholder']"
-        @keydown.enter="FetchSaveAndFilter"
+        @enter="FetchSaveAndFilter"
         style="width: 100%; min-width: 210px"
       />
 
       <!-- button -->
-      <sa-button class="ml-size-v2" style="flex: 0 0 89px" is="search" @click="FetchSaveAndFilter">
+      <sa-button class="ml-size" style="flex: 0 0 89px" is="search" @click="FetchSaveAndFilter">
         {{ languagePackage["search"] }}
       </sa-button>
     </div>
@@ -104,7 +104,7 @@ import { ElMessage } from "element-plus";
 import { isSelectType, isTimeType, isNumberType } from "./hooks/isType";
 import { randChar } from "../tools/rand-char";
 import { SaTableItemType, SaTableUseItemType, SaTableUseType } from "./type";
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 
 type TableColumnFilterType = {
   /**
@@ -119,12 +119,13 @@ type TableColumnFilterType = {
 
 // # Var
 const props = withDefaults(defineProps<TableColumnFilterType>(), {});
-const exOptions = inject("exOptions") as MOptionV2Type.Default;
+const exOptions = inject("exOptions") as SaOptionType.Default;
 const _id = randChar();
-// const emits = defineEmits(["saveAndFilter", "handleRemoveQuery", "openSeniorFilter"]);
+// const emits = defineEmits(["saveAndFilter", "handleRemoveQ", "openSeniorFilter"]);
 const emits = defineEmits(["saveAndFilter", "openSeniorFilter"]);
 
 const languagePackage = inject("languagePackage") as Record<string, string>;
+const language = inject("language") as string;
 
 // const shortcuts = [
 //   {
@@ -157,7 +158,7 @@ const disabledEnd = (time: Date) => {
 };
 
 // #Computed exOptions
-const _exOptions: ComputedRef<MOptionV2Type.Default> = computed(() => {
+const _exOptions: ComputedRef<SaOptionType.Default> = computed(() => {
   const _outData: { [x: string]: { label: string; value: string }[] } = {};
   for (const key in exOptions.value) {
     if (Array.isArray(exOptions.value[key])) {
@@ -212,14 +213,14 @@ function FetchSaveAndFilter() {
   //     conditionalType: 3,
   //     props: element.prop
   //   };
-  //   emits("handleRemoveQuery", data);
+  //   emits("handleRemoveQ", data);
   // }
   // if (isTimeType(element, true) && !!!state.searchValue[1]) {
   //   const data = {
   //     conditionalType: 5,
   //     props: element.prop
   //   };
-  //   emits("handleRemoveQuery", data);
+  //   emits("handleRemoveQ", data);
   // }
   if (String(fieldValue).length <= 0) {
     // let conditionalType = 1;
@@ -232,7 +233,7 @@ function FetchSaveAndFilter() {
     // const data = { conditionalType, props: element.prop };
     mPopoverRef.value.hidePopover();
     emits("saveAndFilter", []);
-    // return emits("handleRemoveQuery", data);
+    // return emits("handleRemoveQ", data);
     return;
   }
 
@@ -330,7 +331,7 @@ watch(
   background-color: rgb(0 0 0 / 10%);
 }
 
-.m-table-tag-v2-color {
+.sa-table-tag-color {
   width: 10px;
   height: 10px;
   border-radius: 50%;

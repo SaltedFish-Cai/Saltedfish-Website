@@ -1,4 +1,6 @@
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
+
+type languageKey = "en-US" | "zh-CN";
 
 export type SaRadioItemType = {
   /**
@@ -45,7 +47,7 @@ export type SaRadioItemType = {
    * @description 当设置该值时，会作为组件的标签
    * @description 该值的类型为 `string`，可以是任意类型
    * */
-  label?: string;
+  label?: Record<languageKey, string> | string;
 
   /**
    * **值**
@@ -90,7 +92,7 @@ export type SaRadioItemType = {
    * @type `option` 为当前选项
    * @default `undefined`
    * @description 当设置该值时，会使用该值作为回调函数
-   * @description 该值的类型为 `({ value, oldValue, option: MOptionV2Type.Select }) => void` | `undefined`，可以是任意类型
+   * @description 该值的类型为 `({ value, oldValue, option: SaOptionType.Select }) => void` | `undefined`，可以是任意类型
    * @example
    * ```tsx
    * <MSwitch onChange={({value, oldValue, option}) => { console.log(value, oldValue, option) }} />
@@ -152,11 +154,11 @@ export type SaRadioType = {
 
   /**
    * **外置数据**
-   * @type `MOptionV2Type.SelectList`
+   * @type `SaOptionType.SelectList`
    * @description 当设置该值时，会使用该值作为配置数据
-   * @description 该值的类型为 `MOptionV2Type.SelectList`，可以是任意类型
+   * @description 该值的类型为 `SaOptionType.SelectList`，可以是任意类型
    * */
-  exOptions?: MOptionV2Type.SelectList;
+  exOptions?: SaOptionType.SelectList;
 
   /**
    * **纯展示模式**

@@ -246,7 +246,7 @@ export interface DatePickerEmits {
   (e: "clear"): void;
 }
 
-export type MTimerV2Type = {
+export type SaTimerType = {
   /**
    * **组件唯一标识**
    * @type `string`

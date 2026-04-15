@@ -1,7 +1,7 @@
 .sa-pagination {
   display: flex;
   align-items: center;
-  color: var(--sa-color-font);
+  color: var(--sa-color);
   font-size: var(--sa-size-font, 13px);
 
   .m-pagination-total {
@@ -19,8 +19,8 @@
 
   .m-pagination-select {
     padding: 5px 8px;
-    border: 1px solid var(--sa-color-border);
-    border-radius: 3px;
+    border: 1px solid var(--sa-border-color);
+    border-radius: var(--sa-size-radius);
     outline: none;
 
     &:focus {
@@ -33,9 +33,9 @@
     height: calc(var(--sa-size-height, 30px) - 4px);
     padding: 0 4px;
     border: none;
-    border-radius: 3px;
+    border-radius: var(--sa-size-radius);
     background: transparent;
-    color: var(--sa-color-font);
+    color: var(--sa-color);
     cursor: pointer;
     transition: all 0.3s;
     font-size: var(--sa-size-font, 13px);
@@ -64,7 +64,7 @@
     min-width: 32px;
     height: 32px;
     cursor: pointer;
-    color: var(--sa-color-font);
+    color: var(--sa-color);
 
     &:hover {
       color: var(--sa-color-primary);

@@ -16,7 +16,7 @@
           <sa-checkbox-item
             v-if="(isMultiple && isCheck) || (isMultiple && !item.children?.length)"
             :isChecked="equalData(item.value, inValue)"
-            class="mr-size-v2"
+            class="mr-size"
           >
             <slot name="optionLabel" :scope="item">
               {{ typeof item.label === "object" ? item.label[languageValue] || item.label["zh-CN"] : item.label }}
@@ -60,21 +60,21 @@
 import { ref, inject, watch, Ref, computed, ComputedRef } from "vue";
 import { SaCascaderOptionType } from "./type";
 import { equalData } from "../utils/equalData";
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 import SaCascaderOption from "./sa-cascader-option.vue";
 import { SaltedGlobalConfigType } from "../sa-content/type";
 
 const props = withDefaults(defineProps<SaCascaderOptionType>(), {});
-const childExOptions = ref([] as Array<MOptionV2Type.Select>);
+const childExOptions = ref([] as Array<SaOptionType.Select>);
 const injectHandleOptionClick: any = inject("handleOptionClick");
 const activeValue: Ref<boolean | number | string | undefined> = ref("");
 
-const ManagerGlobalConfig = inject("ManagerGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
 const languageValue = computed(() => {
-  return ManagerGlobalConfig.value?.language?.value || "zh-CN";
+  return SaltedGlobalConfig.value?.language?.value || "zh-CN";
 });
 
-function handleOptionClick(item: MOptionV2Type.Select, type: "click" | "over") {
+function handleOptionClick(item: SaOptionType.Select, type: "click" | "over") {
   if (item.children?.length) {
     childExOptions.value = item.children;
     activeValue.value = item.value;

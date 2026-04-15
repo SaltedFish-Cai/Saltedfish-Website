@@ -10,8 +10,12 @@
     >
       <div class="sa-message_header">
         <div class="flex-center-start">
-          <sa-icon class="sa-message__icon mr-size-v2" name="warning_line"></sa-icon>
-          <div v-if="dangerouslyUseHTMLString" class="sa-message__content" v-html="dangerouslyUseHTMLString ? message : ''"></div>
+          <sa-icon class="sa-message__icon mr-size" name="warning_line"></sa-icon>
+          <div
+            v-if="dangerouslyUseHTMLString"
+            class="sa-message__content"
+            v-html="dangerouslyUseHTMLString ? message : ''"
+          ></div>
           <div v-else class="sa-message__content">{{ typeof message === "string" ? message : message?.[language] }}</div>
         </div>
         <sa-icon class="sa-message__closeBtn" @click="handleClose" name="close_line"></sa-icon>
@@ -43,7 +47,8 @@ const {
   dangerouslyUseHTMLString = false,
   onClick,
   onClose,
-  zIndex = 2050
+  zIndex = 2050,
+  closeOnPressEscape = true
 } = props.options;
 
 // 状态
@@ -82,6 +87,10 @@ const handleClick = () => {
   if (onClick) {
     onClick();
   }
+  if (closeOnPressEscape) {
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap.filter(item => item != props.id);
+  }
 };
 
 const handleClose = () => {
@@ -92,7 +101,19 @@ const handleClose = () => {
   if (onClose) {
     onClose();
   }
+  if (closeOnPressEscape) {
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap.filter(item => item != props.id);
+  }
 };
+
+// #添加ESC键监听
+function handleKeyDown(e) {
+  const escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+  if (e.key === "Escape" && escapeMap[escapeMap.length - 1] === props.id) {
+    handleClose();
+  }
+}
 
 // 生命周期
 onMounted(() => {
@@ -100,12 +121,18 @@ onMounted(() => {
   setTimeout(() => {
     visible.value = true;
   }, 10);
+  closeOnPressEscape && document.addEventListener("keydown", handleKeyDown);
+  if (closeOnPressEscape) {
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+    window.SaltedGlobalConfig.escapeMap.push(props.id);
+  }
 });
 
 onUnmounted(() => {
   if (timer.value) {
     clearTimeout(timer.value);
   }
+  closeOnPressEscape && document.removeEventListener("keydown", handleKeyDown);
 });
 
 // 暴露方法

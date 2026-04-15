@@ -6,22 +6,21 @@
     :style="{ ...props.style, opacity: isOpacity }"
   >
     <div class="sa-tag-text" v-for="item in inValue" :key="String(item.value)">
-      <div class="sa-tag-text-content">{{ item.label }}</div>
+      <div class="sa-tag-text-content">
+        {{ typeof item.label === "object" ? item.label[language] || item.label["zh-CN"] : item.label }}
+      </div>
       <sa-icon v-if="!props.disabled" name="close_circle_line" class="close-icon" @click="e => removeTag(e, item)"></sa-icon>
     </div>
     <sa-popover ref="popoverRef" v-if="hideValue.length" :popoverWidth="popoverWidth" stopPropagation>
       <template #reference>
-        <div class="sa-tag-text">+{{ hideValue.length }}</div>
+        <div class="sa-tag-text" style="width: initial">+{{ hideValue.length }}</div>
       </template>
       <div class="sa-tag">
         <div class="sa-tag-text" v-for="item in hideValue" :key="String(item.value)">
-          <div class="sa-tag-text-content">{{ item.label }}</div>
-          <sa-icon
-            v-if="!props.disabled"
-            name="close_circle_line"
-            class="close-icon"
-            @click="e => removeTag(e, item)"
-          ></sa-icon>
+          <div class="sa-tag-text-content">
+            {{ typeof item.label === "object" ? item.label[language] || item.label["zh-CN"] : item.label }}
+          </div>
+          <sa-icon v-if="!disabled" name="close_circle_line" class="close-icon" @click="e => removeTag(e, item)"></sa-icon>
         </div>
       </div>
     </sa-popover>
@@ -29,9 +28,14 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, Ref, watch, nextTick } from "vue";
+import { onMounted, ref, Ref, watch, nextTick, inject, ComputedRef } from "vue";
 import { SaTagType, TagListType } from "./type";
 import { getElementPosition } from "../utils/getElementPosition";
+
+import { SaltedGlobalConfigType } from "../sa-content/type";
+
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+const language = SaltedGlobalConfig.value?.language?.value || "zh-CN";
 
 const props = withDefaults(defineProps<SaTagType>(), {
   useCollapse: true

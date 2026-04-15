@@ -1,4 +1,7 @@
 // # Type
+
+type languageKey = "en-US" | "zh-CN";
+
 export type SaDialogType = {
   /**
    * **是否打开Dialog**
@@ -35,7 +38,7 @@ export type SaDialogType = {
    * <MoDialog size="m" />
    * ```
    * */
-  size?: "l" | "m" | "max" | "s";
+  size?: "full" | "l" | "m" | "max" | "s";
 
   /**
    * **Dialog高度**
@@ -106,7 +109,7 @@ export type SaDialogType = {
 
   /**
    * **Dialog标题**
-   * @type `string`
+   * @type `string`|`Record<languageKey, string>`
    * @default `标题`
    * @description 当设置该值为 `string` 时，Dialog标题为该值
    * @description 当设置该值为 `undefined` 时，Dialog标题为 `标题`
@@ -115,11 +118,11 @@ export type SaDialogType = {
    * <MoDialog title="次标题" />
    * ```
    * */
-  title?: string;
+  title?: Record<languageKey, string> | string;
 
   /**
    * **Dialog副标题**
-   * @type `string`
+   * @type `string`|`Record<languageKey, string>`
    * @default `副标题`
    * @description 当设置该值为 `string` 时，Dialog副标题为该值
    * @description 当设置该值为 `undefined` 时，Dialog副标题为 `副标题`
@@ -128,7 +131,7 @@ export type SaDialogType = {
    * <MoDialog subTitle="次标题" />
    * ```
    * */
-  subTitle?: string;
+  subTitle?: Record<languageKey, string> | string;
 
   /**
    * **是否开启全屏按钮**

@@ -1,5 +1,5 @@
 <template>
-  <div class="m-button-v2-group" :class="['m-button-v2-group--' + type]">
+  <div class="sa-button-group" :class="['sa-button-group--' + type]">
     <slot></slot>
   </div>
 </template>
@@ -8,7 +8,7 @@
 // # Import
 // import { reactive, onBeforeMount, useSlots, nextTick, watch } from "vue";
 // import lodashPkg from "lodash";
-// import { MButtonTypeV2 } from "./type";
+// import { SaButtonType } from "./type";
 // import inBrowser from "../tools/inBrowser";
 withDefaults(
   defineProps<{

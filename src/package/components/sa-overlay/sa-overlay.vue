@@ -17,8 +17,8 @@ const props = withDefaults(defineProps<SaOverlayType>(), {
   useBlock: true
 });
 const emits = defineEmits(["update:modelValue", "clickOverlay"]);
-const getManagerV2GlobalZIndex = inject("getManagerV2GlobalZIndex") as () => number;
-const zIndex = ref(getManagerV2GlobalZIndex());
+const getSaAnagerGlobalZIndex = inject("getSaAnagerGlobalZIndex") as () => number;
+const zIndex = ref(getSaAnagerGlobalZIndex());
 
 const state = reactive({
   visible: false

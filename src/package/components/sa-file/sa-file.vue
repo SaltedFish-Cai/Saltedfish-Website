@@ -15,7 +15,7 @@
           >
             <div class="flex-center">
               <div style="word-wrap: break-word">{{ computedPlaceholder }}</div>
-              <div class="ml-size-v2" v-if="fileMultiple && fileMultiple > 1">
+              <div class="ml-size" v-if="fileMultiple && fileMultiple > 1">
                 (<span class="light-text"> {{ inValue?.length || 0 }}</span
                 >/{{ fileMultiple }})
               </div>
@@ -27,7 +27,7 @@
               :accept="accept"
               class="sa-file_upload-btn_inner"
               :disabled="disabled || (fileMultiple ? fileMultiple == inValue?.length : false)"
-              @change="fileChange"
+              @change="handleFileChange"
             />
           </sa-button>
 
@@ -41,7 +41,7 @@
         v-if="inValue?.length && !display"
         :title="languagePackage['clearAddedfiles']"
         style="--sa-size-font: 12px; --sa-size-height: 24px"
-        class="btn-width ml-size-v2"
+        class="btn-width ml-size"
         is="trash"
         :disabled="disabled"
         @click="cleanFiles"
@@ -87,7 +87,7 @@
             <sa-icon
               v-if="!display && !disabled"
               :title="languagePackage['del']"
-              class="file-item-box__del-hand ml-size-v2"
+              class="file-item-box__del-hand ml-size"
               name="close_circle_line"
               @click="removeFile(index)"
             />
@@ -253,7 +253,7 @@ const handleError = () => {
 };
 
 // @ computed 文件选择
-const fileChange = event => {
+const handleFileChange = event => {
   const files: any = Array.from(event.target.files);
   if (loading.value) return;
   uploadFilesList.push(...files);

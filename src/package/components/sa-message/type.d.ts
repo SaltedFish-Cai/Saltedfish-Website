@@ -47,6 +47,10 @@ export interface MessageOptions {
    * z-index
    */
   zIndex?: number;
+  /**
+   * 是否在按下ESC键时关闭通知
+   */
+  closeOnPressEscape?: boolean;
 }
 
 // 通知实例接口

@@ -44,6 +44,7 @@ declare global {
     globalZIndex: number;
     SaltedGlobalConfig: SaltedGlobalConfigType & {
       language: languageKey;
+      escapeMap?: string[];
       PopoverList?: {
         [x: string]: () => void;
       };

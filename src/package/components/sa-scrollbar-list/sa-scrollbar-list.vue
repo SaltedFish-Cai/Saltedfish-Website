@@ -27,12 +27,12 @@
       </template>
 
       <!-- loading -->
-      <div v-if="state.tableLoad" class="m-loading-v2">
+      <div v-if="state.tableLoad" class="sa-loading">
         <m-icon class="loading_font" name="loading_line"></m-icon>
       </div>
 
       <!-- more -->
-      <div v-if="state.tableLoadEnd && state.tableData.length > 0" class="no-more-v2">{{ languagePackage.noMore }}</div>
+      <div v-if="state.tableLoadEnd && state.tableData.length > 0" class="no-more">{{ languagePackage.noMore }}</div>
     </sa-scrollbar>
 
     <slot name="footer">
@@ -65,7 +65,7 @@
 // # import
 import { ref, reactive, onMounted, onBeforeUnmount, nextTick, computed, inject, ComputedRef } from "vue";
 import { randChar } from "../tools/rand-char";
-import { SaScrollBarListType } from "./type";
+import { SaScrollbarListType } from "./type";
 import { SaltedGlobalConfigType } from "../sa-content/type";
 
 const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
@@ -74,7 +74,7 @@ const languagePackage = computed(() => SaltedGlobalConfig.value?.language?.packa
 const scrollBarList = ref();
 // const emits = defineEmits(["scroll"]);
 
-const props = withDefaults(defineProps<SaScrollBarListType>(), {
+const props = withDefaults(defineProps<SaScrollbarListType>(), {
   showPagination: true,
   styleMode: "default"
 });
@@ -242,22 +242,22 @@ defineExpose({ refresh, setScrollTop, el: mScrollbarListRef });
   min-width: 100%;
 
   &.padding-top {
-    padding-top: var(--sa-size-padding-base, 10px);
+    padding-top: var(--sa-size-padding, 10px);
   }
   &.padding-left {
-    padding-left: var(--sa-size-padding-base, 10px);
-    width: calc(100% - calc(var(--sa-size-padding-base, 10px)));
-    min-width: calc(100% - calc(var(--sa-size-padding-base, 10px)));
+    padding-left: var(--sa-size-padding, 10px);
+    width: calc(100% - calc(var(--sa-size-padding, 10px)));
+    min-width: calc(100% - calc(var(--sa-size-padding, 10px)));
   }
   &.padding-right {
-    padding-right: var(--sa-size-padding-base, 10px);
-    width: calc(100% - calc(var(--sa-size-padding-base, 10px)));
-    min-width: calc(100% - calc(var(--sa-size-padding-base, 10px)));
+    padding-right: var(--sa-size-padding, 10px);
+    width: calc(100% - calc(var(--sa-size-padding, 10px)));
+    min-width: calc(100% - calc(var(--sa-size-padding, 10px)));
   }
 
   &.padding-left.padding-right {
-    width: calc(100% - calc(var(--sa-size-padding-base, 10px)) * 2);
-    min-width: calc(100% - calc(var(--sa-size-padding-base, 10px)) * 2);
+    width: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
+    min-width: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
   }
 }
 </style>

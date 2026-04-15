@@ -1,7 +1,7 @@
 <template>
-  <sa-scrollbar always noPadding>
+  <m-scrollbar always noPadding>
     <div class="PdfCss" :id="PDF_ID + '-pdf'" :style="{ '--word-view-body_zoom': zoom }"></div>
-  </sa-scrollbar>
+  </m-scrollbar>
 
   <div class="menu-setting-box" v-if="menuSettingVisible" @click="menuSettingVisible = false">
     <transition v-show="menuSettingVisible" appear name="fade-opacity-transform" mode="out-in">
@@ -54,36 +54,6 @@ const client = ref({ x: -500, y: -500 });
 const menuSettingVisible = ref(false);
 
 onMounted(async () => {
-  pdf.value = new window.Pdfh5("#" + PDF_ID.value + "-pdf", {
-    pdfurl: textUrl,
-    zoomEnable: false,
-    pageNum: false,
-    backTop: false,
-    scrollEnable: false
-  });
-  pdf.value.on("complete", function () {
-    // status: string, msg: string, time: string
-    const el = document.getElementById(PDF_ID.value + "-pdf");
-    if (el) {
-      const container = el.querySelectorAll(".pageContainer");
-      for (let i = 0; i < container.length; i++) {
-        (container[i] as HTMLElement).oncontextmenu = function (e: any) {
-          e.preventDefault();
-          return false;
-        };
-        container[i].addEventListener(
-          "mouseup",
-          event =>
-            mouseUp(event as MouseEvent, e => {
-              menuSettingVisible.value = true;
-              client.value = { x: e.clientX + 5, y: e.clientY + 10 };
-            }),
-          { passive: false }
-        );
-      }
-    }
-  });
-  return;
   const config = {
     requestHeader: SaltedGlobalConfig.value?.requestHeader,
     downloadHose: SaltedGlobalConfig.value?.file_config?.downloadHose || ""
@@ -158,9 +128,9 @@ defineExpose({ leftAll90: () => leftAll90(PDF_ID.value + "-pdf") });
   .setting-item {
     padding: 5px 16px;
     &:hover {
-      color: var(--sa-color-primary);
+      color: var(--el-color-primary);
       cursor: pointer;
-      background-color: var(--sa-color-primary-light-8);
+      background-color: var(--el-color-primary-light-8);
     }
   }
 }
@@ -190,7 +160,7 @@ defineExpose({ leftAll90: () => leftAll90(PDF_ID.value + "-pdf") });
     .pageContainer {
       margin: 0 !important;
       width: 780px;
-      transition: var(--m-component-animation, 0.3s);
+      transition: var(--sa-component-animation, 0.3s);
       --rotate-X: 0deg;
       --rotate-Z: 0deg;
       --rotate-Y: 0deg;
@@ -204,7 +174,7 @@ defineExpose({ leftAll90: () => leftAll90(PDF_ID.value + "-pdf") });
       max-height: var(--position-height) !important;
       background-color: transparent !important;
       img {
-        transition: var(--m-component-animation, 0.3s);
+        transition: var(--sa-component-animation, 0.3s);
         width: 780px !important;
         max-width: 780px !important;
         height: initial !important;

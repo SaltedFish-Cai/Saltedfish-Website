@@ -78,7 +78,7 @@
               v-model="computedValue"
               :type="item.type"
               :displayValue="item.displayValue ? injectConfigContext.data[item.displayValue] : undefined"
-              :exOptions="useExOptions as MOptionV2Type.SelectList"
+              :exOptions="useExOptions as SaOptionType.SelectList"
               :requestApi="injectConfigContext.exCellDependent?.select_RequestApi?.[item.prop]"
               :optionKey="item.optionKey"
               :placeholder="usePlaceholder"
@@ -111,7 +111,7 @@
               v-model="computedValue"
               :type="item.type"
               :displayValue="item.displayValue ? injectConfigContext.data[item.displayValue] : undefined"
-              :exOptions="useExOptions as MOptionV2Type.SelectList"
+              :exOptions="useExOptions as SaOptionType.SelectList"
               :placeholder="usePlaceholder"
               :disabled="item.disabled || disabledFn(injectConfigContext.data)"
               :display="useDisplay"
@@ -136,7 +136,7 @@
               :id="id + '-' + item.prop + '-switch'"
               v-model="computedValue"
               :disabled="item.disabled || disabledFn(injectConfigContext.data)"
-              :exOptions="injectConfigContext.exOptions[item.prop] as MOptionV2Type.Switch"
+              :exOptions="injectConfigContext.exOptions[item.prop] as SaOptionType.Switch"
               :display="useDisplay"
               :activeValue="item.activeValue"
               :inActiveValue="item.inActiveValue"
@@ -157,7 +157,7 @@
               :id="id + '-' + item.prop + '-checkbox'"
               v-model="computedValue"
               :disabled="item.disabled || disabledFn(injectConfigContext.data)"
-              :exOptions="useExOptions as MOptionV2Type.SelectList"
+              :exOptions="useExOptions as SaOptionType.SelectList"
               :display="useDisplay"
               :contrastData="item.prop && injectConfigContext.contrastData?.[item.prop]"
               :alwaysContrast="injectConfigContext.alwaysContrast"
@@ -174,7 +174,7 @@
               :id="id + '-' + item.prop + '-radio'"
               v-model="computedValue"
               :disabled="item.disabled || disabledFn(injectConfigContext.data)"
-              :exOptions="useExOptions as MOptionV2Type.SelectList"
+              :exOptions="useExOptions as SaOptionType.SelectList"
               :display="useDisplay"
               :contrastData="item.prop && injectConfigContext.contrastData?.[item.prop]"
               :alwaysContrast="injectConfigContext.alwaysContrast"
@@ -236,8 +236,9 @@
           </template>
 
           <!-- file -->
-          <template v-else-if="item.type == 'file'">
+          <template v-else-if="item.type == 'file' || item.type == 'file-custom'">
             <sa-file
+              v-if="item.type == 'file'"
               :id="id + '-' + item.prop + '-file'"
               v-model="computedValue"
               :placeholder="usePlaceholder"
@@ -261,15 +262,43 @@
                 <slot :name="'cell-file-' + item.prop" :config="item" :data="injectConfigContext.data"></slot>
               </template>
             </sa-file>
+
+            <sa-file-custom
+              v-if="item.type == 'file-custom'"
+              :id="id + '-' + item.prop + '-file-custom'"
+              v-model="computedValue"
+              :placeholder="usePlaceholder"
+              :attachedData="item.attachedData || injectConfigContext.exCellDependent?.file_attachedData?.[String(item.prop)]"
+              :downloadTemplate="injectConfigContext.exCellDependent?.file_downloadTemplate?.[String(item.prop)]"
+              :fileMultiple="item.fileMultiple"
+              :fileIncludeType="item.fileIncludeType"
+              :fileIncludeText="item.fileIncludeText"
+              :fileExcludeType="item.fileExcludeType"
+              :fileExcludeText="item.fileExcludeText"
+              :fileSingleSize="item.fileSingleSize"
+              :fileAllSize="item.fileAllSize"
+              :disabled="item.disabled || disabledFn(injectConfigContext.data)"
+              :display="useDisplay"
+              :contrastData="item.prop && injectConfigContext.contrastData?.[item.prop]"
+              :alwaysContrast="injectConfigContext.alwaysContrast"
+              @change="valueChange"
+            >
+              <template #exDisplay v-if="$slots.exDisplay"> <slot name="exDisplay"></slot> </template>
+              <template #exContrast v-if="$slots.exContrast"> <slot name="exContrast"></slot> </template>
+
+              <template v-if="$slots['cell-file-' + String(item.prop)]" #downloadTemplate>
+                <slot :name="'cell-file-' + item.prop" :config="item" :data="injectConfigContext.data"></slot>
+              </template>
+            </sa-file-custom>
           </template>
 
           <!-- transfer -->
           <template v-else-if="item.type == 'transfer'">
-            <m-transfer-v2
+            <sa-transfer
               :id="id + '-' + item.prop + '-transfer'"
               v-model="computedValue"
               :disabled="item.disabled || disabledFn(injectConfigContext.data)"
-              :exOptions="useExOptions as MOptionV2Type.SelectList"
+              :exOptions="useExOptions as SaOptionType.SelectList"
               :useSearch="item.useSearch"
               :display="useDisplay"
               :contrastData="item.prop && injectConfigContext.contrastData?.[item.prop]"
@@ -279,7 +308,7 @@
             >
               <template #exDisplay v-if="$slots.exDisplay"> <slot name="exDisplay"></slot> </template>
               <template #exContrast v-if="$slots.exContrast"> <slot name="exContrast"></slot> </template>
-            </m-transfer-v2>
+            </sa-transfer>
           </template>
 
           <!-- group -->
@@ -294,6 +323,20 @@
           <!-- slot -->
           <template v-else-if="item.type == 'slot' || $slots[String(item.prop)]">
             <slot :name="item.prop" :config="item" :data="injectConfigContext.data"></slot>
+          </template>
+
+          <!-- clickTag -->
+          <template v-else-if="item.type == 'clickTag'">
+            <div
+              :class="[
+                'click-tag',
+                { 'sa-display-style': useDisplay, 'click-tag-disabled': item.disabled || disabledFn(injectConfigContext.data) }
+              ]"
+              @click="injectConfigContext.exCellDependent?.clickTagClick?.[item.prop](item.prop, injectConfigContext.data)"
+            >
+              <slot :name="'clickTag-' + item.prop" :config="item" :data="injectConfigContext.data"> 点击查看内容 </slot>
+              <sa-icon class="click-tag-icon" name="right_line" />
+            </div>
           </template>
         </section>
 
@@ -315,16 +358,14 @@
 // # Import
 import { ref, computed, onMounted, inject, Ref, watch, ComputedRef } from "vue";
 import formLabel from "./form-label.vue";
-import SaFormItem from "./sa-form-item.vue"; // 添加这行
+import mFormV2Item from "./sa-form-item.vue"; // 添加这行
 import groupItem from "./components/group-item.vue";
 
-import _ from "lodash";
+import { isNil } from "lodash";
 
 import { ConfigContextType, SaFormItemType } from "./type";
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 import { GetSystemAddressMap } from "../api/form";
-
-const { isNil } = _;
 
 // # Var
 type BasicsItemPropsType = {
@@ -358,15 +399,16 @@ const injectConfigContext = inject<Ref<ConfigContextType>>(
   })
 );
 const injectFormContext = inject<any>("formContext", {});
-const addressMap = ref<MOptionV2Type.SelectList>([]);
+const addressMap = ref<SaOptionType.SelectList>([]);
 
 const computedValue = computed({
   get: () => {
-    return !isNil(props.exData)
+    const data = !isNil(props.exData)
       ? props.exData
       : props.tabsProps && !isNil(props.tabsIndex)
       ? injectConfigContext.value.data[props.tabsProps][props.tabsIndex][String(props.item.prop)]
       : injectConfigContext.value.data[String(props.item.prop)];
+    return data;
   },
   set: value => {
     if (props.tabsProps && !isNil(props.tabsIndex)) {

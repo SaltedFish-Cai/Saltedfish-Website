@@ -11,15 +11,21 @@
     display: flex;
     padding: 1px calc(var(--sa-size-padding, 10px) / 2);
     margin: 2px;
-    border-radius: calc(var(--sa-size-radius) / 1.4);
+    border-radius: calc(var(--sa-size-radius, 3px) / 1.4);
     line-height: normal;
     justify-content: center;
     align-items: center;
     background-color: var(--sa-color-info-light-8);
     color: var(--sa-color-info);
     font-size: calc(var(--sa-size-font, 13px) - 1px);
+    overflow: hidden;
+    width: max-content;
+    flex: 0 0 max-content;
     .sa-tag-text-content {
       width: max-content;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .close-icon {
       margin-left: calc(var(--sa-size-padding, 10px) / 2);

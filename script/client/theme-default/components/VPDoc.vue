@@ -63,9 +63,9 @@ const SaltedUIConfig = ref({
         <div class="content-container">
           <slot name="doc-before" />
           <main class="main">
-            <sa-content v-bind="SaltedUIConfig">
+            <sa-manager v-bind="SaltedUIConfig">
               <Content class="vp-doc" :class="[pageName, theme.externalLinkIcon && 'external-link-icon-enabled']" />
-            </sa-content>
+            </sa-manager>
           </main>
           <VPDocFooter>
             <template #doc-footer-before><slot name="doc-footer-before" /></template>

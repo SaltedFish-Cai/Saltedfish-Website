@@ -9,7 +9,17 @@ import { SaFormChildType } from "../../sa-form/type";
 export const useStateHooks = (
   props: SaTableType,
   emits,
-  { language, languagePackage, bodyRef, contentRef, mScrollbarListRef, isIntersectingList, isInViewList, infiniteScroll }
+  {
+    isScrollHeaderIng,
+    language,
+    languagePackage,
+    bodyRef,
+    contentRef,
+    mScrollbarListRef,
+    isIntersectingList,
+    isInViewList,
+    infiniteScroll
+  }
 ) => {
   const { debounce, isNil, cloneDeep } = lodashPkg;
   const { listenCellInView, listenCellChildChange, clearListen } = useObserverHooks(props, {
@@ -26,6 +36,7 @@ export const useStateHooks = (
   const PAGE_SIZE = 30;
   const tableStructure: Ref<Array<SaTableItemType & SaTableUseItemType>> = ref([]);
   const state: Reactive<SaTableUseType.TableStateType> = reactive({
+    tableLoadingSize: 100,
     tableData: [],
     flatTableData: [],
     selectTableData: [],
@@ -63,18 +74,39 @@ export const useStateHooks = (
 
     useAverageWidth: -1,
 
-    inRules: {}
+    inRules: {},
+
+    awaitSelectData: []
   });
 
   // 添加鼠标悬停事件处理函数
   function handleCellMouseEnter(rowIndex: number, columnIndex: number) {
     state.hoveredRowIndex = rowIndex;
     state.hoveredColumnIndex = columnIndex;
+
+    if (isScrollHeaderIng.value) {
+      state.hoveredRowIndex = -1;
+      state.hoveredColumnIndex = -1;
+      contentRef.value?.classList?.remove("use-hover");
+      return contentRef.value?.style?.setProperty(`--body_content_col_hover_index`, -1);
+    }
+    clearTimeout(timeOut);
+    contentRef.value?.classList?.add("use-hover");
+    contentRef.value?.style?.setProperty(`--body_content_col_hover_index`, columnIndex);
   }
 
+  let timeOut: any = null;
   function handleCellMouseLeave() {
-    state.hoveredRowIndex = -1;
-    state.hoveredColumnIndex = -1;
+    if (timeOut) {
+      clearTimeout(timeOut);
+    }
+    timeOut = setTimeout(() => {
+      state.hoveredRowIndex = -1;
+      state.hoveredColumnIndex = -1;
+      contentRef.value?.classList?.remove("use-hover");
+      contentRef.value?.style?.setProperty(`--body_content_col_hover_index`, -1);
+      isScrollHeaderIng.value = false;
+    }, 300);
   }
 
   function isFixedLeftItem(item) {
@@ -260,6 +292,9 @@ export const useStateHooks = (
     state.tableData.length = 0;
   }
 
+  let intervalId: any = null;
+  let timeoutId: any = null;
+
   // # Function 获取表格数据
   async function getTableList(exQuery: SaTableUseType.TableQueryType = {}, stopListen: boolean = false) {
     if (state.showSelectList) return;
@@ -267,6 +302,7 @@ export const useStateHooks = (
     // @ 如果没有Page对象，重制分页请求，关闭监听
     const keys = Object.keys(exQuery).filter(item => item !== "Page");
     if (keys.length || (exQuery.Page && exQuery.Page?.PageSize)) {
+      listenCellChildChange.close?.();
       listenCellInView.close();
       state.listenCellInViewIng = false;
       state.PageNum = 1;
@@ -280,16 +316,17 @@ export const useStateHooks = (
         PageSize: exQuery.Page?.PageSize || state.pageable.PageSize || 1
       };
     }
+
     if (stopListen) {
       listenCellInView.close();
       state.listenCellInViewIng = false;
     }
 
     if (!infiniteScroll.value) {
+      clearListen();
       state.flatTableData.length = 0;
       state.tableData.length = 0;
     }
-
     // @ 如果存在Page，更新Page信息
     if (exQuery?.Page) {
       const _page = {
@@ -303,7 +340,6 @@ export const useStateHooks = (
     }
 
     const _pageNum = (exQuery.Page?.PageNum || 1) - 1 <= 0 ? 0 : (exQuery.Page?.PageNum || 1) - 1;
-
     // @ 如果数据加载结束或者当前页数据已经存在，则不再请求数据
     if (
       state.tableLoadEndStatus ||
@@ -311,6 +347,11 @@ export const useStateHooks = (
     ) {
       if (props.useSummary && !props.usePagination) debounceGetSummary();
       window.developLog.log("当前页数据已经存在", _pageNum, "info");
+
+      state.tableLoadingSize = 100;
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+
       if (props.usePagination && !stopListen) {
         // @ 开始监听元素是否进入视窗
         nextTick(() => {
@@ -324,25 +365,70 @@ export const useStateHooks = (
     if (state.tableLoadStatus) return;
     state.tableLoadStatus = true;
 
+    // mock loading
+    clearInterval(intervalId);
+    clearTimeout(timeoutId);
+    state.tableLoadingSize = Math.floor(Math.random() * (23 - 5 + 1)) + 5;
+    await nextTick();
+    intervalId = setInterval(() => {
+      state.tableLoadingSize += Math.floor(Math.random() * (20 - 10 + 1)) + 10;
+      if (state.tableLoadingSize >= 87) state.tableLoadingSize = 87;
+    }, 500);
+    timeoutId = setTimeout(() => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    }, 8000);
+
     const _query = { ...state.tableQuery, ...exQuery };
 
     state.tableQuery = _query;
 
     let index = _pageNum * state.pageable.PageSize;
     let renderIndex = _pageNum * state.pageable.PageSize;
+    let _data: any = [];
 
     // @ requestApi
     const { Data, Code } = await props.requestApi(_query);
     if (Code == 200) {
       const { List, TotalCount } = Data;
-      const _data = props.usePagination ? List : Data;
+      _data = props.usePagination ? List : Data;
       const ar: SaTableUseType.dataType = [
         { renderIndex: -1, parentRenderIndex: -1, rowIndex: -1, type: "more", name: String(_pageNum) }
       ];
+
       _data.forEach(item => {
         index++;
         renderIndex++;
-        const selectedItem = state.selectTableData.find(child => child[String(props.rowKey)] === item[String(props.rowKey)]);
+        let selectedItem = state.selectTableData.find(child => child[String(props.rowKey)] === item[String(props.rowKey)]);
+        if (!selectedItem) {
+          const _index = state.awaitSelectData.findIndex(data => data[String(props.rowKey)] === item[String(props.rowKey)]);
+
+          if (_index >= 0) {
+            state.awaitSelectData.splice(_index, 1);
+          }
+
+          selectedItem = {
+            ...item,
+            children: item?.children?.map(ch => {
+              const _ind = state.awaitSelectData.findIndex(data => data[String(props.rowKey)] === ch[String(props.rowKey)]);
+              if (_ind >= 0) {
+                state.awaitSelectData.splice(_ind, 1);
+              }
+              const outData = { ...ch, isSelected: _ind >= 0 };
+
+              if (_ind >= 0) {
+                state.selectTableData.push(outData);
+              }
+
+              return outData;
+            }),
+            isSelected: _index >= 0
+          };
+          if (_index >= 0) {
+            state.selectTableData.push(selectedItem as SaTableUseType.SaTableInDataType);
+          }
+        }
+
         ar.push({
           rowIndex: index,
           renderIndex: renderIndex,
@@ -363,7 +449,6 @@ export const useStateHooks = (
           })
         });
       });
-      state.flatTableData = [...state.flatTableData, ..._data];
 
       state.tableData[_pageNum] = ar;
 
@@ -399,15 +484,23 @@ export const useStateHooks = (
 
       if (props.summaryFunction) debounceGetSummary();
 
-      state.tableLoadStatus = false;
-
       // 结束全部请求
       if (state.flatTableData.length >= Data.TotalCount || !props.usePagination) {
         state.tableLoadEndStatus = true;
       }
     }
+    // console.log("++++++++++> mScrollbarListRef.value:", mScrollbarListRef.value);
+    // mScrollbarListRef.value.update();
+    state.tableLoadStatus = false;
 
-    listenCellChildChange.create?.();
+    listenCellChildChange.create?.(async () => {
+      state.flatTableData = [...state.flatTableData, ..._data];
+    });
+
+    state.tableLoadingSize = 100;
+    clearInterval(intervalId);
+    clearTimeout(timeoutId);
+
     if (props.usePagination && !stopListen) {
       // @ 开始监听元素是否进入视窗
       nextTick(() => {
@@ -457,9 +550,8 @@ export const useStateHooks = (
               useWidth = offsetWidth;
             }
           }
-
-          const _width = (useWidth > maxWidth ? maxWidth : useWidth) + 1;
-
+          const isWidth = (useWidth > maxWidth ? maxWidth : useWidth) + 1;
+          const _width = isWidth % 2 == 0 ? isWidth : isWidth + 1;
           item.width = item.baseWidth || setWidthToString(_width);
 
           allWidth += setWidthToNumber(item.width);

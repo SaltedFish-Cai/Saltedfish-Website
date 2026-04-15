@@ -3,7 +3,7 @@
     <section class="sa-table_filter-list" style="height: calc(100% - 90px)">
       <template v-for="(groupItem, groupItemIndex) in state.advancedFilter.relationshipGroup" :key="groupItem.groupName">
         <div class="group">
-          <div class="flex-center-between mb-size-v2 border-bottom group_top">
+          <div class="flex-center-between mb-size border-bottom group_top">
             <div class="flex1 group__title" style="text-align: left">{{ groupItem.groupName }} {{ groupItemIndex + 1 }}</div>
             <sa-button v-if="groupItemIndex > 0" is="trash" size="small" @click="FilterFn.remove(groupItemIndex)">
               {{ languagePackage?.["clenGroup"] }}
@@ -26,12 +26,7 @@
                   <div class="filter-item_name"># {{ propItem.label }}</div>
                 </template>
                 <template #Del>
-                  <sa-button
-                    class="ml0"
-                    is="trash"
-                    style="width: 88px; flex: 0 0 88px"
-                    @click="FilterFn.removeItem(item.key, groupItemIndex)"
-                  >
+                  <sa-button class="ml0" is="trash" style="width: 100%" @click="FilterFn.removeItem(item.key, groupItemIndex)">
                     {{ languagePackage?.["del"] }}
                   </sa-button>
                 </template>
@@ -44,7 +39,7 @@
               <section class="filter-item flex-center-start">
                 <div class="filter-item_name"># {{ propItem.label }}</div>
 
-                <div class="ml-size-v2 mr-size-v2">
+                <div class="ml-size mr-size">
                   <sa-select
                     v-model="item.conditionalType"
                     :placeholder="languagePackage?.['selectConditional']"
@@ -57,7 +52,7 @@
 
                 <el-form-item prop="fieldValue" style="width: 60% !important; margin-bottom: 0">
                   <sa-input
-                    class="mr-size-v2"
+                    class="mr-size"
                     style="width: 100%"
                     v-model="item.fieldValue"
                     :placeholder="languagePackage?.['inputAdvanced']"
@@ -76,7 +71,7 @@
               </section>
 
               <div class="flex-center" v-if="itemIndex < groupItem.group.length - 1">
-                <span style="font-size: var(--sa-size-font, 13px)">{{ languagePackage?.["filterText"] }}：</span>
+                <span style="font-size: var(--sa-size-font, 16px)">{{ languagePackage?.["filterText"] }}：</span>
                 <sa-radio
                   v-model="groupItem.groupLinkType"
                   :ex-options="seniorFilterOptions.linkOptions.map(item => ({ label: item.Description, value: item.Value }))"
@@ -84,12 +79,12 @@
               </div>
             </el-form> -->
               <div class="flex-center" v-if="itemIndex < groupItem.group.length - 1">
-                <span style="font-size: var(--sa-size-font, 13px)">{{ languagePackage?.["filterText"] }}：</span>
+                <span style="font-size: var(--sa-size-font, 16px)">{{ languagePackage?.["filterText"] }}：</span>
                 <sa-radio v-model="groupItem.groupLinkType" :ex-options="state.linkOptions"></sa-radio>
               </div>
             </template>
 
-            <div class="flex-center mt-size-v2">
+            <div class="flex-center mt-size">
               <sa-button font="add_circle_line" plain type="primary" @click="FilterFn.addFilter(groupItemIndex)">
                 {{ languagePackage?.["addFilter"] }}
               </sa-button>
@@ -97,12 +92,12 @@
           </div>
         </div>
         <div class="flex-center" v-if="groupItemIndex < state.advancedFilter.relationshipGroup.length - 1">
-          <span style="font-size: var(--sa-size-font, 13px)">{{ languagePackage?.["groupText"] }}：</span>
+          <span style="font-size: var(--sa-size-font, 16px)">{{ languagePackage?.["groupText"] }}：</span>
           <sa-radio v-model="state.advancedFilter.relationshipGroupLinkType" :ex-options="state.linkOptions"></sa-radio>
         </div>
       </template>
-      <div class="flex-center mt-size-v2">
-        <sa-button class="mb-size-v2" font="goods_line" @click="FilterFn.addFilterGroup" plain type="warning">
+      <div class="flex-center mt-size">
+        <sa-button class="mb-size" font="goods_line" @click="FilterFn.addFilterGroup" plain type="warning">
           {{ languagePackage?.["addGroup"] }}
         </sa-button>
       </div>
@@ -118,25 +113,25 @@
 
 <script lang="ts" setup>
 // # Import
-import { reactive, watch, nextTick } from "vue";
+import { reactive, watch, nextTick, inject } from "vue";
 import { SaTableUseType } from "./type";
-import { MOptionV2Type, MRefV2Type } from "../manager-type";
+import { SaOptionType, SaRefType } from "../manager-type";
 import { SaFormItemType } from "../sa-form/type";
 import { M_MessageBox } from "../feedback";
 
 type SeniorFilterPropsType = {
   modelValue: boolean;
   propItem: Record<string, string>;
-  seniorFilterOptions: { LineConditional: MOptionV2Type.SelectList; linkOptions: MOptionV2Type.SelectList };
+  seniorFilterOptions: { LineConditional: SaOptionType.SelectList; linkOptions: SaOptionType.SelectList };
   tableQuery: SaTableUseType.TableQueryType;
-  languagePackage: Record<string, string>;
 };
 // # Var
 const props = defineProps<SeniorFilterPropsType>();
+const languagePackage = inject("languagePackage") as Record<string, string>;
 
 const emits = defineEmits(["update:modelValue", "callback", "saveAndFilter"]);
 
-let ruleTabsFormRef: Array<{ name: string; ref: MRefV2Type.FormV2 }> = [];
+let ruleTabsFormRef: Array<{ name: string; ref: SaRefType.FormV2 }> = [];
 const setAllFormRef = (ref: any, name: string) => {
   const its = ruleTabsFormRef.filter(item => item.name == name);
   if (its.length == 0 && ref) {
@@ -155,7 +150,7 @@ const state = reactive({
   exOptions: {
     conditionalType: {}
   },
-  linkOptions: [] as MOptionV2Type.SelectList
+  linkOptions: [] as SaOptionType.SelectList
 });
 
 const _formBConfig: Array<SaFormItemType> = [
@@ -165,9 +160,9 @@ const _formBConfig: Array<SaFormItemType> = [
     prop: "conditionalType",
     type: "select",
     colSpan: 7,
-    placeholder: props.languagePackage?.["selectConditional"]
+    placeholder: languagePackage.value?.["selectConditional"]
   },
-  { label: "Label-Text2", prop: "fieldValue", type: "input", colSpan: 7, placeholder: props.languagePackage?.["inputAdvanced"] },
+  { label: "Label-Text2", prop: "fieldValue", type: "input", colSpan: 7, placeholder: languagePackage.value?.["inputAdvanced"] },
   { label: "Label-Text2", prop: "Del", type: "slot", colSpan: 3, required: false }
 ];
 
@@ -176,7 +171,7 @@ const FilterFn = {
   addFilterGroup() {
     const key = String(Number(new Date()));
     const upData: SaTableUseType.RelationshipGroupType = {
-      groupName: props.languagePackage?.["group"],
+      groupName: languagePackage.value?.["group"],
       group: [{ fieldValue: "", conditionalType: 0, key }],
       groupLinkType: "1"
     };
@@ -198,10 +193,10 @@ const FilterFn = {
   remove(pIndex: number, tip = true) {
     if (tip) {
       M_MessageBox.confirm({
-        message: props.languagePackage["isDelGroup"],
-        title: props.languagePackage["tip"],
+        message: languagePackage.value?.["isDelGroup"],
+        title: languagePackage.value?.["tip"],
         type: "danger",
-        confirmButtonText: props.languagePackage["enterDel"],
+        confirmButtonText: languagePackage.value?.["enterDel"],
         onConfirm: () => {
           const item = state.advancedFilter.relationshipGroup[pIndex];
           for (let index = 0; index < item.group.length; index++) {
@@ -231,7 +226,7 @@ const FilterFn = {
 
 // #Function 暴露表单校验方法
 async function submitTabsForm() {
-  const _ruleTabsFormRef: Array<MRefV2Type.FormV2> = ruleTabsFormRef.map(item => item.ref);
+  const _ruleTabsFormRef: Array<SaRefType.FormV2> = ruleTabsFormRef.map(item => item.ref);
   if (_ruleTabsFormRef.length == 0) {
     return undefined;
   }
@@ -320,7 +315,7 @@ watch(
     state.linkOptions = options.linkOptions?.map((item: any) => ({
       label: item.Description,
       value: item.Value
-    })) as MOptionV2Type.SelectList;
+    })) as SaOptionType.SelectList;
   },
   { immediate: true, deep: true }
 );
@@ -332,9 +327,9 @@ watch(
   .group {
     box-sizing: border-box;
     overflow-x: hidden;
-    background-color: var(--sa-color-send-bg);
+    background-color: var(--sa-send-bg-color-lighter);
     border: 1px solid var(--sa-color-border);
-    border-radius: 3px;
+    border-radius: var(--sa-size-radius);
     box-shadow: 0 0 12px rgb(0 0 0 / 5%);
     .group_top {
       padding: calc(var(--sa-size-padding, 10px) / 1.5);
@@ -348,7 +343,7 @@ watch(
       height: 1.7em;
       line-height: 1.7em;
       padding-left: 12px;
-      font-size: calc(var(--sa-size-font, 13px) + 1px);
+      font-size: calc(var(--sa-size-font, 16px) + 1px);
       color: var(--sa-color-primary);
       &::before {
         position: absolute;
@@ -371,7 +366,7 @@ watch(
 
 .filter-item_name {
   width: 210px;
-  font-size: calc(var(--sa-size-font, 13px) + 2px);
+  font-size: calc(var(--sa-size-font, 16px) + 2px);
   font-weight: bold;
   color: var(--sa-color-font);
 }

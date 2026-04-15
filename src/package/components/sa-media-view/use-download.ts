@@ -16,6 +16,9 @@ import inBrowser from "../tools/inBrowser";
 
 export const useGetBlob = async (config = { downloadHose: "", requestHeader: {} }, path: string) => {
   try {
+    // const baseURL = process.env.TARO_APP_DOMAIN_URL as string;
+    // const TOKEN = Taro.getStorageSync("BBRAUN_TOKEN") || "";
+
     const headerData = config.requestHeader;
     const baseURL = config.downloadHose;
     // const headers: objectType = {
@@ -81,7 +84,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
     title: "温馨提示",
     dangerouslyUseHTMLString: true,
     message:
-      "<div class='download-message'><span class='m-iconfont sa-iconfont_icon icon-loading_line'></span>如果数据庞大会导致下载缓慢，请您耐心等待！</div>",
+      "<div class='download-message'><span class='m-iconfont m-iconfont_icon icon-loading_line'></span>如果数据庞大会导致下载缓慢，请您耐心等待！</div>",
     type: "info",
     duration: 0,
     customClass: "download-message-info"

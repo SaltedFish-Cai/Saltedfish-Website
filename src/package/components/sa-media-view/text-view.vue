@@ -9,41 +9,28 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, inject, ComputedRef } from "vue";
+import { useGetBlob } from "./use-download";
+import { SaltedGlobalConfigType } from "../sa-content/type";
 
 const props = withDefaults(defineProps<{ filePath: string; zoom: number }>(), {});
 const textUrl = String(props.filePath);
 
 const mediaText = ref("");
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
 
 onMounted(async () => {
-  try {
-    // 构建完整URL
-    const fullUrl = textUrl;
-
-    // 直接通过fetch获取文本内容
-    const response = await fetch(fullUrl, {
-      method: "GET"
-    });
-
-    if (!response.ok) {
-      mediaText.value = `读取文件失败: ${response.statusText}`;
-      return;
-    }
-
-    // 检查是否是JSON错误响应
-    const contentType = response.headers.get("Content-Type");
-    if (contentType?.includes("application/json")) {
-      const json = await response.json();
-      mediaText.value = `服务器错误: ${json.Message || "未知错误"}`;
-      return;
-    }
-
-    // 直接获取并显示文本内容
-    mediaText.value = await response.text();
-  } catch (error) {
-    console.error("读取文本文件时出错:", error);
-    mediaText.value = `读取文件失败: ${error instanceof Error ? error.message : "未知错误"}`;
+  const config = {
+    requestHeader: SaltedGlobalConfig.value?.requestHeader,
+    downloadHose: SaltedGlobalConfig.value?.file_config?.downloadHose || ""
+  };
+  const blob = await useGetBlob(config, textUrl);
+  if (blob) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      mediaText.value = String(reader.result);
+    };
+    if (blob) reader.readAsText(blob);
   }
 });
 </script>

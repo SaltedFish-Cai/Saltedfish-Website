@@ -14,15 +14,14 @@
             ? 'table_body_label_flex'
             : '',
           item.lastLeftFixed ? 'last-left-fixed' : '',
-          item.lastRightFixed ? 'last-right-fixed' : '',
-          shouldHighlightRow ? 'highlight-row' : '',
-          hoveredColumnIndex === columnIndex ? 'highlight-column' : ''
+          item.lastRightFixed ? 'last-right-fixed' : ''
         ]"
         :style="{
-          '--m-table-sticky': item.fixedValue,
-          '--m-table-sticky-index': item.fixedValueIndex,
-          '--m-table-item-width': item.width,
-          '--m-table-item-min-width': item.minWidth
+          '--sa-table-sticky': item.fixedValue,
+          '--sa-table-sticky-index': item.fixedValueIndex,
+          '--sa-table-item-width': item.width,
+          '--sa-table-item-min-width': item.minWidth,
+          '--sa-table-item-index': columnIndex
         }"
         @mouseenter="handleCellMouseEnter(props.rowIndex, columnIndex)"
         @mouseleave="handleCellMouseLeave"
@@ -30,6 +29,7 @@
         <div
           :class="[item.width && !setCellWidthIng ? 'table_body_label_content' : `find_cell_${item.prop || item.type}`]"
           :style="{
+            display: isRowIndex(item) ? 'flex' : 'block',
             justifyContent: isRowIndex(item) ? 'center' : 'flex-start'
           }"
         >
@@ -83,7 +83,7 @@
             </template>
           </Operation>
 
-          <template v-else-if="item.cellConfig">
+          <template v-else-if="item.cellConfig && item.cellConfig.type != 'text'">
             <div
               v-if="item.cellConfig.display && item?.cellConfig.type != 'file'"
               :key="'cellConfig-' + item.prop + '-' + row.rowIndex"
@@ -98,7 +98,7 @@
               :row="row"
               :clickTag="exCellDependent?.tag_click?.[String(item.prop)]"
               :disabled="exCellDependent?.tag_disabled?.[String(item.prop)]?.({ value: row[String(item.prop)] })"
-              :exOptions="exOptions[String(item.prop)] as MOptionV2Type.SelectList || item.cellConfig.exOptions"
+              :exOptions="exOptions[String(item.prop)] as SaOptionType.SelectList || item.cellConfig.exOptions"
             />
 
             <!-- number -->
@@ -132,7 +132,7 @@
               v-model="row[String(item.prop)]"
               :type="item.cellConfig.type"
               :displayValue="item.cellConfig.displayValue ? row[item.cellConfig.displayValue] : undefined"
-              :exOptions="exOptions[String(item.prop)] as MOptionV2Type.SelectList || item.cellConfig.exOptions"
+              :exOptions="exOptions[String(item.prop)] as SaOptionType.SelectList || item.cellConfig.exOptions"
               :requestApi="exCellDependent?.select_RequestApi?.[String(item.prop)]"
               :optionKey="item.cellConfig.optionKey"
               :placeholder="item.cellConfig.placeholder || languagePackage?.['select'] + item.label"
@@ -153,7 +153,7 @@
               v-else-if="item.cellConfig.type == 'switch'"
               v-model="row[String(item.prop)]"
               :disabled="item.cellConfig.disabled"
-              :exOptions="exOptions[String(item.prop)] as MOptionV2Type.Switch || item.cellConfig.exOptions"
+              :exOptions="exOptions[String(item.prop)] as SaOptionType.Switch || item.cellConfig.exOptions"
               :display="item.cellConfig.display"
               :activeValue="item.cellConfig.activeValue"
               :inActiveValue="item.cellConfig.inActiveValue"
@@ -169,7 +169,7 @@
               v-else-if="item.cellConfig.type == 'radio'"
               v-model="row[String(item.prop)]"
               :disabled="item.cellConfig.disabled"
-              :exOptions="exOptions[String(item.prop)] as MOptionV2Type.SelectList || item.cellConfig.exOptions"
+              :exOptions="exOptions[String(item.prop)] as SaOptionType.SelectList || item.cellConfig.exOptions"
               :display="item.cellConfig.display"
               :contrastData="item.cellConfig.contrastData?.[String(item.prop)]"
               :alwaysContrast="item.cellConfig.alwaysContrast"
@@ -182,7 +182,7 @@
               v-else-if="item.cellConfig.type == 'checkbox'"
               v-model="row[String(item.prop)]"
               :disabled="item.cellConfig.disabled"
-              :exOptions="exOptions[String(item.prop)] as MOptionV2Type.SelectList || item.cellConfig.exOptions"
+              :exOptions="exOptions[String(item.prop)] as SaOptionType.SelectList || item.cellConfig.exOptions"
               :display="item.cellConfig.display"
               :contrastData="item.cellConfig.contrastData?.[String(item.prop)]"
               :alwaysContrast="item.cellConfig.alwaysContrast"
@@ -201,7 +201,7 @@
               v-model="row[String(item.prop)]"
               :type="item.cellConfig.type"
               :displayValue="item.cellConfig.displayValue ? row[item.cellConfig.displayValue] : undefined"
-              :exOptions="exOptions[String(item.prop)] as MOptionV2Type.SelectList|| item.cellConfig.exOptions"
+              :exOptions="exOptions[String(item.prop)] as SaOptionType.SelectList|| item.cellConfig.exOptions"
               :placeholder="item.cellConfig.placeholder || languagePackage?.['select'] + item.label"
               :disabled="item.cellConfig.disabled"
               :display="item.cellConfig.display"
@@ -287,9 +287,9 @@
             </div>
           </template>
 
-          <!-- <template v-else-if="item.filterType == 'select'">
-        {{ findData(item, row) }}
-      </template> -->
+          <template v-else-if="item.filterType == 'select'">
+            {{ findDataSelect(row[String(item.prop)], exOptions[String(item.prop)] as SaOptionType.SelectList) }}
+          </template>
 
           <div v-else :style="{ whiteSpace: setCellWidthIng ? 'nowrap' : 'wrap' }">{{ row[String(item.prop)] }}</div>
           <!-- <sa-input v-else v-model="" :display="props.display" /> -->
@@ -301,7 +301,7 @@
 
 <script lang="ts" setup>
 // >-------------> 依赖 <------------<
-import { inject, Ref, computed, ComputedRef } from "vue";
+import { inject, Ref, ComputedRef } from "vue";
 import Operation from "./operation.vue";
 import { SaTableUseItemType, SaTableUseType, SaTableCellExDependentType } from "./type";
 import { isRowIndex } from "./hooks/isType";
@@ -309,7 +309,7 @@ import CellTag from "./cell-tag.vue";
 import { keepDecimalPlaces } from "../utils/handlePrecision";
 import { findData as findDataSwitch } from "../sa-switch/find-data";
 import { findData as findDataSelect } from "../sa-select/find-data";
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 import { SaFormChildType } from "../sa-form/type";
 import { SaltedGlobalConfigType } from "../sa-content/type";
 
@@ -337,7 +337,7 @@ const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlo
 // const exFormatter = ref({} as Record<string, string>);
 // const exParser = ref({} as Record<string, string>);
 const isTableSelectAll = inject("isTableSelectAll") as Ref<boolean>;
-const exOptions = inject("exOptions") as MOptionV2Type.Default;
+const exOptions = inject("exOptions") as SaOptionType.Default;
 const exCellDependent = inject("exCellDependent") as SaTableCellExDependentType;
 const languagePackage = inject("languagePackage") as Record<string, string>;
 const handleSelectChange = inject("handleSelectChange") as (params: {
@@ -348,13 +348,6 @@ const handleSelectChange = inject("handleSelectChange") as (params: {
 // 注入鼠标悬停相关函数和状态
 const handleCellMouseEnter = inject("handleCellMouseEnter") as (rowIndex: number, columnIndex: number) => void;
 const handleCellMouseLeave = inject("handleCellMouseLeave") as () => void;
-const hoveredRowIndex = inject("hoveredRowIndex") as Ref<number>;
-const hoveredColumnIndex = inject("hoveredColumnIndex") as Ref<number>;
-
-// 检查当前单元格是否应该高亮
-const shouldHighlightRow = computed(() => {
-  return hoveredRowIndex.value === props.rowIndex;
-});
 
 // # 处理单元格显示值
 function setCellDisplayValue(row: SaTableUseType.SaTableInDataType, prop: string, cellConfig: SaFormChildType) {
@@ -393,5 +386,5 @@ function valueChange(data, row) {
   validateField(row.prop, data.value, row);
 }
 
-const emits = defineEmits(["changeRowStatus", "handleChangeChecked"]);
+const emits = defineEmits(["changeRowStatus", "handleChangeChecked", "selectRowBack", "radioRowBack"]);
 </script>

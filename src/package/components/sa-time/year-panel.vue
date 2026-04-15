@@ -789,7 +789,7 @@ watch(
   margin-bottom: calc(var(--sa-size-padding) / 2);
   font-size: var(--sa-size-font);
   cursor: pointer;
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   transition: all var(--sa-animation-time, 0.2s);
 }
 
@@ -860,7 +860,7 @@ watch(
   line-height: 36px;
   text-align: center;
   cursor: pointer;
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   transition: all 0.3s;
   font-size: var(--sa-size-font);
 

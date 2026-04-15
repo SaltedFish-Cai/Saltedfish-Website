@@ -7,10 +7,8 @@
 
 <script lang="tsx" setup>
 import { ref, reactive, defineEmits, watch, computed, provide, inject, Ref } from "vue";
-import _ from "lodash";
+import { cloneDeep, isEqual } from "lodash";
 import { ConfigContextType, FormItemRule } from "./type";
-
-const { cloneDeep, isEqual } = _;
 
 // 定义组件属性
 const props = withDefaults(
@@ -101,7 +99,10 @@ const className = computed(() => {
 
 const styles = computed(() => {
   const styleObj = { ...props.style };
-  if (injectConfigContext.value.labelWidth !== undefined && injectConfigContext.value.labelPosition === "left") {
+  if (
+    injectConfigContext.value.labelWidth !== undefined &&
+    (injectConfigContext.value.labelPosition === "left" || injectConfigContext.value.labelPosition === "right")
+  ) {
     styleObj["--sa-form-label-width"] =
       typeof injectConfigContext.value.labelWidth === "number"
         ? `${injectConfigContext.value.labelWidth}px`
@@ -394,6 +395,7 @@ async function submitForm(): Promise<Record<string, any> | false> {
 
 // 设置表单数据
 function setFormData(data: Record<string, any>) {
+  console.log("++++++++++> data:", data);
   Object.assign(formData, cloneDeep(data));
 }
 

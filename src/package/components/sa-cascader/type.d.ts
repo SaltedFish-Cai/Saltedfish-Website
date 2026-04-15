@@ -1,4 +1,4 @@
-import { MOptionV2Type } from "../manager-type";
+import { SaOptionType } from "../manager-type";
 
 type languageKey = "en-US" | "zh-CN";
 
@@ -91,15 +91,15 @@ export type SaCascaderType = {
 
   /**
    * **外置数据**
-   * @type `Array<MOptionV2Type.Select>`
+   * @type `Array<SaOptionType.Select>`
    * @description 当设置该值时，会使用该值作为配置数据
-   * @description 该值的类型为 `Array<MOptionV2Type.Select>`，可以是任意类型
+   * @description 该值的类型为 `Array<SaOptionType.Select>`，可以是任意类型
    * @example
    * ```tsx
-   * <MoCascaderV2 exOptions={[]} />
+   * <SaCascader exOptions={[]} />
    * ```
    * */
-  exOptions?: MOptionV2Type.SelectList;
+  exOptions?: SaOptionType.SelectList;
 
   /**
    * **表单项占位符**
@@ -116,7 +116,7 @@ export type SaCascaderType = {
    * @description 当设置该值为 `false` 时，不会禁用该组件
    * @example
    * ```tsx
-   * <MoCascaderV2 disabled={true} />
+   * <SaCascader disabled={true} />
    * ```
    * */
   disabled?: boolean;
@@ -129,7 +129,7 @@ export type SaCascaderType = {
    * @description 当设置该值为 `false` 时，不会使用纯展示模式
    * @example
    * ```tsx
-   * <MoCascaderV2 display={true} />
+   * <SaCascader display={true} />
    * ```
    * */
   display?: boolean;
@@ -142,7 +142,7 @@ export type SaCascaderType = {
    * @description 当设置该值为 `false` 时，不会显示清除按钮
    * @example
    * ```tsx
-   * <MoCascaderV2 clearable={true} />
+   * <SaCascader clearable={true} />
    * ```
    * */
   clearable?: boolean;
@@ -155,7 +155,7 @@ export type SaCascaderType = {
    * @description 该值的类型为 `boolean`，可以是任意类型
    * @example
    * ```tsx
-   * <MoCascaderV2 teleportInContainer={true} />
+   * <SaCascader teleportInContainer={true} />
    * ```
    * */
   teleportInContainer?: boolean;
@@ -168,7 +168,7 @@ export type SaCascaderType = {
    * @description 该值的类型为 `Array<number | string>` | `number` | `string`，可以是任意类型
    * @example
    * ```tsx
-   * <MoCascaderV2 contrastData={[1, 2, 3]} />
+   * <SaCascader contrastData={[1, 2, 3]} />
    * ```
    * */
   contrastData?: Array<number | string> | number | string;
@@ -181,7 +181,7 @@ export type SaCascaderType = {
    * @description 当设置该值为 `false` 时，不会显示对比数据
    * @example
    * ```tsx
-   * <MoCascaderV2 contrast={true} />
+   * <SaCascader contrast={true} />
    * ```
    * */
   alwaysContrast?: boolean;
@@ -193,10 +193,10 @@ export type SaCascaderType = {
    * @type `oldValue` 为旧值
    * @type `option` 为当前选项
    * @default `undefined`
-   * @description 当设置该值为 `({ value, oldValue, option: MOptionV2Type.Select }) => void` 时，会使用该值作为回调函数
+   * @description 当设置该值为 `({ value, oldValue, option: SaOptionType.Select }) => void` 时，会使用该值作为回调函数
    * @example
    * ```tsx
-   * <MoCascaderV2 onChange={({value, oldValue, option}) => { console.log(value, oldValue, option) }} />
+   * <SaCascader onChange={({value, oldValue, option}) => { console.log(value, oldValue, option) }} />
    * ```
    * */
   onChange?: ({ value, oldValue, option }) => void;
@@ -205,15 +205,15 @@ export type SaCascaderType = {
 export type SaCascaderOptionType = {
   /**
    * **外置数据**
-   * @type `Array<MOptionV2Type.Select>`
+   * @type `Array<SaOptionType.Select>`
    * @description 当设置该值时，会使用该值作为配置数据
-   * @description 该值的类型为 `Array<MOptionV2Type.Select>`，可以是任意类型
+   * @description 该值的类型为 `Array<SaOptionType.Select>`，可以是任意类型
    * @example
    * ```tsx
-   * <MoCascaderV2 exOptions={[]} />
+   * <SaCascader exOptions={[]} />
    * ```
    * */
-  exOptions?: Array<MOptionV2Type.Select>;
+  exOptions?: Array<SaOptionType.Select>;
 
   /**
    * **当前值**
@@ -223,7 +223,7 @@ export type SaCascaderOptionType = {
    * @description 该值的类型为 `Array<number | string>` | `number` | `string`，可以是任意类型
    * @example
    * ```tsx
-   * <MoCascaderV2 inValue={[1, 2, 3]} />
+   * <SaCascader inValue={[1, 2, 3]} />
    * ```
    * */
   inValue?: Array<number | string> | number | string;
@@ -236,7 +236,7 @@ export type SaCascaderOptionType = {
    * @description 当设置该值为 `false` 时，不会使用多选模式
    * @example
    * ```tsx
-   * <MoCascaderV2 multiple={true} />
+   * <SaCascader multiple={true} />
    * ```
    * */
   isMultiple?: boolean;
@@ -249,7 +249,7 @@ export type SaCascaderOptionType = {
    * @description 当设置该值为 `false` 时，不会使用Check模式
    * @example
    * ```tsx
-   * <MoCascaderV2 isCheck={true} />
+   * <SaCascader isCheck={true} />
    * ```
    * */
   isCheck?: boolean;
@@ -263,7 +263,7 @@ export type SaCascaderOptionType = {
    * @description 当设置该值为 `string` 时，选项高度为 `string`
    * @example
    * ```tsx
-   * <MoCascaderV2 OptionsHeight="48px" />
+   * <SaCascader OptionsHeight="48px" />
    * ```
    * */
   OptionsHeight?: string;
@@ -276,7 +276,7 @@ export type SaCascaderOptionType = {
    * @description 当设置该值为 `false` 时，不会使用过滤模式
    * @example
    * ```tsx
-   * <MoCascaderV2 isFilter={true} />
+   * <SaCascader isFilter={true} />
    * ```
    * */
   isFilter?: boolean;

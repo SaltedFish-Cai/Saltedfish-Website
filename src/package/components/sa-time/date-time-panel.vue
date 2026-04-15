@@ -645,17 +645,17 @@ watch(
 .m-date-table.end {
   .current-month.selected-start {
     border-radius: 0;
-    border-top-left-radius: calc(var(--sa-size-radius) * 2);
-    border-bottom-left-radius: calc(var(--sa-size-radius) * 2);
+    border-top-left-radius: calc(var(--sa-size-radius, 3px) * 2);
+    border-bottom-left-radius: calc(var(--sa-size-radius, 3px) * 2);
   }
 
   .current-month.selected-end {
     border-radius: 0;
-    border-top-right-radius: calc(var(--sa-size-radius) * 2);
-    border-bottom-right-radius: calc(var(--sa-size-radius) * 2);
+    border-top-right-radius: calc(var(--sa-size-radius, 3px) * 2);
+    border-bottom-right-radius: calc(var(--sa-size-radius, 3px) * 2);
   }
   .current-month.selected-start.selected-end {
-    border-radius: var(--sa-size-radius);
+    border-radius: var(--sa-size-radius, 3px);
   }
 }
 

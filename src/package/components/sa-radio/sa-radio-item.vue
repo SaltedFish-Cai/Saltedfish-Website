@@ -13,19 +13,22 @@
         </transition>
       </div>
       <div v-if="props.label || $slots.default" class="sa-radio-item-label">
-        <slot>{{ props.label }}</slot>
+        <slot>{{ typeof props.label === "object" ? props.label[language] : props.label }}</slot>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
+import { computed, ComputedRef, inject, ref, watch } from "vue";
 import { SaRadioItemType } from "./type";
-import _ from "lodash";
-const { isNil } = _;
+import { isNil } from "lodash";
+import { SaltedGlobalConfigType } from "../sa-content/type";
 
 const props = withDefaults(defineProps<SaRadioItemType>(), {});
+
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+const language = SaltedGlobalConfig.value?.language?.value || "zh-CN";
 
 const inValue = ref(props.modelValue);
 const emits = defineEmits(["update:modelValue", "change"]);

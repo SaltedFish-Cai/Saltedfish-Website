@@ -6,22 +6,32 @@
     :style="{ ...props.style }"
     ref="selectRef"
   >
-    <sa-icon :name="selectItem" class="sa-select-icon_select-icon" />
+    <!-- <sa-icon :name="selectItem" class="sa-select-icon_select-icon" /> -->
 
     <sa-popover
       ref="popoverRef"
       :disabled="disabled"
       :popover-width="520"
       :teleport-to="teleportInContainer ? selectRef : 'body'"
+      :closeByScroll="false"
     >
       <template #reference>
-        <sa-button is="import" :disabled="disabled" :name="selectItem" :use-font="false" position="left">
+        <!-- <div class="reference-btn">
+          <sa-icon :name="selectItem" />
           {{ inputPlaceholder }}
-        </sa-button>
+        </div> -->
+        <sa-button :icon-name="selectItem" type="default" :useStop="false">{{ inputPlaceholder }}</sa-button>
+        <!-- <div class="reference-btn">{{ inputPlaceholder }}</div> -->
       </template>
 
-      <sa-tabs v-model="activeName">
-        <sa-tabs-item v-for="its in Config" :key="its.name" :label="`${its.title}(${its.icons.length})`" :name="its.name" scroll>
+      <sa-tabs v-model="activeName" align="edge">
+        <sa-tabs-item
+          v-for="its in Config"
+          :key="its.name"
+          :label="`${its.title}(${its.icons.length})`"
+          :name="its.name"
+          scroll
+        >
           <div class="sa-select-icon_popover">
             <template v-for="icon in its.icons" :key="icon.value">
               <sa-icon
@@ -55,7 +65,7 @@
 <script lang="ts" setup>
 // # Import
 import { ref, computed, watch, inject, ComputedRef } from "vue";
-import { MSelectIconV2Type } from "./type";
+import { SaSelectIconType } from "./type";
 import iconJson from "./config/icon.json";
 import direction from "./config/direction.json";
 import multiMedia from "./config/multi-media.json";
@@ -84,7 +94,7 @@ const Config = ref([
   { title: "其他图标", name: "default", icons: setIconOptions(iconJson) }
 ]);
 
-const props = defineProps<MSelectIconV2Type>();
+const props = defineProps<SaSelectIconType>();
 const emits = defineEmits(["update:modelValue", "change"]);
 
 const selectRef = ref();
@@ -100,8 +110,8 @@ const languagePackage = computed(() => {
 const inputPlaceholder = computed(() => {
   const language = SaltedGlobalConfig.value?.language?.value || "zh-CN";
   return typeof props.placeholder === "object"
-    ? props.placeholder[language] || languagePackage.value[`selectPlaceholder`]
-    : props.placeholder || languagePackage.value[`selectPlaceholder`];
+    ? props.placeholder[language] || languagePackage.value[`clickChangeIcon`]
+    : props.placeholder || languagePackage.value[`clickChangeIcon`];
 });
 
 const activeName = ref("all");
@@ -148,6 +158,24 @@ watch(
   justify-content: center;
   width: 100%;
 
+  .reference-btn {
+    width: 100%;
+    height: calc(var(--sa-size-height) + var(--sa-size-padding, 10px) / 3);
+    line-height: calc(var(--sa-size-height) + var(--sa-size-padding, 10px) / 3);
+    text-align: center;
+    font-size: var(--sa-size-font);
+    color: var(--sa-color-font);
+    border: 1px solid var(--sa-color-border);
+    border-radius: var(--sa-size-radius, 3px);
+    background-color: var(--sa-color-bg);
+    &:hover {
+      cursor: pointer;
+      background-color: var(--sa-color-primary-light-9);
+      color: var(--sa-color-primary);
+      border: 1px solid var(--sa-color-primary);
+    }
+  }
+
   .sa-select-icon_select-icon {
     padding: 4px;
     margin-right: calc(var(--sa-size-padding, 10px) / 2);
@@ -176,7 +204,7 @@ watch(
     align-items: center;
     justify-content: center;
     margin: 1px;
-    border: 1px solid var(--sa-color-border);
+    border: 1px solid var(--sa-border-color);
     border-radius: 3px;
     box-sizing: border-box;
     &:hover {
@@ -230,7 +258,7 @@ watch(
     &:hover {
       > .sa-button {
         cursor: not-allowed;
-        border-color: var(--sa-color-border);
+        border-color: var(--sa-border-color);
         box-shadow: none;
       }
     }

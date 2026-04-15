@@ -1,14 +1,18 @@
 // # Import
-import { useBaseStore as globalState } from "../store/index";
+import { SaltedGlobalConfigType } from "../sa-content/type";
 
-// #Function 获取字典(链接关系)
-export async function GetConditionals(useType: "group" | "link", params?: objectType) {
-  const useGlobalState = globalState();
-
-  let API = useGlobalState.getTableConfig?.advancedQueryApi;
+/**
+ * @description 获取字典(链接关系)
+ * @param config 全局配置
+ * @param useType 使用类型
+ * @param params 参数
+ * @returns 字典(链接关系)
+ */
+export async function GetConditionals(config: SaltedGlobalConfigType, useType: "group" | "link", params?: objectType) {
+  let API = config?.table_config?.advancedQueryApi;
 
   if (useType == "group") {
-    API = useGlobalState.getTableConfig?.groupAdvancedQueryApi;
+    API = config?.table_config?.groupAdvancedQueryApi;
   }
 
   if (typeof API == "object") {

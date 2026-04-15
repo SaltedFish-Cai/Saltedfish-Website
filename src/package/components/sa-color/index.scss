@@ -14,7 +14,7 @@
   &-preview {
     display: flex;
     align-items: center;
-    padding: calc(var(--sa-size-padding) / 2) calc(var(--sa-size-padding) + 0px);
+    padding: calc(var(--sa-size-padding) / 2) var(--sa-size-padding);
     border: 1px solid var(--sa-color-border);
     border-radius: var(--sa-size-radius);
     cursor: pointer;
@@ -62,7 +62,7 @@
 
 .sa-color-picker {
   &-main {
-    min-width: 200px;
+    min-width: 180px;
     margin-bottom: var(--sa-size-padding);
   }
 
@@ -182,7 +182,7 @@
       width: 100%;
       padding: 2px 8px;
       border: 1px solid var(--sa-color-border);
-      border-radius: var(--sa-size-radius);
+      border-radius: var(--sa-size-radius, 3px);
       font-size: 12px;
       box-sizing: border-box;
 

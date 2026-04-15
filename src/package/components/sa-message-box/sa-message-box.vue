@@ -12,7 +12,7 @@
         >
           <div class="sa-message-box_header mb-size">
             <div class="flex-center-start">
-              <sa-icon class="sa-message-box__icon mr-size-v2" name="warning_line"></sa-icon>
+              <sa-icon class="sa-message-box__icon mr-size" name="warning_line"></sa-icon>
               <div class="sa-message-box__title">
                 {{ typeof title === "string" ? title : title?.[language] || languagePackage["notificationTitle"] }}
               </div>
@@ -27,10 +27,22 @@
           <div v-else class="sa-message-box__content">{{ typeof message === "string" ? message : message?.[language] }}</div>
 
           <div class="sa-message-box__footer">
-            <sa-button is="cancel" :type="isType === 'confirm' ? 'default' : 'primary'" @click="handleClose">
+            <sa-button
+              is="cancel"
+              :iconName="cancelButtonIcon"
+              :type="isType === 'confirm' ? 'default' : 'primary'"
+              @click="handleClose"
+            >
               {{ cancelButtonText }}
             </sa-button>
-            <sa-button v-if="isType === 'confirm'" :type="type" font="check_circle_line" is="submit" @click="handleClick">
+            <sa-button
+              :iconName="confirmButtonIcon"
+              v-if="isType === 'confirm'"
+              :type="type"
+              font="check_circle_line"
+              is="submit"
+              @click="handleClick"
+            >
               {{ confirmButtonText }}
             </sa-button>
           </div>
@@ -68,7 +80,10 @@ const {
   onClose,
   confirmButtonText = languagePackage["confirmButtonText"],
   cancelButtonText = isType === "confirm" ? languagePackage["cancelButtonText"] : languagePackage["confirmButtonText"],
-  zIndex = 2050
+  cancelButtonIcon = "close_circle_line",
+  confirmButtonIcon = "check_circle_line",
+  zIndex = 2050,
+  closeOnPressEscape = true
 } = props.options;
 
 // 状态
@@ -101,6 +116,10 @@ const handleClick = () => {
   if (timer.value) {
     clearTimeout(timer.value);
   }
+  if (closeOnPressEscape) {
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap.filter(item => item != props.id);
+  }
 };
 
 const handleClose = () => {
@@ -109,7 +128,19 @@ const handleClose = () => {
   if (timer.value) {
     clearTimeout(timer.value);
   }
+  if (closeOnPressEscape) {
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap.filter(item => item != props.id);
+  }
 };
+
+// #添加ESC键监听
+function handleKeyDown(e) {
+  const escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+  if (e.key === "Escape" && escapeMap[escapeMap.length - 1] === props.id) {
+    handleClose();
+  }
+}
 
 // 生命周期
 onMounted(() => {
@@ -117,12 +148,18 @@ onMounted(() => {
   setTimeout(() => {
     visible.value = true;
   }, 10);
+  closeOnPressEscape && document.addEventListener("keydown", handleKeyDown);
+  if (closeOnPressEscape) {
+    window.SaltedGlobalConfig.escapeMap = window.SaltedGlobalConfig.escapeMap || [];
+    window.SaltedGlobalConfig.escapeMap.push(props.id);
+  }
 });
 
 onUnmounted(() => {
   if (timer.value) {
     clearTimeout(timer.value);
   }
+  closeOnPressEscape && document.removeEventListener("keydown", handleKeyDown);
 });
 
 // 暴露方法

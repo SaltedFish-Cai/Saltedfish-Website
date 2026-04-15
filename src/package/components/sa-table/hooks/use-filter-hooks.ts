@@ -2,7 +2,7 @@ import { ElMessageBox } from "element-plus";
 import { computed, inject } from "vue";
 import { SaTableUseType } from "../type";
 
-export const useFilterHooks = (props, state) => {
+export const useFilterHooks = (props, state, language) => {
   const Query = computed(handleQueryChange);
   const AdvancedQuery = computed(handleAdvancedQueryChange);
   const injectGetTableList = inject("getTableList") as (
@@ -15,7 +15,7 @@ export const useFilterHooks = (props, state) => {
   // #Function 保存高级搜索筛选
   function handleSeniorSetting({ AdvancedFilter }) {
     if (!AdvancedFilter.relationshipGroup.length) {
-      handleRemoveSeniorQuery(AdvancedFilter);
+      handleRemoveSenior(AdvancedFilter);
       return;
     }
 
@@ -60,7 +60,7 @@ export const useFilterHooks = (props, state) => {
             if (exOptions) {
               const exValue = exOptions.find(item => item.value == element);
               value = {
-                text: exValue?.label
+                text: typeof exValue?.label === "object" ? exValue?.label[language.value] : exValue?.label
               };
             }
 
@@ -106,10 +106,7 @@ export const useFilterHooks = (props, state) => {
   }
 
   // #Function 删除已筛选数据
-  function handleRemoveQuery(
-    item: { label: string; props: string; conditionalType: number; relValue: string },
-    byColumn?: string
-  ) {
+  function handleRemoveQ(item: { label: string; props: string; conditionalType: number; relValue: string }, byColumn?: string) {
     const FILTER = JSON.parse(JSON.stringify(state.tableQuery?.Filter || {}));
     if (item.conditionalType == 1 || item.conditionalType == 0) {
       // 输入框
@@ -140,7 +137,7 @@ export const useFilterHooks = (props, state) => {
   }
 
   // #Function 删除已筛选高级搜索数据
-  function handleRemoveSeniorQuery(its: Record<string, string>) {
+  function handleRemoveSenior(its: Record<string, string>) {
     const baseData = JSON.parse(JSON.stringify(state.tableQuery?.AdvancedFilter)) || [];
     const index = baseData.findIndex(item => item.fieldName == its.fieldName);
     if (index > -1) {
@@ -177,8 +174,8 @@ export const useFilterHooks = (props, state) => {
     handleSeniorSetting,
     handleQueryChange,
     handleAdvancedQueryChange,
-    handleRemoveQuery,
-    handleRemoveSeniorQuery,
+    handleRemoveQ,
+    handleRemoveSenior,
     handleCleanAllQuery,
     handleCleanAllSeniorQuery
   };

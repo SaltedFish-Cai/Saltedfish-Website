@@ -1,5 +1,5 @@
 import type { MessageOptions, MessageInstance } from "./type";
-import { MessageManager } from "./sa-message-manager";
+import { MessageManager } from "./message-manager";
 
 // 主通知函数
 export function Message(options: MessageOptions | string): MessageInstance {

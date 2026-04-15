@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <!-- @handle-remove-query="handleRemoveQuery" -->
+    <!-- @handle-remove-query="handleRemoveQ" -->
     <Filter
       v-if="item.useFilter != false"
       :id="props.id"
@@ -68,7 +68,7 @@
       </template>
 
       <template #exBtn v-if="isUseCellConfig(item) && item.useSeniorFilter != false && useGlobalSeniorFilter">
-        <div class="flex-center mt-size-v2">
+        <div class="flex-center mt-size">
           <sa-button font="mortarboard_line" @click="openSeniorFilter(item)"
             >{{ languagePackage["useAdvancedSearch"] }}
           </sa-button>
@@ -138,8 +138,8 @@ function setIconAction(prop) {
 }
 
 // #Function 删除筛选框数据时,同步删除相关数据
-// function handleRemoveQuery(scope) {
-//   emits("handleRemoveQuery", scope, "column");
+// function handleRemoveQ(scope) {
+//   emits("handleRemoveQ", scope, "column");
 // }
 
 // #Function 打开高级搜索
@@ -215,7 +215,7 @@ watch(
     display: flex !important;
     width: 18px;
     height: 7px;
-    font-size: calc(var(--sa-size-font, 13px) + 8px);
+    font-size: calc(var(--sa-size-font, 16px) + 8px);
     color: var(--sa-color-hover);
   }
   .order-act {
@@ -234,7 +234,7 @@ watch(
     display: flex !important;
     width: inherit;
     height: 100%;
-    font-size: calc(var(--sa-size-font, 13px) + 1px);
+    font-size: calc(var(--sa-size-font, 16px) + 1px);
     color: var(--sa-color-hover);
   }
 

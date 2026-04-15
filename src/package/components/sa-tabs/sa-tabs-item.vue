@@ -38,7 +38,7 @@
           :id="tabsContext.tabsId + '-' + name"
         >
           <sa-title :tips="tips">
-            {{ label }}
+            {{ typeof label === "string" ? label : label[languageValue] }}
             <template #tips v-if="$slots['tips']">
               <slot name="tips"></slot>
             </template>
@@ -52,9 +52,15 @@
 </template>
 <script lang="ts" setup>
 // #
-import { ref, onMounted, inject, provide, watch } from "vue";
+import { ref, onMounted, inject, provide, watch, computed, ComputedRef } from "vue";
 import { SaTabsItemType } from "./type";
+import { SaltedGlobalConfigType } from "../sa-content/type";
 // import { randChar } from "../tools/rand-char";
+
+const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
+const languageValue = computed(() => {
+  return SaltedGlobalConfig.value?.language?.value || "zh-CN";
+});
 
 const scrollbarRef = ref();
 provide("parentScrollbarRef", scrollbarRef);
@@ -138,6 +144,7 @@ watch(
 
   .sa-tabs-item-body_fix {
     height: calc(100% - 0px);
+    box-sizing: border-box;
     // padding-right: 9px;
     // padding-bottom: 7px;
     // padding-left: 9px;
@@ -145,26 +152,26 @@ watch(
 }
 
 .sa-tabs-item-body_fix.padding-top {
-  height: calc(100% - calc(var(--sa-size-padding, 10px)));
+  // height: calc(100% - calc(var(--sa-size-padding, 10px)));
   padding-top: calc(var(--sa-size-padding, 10px)) !important;
 }
 .sa-tabs-item-body_fix.padding-left {
-  width: calc(100% - calc(var(--sa-size-padding, 10px)));
+  // width: calc(100% - calc(var(--sa-size-padding, 10px)));
   padding-left: calc(var(--sa-size-padding, 10px)) !important;
 }
 .sa-tabs-item-body_fix.padding-bottom {
-  height: calc(100% - calc(var(--sa-size-padding, 10px)));
+  // height: calc(100% - calc(var(--sa-size-padding, 10px)));
   padding-bottom: calc(var(--sa-size-padding, 10px)) !important;
 }
 .sa-tabs-item-body_fix.padding-right {
-  width: calc(100% - calc(var(--sa-size-padding, 10px)));
+  // width: calc(100% - calc(var(--sa-size-padding, 10px)));
   padding-right: calc(var(--sa-size-padding, 10px)) !important;
 }
 .sa-tabs-item-body_fix.padding-top.padding-bottom {
-  height: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
+  // height: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
 }
 .sa-tabs-item-body_fix.padding-left.padding-right {
-  width: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
+  // width: calc(100% - calc(var(--sa-size-padding, 10px)) * 2);
 }
 
 .sa-tabs-item.active {

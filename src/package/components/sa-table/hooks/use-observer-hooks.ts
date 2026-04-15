@@ -65,7 +65,7 @@ export const useObserverHooks = (
     }
   }
 
-  function listenChildCell() {
+  function listenChildCell(callback?) {
     if (observer?.disconnect) return;
     window.developLog.log(`打开监听——子元素宽度变化`, props.id, "success");
     observer = new window.MutationObserver(setCellWidth);
@@ -74,6 +74,7 @@ export const useObserverHooks = (
       observer.observe(contentRef.value, config);
       nextTick(() => {
         setCellWidth();
+        callback?.();
       });
     }
   }

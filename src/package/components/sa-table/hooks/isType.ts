@@ -14,7 +14,7 @@ export function isSelectType(row, display) {
     "multiple-cascader-check",
     "multiple-cascader"
   ];
-  const type = row.cellConfig?.type || row.filterType;
+  const type = row.filterType || row.cellConfig?.type;
   const _display = row.cellConfig?.display || display || !!row.filterType;
   let isTrue = arr.indexOf(type) > -1 && _display == true;
   if (type == "tag") isTrue = true;
@@ -36,7 +36,7 @@ export function isTimeType(row, display) {
     "year-picker-group",
     "year-picker"
   ];
-  const type = row.cellConfig?.type || row.filterType;
+  const type = row.filterType || row.cellConfig?.type;
   const _display = row.cellConfig?.display || display || !!row.filterType;
   const isTrue = arr.indexOf(type) > -1 && _display == true;
   return isTrue;
@@ -45,7 +45,7 @@ export function isTimeType(row, display) {
 // #Function 是否数字类型
 export function isNumberType(row, display) {
   const arr = ["number"];
-  const type = row.cellConfig?.type || row.filterType;
+  const type = row.filterType || row.cellConfig?.type;
   const _display = row.cellConfig?.display || display || !!row.filterType;
   const isTrue = arr.indexOf(type) > -1 && _display == true;
   return isTrue;
@@ -54,7 +54,7 @@ export function isNumberType(row, display) {
 // #Function 是否文本类型
 export function isTextType(row, display) {
   const arr = ["input", "textarea"];
-  const type = row.cellConfig?.type || row.filterType;
+  const type = row.filterType || row.cellConfig?.type;
   const _display = row.cellConfig?.display || display || !!row.filterType;
   const isTrue = arr.indexOf(type) > -1 && _display == true;
   return isTrue;

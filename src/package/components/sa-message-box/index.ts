@@ -1,5 +1,5 @@
 import type { MessageBoxOptions, MessageBoxInstance } from "./type";
-import { messageBoxManager } from "./sa-message-box-manager";
+import { messageBoxManager } from "./message-box-manager";
 import { useZIndex } from "element-plus";
 /**
  * # 获取全局 Z 索引
@@ -41,9 +41,9 @@ MessageBox.confirm = (options: MessageBoxOptions | string, onConfirm?: () => voi
 MessageBox.delete = (options: MessageBoxOptions | string): MessageBoxInstance => {
   const baseOptions = {
     title: { "en-US": "Tips", "zh-CN": "注意" },
-    message: { "en-US": "Are you sure to delete this data?", "zh-CN": "是否删除数据?" },
+    message: { "en-US": "Are you sure to delete this data?", "zh-CN": "是否删除此数据?" },
     type: "danger" as const,
-    confirmButtonText: { "en-US": "Delete", "zh-CN": "删除" },
+    confirmButtonText: { "en-US": "Delete", "zh-CN": "确认删除" },
     cancelButtonText: { "en-US": "Cancel", "zh-CN": "取消" }
   };
   if (typeof options === "string") {

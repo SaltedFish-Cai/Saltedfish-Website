@@ -121,6 +121,8 @@ export type SaFileType = {
    * */
   fileIncludeType?: string[];
 
+  fileIncludeText?: string[];
+
   /**
    * **不允许上传文件类型**
    * @type `Array<string>` | `undefined`
@@ -137,6 +139,8 @@ export type SaFileType = {
    * ```
    * */
   fileExcludeType?: string[];
+
+  fileExcludeText?: string[];
 
   /**
    * **单个文件上传大小限制**、

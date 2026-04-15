@@ -1,6 +1,6 @@
 <template>
   <sa-scrollbar always noPadding ref="scrollRef">
-    <div class="m-image-view-v2" :id="IMG_ID + '-img'">
+    <div class="sa-image-view" :id="IMG_ID + '-img'">
       <div class="image-wrapper" :class="zoomIndex > baseIndex ? 'flex' : 'flex-center'" :style="{ zoom: zoomIndex }">
         <img ref="imgRef" :src="mediaImage" :onload="imgLoaded" />
       </div>
@@ -61,9 +61,6 @@ const client = ref({ x: -500, y: -500 });
 const menuSettingVisible = ref(false);
 
 onMounted(async () => {
-  mediaImage.value = props.filePath;
-  return;
-
   const config = {
     requestHeader: SaltedGlobalConfig.value?.requestHeader,
     downloadHose: SaltedGlobalConfig.value?.file_config?.downloadHose || ""
@@ -148,16 +145,16 @@ watch(
   .setting-item {
     padding: 5px 16px;
     &:hover {
-      color: var(--sa-color-primary);
+      color: var(--el-color-primary);
       cursor: pointer;
-      background-color: var(--sa-color-primary-light-8);
+      background-color: var(--el-color-primary-light-8);
     }
   }
 }
 </style>
 
 <style lang="scss">
-.m-image-view-v2 {
+.sa-image-view {
   background: gray;
   padding: 30px;
   min-height: calc(100% - 60px);
@@ -172,7 +169,7 @@ watch(
     max-width: var(--position-width) !important;
     max-height: var(--position-height) !important;
     img {
-      transition: var(--m-component-animation, 0.3s);
+      transition: var(--sa-component-animation, 0.3s);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       display: block;
       width: 780px !important;

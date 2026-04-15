@@ -1,6 +1,6 @@
 type languageKey = "en-US" | "zh-CN";
 
-export type MSelectIconV2Type = {
+export type SaSelectIconType = {
   /**
    * **组件唯一标识**
    * @type `string` | `undefined`

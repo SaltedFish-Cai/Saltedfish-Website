@@ -1,20 +1,20 @@
 <template>
-  <div class="m-timer-v2" ref="timerRef" :class="[props.class, { 'is-disabled': props.disabled }]" :style="{ ...props.style }">
+  <div class="sa-timer" ref="timerRef" :class="[props.class, { 'is-disabled': props.disabled }]" :style="{ ...props.style }">
     <sa-popover
       ref="popoverRef"
       @change="handlePopoverChange"
       :disabled="props.disabled"
       :popoverWidth="240"
-      class="m-timer-v2-popover"
+      class="sa-timer-popover"
       :teleportTo="timerRef"
       :targetClose="false"
     >
       <template #reference>
         <!-- 时间输入框 -->
-        <div class="m-timer-v2-input" :class="[isFocus ? 'is-focus' : '']">
+        <div class="sa-timer-input" :class="[isFocus ? 'is-focus' : '']">
           <!-- 小时 -->
           <input
-            class="m-timer-v2-input-inner"
+            class="sa-timer-input-inner"
             v-model="hours"
             ref="hourInputRef"
             :name="id + '_h'"
@@ -30,7 +30,7 @@
           :
           <!-- 分钟 -->
           <input
-            class="m-timer-v2-input-inner"
+            class="sa-timer-input-inner"
             v-model="minutes"
             ref="minuteInputRef"
             :name="id + '_m'"
@@ -46,7 +46,7 @@
           :
           <!-- 秒钟 -->
           <input
-            class="m-timer-v2-input-inner"
+            class="sa-timer-input-inner"
             v-model="seconds"
             ref="secondInputRef"
             :name="id + '_s'"
@@ -63,42 +63,42 @@
       </template>
 
       <!-- 时间选择面板 -->
-      <div class="m-timer-v2-panel">
-        <div class="m-timer-v2-panel-content">
-          <div class="m-timer-v2-time-selector">
-            <div class="m-timer-v2-time-column">
-              <div class="m-timer-v2-time-title">时</div>
-              <div class="m-timer-v2-time-list">
+      <div class="sa-timer-panel">
+        <div class="sa-timer-panel-content">
+          <div class="sa-timer-time-selector">
+            <div class="sa-timer-time-column">
+              <div class="sa-timer-time-title">时</div>
+              <div class="sa-timer-time-list">
                 <div
                   v-for="h in 24"
                   :key="h"
-                  :class="['m-timer-v2-time-item', { selected: hours === formatTimeUnit(h - 1) }]"
+                  :class="['sa-timer-time-item', { selected: hours === formatTimeUnit(h - 1) }]"
                   @click="selectHour(h - 1)"
                 >
                   {{ formatTimeUnit(h - 1) }}
                 </div>
               </div>
             </div>
-            <div class="m-timer-v2-time-column">
-              <div class="m-timer-v2-time-title">分</div>
-              <div class="m-timer-v2-time-list">
+            <div class="sa-timer-time-column">
+              <div class="sa-timer-time-title">分</div>
+              <div class="sa-timer-time-list">
                 <div
                   v-for="m in 60"
                   :key="m"
-                  :class="['m-timer-v2-time-item', { selected: minutes === formatTimeUnit(m - 1) }]"
+                  :class="['sa-timer-time-item', { selected: minutes === formatTimeUnit(m - 1) }]"
                   @click="selectMinute(m - 1)"
                 >
                   {{ formatTimeUnit(m - 1) }}
                 </div>
               </div>
             </div>
-            <div class="m-timer-v2-time-column">
-              <div class="m-timer-v2-time-title">秒</div>
-              <div class="m-timer-v2-time-list">
+            <div class="sa-timer-time-column">
+              <div class="sa-timer-time-title">秒</div>
+              <div class="sa-timer-time-list">
                 <div
                   v-for="s in 60"
                   :key="s"
-                  :class="['m-timer-v2-time-item', { selected: seconds === formatTimeUnit(s - 1) }]"
+                  :class="['sa-timer-time-item', { selected: seconds === formatTimeUnit(s - 1) }]"
                   @click="selectSecond(s - 1)"
                 >
                   {{ formatTimeUnit(s - 1) }}
@@ -107,7 +107,7 @@
             </div>
           </div>
         </div>
-        <div class="m-timer-v2-panel-footer">
+        <div class="sa-timer-panel-footer">
           <sa-button @click="setCurrentTime('start')" is="go" type="default">开始</sa-button>
           <sa-button @click="setCurrentTime('current')" is="go" type="default">当前</sa-button>
           <sa-button @click="setCurrentTime('end')" is="go" type="default">结束</sa-button>
@@ -119,7 +119,7 @@
 
 <script lang="ts" setup>
 import { ref, watch, onMounted, onUnmounted, computed } from "vue";
-import { MTimerV2Type } from "./type";
+import { SaTimerType } from "./type";
 import { randChar } from "../tools/rand-char";
 
 // Refs
@@ -130,7 +130,7 @@ const secondInputRef = ref();
 const isFocus = ref(false);
 const currentFocus = ref<"hour" | "minute" | "second">("hour");
 
-const props = withDefaults(defineProps<MTimerV2Type>(), {
+const props = withDefaults(defineProps<SaTimerType>(), {
   id: randChar(),
   modelValue: "",
   clearable: true,
@@ -469,7 +469,7 @@ watch(
 </script>
 
 <style lang="scss">
-.m-timer-v2 {
+.sa-timer {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -477,7 +477,7 @@ watch(
   padding: calc(var(--sa-size-padding) / 3) calc(var(--sa-size-padding) / 1.2);
   color: var(--sa-color-default);
   font-size: var(--sa-size-font);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   line-height: 1.5715;
   background: none;
   border: 1px solid var(--sa-color-border);
@@ -496,11 +496,11 @@ watch(
   }
 }
 
-.m-timer-v2-popover {
+.sa-timer-popover {
   width: 100% !important;
 }
 
-.m-timer-v2.is-disabled {
+.sa-timer.is-disabled {
   color: rgba(0, 0, 0, 0.25);
   background-color: #f5f5f5;
   border-color: #d9d9d9;
@@ -509,13 +509,13 @@ watch(
   opacity: 1;
 }
 
-.m-timer-v2-input {
+.sa-timer-input {
   display: flex;
   align-items: center;
   gap: 2px;
 }
 
-.m-timer-v2-input-inner {
+.sa-timer-input-inner {
   width: 24px;
   flex: 1;
   height: calc(var(--sa-size-height) - var(--sa-size-height) / 4);
@@ -527,27 +527,27 @@ watch(
   font-size: var(--sa-size-font);
 }
 
-.m-timer-v2-panel {
+.sa-timer-panel {
   width: 100%;
 }
 
-.m-timer-v2-time-selector {
+.sa-timer-time-selector {
   display: flex;
   max-height: 200px;
   overflow: hidden;
 }
 
-.m-timer-v2-time-column {
+.sa-timer-time-column {
   flex: 1;
   overflow-y: auto;
   border-right: 1px solid var(--sa-color-border);
 }
 
-.m-timer-v2-time-column:last-child {
+.sa-timer-time-column:last-child {
   border-right: none;
 }
 
-.m-timer-v2-time-title {
+.sa-timer-time-title {
   padding: calc(var(--sa-size-padding) / 2) calc(var(--sa-size-padding) / 1);
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
@@ -556,7 +556,7 @@ watch(
   font-size: var(--sa-size-font);
 }
 
-.m-timer-v2-time-list {
+.sa-timer-time-list {
   max-height: 160px;
   overflow-y: auto;
   font-size: var(--sa-size-font);
@@ -567,24 +567,24 @@ watch(
   }
 }
 
-.m-timer-v2-time-item {
+.sa-timer-time-item {
   padding: calc(var(--sa-size-padding) / 2) calc(var(--sa-size-padding) / 1);
   text-align: center;
   cursor: pointer;
   transition: background-color var(--sa-animation-time, 0.2s);
 }
 
-.m-timer-v2-time-item:hover {
+.sa-timer-time-item:hover {
   background-color: var(--sa-color-info-light-9);
 }
 
-.m-timer-v2-time-item.selected {
+.sa-timer-time-item.selected {
   background-color: var(--sa-color-primary);
   color: var(--sa-color-white);
   font-weight: 500;
 }
 
-.m-timer-v2-panel-footer {
+.sa-timer-panel-footer {
   display: flex;
   justify-content: space-between;
   padding: var(--sa-size-padding);

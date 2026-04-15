@@ -1,3 +1,5 @@
+type languageKey = "en-US" | "zh-CN";
+
 // # type
 export type SaTabsType = {
   /**
@@ -45,7 +47,7 @@ export type SaTabsType = {
    * @description 当设置该值为 `visible` 时，不会隐藏tabs内容元素
    * @example
    * ```tsx
-   * <MoTabsV2 visibleMode="display" />
+   * <SaTabs visibleMode="display" />
    * ```
    * */
   visibleMode?: "display" | "visible";
@@ -60,7 +62,7 @@ export type SaTabsType = {
    * @description 当设置该值为 `default` 时，会使用默认布局
    * @example
    * ```tsx
-   * <MoTabsV2 mode="portrait" />
+   * <SaTabs mode="portrait" />
    * ```
    * */
   mode?: "default" | "portrait" | "slider" | "sticky";
@@ -73,7 +75,7 @@ export type SaTabsType = {
    * @description 当设置该值为 `card` 时，会使用卡片样式
    * @example
    * ```tsx
-   * <MoTabsV2 styleMode="card" />
+   * <SaTabs styleMode="card" />
    * ```
    * */
   styleMode?: "card" | "default";
@@ -86,7 +88,7 @@ export type SaTabsType = {
    * @description 当设置该值为 `default` 时，会使用默认对齐
    * @example
    * ```tsx
-   * <MoTabsV2 align="edge" />
+   * <SaTabs align="edge" />
    * ```
    * */
   align?: "default" | "edge";
@@ -99,7 +101,7 @@ export type SaTabsType = {
    * @description 当设置该值为 `false` 时，不会使用底线
    * @example
    * ```tsx
-   * <MoTabsV2 useHeaderLine={true} />
+   * <SaTabs useHeaderLine={true} />
    * ```
    * */
   useHeaderLine?: boolean;
@@ -112,7 +114,7 @@ export type SaTabsType = {
    * @description 当设置该值为 `false` 时，不会使用滚动阴影
    * @example
    * ```tsx
-   * <MoTabsV2 useShadow={true} />
+   * <SaTabs useShadow={true} />
    * ```
    * */
   useShadow?: boolean;
@@ -125,7 +127,7 @@ export type SaTabsType = {
    * @description 当设置该值为 `undefined` 时，不会使用Tab变更回调
    * @example
    * ```tsx
-   * <MoTabsV2 onTabChange={(name, index) => { console.log(name, index) }} />
+   * <SaTabs onTabChange={(name, index) => { console.log(name, index) }} />
    * ```
    * */
   onTabChange?: ({ name: string, index: number }) => void;
@@ -139,10 +141,10 @@ export type SaTabsItemType = {
    * @description 当设置该值为 `string` 时，会使用该值作为Tab名称
    * @example
    * ```tsx
-   * <MoTabsV2Item label="Tab1" />
+   * <SaTabsItem label="Tab1" />
    * ```
    * */
-  label: number | string;
+  label: Record<languageKey, string> | string;
 
   /**
    * **Tab唯一Key**
@@ -151,7 +153,7 @@ export type SaTabsItemType = {
    * @description 当设置该值为 `string` 时，会使用该值作为Tab唯一Key
    * @example
    * ```tsx
-   * <MoTabsV2Item name="Tab1" />
+   * <SaTabsItem name="Tab1" />
    * ```
    * */
   name: number | string;
@@ -164,7 +166,7 @@ export type SaTabsItemType = {
    * @description 当设置该值为 `false` 时，不会开启滚动
    * @example
    * ```tsx
-   * <MoTabsV2Item scroll={true} />
+   * <SaTabsItem scroll={true} />
    * ```
    * */
   scroll?: boolean;
@@ -175,7 +177,7 @@ export type SaTabsItemType = {
    * @description 当设置该值为 `string` 时，会使用该值作为提示
    * @example
    * ```tsx
-   * <MoTabsV2Item tips="提示信息" />
+   * <SaTabsItem tips="提示信息" />
    * ```
    * */
   tips?: string;
@@ -189,8 +191,8 @@ export type SaTabsItemType = {
    * @description 当设置该值为 `number` 时，该组件会懒加载，延迟加载时间为该值
    * @example
    * ```tsx
-   * <MoTabsV2Item lazy={true} />
-   * <MoTabsV2Item lazy={1000} />
+   * <SaTabsItem lazy={true} />
+   * <SaTabsItem lazy={1000} />
    * ```
    * */
   lazy?: boolean | number;
@@ -216,7 +218,7 @@ export type SaTabsItemType = {
    * @description 当设置该值为 `false` 时，不会使用水平滚动
    * @example
    * ```tsx
-   * <MoTabsV2Item useScrollX={true} />
+   * <SaTabsItem useScrollX={true} />
    * ```
    * */
   useScrollX?: boolean;

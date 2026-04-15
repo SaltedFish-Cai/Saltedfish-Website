@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts" setup>
-import { SaEmptyType } from "./type";
+import { SaIconType } from "./type";
 
 // # Var
-const props = withDefaults(defineProps<SaEmptyType>(), {
+const props = withDefaults(defineProps<SaIconType>(), {
   icon: "dakai",
   message: "暂无数据"
 });

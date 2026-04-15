@@ -35,6 +35,15 @@ export type SaPopoverType = {
   style?: Record<string, string>;
 
   /**
+   * **自定义参考元素样式**
+   * @type `Record<string, string>`
+   * @default `undefined`
+   * @description 当设置该值时，会添加到参考元素的样式中
+   * @description 该值的类型为 `Record<string, string>`，可以是任意类型
+   * */
+  referenceStyle?: Record<string, string>;
+
+  /**
    * **是否禁用**
    * @type `boolean`
    * @default `false`
@@ -114,6 +123,14 @@ export type SaPopoverType = {
    * @description 是否粘性
    * */
   sticky?: "left" | "right" | undefined;
+
+  /**
+   * **是否点击滚动关闭**
+   * @type `boolean`
+   * @default `true`
+   * @description 是否点击滚动关闭
+   * */
+  closeByScroll?: boolean;
 
   /**
    * **弹窗关闭前触发**

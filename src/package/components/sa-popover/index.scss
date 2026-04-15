@@ -26,7 +26,7 @@
 
 .sa-popover-reference + .sa-button,
 .sa-button + .sa-popover-reference {
-  margin: 0 calc(var(--m-button-padding-size, 10px) / 4);
+  margin: 0 calc(var(--sa-size-padding, 10px) / 4);
   &:last-child {
     margin-right: 0;
   }
@@ -38,7 +38,7 @@
   left: -100%;
   z-index: 210;
   border: 1px solid var(--sa-color-border);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--sa-size-radius, 3px);
   box-shadow: 0px 0 5px 0px rgba(0, 0, 0, 0.15);
 
   .sa-popover-arrow {
@@ -61,7 +61,7 @@
     font-size: var(--sa-size-font);
     padding: calc(var(--sa-size-padding, 10px) / 1.5);
     overflow-wrap: break-word;
-    border-radius: var(--sa-size-radius);
+    border-radius: var(--sa-size-radius, 3px);
     z-index: 220;
     > .sa-tag {
       transform: translateX(0px);

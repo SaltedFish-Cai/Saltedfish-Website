@@ -1,12 +1,12 @@
 // m-row 组件样式
-$--m-row-gutter: 24px !default;
+$--sa-row-gutter: 24px !default;
 
 .m-row {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  margin-left: -$--m-row-gutter / 2;
-  margin-right: -$--m-row-gutter / 2;
+  margin-left: -$--sa-row-gutter / 2;
+  margin-right: -$--sa-row-gutter / 2;
 }
 
 // 水平对齐方式
@@ -44,7 +44,7 @@ $--m-row-gutter: 24px !default;
 }
 
 // 响应式断点
-$--m-breakpoints: (
+$--sa-breakpoints: (
   "xs": 0,
   "sm": 384px,
   "md": 768px,
@@ -53,7 +53,7 @@ $--m-breakpoints: (
   "xxl": 1920px
 );
 
-@each $bp, $width in $--m-breakpoints {
+@each $bp, $width in $--sa-breakpoints {
   @media (min-width: $width) {
     .m-row--#{bp}-start {
       justify-content: flex-start;

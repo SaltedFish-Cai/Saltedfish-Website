@@ -1,5 +1,5 @@
-import { MOptionV2Type } from "../manager-type";
-import { MCellItemV2Type } from "../cell";
+import { SaOptionType } from "../manager-type";
+import { SaCellItemType } from "../cell";
 import { DatePickerShortcut } from "../sa-time/type";
 import { SaFormChildType } from "../sa-form/type";
 
@@ -14,10 +14,10 @@ type languageKey = "en-US" | "zh-CN";
 export type SaTableCellExDependentType = {
   /**
    * **选择器请求Api**
-   * @type `(params: { query: string }) => Promise<MOptionV2Type.SelectList>`
+   * @type `(params: { query: string }) => Promise<SaOptionType.SelectList>`
    * @description 当设 cellConfig.type=='select' 时，会使用该值作为选择器请求Api
    * */
-  select_RequestApi?: { [x: string]: ({ query: string }) => Promise<MOptionV2Type.SelectList> };
+  select_RequestApi?: { [x: string]: ({ query: string }) => Promise<SaOptionType.SelectList> };
   /**
    * **时间选择器禁用日期函数**
    * @type `(date: any) => boolean`
@@ -298,14 +298,14 @@ export interface SaTableType {
 
   /**
    * **外置选择框选项**
-   * @type `MOptionV2Type.Default`
+   * @type `SaOptionType.Default`
    * @description 当设置该值时，会使用该值作为外置选择框选项
    * @example
    * ```ts
    * <m-table :exOptions="exOptions"></m-table>
    * ```
    * */
-  exOptions?: MOptionV2Type.Default;
+  exOptions?: SaOptionType.Default;
 
   /**
    * **表格额外依赖**
@@ -321,7 +321,7 @@ export interface SaTableType {
   /**
    * **单元格额外依赖**
    * @type `SaTableCellExDependentType`
-   * @type `SaTableCellExDependentType.select_RequestApi` 为 `(params: { query: string }) => Promise<MOptionV2Type.SelectList>`
+   * @type `SaTableCellExDependentType.select_RequestApi` 为 `(params: { query: string }) => Promise<SaOptionType.SelectList>`
    * @type `SaTableCellExDependentType.file_attachedData` 为 `{ [x: string]: Record<string, string> }`
    * @type `SaTableCellExDependentType.time_disabledDateFn` 为 `(date: any) => boolean`
    * @type `SaTableCellExDependentType.time_shortcuts` 为 `DatePickerShortcut[]`
@@ -521,7 +521,7 @@ export interface SaTableType {
    * */
   onRenderEnd?: (getTableList: (params?: Record<string, string>) => Promise<any>) => void;
 
-  getTableList: (params?: Record<string, string>) => Promise<any>;
+  getTableList?: (params?: Record<string, string>) => Promise<any>;
 
   /**
    * **单元格变化回调**
@@ -547,7 +547,7 @@ export type SearchType =
   | "date-picker"
   | "input-number"
   | "input"
-  | "select-v2"
+  | "select"
   | "select"
   | "slider"
   | "switch"
@@ -555,7 +555,7 @@ export type SearchType =
   | "time-select"
   | "tree-select";
 
-export type CellConfigType = MCellItemV2Type & {
+export type CellConfigType = SaCellItemType & {
   required?: boolean;
 };
 
@@ -644,7 +644,7 @@ export type SaTableItemType = {
    * - 当设置该值为 `right` 时，会固定在右侧
    * - 当设置该值为 `undefined` 时，不会固定
    * */
-  fixed?: "left" | "right";
+  fixed?: "default" | "left" | "right";
 
   /**
    * **单位文本**
@@ -809,6 +809,12 @@ export namespace SaTableUseType {
    */
   export type TableStateType = {
     /**
+     * **表格加载宽度**
+     * @type `number`
+     * @description 表格加载宽度
+     * */
+    tableLoadingSize: number;
+    /**
      * **表格数据（原始数据）**
      * @type `Record<string, string>[]`
      * @description 表格数据
@@ -941,6 +947,12 @@ export namespace SaTableUseType {
      * @description 校验规则
      */
     inRules: Record<string, any[]>;
+    /**
+     * **等待选择数据**
+     * @type `string[]`
+     * @description 等待选择数据
+     */
+    awaitSelectData: Record<string, any>[];
   };
 
   export type FilterType = {

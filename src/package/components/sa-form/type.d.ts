@@ -1,8 +1,8 @@
 import { OtherType, GroupType, TabsType } from "./cell";
-import { MCellV2Type } from "../cell";
-import { MOptionV2Type } from "../manager-type";
+import { SaCellType } from "../cell";
+import { SaOptionType } from "../manager-type";
 import { DatePickerShortcut } from "../sa-time/type";
-import { SaTransferV2Type } from "../sa-transfer-v2/type";
+import { SaTransferType } from "../sa-transfer/type";
 
 type languageKey = "en-US" | "zh-CN";
 
@@ -73,10 +73,10 @@ export type SaFormProps = {
 
   /**
    * **外置选择框选项**
-   * @type `MOptionV2Type.Default`
+   * @type `SaOptionType.Default`
    * @description 当设置该值时，会使用该值作为外置选择框选项
    * */
-  exOptions?: MOptionV2Type.Default;
+  exOptions?: SaOptionType.Default;
 
   /**
    * **是否使用校验**
@@ -182,7 +182,7 @@ export type SaFormProps = {
   /**
    * **单元格额外依赖**
    * @type `SaFormCellExDependentType`
-   * @type `SaFormCellExDependentType.select_RequestApi` 为 `(params: { query: string }) => Promise<Array<MOptionV2Type.Select>>`
+   * @type `SaFormCellExDependentType.select_RequestApi` 为 `(params: { query: string }) => Promise<Array<SaOptionType.Select>>`
    * @type `SaFormCellExDependentType.file_attachedData` 为 `{ [x: string]: Record<string, string> }`
    * @type `SaFormCellExDependentType.time_disabledDateFn` 为 `(date: any) => boolean`
    * @type `SaFormCellExDependentType.time_shortcuts` 为 `DatePickerShortcut[]`
@@ -230,7 +230,7 @@ export type SaFormProps = {
    * @type `prop` `string` 表单结构唯一Key
    * @type `value` `Array<number | string>` | `number` | `string` `单元素`数据
    * @type `oldValue` `Array<number | string>` | `number` | `string` `单元素`旧数据
-   * @type `option` `MOptionV2Type.Select` 表单结构项
+   * @type `option` `SaOptionType.Select` 表单结构项
    * @description 当设置该值为 `(prop, value, oldValue) => void` 时，会使用该值作为回调函数
    * @example
    * ```ts
@@ -355,9 +355,9 @@ type BaseType = {
   };
 };
 
-export type SaFormChildType = BaseType & StrictUnion<MCellV2Type | OtherType | (SaTransferV2Type & { type: "transfer" })>;
+export type SaFormChildType = BaseType & StrictUnion<SaCellType | OtherType | (SaTransferType & { type: "transfer" })>;
 export type SaFormItemType = BaseType &
-  StrictUnion<GroupType | MCellV2Type | OtherType | TabsType | (SaTransferV2Type & { type: "transfer" })>;
+  StrictUnion<GroupType | SaCellType | OtherType | TabsType | (SaTransferType & { type: "transfer" })>;
 
 export type SaFormRef = {
   /**
@@ -505,10 +505,10 @@ export type SaFormExDependentType = {
 export type SaFormCellExDependentType = {
   /**
    * **选择器请求Api**
-   * @type `(params: { query: string }) => Promise<MOptionV2Type.SelectList>`
+   * @type `(params: { query: string }) => Promise<SaOptionType.SelectList>`
    * @description 当设 cellConfig.type=='select' 时，会使用该值作为选择器请求Api
    * */
-  select_RequestApi?: { [x: string]: ({ query }: { query: string }) => Promise<MOptionV2Type.SelectList> };
+  select_RequestApi?: { [x: string]: ({ query }: { query: string }) => Promise<SaOptionType.SelectList> };
   /**
    * **文件上传请求Api**
    * @type `(params: { file: File }) => Promise<any>`
@@ -533,6 +533,12 @@ export type SaFormCellExDependentType = {
    * @description 当设 cellConfig.type=='time' 时，会使用该值作为时间选择器快捷选项
    * */
   time_shortcuts?: { [x: string]: DatePickerShortcut[] };
+  /**
+   * **点击查看内容函数**
+   * @type `(prop: string, data: object) => void`
+   * @description 当设 cellConfig.type=='clickTag' 时，会使用该值作为点击查看内容函数
+   * */
+  clickTagClick?: { [x: string]: (prop: string, data: any) => void };
 };
 
 export type ConfigContextType = {
@@ -548,7 +554,7 @@ export type ConfigContextType = {
   display: boolean;
   languagePackage: Record<string, string>;
   language: languageKey;
-  exOptions: MOptionV2Type.Default;
+  exOptions: SaOptionType.Default;
   exDependent: SaFormExDependentType;
   exCellDependent: SaFormCellExDependentType;
   useRequired: boolean;
