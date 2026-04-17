@@ -148,22 +148,28 @@ export const useFilterHooks = (props, state, language) => {
 
   // #Function 删除全部已筛选数据
   function handleCleanAllQuery() {
-    M_MessageBox.confirm("是否删除所有筛选项?", "温馨提示", {
+    M_MessageBox.confirm({
+      message: "是否删除所有筛选项?",
+      title: "温馨提示",
       type: "error",
-      confirmButtonText: "确认删除"
-    }).then(() => {
-      // callbackColSetting({}, true);
-      injectGetTableList({ Filter: [] });
+      confirmButtonText: "确认删除",
+      onConfirm: () => {
+        // callbackColSetting({}, true);
+        injectGetTableList({ Filter: [] });
+      }
     });
   }
 
   // #Function 删除全部已筛选高级搜索数据
   function handleCleanAllSeniorQuery() {
-    M_MessageBox.confirm("是否删除所有筛选项?", "温馨提示", {
+    M_MessageBox.confirm({
+      message: "是否删除所有筛选项?",
+      title: "温馨提示",
       type: "error",
-      confirmButtonText: "确认删除"
-    }).then(() => {
-      injectGetTableList({ AdvancedFilter: [] });
+      confirmButtonText: "确认删除",
+      onConfirm: () => {
+        injectGetTableList({ AdvancedFilter: [] });
+      }
     });
   }
 

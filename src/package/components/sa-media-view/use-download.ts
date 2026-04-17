@@ -50,7 +50,7 @@ export const useGetBlob = async (config = { downloadHose: "", requestHeader: {} 
               title: "当前页面过期",
               message: "当前页面已过期",
               showCancelButton: false,
-              callback: () => {
+              onConfirm: () => {
                 location.reload();
               }
             });
@@ -126,7 +126,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
               title: "当前页面过期",
               message: "当前页面已过期",
               showCancelButton: false,
-              callback: () => {
+              onConfirm: () => {
                 location.reload();
               }
             });
