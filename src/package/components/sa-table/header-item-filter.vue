@@ -100,7 +100,7 @@
 <script setup lang="ts" name="TableColumnFilter">
 // # import
 import { ref, inject, reactive, watch, computed, ComputedRef } from "vue";
-import { ElMessage } from "element-plus";
+import { M_Message } from "../feedback";
 import { isSelectType, isTimeType, isNumberType } from "./hooks/isType";
 import { randChar } from "../tools/rand-char";
 import { SaTableItemType, SaTableUseItemType, SaTableUseType } from "./type";
@@ -256,7 +256,7 @@ function FetchSaveAndFilter() {
       });
     }
     if (state.searchValue[0] && state.searchValue[1] && state.searchValue[0] > state.searchValue[1]) {
-      return ElMessage.error(element.label + ` ${languagePackage.value["errorMessage"]}`);
+      return M_Message.error(element.label + ` ${languagePackage.value["errorMessage"]}`);
     }
   } else {
     filter = [

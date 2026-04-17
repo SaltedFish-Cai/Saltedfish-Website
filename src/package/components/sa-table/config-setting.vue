@@ -102,7 +102,7 @@
 <script setup lang="ts" name="ColSetting">
 // # Import
 import { ref, computed, defineEmits, inject, nextTick, ComputedRef } from "vue";
-import { ElMessage } from "element-plus";
+import { M_Message } from "../feedback";
 import { isSelectType, isTimeType, isTextType, isNumberType } from "./hooks/isType";
 
 import { SaTableUseItemType, SaTableUseType } from "./type";
@@ -283,7 +283,7 @@ async function FetchSaveAndFilter() {
       element.searchCriteria[1] &&
       element.searchCriteria[0] > element.searchCriteria[1]
     ) {
-      return ElMessage.error(element.label + ` ${languagePackage.value?.["errorMessage"]}`);
+      return M_Message.error(element.label + ` ${languagePackage.value?.["errorMessage"]}`);
     }
 
     if (!isTimeType(element, true)) {

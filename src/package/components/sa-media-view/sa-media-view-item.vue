@@ -58,7 +58,7 @@
 import { ref, computed, watch, inject, ComputedRef } from "vue";
 import { SaMediaViewItemType } from "./type";
 import { isImageFile, isPdfFile, isTextFile, isWordFile, isExcelFile, isUnOpenFile } from "./is";
-import { ElMessage } from "element-plus";
+import { M_Message } from "../feedback";
 
 import { useDownload } from "./use-download";
 import imageView from "./image-view.vue";
@@ -100,7 +100,7 @@ const languagePackage = computed(() => {
 function openFile() {
   const fileName = props.fileName || props?.file?.OriginalName || props?.file?.FileName;
   if (isUnOpenFile(fileName)) {
-    return ElMessage.warning(languagePackage.value["errorText"]);
+    return M_Message.warning(languagePackage.value["errorText"]);
   }
   visible.value = true;
 }

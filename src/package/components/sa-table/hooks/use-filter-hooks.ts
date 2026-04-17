@@ -1,4 +1,4 @@
-import { ElMessageBox } from "element-plus";
+import { M_MessageBox } from "../../feedback";
 import { computed, inject } from "vue";
 import { SaTableUseType } from "../type";
 
@@ -148,7 +148,7 @@ export const useFilterHooks = (props, state, language) => {
 
   // #Function 删除全部已筛选数据
   function handleCleanAllQuery() {
-    ElMessageBox.confirm("是否删除所有筛选项?", "温馨提示", {
+    M_MessageBox.confirm("是否删除所有筛选项?", "温馨提示", {
       type: "error",
       confirmButtonText: "确认删除"
     }).then(() => {
@@ -159,7 +159,7 @@ export const useFilterHooks = (props, state, language) => {
 
   // #Function 删除全部已筛选高级搜索数据
   function handleCleanAllSeniorQuery() {
-    ElMessageBox.confirm("是否删除所有筛选项?", "温馨提示", {
+    M_MessageBox.confirm("是否删除所有筛选项?", "温馨提示", {
       type: "error",
       confirmButtonText: "确认删除"
     }).then(() => {

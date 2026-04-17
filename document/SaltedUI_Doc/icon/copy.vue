@@ -26,7 +26,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, watch, computed } from "vue";
-import { ElMessage } from "element-plus";
+import { M_Message } from "@/package/components/feedback";
 
 import all from "./config/all.json";
 import iconJson from "./config/icon.json";
@@ -94,7 +94,7 @@ function handleCopy(text) {
   copyInput.setAttribute("value", text);
   copyInput.select();
   document.execCommand("Copy");
-  ElMessage.success("图标名—已复制！");
+  M_Message.success("图标名—已复制！");
   document.body.removeChild(copyInput);
 }
 

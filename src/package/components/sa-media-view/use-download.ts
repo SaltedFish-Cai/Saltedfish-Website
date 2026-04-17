@@ -3,7 +3,7 @@
 // import { useBaseStore as globalState } from "../../store/index";
 // import inBrowser from "@mo/tools/inBrowser";
 // import Taro from "@tarojs/taro";
-import { ElMessageBox, ElNotification } from "element-plus";
+import { M_MessageBox, M_Notification } from "../feedback";
 import inBrowser from "../tools/inBrowser";
 
 /**
@@ -46,7 +46,7 @@ export const useGetBlob = async (config = { downloadHose: "", requestHeader: {} 
       } else if (response.headers.get("Content-Type")?.includes("application/json")) {
         response.json().then(json => {
           if (json.Message == "当前页面过期") {
-            ElMessageBox({
+            M_MessageBox({
               title: "当前页面过期",
               message: "当前页面已过期",
               showCancelButton: false,
@@ -55,14 +55,14 @@ export const useGetBlob = async (config = { downloadHose: "", requestHeader: {} 
               }
             });
           } else if (json.Message == "批量导出") {
-            ElNotification({
+            M_Notification({
               title: "温馨提示",
               message: "数据量过大，请至【导出管理-导出记录】中进行查看导出进度",
               type: "warning",
               duration: 10000
             });
           } else {
-            ElNotification({
+            M_Notification({
               title: "下载出错",
               message: json.Message,
               type: "error",
@@ -80,7 +80,7 @@ export const useGetBlob = async (config = { downloadHose: "", requestHeader: {} 
 };
 
 export const useDownload = async (config = { downloadHose: "", requestHeader: {} }, path: string, exFileName?: string) => {
-  const megNotify: any = ElNotification({
+  const megNotify: any = M_Notification({
     title: "温馨提示",
     dangerouslyUseHTMLString: true,
     message:
@@ -112,7 +112,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
       const fileName = (fileNameEncode && decodeURIComponent(fileNameEncode)) || exFileName || "下载文件";
       if (response.status != 200) {
         megNotify?.close();
-        ElNotification({
+        M_Notification({
           title: "下载出错",
           message: response.statusText,
           type: "error",
@@ -122,7 +122,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
         response.json().then(json => {
           if (json.Message == "当前页面过期") {
             megNotify?.close();
-            ElMessageBox({
+            M_MessageBox({
               title: "当前页面过期",
               message: "当前页面已过期",
               showCancelButton: false,
@@ -132,7 +132,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
             });
           } else if (json.Message == "批量导出") {
             megNotify?.close();
-            ElNotification({
+            M_Notification({
               title: "温馨提示",
               message: "数据量过大，请至【导出管理-导出记录】中进行查看导出进度",
               type: "warning",
@@ -140,7 +140,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
             });
           } else {
             megNotify?.close();
-            ElNotification({
+            M_Notification({
               title: "下载出错",
               message: json.Message,
               type: "error",
@@ -150,7 +150,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
         });
       } else {
         megNotify?.close();
-        ElNotification({
+        M_Notification({
           title: "下载成功",
           message: `请注意下载文件内容，文件名(${fileName})`,
           type: "success",
