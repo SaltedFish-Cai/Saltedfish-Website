@@ -1,5 +1,5 @@
 <template>
-  <sa-title :padding="['bottom']">FormData结果值：</sa-title>
+  <pa-title :padding="['bottom']">FormData结果值：</pa-title>
 
   <code-view v-model:html="formData"> </code-view>
 
@@ -8,7 +8,7 @@
     <div class="in_title_label">使用 上标题 模式：<m-switch v-model="state.useTopTitle" /></div>
     <div class="in_title_label">使用 Disabled 模式：<m-switch v-model="state.disabled" /></div>
   </div>
-  <sa-form
+  <pa-form
     id="show-from-demo"
     ref="proForm"
     :labelWidth="100"
@@ -21,7 +21,7 @@
     :labelPosition="state.useTopTitle ? 'top' : 'right'"
   />
   <div class="flex-center">
-    <sa-button is="submit" @click="submitForm">提交Form</sa-button>
+    <pa-button is="submit" @click="submitForm">提交Form</pa-button>
   </div>
 </template>
 

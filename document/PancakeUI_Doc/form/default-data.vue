@@ -1,17 +1,17 @@
 <template>
-  <sa-title :padding="['bottom']">baseFormData结果值：</sa-title>
+  <pa-title :padding="['bottom']">baseFormData结果值：</pa-title>
 
   <code-view v-model:html="baseFormData"> </code-view>
 
-  <sa-title :padding="['bottom']">FormData结果值：</sa-title>
+  <pa-title :padding="['bottom']">FormData结果值：</pa-title>
 
   <code-view v-model:html="formData"> </code-view>
 
-  <sa-form id="base-from-demo" :data="baseFormData" ref="proForm" :structure="formConfig" :ex-options="exOptions" />
+  <pa-form id="base-from-demo" :data="baseFormData" ref="proForm" :structure="formConfig" :ex-options="exOptions" />
 
   <div class="flex-center">
-    <sa-button is="submit" @click="submitForm">提交Form</sa-button>
-    <sa-button is="go" @click="changeData">二次修改默认值</sa-button>
+    <pa-button is="submit" @click="submitForm">提交Form</pa-button>
+    <pa-button is="go" @click="changeData">二次修改默认值</pa-button>
   </div>
 </template>
 

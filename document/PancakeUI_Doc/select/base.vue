@@ -1,12 +1,12 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-select v-model="value1" :exOptions="exOptions" :title="{ 'en-US': 'Basic Usage', 'zh-CN': '基础使用' }"></sa-select>
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-select v-model="value1" :exOptions="exOptions" :title="{ 'en-US': 'Basic Usage', 'zh-CN': '基础使用' }"></pa-select>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-select v-model="value1" :exOptions="exOptions" display></sa-select>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-select v-model="value1" :exOptions="exOptions" display></pa-select>
 
-  <sa-title class="mt10" :padding="['bottom']">异步请求选项</sa-title>
-  <sa-select v-model="value2" :requestApi="remoteMethodFn" type="online-select"></sa-select>
+  <pa-title class="mt10" :padding="['bottom']">异步请求选项</pa-title>
+  <pa-select v-model="value2" :requestApi="remoteMethodFn" type="online-select"></pa-select>
 </template>
 
 <script lang="ts" setup>

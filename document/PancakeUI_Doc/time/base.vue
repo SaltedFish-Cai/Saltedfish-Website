@@ -1,36 +1,36 @@
 <template>
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-time v-model="value1" type="date-picker-group" display></sa-time>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-time v-model="value1" type="date-picker-group" display></pa-time>
 
-  <sa-title :padding="['bottom']">基础使用(类型：date-picker-group)</sa-title>
-  <sa-time v-model="value1" type="date-picker-group"></sa-time>
+  <pa-title :padding="['bottom']">基础使用(类型：date-picker-group)</pa-title>
+  <pa-time v-model="value1" type="date-picker-group"></pa-time>
 
-  <sa-title :padding="['bottom']">类型：date-picker</sa-title>
-  <sa-time v-model="value2" type="date-picker"></sa-time>
+  <pa-title :padding="['bottom']">类型：date-picker</pa-title>
+  <pa-time v-model="value2" type="date-picker"></pa-time>
 
-  <sa-title :padding="['bottom']">date-time-picker-group</sa-title>
-  <sa-time v-model="value3" type="date-time-picker-group"></sa-time>
+  <pa-title :padding="['bottom']">date-time-picker-group</pa-title>
+  <pa-time v-model="value3" type="date-time-picker-group"></pa-time>
 
-  <sa-title :padding="['bottom']">date-time-picker</sa-title>
-  <sa-time v-model="value4" type="date-time-picker"></sa-time>
+  <pa-title :padding="['bottom']">date-time-picker</pa-title>
+  <pa-time v-model="value4" type="date-time-picker"></pa-time>
 
-  <sa-title :padding="['bottom']">类型：month-picker-group</sa-title>
-  <sa-time v-model="value5" type="month-picker-group"></sa-time>
+  <pa-title :padding="['bottom']">类型：month-picker-group</pa-title>
+  <pa-time v-model="value5" type="month-picker-group"></pa-time>
 
-  <sa-title :padding="['bottom']">类型：month-picker</sa-title>
-  <sa-time v-model="value6" type="month-picker"></sa-time>
+  <pa-title :padding="['bottom']">类型：month-picker</pa-title>
+  <pa-time v-model="value6" type="month-picker"></pa-time>
 
-  <sa-title :padding="['bottom']">类型：time-picker-group</sa-title>
-  <sa-time v-model="value7" type="time-picker-group"></sa-time>
+  <pa-title :padding="['bottom']">类型：time-picker-group</pa-title>
+  <pa-time v-model="value7" type="time-picker-group"></pa-time>
 
-  <sa-title :padding="['bottom']">类型：time-picker</sa-title>
-  <sa-time v-model="value8" type="time-picker"></sa-time>
+  <pa-title :padding="['bottom']">类型：time-picker</pa-title>
+  <pa-time v-model="value8" type="time-picker"></pa-time>
 
-  <sa-title :padding="['bottom']">类型：year-picker-group</sa-title>
-  <sa-time v-model="value9" type="year-picker-group"></sa-time>
+  <pa-title :padding="['bottom']">类型：year-picker-group</pa-title>
+  <pa-time v-model="value9" type="year-picker-group"></pa-time>
 
-  <sa-title :padding="['bottom']">类型：year-picker</sa-title>
-  <sa-time v-model="value10" type="year-picker"></sa-time>
+  <pa-title :padding="['bottom']">类型：year-picker</pa-title>
+  <pa-time v-model="value10" type="year-picker"></pa-time>
 </template>
 
 <script lang="ts" setup>

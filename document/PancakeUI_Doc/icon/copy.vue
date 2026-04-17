@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="flex-center-start">
-      <sa-icon class="pop_icon-show ml15 mr25" :name="selectItem" />
+      <pa-icon class="pop_icon-show ml15 mr25" :name="selectItem" />
       <code-view style="width: 100%" v-model:html="params"> </code-view>
     </div>
 
@@ -10,9 +10,9 @@
     <div class="h300">
       <div class="select_icon_popover">
         <template v-for="icon in Config[0].icons" :key="icon.value">
-          <sa-icon
+          <pa-icon
             class="pop_icon"
-            :style="{ color: icon.value == selectItem ? 'var(--sa-color-primary)' : '' }"
+            :style="{ color: icon.value == selectItem ? 'var(--pa-color-primary)' : '' }"
             :name="icon.value"
             @click="selectedIcon(icon.value)"
             @mouseover="hoverIcon(icon)"
@@ -74,7 +74,7 @@ const hoverItem = ref("finger_press_line");
 const params = computed(() => {
   const data = {
     icon_name: selectItem.value,
-    icon_element: `<sa-icon :name="${selectItem.value}" />`
+    icon_element: `<pa-icon :name="${selectItem.value}" />`
   };
   return data;
 });

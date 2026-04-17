@@ -187,19 +187,19 @@ export const useBaseStore = defineStore({
 
       // # 组件字体大小
       // window.document.documentElement?.style?.setProperty(
-      //   "--sa-size-font",
+      //   "--pa-size-font",
       //   13 + (this.size == "small" ? -1 : this.size == "large" ? 1 : 0) + "px"
       // );
 
       // # 组件高度
       // window.document.documentElement?.style?.setProperty(
-      //   "--sa-size-height",
+      //   "--pa-size-height",
       //   28 + (this.size == "small" ? -4 : this.size == "large" ? 1 : 0) + "px"
       // );
 
       // # 组件内边距
       // window.document.documentElement?.style?.setProperty(
-      //   "--sa-size-padding",
+      //   "--pa-size-padding",
       //   10 + (this.size == "small" ? -3 : this.size == "large" ? 2 : 0) + "px"
       // );
 
@@ -210,7 +210,7 @@ export const useBaseStore = defineStore({
       // window.document.documentElement?.style?.setProperty("--m-component-height-base", 28 + "px");
 
       // # 组件内边距
-      // window.document.documentElement?.style?.setProperty("--sa-size-padding", 10 + "px");
+      // window.document.documentElement?.style?.setProperty("--pa-size-padding", 10 + "px");
     },
 
     /**

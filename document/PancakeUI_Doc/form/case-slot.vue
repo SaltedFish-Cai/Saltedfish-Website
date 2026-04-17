@@ -1,7 +1,7 @@
 <template>
-  <sa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
+  <pa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
     <template #SlotKey> 这是一个插槽 </template>
-  </sa-form>
+  </pa-form>
 </template>
 
 <script lang="ts" setup>

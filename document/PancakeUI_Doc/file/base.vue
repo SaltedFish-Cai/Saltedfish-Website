@@ -1,6 +1,6 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-file
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-file
     v-model="value1"
     :fileIncludeType="['png', 'jpeg']"
     :fileExcludeType="['jpg']"
@@ -11,10 +11,10 @@
         M_Message.success('下载模版');
       }
     "
-  ></sa-file>
+  ></pa-file>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-file v-model="value1" :exData="exData" :contrastData="value2" display></sa-file>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-file v-model="value1" :exData="exData" :contrastData="value2" display></pa-file>
 </template>
 
 <script lang="ts" setup>

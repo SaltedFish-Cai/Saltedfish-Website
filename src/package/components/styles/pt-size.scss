@@ -1,39 +1,39 @@
 .p-all-size {
-  padding: var(--sa-size-padding, 10px);
+  padding: var(--pa-size-padding, 10px);
 }
 .m-all-size {
-  margin: var(--sa-size-padding, 10px);
+  margin: var(--pa-size-padding, 10px);
 }
 
 .mt-size {
-  margin-top: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  margin-top: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .mb-size {
-  margin-bottom: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  margin-bottom: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .mr-size {
-  margin-right: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  margin-right: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .ml-size {
-  margin-left: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  margin-left: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .pt-size {
-  padding-top: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  padding-top: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .pb-size {
-  padding-bottom: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  padding-bottom: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .pr-size {
-  padding-right: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  padding-right: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .pl-size {
-  padding-left: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  padding-left: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .p-all-size {
-  padding: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  padding: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 .m-all-size {
-  margin: calc(var(--sa-size-padding, 10px) / 1.5) !important;
+  margin: calc(var(--pa-size-padding, 10px) / 1.5) !important;
 }
 
 @for $i from 0 through 40 {

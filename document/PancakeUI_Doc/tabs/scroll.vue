@@ -1,12 +1,12 @@
 <template>
-  <sa-tabs v-model="state.activeName" align="edge" class="tabs-box">
-    <sa-tabs-item label="User" name="one" scroll :padding="['all']" useScrollX class="card_style">
+  <pa-tabs v-model="state.activeName" align="edge" class="tabs-box">
+    <pa-tabs-item label="User" name="one" scroll :padding="['all']" useScrollX class="card_style">
       <div style="height: 800px; width: 2200px; background-color: aliceblue">scroll</div>
-    </sa-tabs-item>
-    <sa-tabs-item label="User" name="two" :padding="['all']" class="card_style">
+    </pa-tabs-item>
+    <pa-tabs-item label="User" name="two" :padding="['all']" class="card_style">
       <div style="height: 800px; width: 2200px">no-scroll</div>
-    </sa-tabs-item>
-  </sa-tabs>
+    </pa-tabs-item>
+  </pa-tabs>
 </template>
 
 <script lang="ts" setup>

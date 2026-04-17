@@ -1,6 +1,6 @@
 <template>
   <div class="h400">
-    <sa-table
+    <pa-table
       id="children-table-demo"
       ref="proTable"
       row-key="Text"
@@ -10,9 +10,9 @@
       :ex-options="exOptions"
     >
       <template #operation>
-        <sa-button is="edit"> 编辑 </sa-button>
+        <pa-button is="edit"> 编辑 </pa-button>
       </template>
-    </sa-table>
+    </pa-table>
   </div>
 </template>
 

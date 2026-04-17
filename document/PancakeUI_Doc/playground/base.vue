@@ -1,6 +1,6 @@
 <template>
   <div class="playground-demo">
-    <sa-playground :data="playgroundConfig" />
+    <pa-playground :data="playgroundConfig" />
   </div>
 </template>
 

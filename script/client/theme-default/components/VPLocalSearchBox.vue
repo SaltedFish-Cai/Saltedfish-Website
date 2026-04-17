@@ -636,7 +636,7 @@ function formMarkRegex(terms: Set<string>) {
 }
 
 .search-bar:focus-within {
-  border-color: var(--sa-color-primary);
+  border-color: var(--pa-color-primary);
 }
 
 .search-icon {
@@ -684,7 +684,7 @@ function formMarkRegex(terms: Set<string>) {
 
 .search-actions button:not([disabled]):hover,
 .toggle-layout-button.detailed-list {
-  color: var(--sa-color-primary);
+  color: var(--pa-color-primary);
 }
 
 .search-actions button.clear-button:disabled {
@@ -778,7 +778,7 @@ function formMarkRegex(terms: Set<string>) {
 .title-icon {
   opacity: 0.5;
   font-weight: 500;
-  color: var(--sa-color-primary);
+  color: var(--pa-color-primary);
 }
 
 .title svg {
@@ -851,7 +851,7 @@ function formMarkRegex(terms: Set<string>) {
 
 .result.selected .titles,
 .result.selected .title-icon {
-  color: var(--sa-color-primary) !important;
+  color: var(--pa-color-primary) !important;
 }
 
 .no-results {

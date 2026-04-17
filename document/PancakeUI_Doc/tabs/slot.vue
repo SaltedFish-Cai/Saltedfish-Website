@@ -3,16 +3,16 @@
     <div class="in_title_label">是否现实第二页：<el-switch v-model="switchValue" /></div>
   </div>
 
-  <sa-tabs v-model="activeName" align="edge">
-    <sa-tabs-item label="第一页" name="page1" class="card_style" :padding="['all']">
+  <pa-tabs v-model="activeName" align="edge">
+    <pa-tabs-item label="第一页" name="page1" class="card_style" :padding="['all']">
       <template #label>
         <m-icon name="applet_line" />
         <span>Page1</span>
       </template>
       page1
-    </sa-tabs-item>
-    <sa-tabs-item v-if="switchValue" label="第二页" name="page2" class="card_style" :padding="['all']"> page2 </sa-tabs-item>
-  </sa-tabs>
+    </pa-tabs-item>
+    <pa-tabs-item v-if="switchValue" label="第二页" name="page2" class="card_style" :padding="['all']"> page2 </pa-tabs-item>
+  </pa-tabs>
 </template>
 
 <script lang="ts" setup>

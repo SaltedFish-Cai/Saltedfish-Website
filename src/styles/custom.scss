@@ -56,7 +56,7 @@
   .jv-button {
     padding: 0 !important;
     padding-top: 10px !important;
-    color: var(--sa-color-primary) !important;
+    color: var(--pa-color-primary) !important;
     font-family: var(--vp-font-family-base);
     &:hover {
       text-decoration: underline;
@@ -75,7 +75,7 @@
   }
 
   .outline-link.active {
-    color: var(--sa-color-primary);
+    color: var(--pa-color-primary);
     font-weight: bold;
     font-style: italic;
   }
@@ -95,7 +95,7 @@
   font-style: italic;
   font-weight: bold;
   color: #ffffff !important;
-  background-color: var(--sa-color-primary);
+  background-color: var(--pa-color-primary);
   border-radius: 5px;
 }
 .VPNavBarTitle.has-sidebar .title {
@@ -124,7 +124,7 @@
     height: 1em;
     margin-right: 8px;
     content: "";
-    background-color: var(--sa-color-primary);
+    background-color: var(--pa-color-primary);
   }
 }
 

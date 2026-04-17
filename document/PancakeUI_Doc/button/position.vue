@@ -1,7 +1,7 @@
 <template>
   <el-row>
-    <sa-button iconName="star_arc_line" @click="debouncedClick">左侧</sa-button>
-    <sa-button iconName="star_arc_line" iconPosition="right" @click="debouncedClick">右侧</sa-button>
+    <pa-button iconName="star_arc_line" @click="debouncedClick">左侧</pa-button>
+    <pa-button iconName="star_arc_line" iconPosition="right" @click="debouncedClick">右侧</pa-button>
   </el-row>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <sa-form id="classify-form-demo" ref="proForm" :structure="formConfig" :ex-options="exOptions" />
+  <pa-form id="classify-form-demo" ref="proForm" :structure="formConfig" :ex-options="exOptions" />
 </template>
 
 <script lang="ts" setup>

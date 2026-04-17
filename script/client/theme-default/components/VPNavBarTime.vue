@@ -154,7 +154,7 @@ li {
   padding: 0;
   font-size: 14px;
   line-height: 30px;
-  color: var(--sa-color-primary);
+  color: var(--pa-color-primary);
 }
 
 .clock {

@@ -2,12 +2,12 @@
   <div>
     <!-- form -->
     <template v-if="false">
-      <sa-switch v-model="switchValue" :disabled="disabled" :display="display"></sa-switch>
+      <pa-switch v-model="switchValue" :disabled="disabled" :display="display"></pa-switch>
 
       <!-- <m-form ref="formARef" id="form_a" :data="formAData" :structure="formAConfig" :ex-options="exOptions" />
-    <sa-button type="primary" is="submit" index="1" @click="submitAForm"> 提交 </sa-button> -->
+    <pa-button type="primary" is="submit" index="1" @click="submitAForm"> 提交 </pa-button> -->
 
-      <sa-form
+      <pa-form
         ref="formBRef"
         id="form_b"
         :data="formBData"
@@ -16,7 +16,7 @@
         :ex-cell-dependent="cellDependent"
         :display="switchValue"
       />
-      <sa-button type="primary" is="submit" index="1" @click="submitBForm"> 提交 </sa-button>
+      <pa-button type="primary" is="submit" index="1" @click="submitBForm"> 提交 </pa-button>
     </template>
 
     <!-- tabs -->
@@ -30,7 +30,7 @@
         <m-tab-item label="ffffffff" name="ff"> <div style="height: 300px">6</div> </m-tab-item>
       </m-tabs>
 
-      <sa-tabs v-model="tabsIndex" class="h200" mode="portrait">
+      <pa-tabs v-model="tabsIndex" class="h200" mode="portrait">
         <m-tab-v2-item label="aaaaaaaa" name="aa" scroll> <div style="height: 300px">1</div> </m-tab-v2-item>
         <m-tab-v2-item label="bbbbbbbb" name="bb"> <div style="height: 300px">2</div> </m-tab-v2-item>
         <m-tab-v2-item label="cccccccc" name="cc"> <div style="height: 300px">3</div> </m-tab-v2-item>
@@ -41,9 +41,9 @@
         <m-tab-v2-item label="hhhhhhhh" name="hh"> <div style="height: 300px">8</div> </m-tab-v2-item>
         <m-tab-v2-item label="iiiiiiii" name="ii"> <div style="height: 300px">9</div> </m-tab-v2-item>
         <m-tab-v2-item label="jjjjjjjj" name="jj"> <div style="height: 300px">10</div> </m-tab-v2-item>
-      </sa-tabs>
+      </pa-tabs>
 
-      <sa-tabs v-model="tabsIndex" class="h200" style-mode="default">
+      <pa-tabs v-model="tabsIndex" class="h200" style-mode="default">
         <m-tab-v2-item label="aaaaaaaa" name="aa" scroll> <div style="height: 300px">1</div> </m-tab-v2-item>
         <m-tab-v2-item label="bbbbbbbb" name="bb"> <div style="height: 300px">2</div> </m-tab-v2-item>
         <m-tab-v2-item label="cccccccc" name="cc"> <div style="height: 300px">3</div> </m-tab-v2-item>
@@ -54,9 +54,9 @@
         <m-tab-v2-item label="hhhhhhhh" name="hh"> <div style="height: 300px">8</div> </m-tab-v2-item>
         <m-tab-v2-item label="iiiiiiii" name="ii"> <div style="height: 300px">9</div> </m-tab-v2-item>
         <m-tab-v2-item label="jjjjjjjj" name="jj"> <div style="height: 300px">10</div> </m-tab-v2-item>
-      </sa-tabs>
+      </pa-tabs>
 
-      <sa-tabs v-model="tabsIndex" class="h200" mode="slider">
+      <pa-tabs v-model="tabsIndex" class="h200" mode="slider">
         <m-tab-v2-item label="aaaaaaaa" name="aa"> <div style="height: 300px">1</div> </m-tab-v2-item>
         <m-tab-v2-item label="bbbbbbbb" name="bb"> <div style="height: 300px">2</div> </m-tab-v2-item>
         <m-tab-v2-item label="cccccccc" name="cc"> <div style="height: 300px">3</div> </m-tab-v2-item>
@@ -67,7 +67,7 @@
         <m-tab-v2-item label="hhhhhhhh" name="hh"> <div style="height: 300px">8</div> </m-tab-v2-item>
         <m-tab-v2-item label="iiiiiiii" name="ii"> <div style="height: 300px">9</div> </m-tab-v2-item>
         <m-tab-v2-item label="jjjjjjjj" name="jj"> <div style="height: 300px">10</div> </m-tab-v2-item>
-      </sa-tabs>
+      </pa-tabs>
     </template>
 
     <!-- table -->
@@ -75,7 +75,7 @@
       <code-view v-model:html="params"> </code-view>
       {{ JSON.stringify(params) }}
       <div class="h600">
-        <sa-table
+        <pa-table
           id="base-table-demo"
           ref="proTable"
           flat
@@ -88,7 +88,7 @@
           useChildren
         >
           <template #operation="{ row, index }">
-            <sa-button
+            <pa-button
               key="key1"
               is="save"
               index="1"
@@ -101,32 +101,32 @@
               "
             >
               编辑1
-            </sa-button>
-            <sa-button key="key2" type="primary" is="edit" index="2" v-if="isFalse"> 编辑2 </sa-button>
-            <sa-button key="key3" type="danger" is="trash" index="3"> 编辑3 </sa-button>
-            <sa-button key="key4" type="warning" is="edit" index="4"> 编辑4 </sa-button>
-            <sa-button key="key5" type="info" is="edit" index="5"> 编辑5 </sa-button>
-            <sa-button key="key6" type="success" is="edit" index="6"> 编辑6 </sa-button>
+            </pa-button>
+            <pa-button key="key2" type="primary" is="edit" index="2" v-if="isFalse"> 编辑2 </pa-button>
+            <pa-button key="key3" type="danger" is="trash" index="3"> 编辑3 </pa-button>
+            <pa-button key="key4" type="warning" is="edit" index="4"> 编辑4 </pa-button>
+            <pa-button key="key5" type="info" is="edit" index="5"> 编辑5 </pa-button>
+            <pa-button key="key6" type="success" is="edit" index="6"> 编辑6 </pa-button>
           </template>
-        </sa-table>
+        </pa-table>
       </div>
     </template>
 
     <!-- cell -->
     <template v-if="true">
       <m-file v-model="fileData" :disabled="disabled" :display="display" :fileMultiple="3"></m-file>
-      <sa-file
+      <pa-file
         v-model="fileData"
         :disabled="disabled"
         :display="display"
         :fileMultiple="3"
         :attachedData="attachedData"
-      ></sa-file>
+      ></pa-file>
 
-      <sa-select-icon v-model="selectItem" :disabled="disabled" :display="display"></sa-select-icon>
+      <pa-select-icon v-model="selectItem" :disabled="disabled" :display="display"></pa-select-icon>
 
       <m-switch v-model="switchValue" :disabled="disabled" :display="display"></m-switch>
-      <sa-switch v-model="switchValue" :disabled="disabled" :display="display"></sa-switch>
+      <pa-switch v-model="switchValue" :disabled="disabled" :display="display"></pa-switch>
 
       <m-cascader
         v-model="cascaderValue"
@@ -136,41 +136,41 @@
         :display="display"
       ></m-cascader>
 
-      <sa-cascader
+      <pa-cascader
         v-model="cascaderValue"
         type="cascader"
         :exOptions="cascaderSelect"
         :disabled="disabled"
         :display="display"
-      ></sa-cascader>
+      ></pa-cascader>
 
-      <sa-checkbox v-model="checkboxValue" :disabled="disabled" :display="display" :exOptions="select"></sa-checkbox>
-      <sa-radio v-model="radioValue" :disabled="disabled" :display="display" :exOptions="select"></sa-radio>
-      <!-- <sa-checkbox v-model="checkboxValue" :exOptions="checkboxOptions" :disabled="disabled" :display="display"></sa-checkbox> -->
+      <pa-checkbox v-model="checkboxValue" :disabled="disabled" :display="display" :exOptions="select"></pa-checkbox>
+      <pa-radio v-model="radioValue" :disabled="disabled" :display="display" :exOptions="select"></pa-radio>
+      <!-- <pa-checkbox v-model="checkboxValue" :exOptions="checkboxOptions" :disabled="disabled" :display="display"></pa-checkbox> -->
       <div @click="disabled = !disabled">disabled</div>
       <div @click="display = !display">display</div>
 
       <m-title>time</m-title>
       <m-time v-model="timeValue" type="date-time-range"></m-time>
-      <sa-time
+      <pa-time
         v-model="timeValue"
         :disabled="disabled"
         :display="display"
         :disabledDateFn="disabledDate"
         type="date-time-picker-group"
         :shortcuts="shortcuts"
-      ></sa-time>
-      <sa-time
+      ></pa-time>
+      <pa-time
         v-model="timeValue2"
         :disabled="disabled"
         :display="display"
         type="date-time-picker"
         :disabledDateFn="disabledDate"
-      ></sa-time>
+      ></pa-time>
 
       <m-title>input</m-title>
       <m-input v-model="inputValue" placeholder="请输入" maxLength="1616" :disabled="disabled" :display="display"></m-input>
-      <sa-input v-model="inputValue" placeholder="请输入" maxLength="1616" :disabled="disabled" :display="display"></sa-input>
+      <pa-input v-model="inputValue" placeholder="请输入" maxLength="1616" :disabled="disabled" :display="display"></pa-input>
       <m-title>textarea</m-title>
       <m-input
         v-model="inputValue"
@@ -180,7 +180,7 @@
         :display="display"
         type="textarea"
       ></m-input>
-      <sa-input
+      <pa-input
         v-model="inputValue"
         contrastData="bbb"
         placeholder="请输入"
@@ -188,28 +188,28 @@
         type="textarea"
         :disabled="disabled"
         :display="display"
-      ></sa-input>
+      ></pa-input>
 
       <m-title>select</m-title>
       <m-select v-model="selectValue2" :exOptions="selectOptions" :disabled="disabled" :display="display"></m-select>
-      <sa-select
+      <pa-select
         style="max-width: 300px"
         v-model="selectValue2"
         :contrastData="2"
         :exOptions="selectOptions"
         :disabled="disabled"
         :display="display"
-      ></sa-select>
+      ></pa-select>
 
       <m-title>select-multiple</m-title>
-      <sa-select
+      <pa-select
         style="max-width: 300px"
         v-model="selectValue"
         type="multiple-select"
         :exOptions="selectOptions"
         :disabled="disabled"
         :display="display"
-      ></sa-select>
+      ></pa-select>
       <m-select
         style="max-width: 300px"
         v-model="selectValue"
@@ -222,7 +222,7 @@
       <m-title>number</m-title>
       {{ inputValue3 }}
       <m-number v-model="inputValue3" placeholder="请输入" controls :disabled="disabled" :display="display"></m-number>
-      <sa-number
+      <pa-number
         v-model="inputValue3"
         placeholder="请输入"
         :disabled="disabled"
@@ -230,35 +230,35 @@
         :min="-131.12"
         :max="1080.33"
         contrastData="1080.33"
-      ></sa-number>
+      ></pa-number>
 
-      <sa-popover trigger="hover">
+      <pa-popover trigger="hover">
         <template #reference>
-          <sa-button>Hover Popover</sa-button>
+          <pa-button>Hover Popover</pa-button>
         </template>
         <div>
           9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         </div>
-      </sa-popover>
-      <sa-button @click="dialogVisible = !dialogVisible">切换1</sa-button>
-      <sa-button @click="drawerVisible = !drawerVisible">切换2</sa-button>
+      </pa-popover>
+      <pa-button @click="dialogVisible = !dialogVisible">切换1</pa-button>
+      <pa-button @click="drawerVisible = !drawerVisible">切换2</pa-button>
 
-      <sa-dialog v-model="dialogVisible" title="弹窗" sub-title="弹窗副标题">
+      <pa-dialog v-model="dialogVisible" title="弹窗" sub-title="弹窗副标题">
         <div style="height: 1500px">弹窗内容</div>
         <template #footer>
-          <sa-button type="primary" @click="dialogVisible = false">确定</sa-button>
+          <pa-button type="primary" @click="dialogVisible = false">确定</pa-button>
         </template>
-      </sa-dialog>
+      </pa-dialog>
 
-      <sa-drawer v-model="drawerVisible" title="弹窗" sub-title="弹窗副标题" scroll>
+      <pa-drawer v-model="drawerVisible" title="弹窗" sub-title="弹窗副标题" scroll>
         <div style="height: 1500px">弹窗内容</div>
         <template #footer>
-          <sa-button type="primary" @click="drawerVisible = false">确定</sa-button>
+          <pa-button type="primary" @click="drawerVisible = false">确定</pa-button>
         </template>
-      </sa-drawer>
+      </pa-drawer>
 
       <div class="h312">
-        <sa-scrollbar
+        <pa-scrollbar
           ref="scrollRef"
           :onScrollEnd="
             val => {
@@ -271,7 +271,7 @@
           <div v-for="value in arr" :key="value" style="width: 1600px; height: 600px; background-color: bisque">
             {{ value }}- cadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsccadcsadsc
           </div>
-        </sa-scrollbar>
+        </pa-scrollbar>
         <div class="mt10"></div>
         <m-scrollbar always>
           <div style="width: 3200px; height: 3200px; background-color: bisque">
@@ -280,14 +280,14 @@
         </m-scrollbar>
       </div>
 
-      <sa-popover>
+      <pa-popover>
         <template #reference>
-          <sa-button>切换</sa-button>
+          <pa-button>切换</pa-button>
         </template>
         <div>
           9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         </div>
-      </sa-popover>
+      </pa-popover>
     </template>
   </div>
 </template>

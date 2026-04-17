@@ -47,7 +47,7 @@ const install = function (app, options: GlobalState) {
     app.use(dictionaries);
     app.use(dictionariesAll);
 
-    const components: any = import.meta.glob("./components/*/sa-*.vue");
+    const components: any = import.meta.glob("./components/*/pa-*.vue");
     for (const path in components) {
       const name = path.slice(path.lastIndexOf("/") + 1, path.lastIndexOf("."));
       console.log("++++++2++++> name:", name);

@@ -1,7 +1,7 @@
 <template>
-  <sa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig" :span="2">
-    <template #cell-Select> <sa-button is="go">Cell 单元扩展</sa-button> </template>
-  </sa-form>
+  <pa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig" :span="2">
+    <template #cell-Select> <pa-button is="go">Cell 单元扩展</pa-button> </template>
+  </pa-form>
 </template>
 
 <script lang="ts" setup>

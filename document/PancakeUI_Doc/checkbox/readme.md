@@ -3,7 +3,7 @@
 常用与选择多个选项相关的场景。
 
 :::warning 注意
-`sa-checkbox` 可独立使用，在 `sa-form/sa-table` 中可使用时，需配置 `prop` 字段。
+`pa-checkbox` 可独立使用，在 `pa-form/pa-table` 中可使用时，需配置 `prop` 字段。
 :::
 
 ## 组件功能展示

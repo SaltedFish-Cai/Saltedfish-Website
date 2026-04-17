@@ -1,12 +1,12 @@
 <template>
-  <sa-button-group type="primary">
-    <sa-button iconName="star_arc_line" is="upload">Upload</sa-button>
-    <sa-button iconName="star_arc_line" is="download">Download</sa-button>
-    <sa-button iconName="star_arc_line" is="add">Add</sa-button>
-    <sa-button iconName="star_arc_line" is="cancel">Cancel</sa-button>
-    <sa-button iconName="star_arc_line" is="ok">OK</sa-button>
-    <sa-button iconName="star_arc_line" is="trash">Trash</sa-button>
-  </sa-button-group>
+  <pa-button-group type="primary">
+    <pa-button iconName="star_arc_line" is="upload">Upload</pa-button>
+    <pa-button iconName="star_arc_line" is="download">Download</pa-button>
+    <pa-button iconName="star_arc_line" is="add">Add</pa-button>
+    <pa-button iconName="star_arc_line" is="cancel">Cancel</pa-button>
+    <pa-button iconName="star_arc_line" is="ok">OK</pa-button>
+    <pa-button iconName="star_arc_line" is="trash">Trash</pa-button>
+  </pa-button-group>
 </template>
 
 <script lang="ts" setup></script>

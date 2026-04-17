@@ -1,8 +1,8 @@
 <template>
-  <sa-button iconName="star_arc_line" :confirmConfig="confirmConfig">快捷使用Confirm</sa-button>
-  <sa-button is="submit" @submit-click="confirmClick">快捷使用Submit</sa-button>
-  <sa-button is="trash" @delete-click="confirmClick">快捷使用Delete</sa-button>
-  <sa-button is="ok" @confirm-click="confirmClick">快捷使用Confirm</sa-button>
+  <pa-button iconName="star_arc_line" :confirmConfig="confirmConfig">快捷使用Confirm</pa-button>
+  <pa-button is="submit" @submit-click="confirmClick">快捷使用Submit</pa-button>
+  <pa-button is="trash" @delete-click="confirmClick">快捷使用Delete</pa-button>
+  <pa-button is="ok" @confirm-click="confirmClick">快捷使用Confirm</pa-button>
 </template>
 
 <script lang="ts" setup>

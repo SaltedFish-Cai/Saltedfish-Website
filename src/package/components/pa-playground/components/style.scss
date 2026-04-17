@@ -1,0 +1,59 @@
+.m-playground-dialog-container {
+  width: 100%;
+  overflow: auto;
+  .m-playground-dialog-content {
+    width: 100%;
+  }
+  .m-playground-dialog-content.scroll {
+    width: max-content;
+  }
+  .m-playground-dialog-header {
+    margin-bottom: var(--pa-size-padding);
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.m-playground-dialog-table {
+  width: 100%;
+  border: 1px solid var(--pa-color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  .m-playground-dialog-table-header {
+    background-color: var(--pa-color-send-bg);
+    border-bottom: 1px solid var(--pa-color-border);
+    font-weight: bold;
+  }
+
+  .m-playground-dialog-table-row {
+    display: flex;
+    width: 100%;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--pa-color-border);
+    }
+  }
+
+  .m-playground-dialog-table-cell {
+    width: 1px;
+    flex: 1;
+    padding: 8px 12px;
+    border-right: 1px solid var(--pa-color-border);
+    box-sizing: border-box;
+    font-size: var(--pa-size-font, 16px);
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .m-playground-dialog-table-cell.operation {
+    flex: 0 0 0px;
+  }
+
+  .m-playground-dialog-table-body .m-playground-dialog-table-row:hover {
+    background-color: var(--pa-color-primary-light-9);
+  }
+}

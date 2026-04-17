@@ -1,5 +1,5 @@
 <template>
-  <sa-form id="case-ex-rules-from-demo" ref="proForm" :structure="formConfig" :ex-dependent="exRules" />
+  <pa-form id="case-ex-rules-from-demo" ref="proForm" :structure="formConfig" :ex-dependent="exRules" />
 </template>
 
 <script lang="ts" setup>

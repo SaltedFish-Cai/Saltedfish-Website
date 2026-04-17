@@ -1,0 +1,16 @@
+.pa-badge {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .pa-badge__content {
+    background-color: var(--pa-color-danger);
+    font-size: calc(var(--pa-size-font, 13px) * 0.8);
+    border-radius: 20px;
+    padding: 2px 5px;
+    min-height: 6px;
+    line-height: 1em;
+    color: var(--pa-color-white);
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="h400">
-    <sa-table
+    <pa-table
       id="expand-table-demo"
       ref="proTable"
       :structure="tableConfig"
@@ -13,9 +13,9 @@
         <div class="expand-class">这里是展开的内容 Scope : {{ scope }}</div>
       </template>
       <template #operation="{ index, row }">
-        <sa-button is="edit" @click="openExpand(index, row)"> 编辑 </sa-button>
+        <pa-button is="edit" @click="openExpand(index, row)"> 编辑 </pa-button>
       </template>
-    </sa-table>
+    </pa-table>
   </div>
 </template>
 
@@ -64,6 +64,6 @@ function openExpand(index, row) {
 
 <style scoped>
 .expand-class {
-  padding: var(--sa-size-padding);
+  padding: var(--pa-size-padding);
 }
 </style>

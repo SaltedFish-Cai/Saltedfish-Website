@@ -180,7 +180,7 @@ onUnmounted(() => {
   transform: rotate(180deg);
 }
 .box .box__ghost .box__ghost-container {
-  background: var(--sa-color-primary);
+  background: var(--pa-color-primary);
   width: 100px;
   height: 100px;
   border-radius: 100px 100px 0 0;
@@ -226,7 +226,7 @@ onUnmounted(() => {
   top: -10px;
   height: 20px;
   border-radius: 100%;
-  background-color: var(--sa-color-primary);
+  background-color: var(--pa-color-primary);
 }
 .box .box__ghost .box__ghost-container .box__ghost-bottom div:nth-child(2n) {
   top: -12px;

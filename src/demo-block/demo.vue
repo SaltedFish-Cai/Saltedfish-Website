@@ -93,7 +93,7 @@ const onCopy = async e => {
   /* box-shadow: 0 0px 2px #6f6e6e; */
   overflow: hidden;
   border: solid 1px var(--vp-c-divider);
-  border-radius: var(--sa-size-radius);
+  border-radius: var(--pa-size-radius);
   transition: 0.2s;
 }
 
@@ -105,7 +105,7 @@ const onCopy = async e => {
 } */
 .demo-hover .demo-control,
 .demo-control-expanded {
-  background-color: var(--sa-color-primary) !important;
+  background-color: var(--pa-color-primary) !important;
 }
 .demo-slot {
   box-sizing: border-box;
@@ -164,7 +164,7 @@ const onCopy = async e => {
   justify-content: center;
   align-items: center;
 
-  .sa-icon {
+  .pa-icon {
     font-size: 25px;
   }
 }

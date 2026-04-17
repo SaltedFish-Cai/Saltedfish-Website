@@ -1,5 +1,5 @@
 <template>
-  <sa-title :padding="['bottom']">全局配置：</sa-title>
+  <pa-title :padding="['bottom']">全局配置：</pa-title>
   <div class="flex config-box">
     <div class="in_title_label">表列宽缓存：<el-switch v-model="globalConfig.isKeepAliveTableWidth" /></div>
     <div class="in_title_label">表列宽自动列宽： <el-switch v-model="globalConfig.isAutoTableWidth" /></div>
@@ -18,7 +18,7 @@
     :ex-options="exOptions"
   >
     <template #operation>
-      <sa-button is="edit"> 编辑 </sa-button>
+      <pa-button is="edit"> 编辑 </pa-button>
     </template>
   </m-table>
 </template>

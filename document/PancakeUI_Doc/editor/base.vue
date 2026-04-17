@@ -1,8 +1,8 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
+  <pa-title :padding="['bottom']">基础使用</pa-title>
   <div class="rich-editor-section">
     <div class="editor-container-v2">
-      <sa-editor v-model="editorContent" :config="{ uploadImage: { attachedData } }" placeholder="请输入内容..." />
+      <pa-editor v-model="editorContent" :config="{ uploadImage: { attachedData } }" placeholder="请输入内容..." />
     </div>
   </div>
 </template>

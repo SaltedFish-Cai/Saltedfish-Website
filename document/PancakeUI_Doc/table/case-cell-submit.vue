@@ -1,11 +1,11 @@
 <template>
-  <sa-title :padding="['bottom']">FormData结果值：</sa-title>
+  <pa-title :padding="['bottom']">FormData结果值：</pa-title>
 
   <code-view v-model:html="tableFormData"> </code-view>
 
-  <sa-title :padding="['bottom']">效果展示</sa-title>
+  <pa-title :padding="['bottom']">效果展示</pa-title>
   <div style="height: 200px">
-    <sa-table
+    <pa-table
       id="cell-table-demo-submit"
       ref="proTable"
       :structure="tableConfig"
@@ -14,13 +14,13 @@
       row-key="Text"
     >
       <template #operation>
-        <sa-button is="edit"> 编辑 </sa-button>
+        <pa-button is="edit"> 编辑 </pa-button>
       </template>
 
       <template #FooterCenter>
-        <sa-button is="edit" @click="submitTable"> 提交表格 </sa-button>
+        <pa-button is="edit" @click="submitTable"> 提交表格 </pa-button>
       </template>
-    </sa-table>
+    </pa-table>
   </div>
 </template>
 

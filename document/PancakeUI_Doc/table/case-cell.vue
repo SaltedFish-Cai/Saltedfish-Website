@@ -1,6 +1,6 @@
 <template>
   <div style="height: 200px">
-    <sa-table
+    <pa-table
       id="cell-table-demo"
       ref="proTable"
       :structure="tableConfig"
@@ -11,9 +11,9 @@
       row-key="Text"
     >
       <template #operation>
-        <sa-button is="edit"> 编辑 </sa-button>
+        <pa-button is="edit"> 编辑 </pa-button>
       </template>
-    </sa-table>
+    </pa-table>
   </div>
 </template>
 

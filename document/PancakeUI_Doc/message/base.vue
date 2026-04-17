@@ -1,5 +1,5 @@
 <template>
-  <sa-button font="star_arc_line" @click="debouncedClick">快捷弹窗</sa-button>
+  <pa-button font="star_arc_line" @click="debouncedClick">快捷弹窗</pa-button>
 </template>
 
 <script lang="ts" setup>

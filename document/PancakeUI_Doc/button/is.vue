@@ -1,34 +1,34 @@
 <template>
   <el-row class="mb-size">
-    <sa-button is="add">Add</sa-button>
-    <sa-button is="cancel">Cancel</sa-button>
-    <sa-button is="check">Check</sa-button>
-    <sa-button is="download">Download</sa-button>
-    <sa-button is="edit">Edit</sa-button>
+    <pa-button is="add">Add</pa-button>
+    <pa-button is="cancel">Cancel</pa-button>
+    <pa-button is="check">Check</pa-button>
+    <pa-button is="download">Download</pa-button>
+    <pa-button is="edit">Edit</pa-button>
   </el-row>
   <el-row class="mb-size">
-    <sa-button is="export">Export</sa-button>
-    <sa-button is="file">File</sa-button>
-    <sa-button is="go">Go</sa-button>
-    <sa-button is="import">Import</sa-button>
-    <sa-button is="ok">Ok</sa-button>
+    <pa-button is="export">Export</pa-button>
+    <pa-button is="file">File</pa-button>
+    <pa-button is="go">Go</pa-button>
+    <pa-button is="import">Import</pa-button>
+    <pa-button is="ok">Ok</pa-button>
   </el-row>
   <el-row class="mb-size">
-    <sa-button is="refresh">Refresh</sa-button>
-    <sa-button is="remove">Remove</sa-button>
-    <sa-button is="save">Save</sa-button>
-    <sa-button is="search">Search</sa-button>
-    <sa-button is="submit">Submit</sa-button>
+    <pa-button is="refresh">Refresh</pa-button>
+    <pa-button is="remove">Remove</pa-button>
+    <pa-button is="save">Save</pa-button>
+    <pa-button is="search">Search</pa-button>
+    <pa-button is="submit">Submit</pa-button>
   </el-row>
   <el-row class="mb-size">
-    <sa-button is="switch">Switch</sa-button>
-    <sa-button is="sync">Sync</sa-button>
-    <sa-button is="time">Time</sa-button>
-    <sa-button is="trash">Trash</sa-button>
-    <sa-button is="upload">Upload</sa-button>
+    <pa-button is="switch">Switch</pa-button>
+    <pa-button is="sync">Sync</pa-button>
+    <pa-button is="time">Time</pa-button>
+    <pa-button is="trash">Trash</pa-button>
+    <pa-button is="upload">Upload</pa-button>
   </el-row>
   <el-row>
-    <sa-button is="view">View</sa-button>
+    <pa-button is="view">View</pa-button>
   </el-row>
 </template>
 

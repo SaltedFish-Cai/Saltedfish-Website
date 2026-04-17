@@ -74,7 +74,7 @@ export function setThemeColor(themeColor?: string, isDark?: boolean) {
   const style = window.document?.documentElement.style || null;
   const classList = window.document?.documentElement.classList || null;
 
-  classList?.toggle("sa-content", true);
+  classList?.toggle("pa-content", true);
   classList?.toggle("light", true);
   classList?.toggle("dark", isDark);
 
@@ -90,7 +90,7 @@ export function setThemeColor(themeColor?: string, isDark?: boolean) {
   const DARK_COLOR_MAP = {};
 
   const BASE_COLOR_MAP = {
-    "--sa-color-primary": THEME_COLOR
+    "--pa-color-primary": THEME_COLOR
   };
 
   const COLORS = { ...BASE_COLOR_MAP, ...(isDark ? DARK_COLOR_MAP : LIGHT_COLOR_MAP) };
@@ -100,6 +100,6 @@ export function setThemeColor(themeColor?: string, isDark?: boolean) {
 
   for (let i = 1; i <= 9; i++) {
     const primaryColor = isDark ? `${getDarkColor(THEME_COLOR, i / 10)}` : `${getLightColor(THEME_COLOR, i / 10)}`;
-    style?.setProperty(`--sa-color-primary-light-${i}`, primaryColor);
+    style?.setProperty(`--pa-color-primary-light-${i}`, primaryColor);
   }
 }

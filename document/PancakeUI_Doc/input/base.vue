@@ -1,15 +1,15 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-input
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-input
     v-model="value1"
     maxLength="2000"
     alwaysContrast
     :contrastData="value2"
     :title="{ 'en-US': 'Basic Usage', 'zh-CN': '基础使用' }"
-  ></sa-input>
+  ></pa-input>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-input v-model="value1" maxLength="2000" :contrastData="value2" display></sa-input>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-input v-model="value1" maxLength="2000" :contrastData="value2" display></pa-input>
 </template>
 
 <script lang="ts" setup>

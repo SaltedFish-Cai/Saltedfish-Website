@@ -1,9 +1,9 @@
 <template>
-  <sa-title :padding="['bottom']">FormData结果值：</sa-title>
+  <pa-title :padding="['bottom']">FormData结果值：</pa-title>
 
   <code-view v-model:html="formData"> </code-view>
 
-  <sa-form
+  <pa-form
     id="show-from-demo"
     ref="proForm"
     :data="baseFormData"
@@ -12,10 +12,10 @@
     :ex-options="exOptions"
     :ex-cell-dependent="exCellDependent"
   >
-  </sa-form>
+  </pa-form>
 
   <div class="flex-center">
-    <sa-button is="submit" @click="submitForm">提交Form</sa-button>
+    <pa-button is="submit" @click="submitForm">提交Form</pa-button>
   </div>
 </template>
 

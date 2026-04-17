@@ -63,9 +63,9 @@ const PancakeUIConfig = ref({
         <div class="content-container">
           <slot name="doc-before" />
           <main class="main">
-            <sa-manager v-bind="PancakeUIConfig">
+            <pa-manager v-bind="PancakeUIConfig">
               <Content class="vp-doc" :class="[pageName, theme.externalLinkIcon && 'external-link-icon-enabled']" />
-            </sa-manager>
+            </pa-manager>
           </main>
           <VPDocFooter>
             <template #doc-footer-before><slot name="doc-footer-before" /></template>

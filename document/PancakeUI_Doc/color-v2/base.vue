@@ -1,6 +1,6 @@
 <template>
   <div class="mb-size">
-    <sa-color v-model="value" :preset-colors="presetColors"> </sa-color>
+    <pa-color v-model="value" :preset-colors="presetColors"> </pa-color>
   </div>
 </template>
 <script lang="ts" setup>

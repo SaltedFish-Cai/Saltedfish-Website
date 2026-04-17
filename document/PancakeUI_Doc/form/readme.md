@@ -1,6 +1,6 @@
 # Form 表单
 
-`sa-form` 能够快速搭建你需要的表单，只需简单的配置即可创建一个带有 `校验/组合/拆分` 等功能的完善表单，当然你还可以使用 `插槽` 功能扩展使你的表单更加强大！
+`pa-form` 能够快速搭建你需要的表单，只需简单的配置即可创建一个带有 `校验/组合/拆分` 等功能的完善表单，当然你还可以使用 `插槽` 功能扩展使你的表单更加强大！
 
 ## 基础使用
 
@@ -91,7 +91,7 @@ const formConfig: MStructureV2Type.FormV2[] = [
 使用 `Display` 模式时，将无法修改任何数据，数据只做展示使用，但是 `span` `labelWidth` 等配置依然生效。
 
 ```html
-<sa-form :labelWidth="100" display ... />
+<pa-form :labelWidth="100" display ... />
 ```
 
 <demo src="./show-display.vue"></demo>
@@ -121,9 +121,9 @@ function ruleFunction({ value, callback }) {
 ### 基础的使用
 
 ```html
-<sa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
+<pa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
   <template #SlotKey> ... </template>
-</sa-form>
+</pa-form>
 ```
 
 ```typescript
@@ -143,9 +143,9 @@ const formConfig: MStructureV2Type.FormV2[] = [
 对于下拉框结构的现实可以使用 `Options-Slot` 进行扩展，使用时插槽名称只需在 `key` 前面添加 `option-` 即可。
 
 ```html
-<sa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
+<pa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
   <template #option-Select="scope"> {{ scope }} </template> // [!code warning]
-</sa-form>
+</pa-form>
 ```
 
 <demo src="./case-slot-options.vue"></demo>
@@ -155,9 +155,9 @@ const formConfig: MStructureV2Type.FormV2[] = [
 `Cell元素` 的两侧预留了插槽用于内容的展示与扩展，使用时插槽名称只需在 `key` 前面添加 `cell-` 即可。
 
 ```html
-<sa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig" :span="2">
-  <template #cell-Select> <sa-button is="go">Cell 单元扩展</sa-button> </template> // [!code warning]
-</sa-form>
+<pa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig" :span="2">
+  <template #cell-Select> <pa-button is="go">Cell 单元扩展</pa-button> </template> // [!code warning]
+</pa-form>
 ```
 
 <demo src="./case-slot-cell.vue"></demo>

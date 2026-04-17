@@ -1,6 +1,6 @@
 # Icon 图标
 
-常用的图标，多用于 [`sa-button`](/document/PancakeUI_Doc/button/readme) 的图标选择。
+常用的图标，多用于 [`pa-button`](/document/PancakeUI_Doc/button/readme) 的图标选择。
 
 ## 基础用法
 
@@ -23,6 +23,6 @@
 
 ## Icon 选择
 
-全 `Icon` 展示直接点击即可获取 `sa-icon` 所需的 `name` 值
+全 `Icon` 展示直接点击即可获取 `pa-icon` 所需的 `name` 值
 
 <demo src="./copy.vue" control="false"></demo>

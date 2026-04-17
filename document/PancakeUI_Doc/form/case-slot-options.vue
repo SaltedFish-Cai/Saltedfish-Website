@@ -1,9 +1,9 @@
 <template>
-  <sa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
+  <pa-form id="case-slot-from-demo" ref="proForm" :structure="formConfig">
     <template #option-Select="{ config }">
       <div>扩展：{{ config.label }}</div>
     </template>
-  </sa-form>
+  </pa-form>
 </template>
 
 <script lang="ts" setup>

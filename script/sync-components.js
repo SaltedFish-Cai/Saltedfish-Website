@@ -25,7 +25,7 @@ function syncComponents() {
     items.forEach(item => {
       if (item.isDirectory() && item.name.match(/^m-[a-zA-Z0-9-]+-v2$/)) {
         const sourcePath = path.join(sourceDir, item.name);
-        const newName = item.name.replace(/^m-([a-zA-Z0-9-]+)-v2$/, "sa-$1");
+        const newName = item.name.replace(/^m-([a-zA-Z0-9-]+)-v2$/, "pa-$1");
         const targetPath = path.join(targetDir, newName);
 
         console.log(`Processing ${item.name} -> ${newName}`);
@@ -76,19 +76,19 @@ function syncDirectory(source, target, oldPrefix, newPrefix) {
       content = content.replace(new RegExp(oldPrefix, "g"), newPrefix);
       content = content.replace(/ManagerGlobal/g, "PancakeGlobal");
 
-      content = content.replace(/--m-font-/g, "--sa-");
-      content = content.replace(/m-manager-v2/g, "sa-content");
-      content = content.replace(/m-display-v2/g, "sa-display-style");
-      content = content.replace(/m-contrast-v2/g, "sa-contrast-style");
+      content = content.replace(/--m-font-/g, "--pa-");
+      content = content.replace(/m-manager-v2/g, "pa-content");
+      content = content.replace(/m-display-v2/g, "pa-display-style");
+      content = content.replace(/m-contrast-v2/g, "pa-contrast-style");
       content = content.replace(/00a47e/g, "43317A");
 
       content = content.replace(/package\/manager-ui/g, "package");
-      content = content.replace(/components\/m-/g, "components/sa-");
+      content = content.replace(/components\/m-/g, "components/pa-");
 
-      content = content.replace(/M(\w+)V2/g, (match, p1) => `Sa${p1.charAt(0).toUpperCase() + p1.slice(1)}`);
+      content = content.replace(/M(\w+)V2/g, (match, p1) => `Pa${p1.charAt(0).toUpperCase() + p1.slice(1)}`);
       content = content.replace(
         /--m-component-(\w+)-size/g,
-        (match, p1) => `--sa-size-${p1.charAt(0).toLowerCase() + p1.slice(1)}`
+        (match, p1) => `--pa-size-${p1.charAt(0).toLowerCase() + p1.slice(1)}`
       );
       content = content.replace(/m-([\w-]+)-v2(?:-([\w-]+))?/g, (match, p1, p2) => {
         // p1: v2 前面的部分 (例如 "xx-xx")
@@ -97,23 +97,23 @@ function syncDirectory(source, target, oldPrefix, newPrefix) {
         const suffix = p2 ? `-${p2}` : "";
         const body = p1 + suffix;
 
-        return `sa-${body.charAt(0).toLowerCase() + body.slice(1)}`;
+        return `pa-${body.charAt(0).toLowerCase() + body.slice(1)}`;
       });
 
-      // content = content.replace(/m-(\w+)-v2/g, (match, p1) => `sa-${p1.charAt(0).toLowerCase() + p1.slice(1)}`);
+      // content = content.replace(/m-(\w+)-v2/g, (match, p1) => `pa-${p1.charAt(0).toLowerCase() + p1.slice(1)}`);
 
-      // content = content.replace(/--m-color-v2/g, "--sa-color");
-      // content = content.replace(/--m-color/g, "--sa-color");
+      // content = content.replace(/--m-color-v2/g, "--pa-color");
+      // content = content.replace(/--m-color/g, "--pa-color");
 
       content = content.replace(/-v2/g, "");
-      content = content.replace(/--m-/g, "--sa-");
-      // content = content.replace(/--m-animation-time/g, "--sa-animation-time");
-      // content = content.replace(/--m-font-color/g, "--sa-color");
-      // content = content.replace(/--m-size-v2/g, "--sa-size");
-      // content = content.replace(/--m-size-v2/g, "--sa-size");
+      content = content.replace(/--m-/g, "--pa-");
+      // content = content.replace(/--m-animation-time/g, "--pa-animation-time");
+      // content = content.replace(/--m-font-color/g, "--pa-color");
+      // content = content.replace(/--m-size-v2/g, "--pa-size");
+      // content = content.replace(/--m-size-v2/g, "--pa-size");
 
-      // content = content.replace(/m-(\w+)-v2/g, (match, p1) => `sa-${p1.charAt(0).toLowerCase() + p1.slice(1)}`);
-      // content = content.replace(/m-(\w+)/g, (match, p1) => `sa-${p1.charAt(0).toLowerCase() + p1.slice(1)}`);
+      // content = content.replace(/m-(\w+)-v2/g, (match, p1) => `pa-${p1.charAt(0).toLowerCase() + p1.slice(1)}`);
+      // content = content.replace(/m-(\w+)/g, (match, p1) => `pa-${p1.charAt(0).toLowerCase() + p1.slice(1)}`);
 
       // 写入文件
       fs.writeFileSync(targetPath, content);

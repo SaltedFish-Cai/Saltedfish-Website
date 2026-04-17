@@ -1,9 +1,9 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-switch v-model="value1" :activeText="'activeText'" :exOptions="exOptions"></sa-switch>
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-switch v-model="value1" :activeText="'activeText'" :exOptions="exOptions"></pa-switch>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-switch v-model="value1" :activeText="'activeText'" :exOptions="exOptions" display></sa-switch>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-switch v-model="value1" :activeText="'activeText'" :exOptions="exOptions" display></pa-switch>
 </template>
 
 <script lang="ts" setup>

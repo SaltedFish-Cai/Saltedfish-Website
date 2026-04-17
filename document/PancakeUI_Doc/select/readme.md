@@ -3,7 +3,7 @@
 常用于选择选项的场景。
 
 :::warning 注意
-`sa-select` 可独立使用，在 `sa-form/sa-table` 中可使用时，需配置 `prop` 字段。
+`pa-select` 可独立使用，在 `pa-form/pa-table` 中可使用时，需配置 `prop` 字段。
 :::
 
 ## 组件功能展示

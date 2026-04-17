@@ -204,7 +204,7 @@ setTimeout(() => {
   position: absolute;
   top: 60%;
   text-align: center;
-  color: var(--sa-color-primary);
+  color: var(--pa-color-primary);
   font-family: var(--vp-font-family-base);
   white-space: nowrap;
   margin: 0 auto;
@@ -215,11 +215,11 @@ setTimeout(() => {
   color: transparent;
   background-image: linear-gradient(
     45deg,
-    var(--sa-color-primary),
+    var(--pa-color-primary),
     var(--el-color-danger-light-4),
-    var(--sa-color-primary),
+    var(--pa-color-primary),
     var(--el-color-danger-light-4),
-    var(--sa-color-primary)
+    var(--pa-color-primary)
   );
   background-clip: text;
   animation: type 5s, ran 7s;

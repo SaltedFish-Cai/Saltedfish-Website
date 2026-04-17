@@ -1,5 +1,5 @@
 // # Import
-import { PancakeGlobalConfigType } from "../sa-content/type";
+import { PancakeGlobalConfigType } from "../pa-content/type";
 
 /**
  * @description 获取字典(链接关系)

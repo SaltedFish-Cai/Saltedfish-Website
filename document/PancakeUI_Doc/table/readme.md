@@ -1,6 +1,6 @@
 # Table 表格
 
-`sa-table` 能够快速搭建你需要的表格，只需简单的配置即可创建一个带有 `筛选/搜索/排序/分页` 等功能的完善表格，当然你还可以使用 `插槽` 功能扩展使你的表格更加强大！
+`pa-table` 能够快速搭建你需要的表格，只需简单的配置即可创建一个带有 `筛选/搜索/排序/分页` 等功能的完善表格，当然你还可以使用 `插槽` 功能扩展使你的表格更加强大！
 
 ## 基础使用
 
@@ -19,7 +19,7 @@
 ### 多选（Selection）
 
 ```typescript
-<sa-table
+<pa-table
   id="select-table-v2-demo"
   ref="proTable"
   row-key="Text" // [!code warning]
@@ -37,7 +37,7 @@
 ### 单选（Radio）
 
 ```typescript
-<sa-table
+<pa-table
   id="select-table-v2-demo"
   ref="proTable"
   row-key="Text" // [!code warning]
@@ -56,7 +56,7 @@
 使用 `use-expand` 打开表的展开按钮，在表格内添加插槽 `expand` 以展示展开内容
 
 ```typescript
-<sa-table
+<pa-table
   id="select-table-v2-demo"
   ref="proTable"
   row-key="Text" // [!code warning]
@@ -79,7 +79,7 @@
 :::
 
 ```typescript
-<sa-table
+<pa-table
   id="select-table-v2-demo"
   ref="proTable"
   row-key="Text" // [!code warning]
@@ -111,7 +111,7 @@ const tableConfig: MStructureV2Type.TableV2[] = [
 在使用 `getSubmitTableList` 时，同 'm-form' 相同内部会进行数据校验，默认情况下每个单元格都是 `必填项` ，可以通过配置修改，也可以通过 `exDependent.submitRule` 对其就行独立的校验。
 
 ```typescript
-<sa-table
+<pa-table
   id="cell-table-demo-submit"
   ref="proTable"
   :structure="tableConfig"
@@ -120,13 +120,13 @@ const tableConfig: MStructureV2Type.TableV2[] = [
   row-key="Text"
 >
   <template #operation>
-    <sa-button is="edit"> 编辑 </sa-button>
+    <pa-button is="edit"> 编辑 </pa-button>
   </template>
 
   <template #FooterCenter>
-    <sa-button is="edit" @click="submitTable"> 提交表格 </sa-button>
+    <pa-button is="edit" @click="submitTable"> 提交表格 </pa-button>
   </template>
-</sa-table>
+</pa-table>
 
 const exDependent = {
   submitRule: {

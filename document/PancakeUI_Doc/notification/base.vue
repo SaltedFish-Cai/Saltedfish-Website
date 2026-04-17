@@ -1,7 +1,7 @@
 <template>
-  <sa-button font="star_arc_line" @click="debouncedClick1">快捷弹窗1</sa-button>
+  <pa-button font="star_arc_line" @click="debouncedClick1">快捷弹窗1</pa-button>
 
-  <sa-button font="star_arc_line" @click="debouncedClick2">自定义弹窗2</sa-button>
+  <pa-button font="star_arc_line" @click="debouncedClick2">自定义弹窗2</pa-button>
 </template>
 
 <script lang="ts" setup>

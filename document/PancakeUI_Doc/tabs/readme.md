@@ -25,15 +25,15 @@
 使用 `插槽` 对选项卡标签进行自定义内容修改。
 
 ```html
-<sa-tabs v-model="activeName">
-  <sa-tabs-item label="第一页" name="page1">
+<pa-tabs v-model="activeName">
+  <pa-tabs-item label="第一页" name="page1">
     <template #label>
       <m-icon name="applet_line" />
       <span>Page1</span>
     </template>
     page1
-  </sa-tabs-item>
-</sa-tabs>
+  </pa-tabs-item>
+</pa-tabs>
 ```
 
 <demo src="./slot.vue" ></demo>
@@ -43,21 +43,21 @@
 当设置 `slider` 模式，可实现全展示与 `锚点` 功能
 
 ```html
-<sa-tabs v-model="state.activeName" slider>
-  <sa-tabs-item label="User" name="one"></sa-tabs-item>
-</sa-tabs>
+<pa-tabs v-model="state.activeName" slider>
+  <pa-tabs-item label="User" name="one"></pa-tabs-item>
+</pa-tabs>
 ```
 
 <demo src="./slider.vue" ></demo>
 
 ## 内页是否可滚动
 
-当设置 tabs 高度时，内部元素 `sa-tabs-item` 高度会被拦截，可添加 `scroll` 是否滚动属性
+当设置 tabs 高度时，内部元素 `pa-tabs-item` 高度会被拦截，可添加 `scroll` 是否滚动属性
 
 ```html
-<sa-tabs v-model="state.activeName">
-  <sa-tabs-item label="User" name="one" scroll></sa-tabs-item>
-</sa-tabs>
+<pa-tabs v-model="state.activeName">
+  <pa-tabs-item label="User" name="one" scroll></pa-tabs-item>
+</pa-tabs>
 ```
 
 <demo src="./scroll.vue" ></demo>

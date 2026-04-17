@@ -1,5 +1,5 @@
 <template>
-  <sa-table
+  <pa-table
     id="slot-table-demo1"
     ref="proTable"
     flat
@@ -22,11 +22,11 @@
     <template #FooterCenter><div class="max-box">FooterCenter Slot</div></template>
 
     <template #FooterLeft><div class="max-box">FooterLeft Slot</div></template>
-  </sa-table>
+  </pa-table>
 
   <div class="line"></div>
 
-  <sa-table
+  <pa-table
     id="slot-table-demo2"
     ref="proTable"
     flat
@@ -35,7 +35,7 @@
     :ex-options="exOptions"
   >
     <template #ToolButtonInline><div class="max-inline-box">ToolButtonInline Slot</div></template>
-  </sa-table>
+  </pa-table>
 </template>
 
 <script lang="ts" setup>

@@ -1,16 +1,16 @@
 <template>
-  <sa-title :padding="['bottom']">接口请求参数(params)：</sa-title>
+  <pa-title :padding="['bottom']">接口请求参数(params)：</pa-title>
 
   <code-view v-model:html="params"> </code-view>
   <div class="h400">
-    <sa-table id="base-table-v2-demo" ref="proTable" :structure="tableConfig" :request-api="getTableList" :ex-options="exOptions">
+    <pa-table id="base-table-v2-demo" ref="proTable" :structure="tableConfig" :request-api="getTableList" :ex-options="exOptions">
       <template #operation>
-        <sa-button key="key1" is="save" index="1"> 编辑1 </sa-button>
-        <sa-button key="key2" is="trash" index="2"> 编辑2 </sa-button>
-        <sa-button key="key3" is="trash" index="3"> 编辑3 </sa-button>
-        <sa-button key="key4" is="edit" index="4"> 编辑4 </sa-button>
+        <pa-button key="key1" is="save" index="1"> 编辑1 </pa-button>
+        <pa-button key="key2" is="trash" index="2"> 编辑2 </pa-button>
+        <pa-button key="key3" is="trash" index="3"> 编辑3 </pa-button>
+        <pa-button key="key4" is="edit" index="4"> 编辑4 </pa-button>
       </template>
-    </sa-table>
+    </pa-table>
   </div>
 </template>
 

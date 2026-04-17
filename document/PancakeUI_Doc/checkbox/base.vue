@@ -1,13 +1,13 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-checkbox v-model="value1" :exOptions="exOptions"></sa-checkbox>
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-checkbox v-model="value1" :exOptions="exOptions"></pa-checkbox>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-checkbox v-model="value1" :exOptions="exOptions" display></sa-checkbox>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-checkbox v-model="value1" :exOptions="exOptions" display></pa-checkbox>
 
-  <sa-title :padding="['bottom']">单组件使用</sa-title>
-  <sa-checkbox-item v-model="value2" label="选项1" value="1"></sa-checkbox-item>
-  <sa-checkbox-item v-model="value2" label="选项2" value="2" disabled></sa-checkbox-item>
+  <pa-title :padding="['bottom']">单组件使用</pa-title>
+  <pa-checkbox-item v-model="value2" label="选项1" value="1"></pa-checkbox-item>
+  <pa-checkbox-item v-model="value2" label="选项2" value="2" disabled></pa-checkbox-item>
 </template>
 
 <script lang="ts" setup>

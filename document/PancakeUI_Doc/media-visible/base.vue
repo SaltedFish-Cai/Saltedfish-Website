@@ -1,9 +1,9 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-media-view :file-list="value1"></sa-media-view>
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-media-view :file-list="value1"></pa-media-view>
 
-  <sa-title :padding="['bottom']">单文件使用</sa-title>
-  <sa-media-view-item :filePath="file.filePath" :fileName="file.fileName" :file="file"></sa-media-view-item>
+  <pa-title :padding="['bottom']">单文件使用</pa-title>
+  <pa-media-view-item :filePath="file.filePath" :fileName="file.fileName" :file="file"></pa-media-view-item>
 </template>
 
 <script lang="ts" setup>

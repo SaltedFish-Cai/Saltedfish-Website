@@ -10,15 +10,15 @@ export const packageSidebar = [
     text: "基础组件",
     items: [
       { text: "Color 色彩", link: "/document/demo/component/m-color/readme" },
-      { text: "Icon 图标", link: "/document/demo/component/sa-icon/readme" },
-      { text: "Button 按钮", link: "/document/demo/component/sa-button/readme" },
+      { text: "Icon 图标", link: "/document/demo/component/pa-icon/readme" },
+      { text: "Button 按钮", link: "/document/demo/component/pa-button/readme" },
       { text: "Dialog 弹窗", link: "/document/demo/component/m-dialog/readme" },
       { text: "Tabs 选项卡", link: "/document/demo/component/m-tabs/readme" },
       { text: "Cell 元素", link: "/document/demo/component/m-element/readme" },
-      { text: "Table 表格", link: "/document/demo/component/sa-table/readme" },
-      { text: "Form 表单", link: "/document/demo/component/sa-form/readme" },
+      { text: "Table 表格", link: "/document/demo/component/pa-table/readme" },
+      { text: "Form 表单", link: "/document/demo/component/pa-form/readme" },
       { text: "Editor 富文本", link: "/document/demo/component/m-editor/readme" },
-      { text: "LineMap 关系图", link: "/document/demo/component/sa-line-map/readme" }
+      { text: "LineMap 关系图", link: "/document/demo/component/pa-line-map/readme" }
     ]
   },
   {

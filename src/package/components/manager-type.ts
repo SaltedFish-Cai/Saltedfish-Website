@@ -1,10 +1,10 @@
-import { SaSwitchOptionType } from "./sa-switch/type";
-import { SaSelectOptionsType } from "./sa-select/type";
+import { SaSwitchOptionType } from "./pa-switch/type";
+import { SaSelectOptionsType } from "./pa-select/type";
 
-import { SaFormItemType, SaFormRef } from "./sa-form/type";
-import { SaTableItemType, SaTableType } from "./sa-table/type";
+import { SaFormItemType, SaFormRef } from "./pa-form/type";
+import { SaTableItemType, SaTableType } from "./pa-table/type";
 
-import { PancakeUIType as MManagerV2ConfigType } from "./sa-content/type";
+import { PancakeUIType as MManagerV2ConfigType } from "./pa-content/type";
 // type MOptionType = {
 //   [x: string]: MOptionType;
 // };

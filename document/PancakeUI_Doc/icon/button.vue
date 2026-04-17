@@ -1,5 +1,5 @@
 <template>
-  <sa-icon name="search_line" circle />
+  <pa-icon name="search_line" circle />
 </template>
 
 <script lang="ts" setup></script>

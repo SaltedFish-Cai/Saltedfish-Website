@@ -52,12 +52,12 @@ const heroImageSlotExists = inject("hero-image-slot-exists") as Ref<boolean>;
               </template>
               <img :src="action.link" alt="qrcode" />
             </VPFlyout>
-            <!-- <sa-popover ref="popoverRef" v-if="action.theme === 'img'" autoWidth>
+            <!-- <pa-popover ref="popoverRef" v-if="action.theme === 'img'" autoWidth>
               <template #reference>
                 <VPButton size="medium" :theme="'brand'" :text="action.text" />
               </template>
               <img :src="action.link" alt="qrcode" />
-            </sa-popover> -->
+            </pa-popover> -->
 
             <VPButton
               v-else

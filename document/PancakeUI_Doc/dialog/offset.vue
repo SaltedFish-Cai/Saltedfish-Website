@@ -1,13 +1,13 @@
 <template>
-  <sa-button is="go" @click="visible1 = true">offsetX:300</sa-button>
-  <sa-button is="go" @click="visible2 = true">offsetY:300</sa-button>
-  <sa-button is="go" @click="visible3 = true">offsetX:20%</sa-button>
-  <sa-button is="go" @click="visible4 = true">offsetY:20%</sa-button>
+  <pa-button is="go" @click="visible1 = true">offsetX:300</pa-button>
+  <pa-button is="go" @click="visible2 = true">offsetY:300</pa-button>
+  <pa-button is="go" @click="visible3 = true">offsetX:20%</pa-button>
+  <pa-button is="go" @click="visible4 = true">offsetY:20%</pa-button>
 
-  <sa-dialog v-model="visible1" title="offsetX设置" offsetX="300"> offsetX:300 </sa-dialog>
-  <sa-dialog v-model="visible2" title="offsetY设置" offsetY="300"> offsetY:300 </sa-dialog>
-  <sa-dialog v-model="visible3" title="offsetX设置" offsetX="20%"> offsetX:20% </sa-dialog>
-  <sa-dialog v-model="visible4" title="offsetY设置" offsetY="20%"> offsetY:20% </sa-dialog>
+  <pa-dialog v-model="visible1" title="offsetX设置" offsetX="300"> offsetX:300 </pa-dialog>
+  <pa-dialog v-model="visible2" title="offsetY设置" offsetY="300"> offsetY:300 </pa-dialog>
+  <pa-dialog v-model="visible3" title="offsetX设置" offsetX="20%"> offsetX:20% </pa-dialog>
+  <pa-dialog v-model="visible4" title="offsetY设置" offsetY="20%"> offsetY:20% </pa-dialog>
 </template>
 
 <script lang="ts" setup>

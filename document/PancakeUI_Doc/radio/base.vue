@@ -1,13 +1,13 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-radio v-model="value1" :exOptions="exOptions"></sa-radio>
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-radio v-model="value1" :exOptions="exOptions"></pa-radio>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-radio v-model="value1" :exOptions="exOptions" display></sa-radio>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-radio v-model="value1" :exOptions="exOptions" display></pa-radio>
 
-  <sa-title :padding="['bottom']">单组件使用</sa-title>
-  <sa-radio-item v-model="value2" label="选项1" value="1"></sa-radio-item>
-  <sa-radio-item v-model="value2" label="选项2" value="2" disabled></sa-radio-item>
+  <pa-title :padding="['bottom']">单组件使用</pa-title>
+  <pa-radio-item v-model="value2" label="选项1" value="1"></pa-radio-item>
+  <pa-radio-item v-model="value2" label="选项2" value="2" disabled></pa-radio-item>
 </template>
 
 <script lang="ts" setup>

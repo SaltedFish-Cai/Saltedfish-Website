@@ -1,20 +1,20 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-cascader
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-cascader
     v-model="value1"
     :exOptions="exOptions"
     clearable
     :title="{ 'en-US': 'Basic Usage', 'zh-CN': '基础使用' }"
-  ></sa-cascader>
+  ></pa-cascader>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-cascader v-model="value3" :exOptions="exOptions" display></sa-cascader>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-cascader v-model="value3" :exOptions="exOptions" display></pa-cascader>
 
-  <sa-title :padding="['bottom']">单层选择</sa-title>
-  <sa-cascader v-model="value2" :exOptions="exOptions" :type="'cascader-check'"></sa-cascader>
+  <pa-title :padding="['bottom']">单层选择</pa-title>
+  <pa-cascader v-model="value2" :exOptions="exOptions" :type="'cascader-check'"></pa-cascader>
 
-  <sa-title :padding="['bottom']">单层多选择</sa-title>
-  <sa-cascader v-model="value3" :exOptions="exOptions" :type="'multiple-cascader-check'"></sa-cascader>
+  <pa-title :padding="['bottom']">单层多选择</pa-title>
+  <pa-cascader v-model="value3" :exOptions="exOptions" :type="'multiple-cascader-check'"></pa-cascader>
 </template>
 
 <script lang="ts" setup>

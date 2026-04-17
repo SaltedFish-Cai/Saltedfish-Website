@@ -1,16 +1,16 @@
 <template>
   <div class="flex config-box">
-    <div class="in_title_label">显示筛选/刷新：<sa-switch v-model="state.useToolButton" /></div>
-    <div class="in_title_label">是否显示分页功能：<sa-switch v-model="state.usePagination" /></div>
-    <div class="in_title_label">是否功能按钮嵌入式样式：<sa-switch v-model="state.embeddedToolButton" /></div>
+    <div class="in_title_label">显示筛选/刷新：<pa-switch v-model="state.useToolButton" /></div>
+    <div class="in_title_label">是否显示分页功能：<pa-switch v-model="state.usePagination" /></div>
+    <div class="in_title_label">是否功能按钮嵌入式样式：<pa-switch v-model="state.embeddedToolButton" /></div>
   </div>
 
-  <sa-title :padding="['bottom']">FormData结果值：</sa-title>
+  <pa-title :padding="['bottom']">FormData结果值：</pa-title>
 
   <code-view v-model:html="tableFormData"> </code-view>
 
-  <sa-title :padding="['bottom']">效果展示</sa-title>
-  <sa-table
+  <pa-title :padding="['bottom']">效果展示</pa-title>
+  <pa-table
     id="options-table-demo"
     ref="proTable"
     :structure="tableConfig"
@@ -24,9 +24,9 @@
     row-key="Text"
   >
     <template #operation>
-      <sa-button is="edit"> 编辑 </sa-button>
+      <pa-button is="edit"> 编辑 </pa-button>
     </template>
-  </sa-table>
+  </pa-table>
 </template>
 
 <script lang="ts" setup>

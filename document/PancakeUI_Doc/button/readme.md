@@ -10,7 +10,7 @@
 
 ## Group 组合
 
-使用 `sa-button-group` 组件来定义按钮的组合样式。
+使用 `pa-button-group` 组件来定义按钮的组合样式。
 
 <demo src="./group.vue" ></demo>
 
@@ -62,7 +62,7 @@
 | debounced     | 开启防抖                                                                    | `boolean`                                                             | `true`    |
 | debouncedTime | 防抖延迟时间                                                                | `number`                                                              | `300`     |
 | iconPosition  | Icon 位置                                                                   | `left` `right`                                                        | `left`    |
-| iconName      | icon 图标([`sa-icon`](/document/PancakeUI_Doc/icon/readme.html))             | `string`                                                              | —         |
+| iconName      | icon 图标([`pa-icon`](/document/PancakeUI_Doc/icon/readme.html))             | `string`                                                              | —         |
 | useFont       | 是否使用字体图标                                                            | `boolean`                                                             | `true`    |
 | useLine       | 是否为链接按钮                                                              | `boolean`                                                             | `false`   |
 | usePlain      | 是否为朴素按钮                                                              | `boolean`                                                             | `true`    |

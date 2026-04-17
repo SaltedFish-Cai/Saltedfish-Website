@@ -1,6 +1,6 @@
 <template>
   相交元素：{{ isIntersectingEl }}
-  <sa-scrollbar
+  <pa-scrollbar
     style="height: 200px; width: 100%; margin-top: 10px"
     intersectClassName=".intersecting"
     @intersecting="handleIntersecting"
@@ -11,7 +11,7 @@
     <div style="height: 300px"></div>
     <div class="intersecting" id="intersecting_3">内容3</div>
     <div style="height: 300px"></div>
-  </sa-scrollbar>
+  </pa-scrollbar>
 </template>
 
 <script lang="ts" setup>

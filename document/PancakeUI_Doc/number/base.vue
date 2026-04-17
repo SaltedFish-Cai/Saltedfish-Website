@@ -1,15 +1,15 @@
 <template>
-  <sa-title :padding="['bottom']">基础使用</sa-title>
-  <sa-number
+  <pa-title :padding="['bottom']">基础使用</pa-title>
+  <pa-number
     v-model="value1"
     controls
     :size="size"
     :contrastData="value2"
     :title="{ 'en-US': 'Basic Usage', 'zh-CN': '基础使用' }"
-  ></sa-number>
+  ></pa-number>
 
-  <sa-title :padding="['bottom']">Display</sa-title>
-  <sa-number v-model="value3" controls :size="size" display :contrastData="value2"></sa-number>
+  <pa-title :padding="['bottom']">Display</pa-title>
+  <pa-number v-model="value3" controls :size="size" display :contrastData="value2"></pa-number>
 </template>
 
 <script lang="ts" setup>

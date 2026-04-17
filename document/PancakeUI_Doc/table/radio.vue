@@ -1,6 +1,6 @@
 <template>
   <div class="h400">
-    <sa-table
+    <pa-table
       id="select-table-v2-demo"
       ref="proTable"
       row-key="Text"

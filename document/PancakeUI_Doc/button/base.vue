@@ -1,26 +1,26 @@
 <template>
   <div class="mb-size">
-    <sa-button iconName="star_arc_line" :usePlain="false" type="primary">Primary</sa-button>
-    <sa-button iconName="star_arc_line" :usePlain="false" type="success">Success</sa-button>
-    <sa-button iconName="star_arc_line" :usePlain="false" type="info">Info</sa-button>
-    <sa-button iconName="star_arc_line" :usePlain="false" type="warning">Warning</sa-button>
-    <sa-button iconName="star_arc_line" :usePlain="false" type="danger">Danger</sa-button>
+    <pa-button iconName="star_arc_line" :usePlain="false" type="primary">Primary</pa-button>
+    <pa-button iconName="star_arc_line" :usePlain="false" type="success">Success</pa-button>
+    <pa-button iconName="star_arc_line" :usePlain="false" type="info">Info</pa-button>
+    <pa-button iconName="star_arc_line" :usePlain="false" type="warning">Warning</pa-button>
+    <pa-button iconName="star_arc_line" :usePlain="false" type="danger">Danger</pa-button>
   </div>
 
   <div class="mb-size">
-    <sa-button iconName="star_arc_line" type="primary">Primary</sa-button>
-    <sa-button iconName="star_arc_line" type="success">Success</sa-button>
-    <sa-button iconName="star_arc_line" type="info">Info</sa-button>
-    <sa-button iconName="star_arc_line" type="warning">Warning</sa-button>
-    <sa-button iconName="star_arc_line" type="danger">Danger</sa-button>
+    <pa-button iconName="star_arc_line" type="primary">Primary</pa-button>
+    <pa-button iconName="star_arc_line" type="success">Success</pa-button>
+    <pa-button iconName="star_arc_line" type="info">Info</pa-button>
+    <pa-button iconName="star_arc_line" type="warning">Warning</pa-button>
+    <pa-button iconName="star_arc_line" type="danger">Danger</pa-button>
   </div>
 
   <div>
-    <sa-button iconName="star_arc_line" type="primary" />
-    <sa-button iconName="star_arc_line" type="success" />
-    <sa-button iconName="star_arc_line" type="info" />
-    <sa-button iconName="star_arc_line" type="warning" />
-    <sa-button iconName="star_arc_line" type="danger" />
+    <pa-button iconName="star_arc_line" type="primary" />
+    <pa-button iconName="star_arc_line" type="success" />
+    <pa-button iconName="star_arc_line" type="info" />
+    <pa-button iconName="star_arc_line" type="warning" />
+    <pa-button iconName="star_arc_line" type="danger" />
   </div>
 </template>
 

@@ -3,7 +3,7 @@ import { useBaseStore as TableBaseStoreType } from "./components/m-table/hooks/s
 
 import { GlobalState } from "./components/m-table/type";
 import toLocaleString from "./components/tools/toLocaleString";
-import { PancakeGlobalConfigType } from "./components/sa-content/type";
+import { PancakeGlobalConfigType } from "./components/pa-content/type";
 
 // _Message global
 declare module "vue" {
