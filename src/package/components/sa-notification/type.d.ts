@@ -1,7 +1,7 @@
 import type { VNode, ComponentPublicInstance } from "vue";
 
 // 通知类型
-export type NotificationType = "error" | "info" | "success" | "warning";
+export type NotificationType = "danger" | "info" | "primary" | "success" | "warning";
 
 // 通知配置接口
 export interface NotificationOptions {
@@ -12,7 +12,7 @@ export interface NotificationOptions {
   /**
    * 通知消息
    */
-  message?: strRecord<languageKey, string> | string;
+  message?: Record<languageKey, string> | string;
   /**
    * 通知类型
    */

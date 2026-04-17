@@ -58,7 +58,6 @@
 import { ref, computed, watch, inject, ComputedRef } from "vue";
 import { SaMediaViewItemType } from "./type";
 import { isImageFile, isPdfFile, isTextFile, isWordFile, isExcelFile, isUnOpenFile } from "./is";
-import { M_Message } from "../feedback";
 
 import { useDownload } from "./use-download";
 import imageView from "./image-view.vue";
@@ -68,6 +67,7 @@ import wordView from "./word-view.vue";
 import textView from "./text-view.vue";
 import { useTemplateRef } from "vue";
 import { SaltedGlobalConfigType } from "../sa-content/type";
+import { M_Message } from "../feedback";
 
 const SaltedGlobalConfig = inject("SaltedGlobalConfig") as ComputedRef<SaltedGlobalConfigType>;
 

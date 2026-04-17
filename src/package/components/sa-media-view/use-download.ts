@@ -3,8 +3,8 @@
 // import { useBaseStore as globalState } from "../../store/index";
 // import inBrowser from "@mo/tools/inBrowser";
 // import Taro from "@tarojs/taro";
-import { M_MessageBox, M_Notification } from "../feedback";
 import inBrowser from "../tools/inBrowser";
+import { M_MessageBox, M_Notification } from "../feedback";
 
 /**
  * @description 接收数据流生成 blob，创建链接，下载文件
@@ -47,17 +47,17 @@ export const useGetBlob = async (config = { downloadHose: "", requestHeader: {} 
         response.json().then(json => {
           if (json.Message == "当前页面过期") {
             M_MessageBox({
-              title: "当前页面过期",
-              message: "当前页面已过期",
-              showCancelButton: false,
+              message: { "en-US": "Current page has expired, please refresh the page.", "zh-CN": "当前页面已过期，请刷新页面" },
               onConfirm: () => {
                 location.reload();
               }
             });
           } else if (json.Message == "批量导出") {
             M_Notification({
-              title: "温馨提示",
-              message: "数据量过大，请至【导出管理-导出记录】中进行查看导出进度",
+              message: {
+                "en-US": "Data volume is too large, please check the export progress in the export management - export records.",
+                "zh-CN": "数据量过大，请至【导出管理-导出记录】中进行查看导出进度"
+              },
               type: "warning",
               duration: 10000
             });
@@ -65,7 +65,7 @@ export const useGetBlob = async (config = { downloadHose: "", requestHeader: {} 
             M_Notification({
               title: "下载出错",
               message: json.Message,
-              type: "error",
+              type: "danger",
               duration: 3000
             });
           }
@@ -115,7 +115,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
         M_Notification({
           title: "下载出错",
           message: response.statusText,
-          type: "error",
+          type: "danger",
           duration: 3000
         });
       } else if (response.headers.get("Content-Type")?.includes("application/json")) {
@@ -125,7 +125,6 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
             M_MessageBox({
               title: "当前页面过期",
               message: "当前页面已过期",
-              showCancelButton: false,
               onConfirm: () => {
                 location.reload();
               }
@@ -143,7 +142,7 @@ export const useDownload = async (config = { downloadHose: "", requestHeader: {}
             M_Notification({
               title: "下载出错",
               message: json.Message,
-              type: "error",
+              type: "danger",
               duration: 3000
             });
           }

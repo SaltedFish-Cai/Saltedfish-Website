@@ -1,6 +1,6 @@
-import { M_MessageBox } from "../../feedback";
 import { computed, inject } from "vue";
 import { SaTableUseType } from "../type";
+import { M_MessageBox } from "../../feedback";
 
 export const useFilterHooks = (props, state, language) => {
   const Query = computed(handleQueryChange);
@@ -148,13 +148,9 @@ export const useFilterHooks = (props, state, language) => {
 
   // #Function 删除全部已筛选数据
   function handleCleanAllQuery() {
-    M_MessageBox.confirm({
-      message: "是否删除所有筛选项?",
-      title: "温馨提示",
-      type: "error",
-      confirmButtonText: "确认删除",
+    M_MessageBox.delete({
+      message: { "en-US": "Are you sure you want to delete all filters?", "zh-CN": "确认删除所有筛选项吗？" },
       onConfirm: () => {
-        // callbackColSetting({}, true);
         injectGetTableList({ Filter: [] });
       }
     });
@@ -162,11 +158,8 @@ export const useFilterHooks = (props, state, language) => {
 
   // #Function 删除全部已筛选高级搜索数据
   function handleCleanAllSeniorQuery() {
-    M_MessageBox.confirm({
-      message: "是否删除所有筛选项?",
-      title: "温馨提示",
-      type: "error",
-      confirmButtonText: "确认删除",
+    M_MessageBox.delete({
+      message: { "en-US": "Are you sure you want to delete all senior filters?", "zh-CN": "确认删除所有高级筛选项吗？" },
       onConfirm: () => {
         injectGetTableList({ AdvancedFilter: [] });
       }
